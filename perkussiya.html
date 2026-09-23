@@ -1,0 +1,496 @@
+<!doctype html><html lang="ru"><head><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="utf-8">
+<title>Перкуссия лёгких</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#1C5A8C; --accent-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --clear-bg:#E2EEF9; --clear-fg:#1B4F7A;
+  --dull-bg:#E4E2DE; --dull-fg:#3D3A35;
+  --tymp-bg:#FBEBD0; --tymp-fg:#7A4A0C;
+  --box-bg:#ECE5F6; --box-fg:#4E3782;
+  --blunt-bg:#EDEFF1; --blunt-fg:#4A5460;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#82B6E4; --accent-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --clear-bg:#16324A; --clear-fg:#A9D0F2;
+    --dull-bg:#33312D; --dull-fg:#DDD8CF;
+    --tymp-bg:#3F2E12; --tymp-fg:#F2C97E;
+    --box-bg:#2E2544; --box-fg:#CDB9F2;
+    --blunt-bg:#252C33; --blunt-fg:#B8C3CE;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#82B6E4; --accent-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --clear-bg:#16324A; --clear-fg:#A9D0F2;
+  --dull-bg:#33312D; --dull-fg:#DDD8CF;
+  --tymp-bg:#3F2E12; --tymp-fg:#F2C97E;
+  --box-bg:#2E2544; --box-fg:#CDB9F2;
+  --blunt-bg:#252C33; --blunt-fg:#B8C3CE;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:760px; margin:0 auto; padding-inline:18px; padding-block:32px 72px}
+a{color:var(--accent); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2.1rem, 6vw, 2.9rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.55rem; font-weight:700}
+h3{font-size:1.12rem; font-weight:700; margin-top:1.6rem}
+p{margin:.6rem 0}
+.lat{font-family:var(--mono); font-size:.86em; color:var(--muted); font-style:normal}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.06rem; color:var(--muted); max-width:62ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
+nav.toc{margin:1.4rem 0 0; font-size:.94rem}
+nav.toc ul{list-style:none; padding:0; margin:.5rem 0 0; columns:2 220px; column-gap:1.6rem}
+nav.toc li{padding:.18rem 0; break-inside:avoid}
+section{padding-top:2.6rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:.3rem 1rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.skill{font:500 .72rem/1.3 var(--mono); color:var(--muted); letter-spacing:.04em}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.35rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.35rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tile.wide{grid-column:1/-1}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.92rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .72rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:transparent}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono); white-space:nowrap}
+.snd{display:inline-block; font-weight:600; font-size:.86em; padding:.12rem .45rem; border-radius:5px; white-space:nowrap}
+.snd.clear{background:var(--clear-bg); color:var(--clear-fg)}
+.snd.dull{background:var(--dull-bg); color:var(--dull-fg)}
+.snd.tymp{background:var(--tymp-bg); color:var(--tymp-fg)}
+.snd.box{background:var(--box-bg); color:var(--box-fg)}
+.snd.blunt{background:var(--blunt-bg); color:var(--blunt-fg)}
+.note{background:var(--accent-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); color:var(--ink); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.45rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+figure{margin:1rem 0; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.8rem .6rem .5rem}
+figure .scroll{overflow-x:auto}
+figure svg{display:block; width:100%; min-width:520px; height:auto}
+figcaption{font-size:.84rem; color:var(--muted); padding:.4rem .4rem 0}
+svg text{font-family:var(--mono); fill:var(--muted); font-size:11px}
+svg .grid{stroke:var(--line); stroke-width:1}
+svg .lung{stroke:var(--accent); stroke-width:2.5; fill:none}
+svg .pleura{stroke:var(--muted); stroke-width:1.5; stroke-dasharray:5 4; fill:none}
+svg .sinus{fill:var(--accent-soft)}
+svg .dot{fill:var(--accent)}
+svg .lbl{fill:var(--ink); font-size:11.5px; font-weight:500}
+svg .zone{fill:var(--muted); font-size:10px; letter-spacing:.06em}
+.record{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem; font-size:.95rem}
+.record p{margin:.45rem 0}
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--accent); background:transparent; color:var(--accent); cursor:pointer}
+button:hover{background:var(--accent-soft)}
+details.q{border-bottom:1px solid var(--line); background:transparent}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.75rem 2rem .75rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.62rem; font:500 1.2rem/1 var(--mono); color:var(--accent)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .9rem; color:var(--ink); font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.5rem; padding-left:1.1rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.35rem} th,td{padding:.5rem .55rem} }
+@media (prefers-reduced-motion:reduce){ *{scroll-behavior:auto!important} }
+html{scroll-behavior:smooth}
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.6pt; line-height:1.5}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar button{display:none}
+  section{padding-top:1.2rem}
+  h1{font-size:22pt} h2{font-size:15pt; break-after:avoid} h3{break-after:avoid}
+  .tbl, figure, .record, .tile, .note, .warn{break-inside:avoid; border-color:#ccc}
+  table{font-size:8.8pt} th,td{padding:.3rem .4rem}
+  figure svg{min-width:0}
+  .tiles{grid-template-columns:1fr 1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  details.q{break-inside:avoid}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+
+</head><body><div class="wrap">
+<header>
+  <div class="eyebrow">Пропедевтика внутренних болезней · занятие 4 · медфак ЧГУ</div>
+  <h1>Перкуссия лёгких</h1>
+  <p class="lead">Сравнительная и топографическая перкуссия с нуля: что это, как стучать, какие звуки бывают, где у здорового человека границы лёгких и что значит их смещение.</p>
+  <div class="chips">
+    <span class="chip">навыки № 27–34 перечня кафедры</span>
+    <span class="chip">учебник А. Л. Гребенева, 6-е изд.</span>
+    <span class="chip">таблицы кафедры</span>
+    <a class="chip" href="perkussiya-legkih.pdf">скачать PDF для телефона</a>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Содержание</div>
+    <ul>
+      <li><a href="#glavnoe">Главное за пять минут</a></li>
+      <li><a href="#chto">Что такое перкуссия</a></li>
+      <li><a href="#zvuki">Перкуторные звуки</a></li>
+      <li><a href="#tehnika">Техника: палец по пальцу</a></li>
+      <li><a href="#sravn">Сравнительная перкуссия</a></li>
+      <li><a href="#topo">Топографическая перкуссия</a></li>
+      <li><a href="#kushetka">Алгоритм у кушетки</a></li>
+      <li><a href="#istoriya">Запись в историю болезни</a></li>
+      <li><a href="#svyazi">Связи с другими предметами</a></li>
+      <li><a href="#test">Самопроверка</a></li>
+      <li><a href="#dalee">Нормы на следующие темы</a></li>
+      <li><a href="#istochniki">Источники</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="glavnoe">
+  <div class="sec-head"><h2>Главное за пять минут</h2></div>
+  <ul class="facts">
+    <li><b>Перкуссия</b> <i class="lat">(percussio — выстукивание)</i> — метод обследования: выстукиваем участок тела и по характеру звука судим о физическом состоянии органов под ним — есть ли там воздух, жидкость или плотная ткань — и о их границах.</li>
+    <li><b>Больше воздуха — громче, ниже, дольше.</b> Воздушное лёгкое даёт <span class="snd clear">ясный лёгочный</span> звук. Плотная безвоздушная ткань или жидкость — тихий, высокий, короткий <span class="snd dull">тупой</span>. Полость с газом — <span class="snd tymp">тимпанический</span>.</li>
+    <li><b>Основной способ</b> — посредственная пальце-пальцевая перкуссия: средний палец левой руки (палец-плессиметр) плотно прижат к коже, средним пальцем правой руки (палец-молоточек) наносят короткий удар по его средней фаланге; движение только в лучезапястном суставе.</li>
+    <li><b>Сравнительная перкуссия</b> отвечает на вопрос «какой звук и одинаков ли он справа и слева»: симметричные точки, одинаковая сила удара. В норме — ясный лёгочный звук.</li>
+    <li><b>Топографическая перкуссия</b> отвечает на вопрос «где граница лёгкого»: тихая перкуссия, палец параллельно искомой границе, от ясного звука к тупому, отметка по краю пальца, обращённому к ясному звуку.</li>
+  </ul>
+  <div class="tiles">
+    <div class="tile"><b>3–4 см</b><span>над ключицей — верхушка спереди</span></div>
+    <div class="tile"><b>C<sub>VII</sub></b><span>остистый отросток VII шейного позвонка — верхушка сзади</span></div>
+    <div class="tile"><b>5–6 см</b><span>ширина полей Кренига (колебания 3,5–8 см)</span></div>
+    <div class="tile"><b>6–8 см</b><span>подвижность нижнего края по средней подмышечной линии</span></div>
+    <div class="tile wide"><b>5 · 6 · 7 · 8 · 9 · 10 · 11</b><span>нижняя граница правого лёгкого сверху вниз по линиям: V межреберье, VI, VII, VIII, IX, X ребро, остистый отросток XI грудного позвонка</span></div>
+  </div>
+</section>
+
+<section id="chto">
+  <div class="sec-head"><h2>Что такое перкуссия</h2><span class="skill">навык № 27</span></div>
+  <h3>Немного истории</h3>
+  <p>Метод предложил венский врач <b>Леопольд Ауэнбруггер</b> в 1761 году в трактате <i>«Inventum novum»</i> («Новое открытие»). По легенде, идея пришла от отца-трактирщика, который выстукиванием определял уровень вина в бочках. В практику перкуссию ввёл <b>Ж. Корвизар</b>, переведший трактат в 1808 году. П. Пиорри предложил плессиметр — пластинку, через которую наносят удар; позже появился перкуссионный молоточек. В отечественной школе <b>В. П. Образцов</b> разработал непосредственную перкуссию одним пальцем.</p>
+  <h3>Физическая основа</h3>
+  <p>Удар вызывает колебания грудной стенки и подлежащих тканей, они передаются воздуху и воспринимаются как звук. Характер звука зависит от соотношения воздуха и плотных тканей и от эластичности стенок: воздушная ткань колеблется с большой амплитудой и низкой частотой, плотная — с малой амплитудой и высокой частотой, колебания быстро затухают.</p>
+  <p>У перкуторного звука оценивают четыре свойства:</p>
+  <ul class="facts">
+    <li><b>громкость (сила)</b> — зависит от амплитуды колебаний;</li>
+    <li><b>высота</b> — от частоты колебаний;</li>
+    <li><b>продолжительность</b> — от того, как быстро колебания затухают;</li>
+    <li><b>тембр</b> — оттенок, например тимпанический.</li>
+  </ul>
+  <p>Перкуссия «видит» неглубоко: при громкой перкуссии — порядка 5–7 см вглубь, при тихой — 2–4 см. Поэтому очаг уплотнения меньше 2–3 см или расположенный глубже 5 см перкуторно не выявляется.</p>
+  <h3>Виды перкуссии</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Признак</th><th>Виды</th></tr></thead>
+    <tbody>
+      <tr><td>По способу</td><td><b>Непосредственная</b> — удар прямо по телу (по Ауэнбруггеру — сложенными пальцами; по Образцову — щелчком указательного пальца; так же перкутируют ключицы).<br><b>Посредственная</b> — удар через плессиметр: инструментальная (молоточек и пластинка) и <b>пальце-пальцевая</b> — основная сегодня.</td></tr>
+      <tr><td>По силе удара</td><td><b>Громкая (глубокая)</b> — для глубоко лежащих изменений.<br><b>Тихая (поверхностная)</b> — для границ и поверхностных изменений.<br><b>Тишайшая, пороговая</b> (по Гольдшейдеру) — звук на пороге слышимости: верхушки лёгких, поля Кренига, абсолютная тупость сердца.</td></tr>
+      <tr><td>По задаче</td><td><b>Сравнительная</b> — сравнить звук над симметричными участками.<br><b>Топографическая</b> — найти границы органа.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="zvuki">
+  <div class="sec-head"><h2>Перкуторные звуки</h2></div>
+  <p>Три основных звука — ясный лёгочный, тупой и тимпанический. Остальные — промежуточные, они и встречаются при болезнях.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Звук</th><th>Свойства</th><th>Где в норме</th><th>Когда при патологии</th></tr></thead>
+    <tbody>
+      <tr><td><span class="snd clear">Ясный лёгочный</span></td><td>громкий, низкий, продолжительный</td><td>над лёгкими</td><td>—</td></tr>
+      <tr><td><span class="snd dull">Тупой</span><br><small>«бедренный»</small></td><td>тихий, высокий, короткий</td><td>над безвоздушными органами: печень, сердце, мышцы бедра</td><td>безвоздушная ткань или жидкость: долевое уплотнение (крупозная пневмония), жидкость в плевральной полости, обтурационный ателектаз, опухоль</td></tr>
+      <tr><td><span class="snd tymp">Тимпанический</span></td><td>громкий, продолжительный, приближается к музыкальному тону; высота зависит от размера полости и напряжения стенок</td><td>над желудком и кишечником, пространство Траубе</td><td>воздух в плевральной полости (пневмоторакс), крупная полость в лёгком, сообщающаяся с бронхом (каверна, опорожнившийся абсцесс)</td></tr>
+      <tr><td><span class="snd blunt">Притупление</span></td><td>между ясным и тупым</td><td>—</td><td>снижение воздушности: очаговая пневмония, пневмосклероз, небольшое количество жидкости, утолщение плевры</td></tr>
+      <tr><td><span class="snd box">Коробочный</span></td><td>громкий, низкий, с оттенком удара по пустой коробке</td><td>—</td><td>повышенная воздушность лёгких: эмфизема, приступ бронхиальной астмы</td></tr>
+      <tr><td><span class="snd blunt">Притуплённо-тимпанический</span></td><td>притупление с тимпаническим оттенком</td><td>—</td><td>в альвеолах одновременно воздух и жидкость, эластичность снижена: начальная стадия крупозной пневмонии, стадия разрешения, компрессионный ателектаз</td></tr>
+      <tr><td><span class="snd tymp">Металлический</span></td><td>тимпанит с металлическим оттенком</td><td>—</td><td>большая (от 6 см) гладкостенная полость у поверхности, открытый пневмоторакс</td></tr>
+      <tr><td><span class="snd tymp">«Треснувшего горшка»</span></td><td>дребезжащий</td><td>—</td><td>полость, сообщающаяся с бронхом узким щелевидным отверстием</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="tehnika">
+  <div class="sec-head"><h2>Техника: палец по пальцу</h2><span class="skill">навыки № 27–28</span></div>
+  <h3>Общие правила перкуссии</h3>
+  <ul class="facts">
+    <li>Помещение тёплое и тихое. Больной стоит или сидит, мышцы расслаблены, дыхание ровное; тяжёлого больного перкутируют лёжа. Врачу должно быть удобно.</li>
+    <li><b>Палец-плессиметр</b> — средний палец левой руки — прижат к коже плотно, всей поверхностью, но без сильного давления. Остальные пальцы слегка разведены и тела не касаются: иначе они глушат звук.</li>
+    <li><b>Палец-молоточек</b> — средний палец правой руки — согнут так, чтобы в момент удара его концевая фаланга была перпендикулярна плессиметру. Удар наносят кончиком пальца по тыльной поверхности <b>средней фаланги</b> пальца-плессиметра.</li>
+    <li>Движение — <b>только в лучезапястном суставе</b>, локоть и плечо неподвижны. Удар короткий, отрывистый, «отскакивающий», перпендикулярно поверхности.</li>
+    <li>В одну точку — <b>два одинаковых удара</b>. Сила удара зависит от задачи: громкая для глубоких изменений, тихая для границ.</li>
+    <li>При <b>сравнительной</b> перкуссии — симметричные точки, одинаковая сила удара и одинаковое положение пальца справа и слева.</li>
+    <li>При <b>топографической</b> перкуссии палец-плессиметр ставят <b>параллельно искомой границе</b> и перемещают на 0,5–1 см, двигаясь <b>от ясного звука к тупому</b>. Границу отмечают по краю пальца, обращённому <b>к ясному звуку</b>.</li>
+  </ul>
+  <h3>Пороговая перкуссия по Гольдшейдеру</h3>
+  <p>Палец-плессиметр сгибают во втором межфаланговом суставе и прикладывают к коже только кончиком концевой фаланги. Удары наносят очень слабые, по согнутому суставу, так чтобы звук был на самом пороге слышимости. Колебания идут через узкую площадку, поэтому граница получается точнее. Применяют для верхушек лёгких, полей Кренига, абсолютной тупости сердца.</p>
+  <div class="warn">
+    <strong class="t">На что преподаватели смотрят в первую очередь</strong>
+    <ul>
+      <li>плессиметр прилегает неплотно или к телу прижаты соседние пальцы;</li>
+      <li>удар идёт от локтя или всей рукой, а не кистью;</li>
+      <li>палец-молоточек задерживается на плессиметре — звук «глохнет»;</li>
+      <li>справа и слева бьют с разной силой;</li>
+      <li>при поиске границы палец стоит не параллельно ей или движение идёт от тупого звука к ясному;</li>
+      <li>длинные ногти: удар должен быть кончиком пальца.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sravn">
+  <div class="sec-head"><h2>Сравнительная перкуссия</h2><span class="skill">навык № 29</span></div>
+  <p><b>Цель</b> — сравнить перкуторный звук над симметричными участками грудной клетки и найти участки, где он изменён. Перкуссия громкая (средней силы); при поверхностных изменениях и у худых — тише.</p>
+  <h3>Последовательность</h3>
+  <ol class="steps">
+    <li><b>Спереди</b>, больной стоит или сидит, руки опущены. Надключичные ямки <i class="lat">(fossa supraclavicularis)</i> — палец параллельно ключице.</li>
+    <li><b>Ключицы</b> <i class="lat">(clavicula)</i> — непосредственная перкуссия согнутым пальцем по середине ключицы.</li>
+    <li><b>I и II межреберья</b> по среднеключичным линиям — палец в межреберье параллельно рёбрам. Ниже слева начинается сердце, поэтому спереди сравнивают только верхние отделы.</li>
+    <li><b>Боковые отделы</b> — больной сцепляет руки на затылке; перкутируют по средним подмышечным линиям сверху вниз по межреберьям.</li>
+    <li><b>Сзади</b> — больной скрещивает руки на груди и слегка наклоняется вперёд: лопатки расходятся и открывают межлопаточное пространство. Надлопаточные области — палец параллельно ости лопатки <i class="lat">(spina scapulae)</i>.</li>
+    <li><b>Межлопаточное пространство</b> — палец вертикально, параллельно позвоночнику, на нескольких уровнях.</li>
+    <li><b>Подлопаточные области</b> — палец горизонтально, в межреберьях, сверху вниз до нижних границ лёгких.</li>
+  </ol>
+  <p>В каждой точке — два удара справа и два в симметричной точке слева. Если разница сомнительна, повтори, начав с другой стороны.</p>
+  <h3>Норма и физиологические различия</h3>
+  <p>Над лёгкими — <span class="snd clear">ясный лёгочный</span> звук, но не везде одинаковый:</p>
+  <ul class="facts">
+    <li>над правой верхушкой и во II межреберье справа звук чуть тише и короче: правый верхнедолевой бронх короче и шире, а мышцы правого плечевого пояса у правшей развиты сильнее;</li>
+    <li>справа внизу — притупление за счёт печени;</li>
+    <li>слева внизу спереди и сбоку — тимпанический оттенок от газового пузыря желудка (пространство Траубе);</li>
+    <li>над областью сердца слева — притупление.</li>
+  </ul>
+  <h3>Как истолковать результат</h3>
+  <p>Таблица кафедры: звук читается вместе с <b>голосовым дрожанием</b> с прошлого занятия. Логика простая: плотная ткань с проходимым бронхом проводит дрожание <b>лучше</b>, а жидкость, воздух или шварты между лёгким и стенкой и закрытый бронх — <b>гасят</b> его.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Перкуторный звук</th><th>Голосовое дрожание</th><th>Синдром</th></tr></thead>
+    <tbody>
+      <tr><td><span class="snd clear">Ясный лёгочный</span></td><td>не изменено</td><td>норма; сужение бронхов</td></tr>
+      <tr><td><span class="snd dull">Притупление или тупой</span></td><td>ослаблено</td><td>гидроторакс; обтурационный ателектаз; фиброторакс, шварты</td></tr>
+      <tr><td><span class="snd dull">Притупление или тупой</span></td><td>усилено</td><td>очаговое уплотнение; долевое уплотнение</td></tr>
+      <tr><td><span class="snd tymp">Тимпанический</span></td><td>ослаблено</td><td>пневмоторакс</td></tr>
+      <tr><td><span class="snd tymp">Тимпанический</span></td><td>усилено</td><td>полость в лёгком, сообщающаяся с бронхом</td></tr>
+      <tr><td><span class="snd box">Коробочный</span></td><td>ослаблено симметрично с двух сторон</td><td>эмфизема лёгких</td></tr>
+      <tr><td><span class="snd blunt">Притупление с тимпаническим оттенком</span></td><td>усилено</td><td>начальная стадия воспаления; компрессионный ателектаз</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="topo">
+  <div class="sec-head"><h2>Топографическая перкуссия</h2><span class="skill">навыки № 30–34</span></div>
+  <p>Задачи: определить <b>верхние границы</b> лёгких (высота стояния верхушек и ширина полей Кренига), <b>нижние границы</b> и <b>подвижность нижнего края</b>. Перкуссия тихая, для верхушек — тишайшая. Правило одно: палец параллельно границе, от ясного звука к тупому, отметка по краю пальца со стороны ясного звука.</p>
+  <div class="note">
+    <p><b>Как считать рёбра.</b> Спереди: угол грудины <i class="lat">(angulus sterni)</i> — место прикрепления II ребра, под ним II межреберье; дальше считай вниз по межреберьям (у женщин — по окологрудинной линии). Сзади: нижний угол лопатки <i class="lat">(angulus inferior scapulae)</i> при опущенных руках — на уровне VII ребра; остистый отросток VII шейного позвонка <i class="lat">(vertebra prominens)</i> — самый выступающий при наклоне головы.</p>
+  </div>
+
+  <h3 id="verh">Высота стояния верхушек <i class="lat">(apex pulmonis)</i></h3>
+  <p><b>Спереди:</b> палец-плессиметр — в надключичной ямке параллельно ключице; перкутируют вверх, пока ясный звук не сменится тупым. Измеряют расстояние от середины ключицы до отметки. <b>Норма — 3–4 см.</b></p>
+  <p><b>Сзади:</b> палец — в надостной ямке параллельно ости лопатки; от её середины перкутируют вверх, к остистому отростку VII шейного позвонка. <b>Норма — на уровне остистого отростка C<sub>VII</sub>.</b></p>
+
+  <h3 id="krenig">Поля Кренига</h3>
+  <p>Полоса ясного лёгочного звука над верхушкой по верхнему краю трапециевидной мышцы <i class="lat">(m. trapezius)</i>. Палец ставят на середину края мышцы перпендикулярно ему и перкутируют сначала медиально, к шее, до притупления, затем от той же точки латерально, к плечу. Расстояние между отметками — ширина поля. <b>Норма — 5–6 см</b>, колебания от 3,5 до 8 см; слева поле обычно немного шире.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Изменение</th><th>Причина</th></tr></thead>
+    <tbody>
+      <tr><td>Верхушки выше, поля Кренига шире</td><td>повышенная воздушность — эмфизема лёгких</td></tr>
+      <tr><td>Верхушки ниже, поля уже (чаще с одной стороны)</td><td>сморщивание верхушки (туберкулёз, пневмосклероз) или её инфильтрация — туберкулёзная, пневмоническая</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="niz">Нижние границы <i class="lat">(margo inferior pulmonis)</i></h3>
+  <p>Перкутируют сверху вниз по вертикальным топографическим линиям: справа — со II–III межреберья по окологрудинной, сзади — от угла лопатки по лопаточной. Слева по окологрудинной и среднеключичной линиям границу не определяют: мешает сердце.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Линия</th><th>Правое лёгкое</th><th>Левое лёгкое</th></tr></thead>
+    <tbody>
+      <tr><td>Окологрудинная <i class="lat">l. parasternalis</i></td><td class="num">V межреберье</td><td class="num">—</td></tr>
+      <tr><td>Среднеключичная <i class="lat">l. medioclavicularis</i></td><td class="num">VI ребро</td><td class="num">—</td></tr>
+      <tr><td>Передняя подмышечная <i class="lat">l. axillaris anterior</i></td><td class="num">VII ребро</td><td class="num">VII ребро</td></tr>
+      <tr><td>Средняя подмышечная <i class="lat">l. axillaris media</i></td><td class="num">VIII ребро</td><td class="num">VIII ребро*</td></tr>
+      <tr><td>Задняя подмышечная <i class="lat">l. axillaris posterior</i></td><td class="num">IX ребро</td><td class="num">IX ребро</td></tr>
+      <tr><td>Лопаточная <i class="lat">l. scapularis</i></td><td class="num">X ребро</td><td class="num">X ребро</td></tr>
+      <tr><td>Околопозвоночная <i class="lat">l. paravertebralis</i></td><td class="num">остистый отросток Th<sub>XI</sub></td><td class="num">остистый отросток Th<sub>XI</sub></td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:.86rem;color:var(--muted)">* В части руководств по средней подмышечной слева — IX ребро: левый купол диафрагмы стоит ниже правого. Норма дана для нормостеника; у гиперстеников границы на ребро выше, у астеников — на ребро ниже.</p>
+
+  <figure>
+    <div class="scroll">
+    <svg viewBox="0 0 660 330" role="img" aria-label="Схема: нижняя граница правого лёгкого опускается от V межреберья спереди до XI грудного позвонка сзади; нижняя граница плевры идёт ниже, разрыв наибольший по средней подмышечной линии">
+      <g class="grid">
+        <line x1="44" y1="70" x2="620" y2="70"/><line x1="44" y1="104" x2="620" y2="104"/><line x1="44" y1="138" x2="620" y2="138"/>
+        <line x1="44" y1="172" x2="620" y2="172"/><line x1="44" y1="206" x2="620" y2="206"/><line x1="44" y1="240" x2="620" y2="240"/><line x1="44" y1="274" x2="620" y2="274"/>
+      </g>
+      <text x="14" y="74">VI</text><text x="14" y="108">VII</text><text x="14" y="142">VIII</text><text x="14" y="176">IX</text><text x="14" y="210">X</text><text x="14" y="244">XI</text><text x="14" y="278">XII</text>
+      <text x="14" y="40" class="zone">РЕБРО</text>
+      <polygon class="sinus" points="150,70 240,104 330,138 420,172 510,206 600,240 600,274 510,240 330,206 150,104"/>
+      <polyline class="pleura" points="150,104 330,206 510,240 600,274"/>
+      <polyline class="lung" points="60,53 150,70 240,104 330,138 420,172 510,206 600,240"/>
+      <g class="dot"><circle cx="60" cy="53" r="4.5"/><circle cx="150" cy="70" r="4.5"/><circle cx="240" cy="104" r="4.5"/><circle cx="330" cy="138" r="4.5"/><circle cx="420" cy="172" r="4.5"/><circle cx="510" cy="206" r="4.5"/><circle cx="600" cy="240" r="4.5"/></g>
+      <text class="lbl" x="68" y="46">V м/р</text>
+      <text class="lbl" x="336" y="130">лёгкое</text>
+      <text x="252" y="196">плевра</text>
+      <text x="350" y="186">синус</text>
+      <text class="lbl" x="611" y="236">Th XI</text>
+      <text x="36" y="302">окологр.</text><text x="120" y="302">ср.-ключ.</text><text x="210" y="302">пер. подм.</text><text x="302" y="302">ср. подм.</text><text x="388" y="302">задн. подм.</text><text x="487" y="302">лопат.</text><text x="566" y="302">околопозв.</text>
+      <text x="44" y="322" class="zone">СПЕРЕДИ</text><text x="300" y="322" class="zone">СБОКУ</text><text x="540" y="322" class="zone">СЗАДИ</text>
+    </svg>
+    </div>
+    <figcaption>Нижняя граница правого лёгкого (сплошная) опускается спереди назад; пунктир — нижняя граница плевры (топанатомия: VII ребро по среднеключичной, X по средней подмышечной, XI по лопаточной, XII у позвоночника). Закрашенный запас между ними — рёберно-диафрагмальный синус; по средней подмышечной он глубже всего, два ребра, поэтому здесь и наибольшая подвижность лёгкого. Схема, не в масштабе.</figcaption>
+  </figure>
+
+  <h3>Что значит смещение нижней границы</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Смещение</th><th>Причины</th></tr></thead>
+    <tbody>
+      <tr><td><b>Вниз</b>, с двух сторон</td><td>эмфизема лёгких; острое вздутие лёгких (приступ бронхиальной астмы); низкое стояние диафрагмы (спланхноптоз)</td></tr>
+      <tr><td><b>Вниз</b>, с одной стороны</td><td>викарная (компенсаторная) эмфизема, когда другое лёгкое выключено из дыхания</td></tr>
+      <tr><td><b>Вверх</b>, с одной стороны</td><td>сморщивание лёгкого (пневмосклероз, фиброз); обтурационный ателектаз; жидкость или воздух в плевральной полости — лёгкое оттесняется вверх и к корню; резкое увеличение печени (справа) или селезёнки (слева)</td></tr>
+      <tr><td><b>Вверх</b>, с двух сторон</td><td>высокое стояние диафрагмы: асцит, метеоризм, выраженное ожирение, беременность</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="podv">Подвижность нижнего края лёгких</h3>
+  <ol class="steps">
+    <li>Найти нижнюю границу при спокойном дыхании, отметить.</li>
+    <li>Больной делает глубокий вдох и задерживает дыхание — продолжить перкуссию вниз от отметки до тупого звука, отметить.</li>
+    <li>Больной делает полный выдох и задерживает дыхание — поставить палец выше, в зону ясного звука, перкутировать вниз до тупого звука, отметить. В части пособий на выдохе идут снизу вверх от отметки спокойного дыхания до появления ясного звука — результат тот же.</li>
+    <li>Расстояние между отметками вдоха и выдоха — подвижность (экскурсия) нижнего края.</li>
+  </ol>
+  <div class="tiles">
+    <div class="tile"><b>6–8 см</b><span>по средней подмышечной линии (по 3–4 см на вдохе и на выдохе)</span></div>
+    <div class="tile"><b>4–6 см</b><span>по среднеключичной и лопаточной линиям</span></div>
+  </div>
+  <p><b>Подвижность уменьшена</b>, если лёгочная ткань теряет эластичность (эмфизема), при воспалительной инфильтрации, застое в лёгких, пневмосклерозе, плевральных сращениях (швартах); при жидкости или воздухе в плевральной полости она не определяется. Внелёгочные причины: парез диафрагмы, высокое внутрибрюшное давление, боль при дыхании (сухой плеврит, перелом рёбер).</p>
+
+  <h3 id="traube">Полулунное пространство Траубе</h3>
+  <p>Зона тимпанического звука в левой нижней части грудной клетки спереди — проекция газового пузыря желудка. <b>Границы:</b> справа — левая доля печени, сверху — нижний край левого лёгкого и сердце, слева — селезёнка, снизу — левая рёберная дуга <i class="lat">(arcus costalis)</i>.</p>
+  <p><b>Уменьшается или исчезает</b> при левостороннем экссудативном плеврите (жидкость заполняет рёберно-диафрагмальный синус — один из ранних признаков), увеличении селезёнки или левой доли печени, выпоте в полость перикарда, переполненном желудке. <b>Увеличивается</b> при вздутии желудка газом.</p>
+</section>
+
+<section id="kushetka">
+  <div class="sec-head"><h2>Алгоритм у кушетки</h2></div>
+  <p>Что делать и что говорить, когда преподаватель просит показать перкуссию на одногруппнике.</p>
+  <ol class="steps">
+    <li>Представиться, объяснить, что будешь делать, попросить раздеться до пояса. Руки тёплые, ногти коротко.</li>
+    <li>Сравнительная перкуссия: спереди → боковые отделы → сзади, в симметричных точках. Вслух: «При сравнительной перкуссии над симметричными участками грудной клетки определяется ясный лёгочный звук».</li>
+    <li>Верхушки спереди и сзади, тишайшая перкуссия. Назвать цифры.</li>
+    <li>Поля Кренига с двух сторон.</li>
+    <li>Нижние границы: справа по всем семи линиям, слева — с передней подмышечной. Называть линию и ребро: «по правой среднеключичной — VI ребро».</li>
+    <li>Подвижность нижнего края по средним подмышечным линиям с двух сторон.</li>
+    <li>Итог одной фразой: «Границы лёгких в пределах нормы, подвижность нижнего края сохранена».</li>
+  </ol>
+</section>
+
+<section id="istoriya">
+  <div class="sec-head"><h2>Запись в историю болезни</h2></div>
+  <p>Так раздел выглядит в истории болезни при норме. Цифры в скобках — подставить свои.</p>
+  <div class="record">
+    <p><b>Перкуссия лёгких.</b> При сравнительной перкуссии над симметричными участками грудной клетки определяется ясный лёгочный звук.</p>
+    <p><b>Топографическая перкуссия.</b> Высота стояния верхушек спереди — (3,5) см выше ключицы справа и слева, сзади — на уровне остистого отростка VII шейного позвонка. Ширина полей Кренига — (6) см справа и слева.</p>
+    <p><b>Нижние границы лёгких:</b> по окологрудинной линии справа — V межреберье; по среднеключичной справа — VI ребро; по передней подмышечной — VII ребро с обеих сторон; по средней подмышечной — VIII ребро; по задней подмышечной — IX ребро; по лопаточной — X ребро; по околопозвоночной — на уровне остистого отростка XI грудного позвонка с обеих сторон.</p>
+    <p><b>Подвижность нижнего края лёгких</b> по средним подмышечным линиям — (7) см справа и слева.</p>
+  </div>
+</section>
+
+<section id="svyazi">
+  <div class="sec-head"><h2>Связи с другими предметами</h2></div>
+  <ul class="facts">
+    <li><b>Прошлое занятие</b> (осмотр и пальпация грудной клетки): голосовое дрожание — вторая половина таблицы интерпретации. Отдельно по перкуссии диагноз не ставят.</li>
+    <li><b>Топографическая анатомия:</b> границы плевры идут ниже границ лёгких; запас между ними — рёберно-диафрагмальный синус <i class="lat">(recessus costodiaphragmaticus)</i>. Жидкость скапливается сначала там, поэтому при выпоте первой исчезает подвижность нижнего края и уменьшается пространство Траубе.</li>
+    <li><b>Патофизиология:</b> эмфизема — потеря эластичности альвеол и повышение воздушности, отсюда разом коробочный звук, опущение границ, расширение полей Кренига и уменьшение подвижности. Ателектаз: обтурационный (бронх закрыт — дрожание ослаблено) и компрессионный (лёгкое сдавлено снаружи, бронх проходим — дрожание усилено, звук притуплённо-тимпанический).</li>
+    <li><b>Следующее занятие</b> — аускультация лёгких: выслушивают в тех же симметричных точках и в той же последовательности, что при сравнительной перкуссии.</li>
+  </ul>
+</section>
+
+<section id="test">
+  <div class="sec-head"><h2>Самопроверка</h2></div>
+  <div class="quiz-bar">
+    <p>Сначала ответь вслух, потом открывай ответ.</p>
+    <button type="button" id="toggle-all">Показать все ответы</button>
+  </div>
+  <details class="q"><summary>Что такое перкуссия?</summary><div class="a"><p>Метод объективного исследования: выстукивание участков тела с оценкой возникающих звуков. По звуку судят о физическом состоянии органов (воздушность, плотность, наличие жидкости) и об их границах.</p></div></details>
+  <details class="q"><summary>Кто и когда предложил перкуссию?</summary><div class="a"><p>Леопольд Ауэнбруггер, 1761 год, трактат «Inventum novum». В практику ввёл Ж. Корвизар (перевод 1808 года).</p></div></details>
+  <details class="q"><summary>Назови три основных перкуторных звука и где их слышно в норме.</summary><div class="a"><p>Ясный лёгочный — над лёгкими. Тупой («бедренный») — над безвоздушными органами: печень, сердце, мышцы бедра. Тимпанический — над полыми органами с газом: желудок, кишечник.</p></div></details>
+  <details class="q"><summary>Чем тупой звук отличается от ясного лёгочного?</summary><div class="a"><p>Тупой — тихий, высокий, короткий. Ясный лёгочный — громкий, низкий, продолжительный.</p></div></details>
+  <details class="q"><summary>Главные правила пальце-пальцевой перкуссии?</summary><div class="a"><p>Плессиметр (средний палец левой руки) плотно прижат, соседние пальцы не касаются тела. Удар средним пальцем правой руки по средней фаланге плессиметра, перпендикулярно, коротко, отскакивающе, движение только в лучезапястном суставе, по два одинаковых удара в точку.</p></div></details>
+  <details class="q"><summary>Как ставят палец, в каком направлении перкутируют и где ставят отметку при топографической перкуссии?</summary><div class="a"><p>Палец параллельно искомой границе, движение от ясного звука к тупому, отметка по краю пальца, обращённому к ясному звуку.</p></div></details>
+  <details class="q"><summary>Какую силу удара используют при сравнительной и при топографической перкуссии?</summary><div class="a"><p>Сравнительная — громкая (средней силы), при поверхностных изменениях тише. Топографическая — тихая. Верхушки и поля Кренига — тишайшая (пороговая).</p></div></details>
+  <details class="q"><summary>Зачем при перкуссии сзади просят скрестить руки на груди?</summary><div class="a"><p>Лопатки расходятся кнаружи и открывают межлопаточное пространство.</p></div></details>
+  <details class="q"><summary>Почему над правой верхушкой звук в норме тише и короче?</summary><div class="a"><p>Правый верхнедолевой бронх короче и шире, а мышцы правого плечевого пояса (у правшей) развиты сильнее.</p></div></details>
+  <details class="q"><summary>Коробочный звук, голосовое дрожание ослаблено с двух сторон. Что это?</summary><div class="a"><p>Эмфизема лёгких.</p></div></details>
+  <details class="q"><summary>Тупой звук, голосовое дрожание ослаблено. Что это?</summary><div class="a"><p>Жидкость в плевральной полости (гидроторакс, экссудат), обтурационный ателектаз, фиброторакс (шварты).</p></div></details>
+  <details class="q"><summary>Притупление или тупой звук, голосовое дрожание усилено. Что это?</summary><div class="a"><p>Уплотнение лёгочной ткани: долевое (крупозная пневмония) или очаговое.</p></div></details>
+  <details class="q"><summary>Тимпанический звук, голосовое дрожание ослаблено. Что это?</summary><div class="a"><p>Пневмоторакс.</p></div></details>
+  <details class="q"><summary>Тимпанический звук, голосовое дрожание усилено. Что это?</summary><div class="a"><p>Полость в лёгком, сообщающаяся с бронхом (каверна, опорожнившийся абсцесс).</p></div></details>
+  <details class="q"><summary>Когда бывает притуплённо-тимпанический звук?</summary><div class="a"><p>Начальная стадия воспаления (крупозная пневмония, стадия прилива), стадия разрешения, компрессионный ателектаз.</p></div></details>
+  <details class="q"><summary>Высота стояния верхушек лёгких в норме?</summary><div class="a"><p>Спереди — 3–4 см над серединой ключицы. Сзади — на уровне остистого отростка VII шейного позвонка.</p></div></details>
+  <details class="q"><summary>Что такое поля Кренига, их норма и изменения?</summary><div class="a"><p>Полоса ясного лёгочного звука над верхушкой по верхнему краю трапециевидной мышцы. Норма 5–6 см (колебания 3,5–8 см). Расширение — эмфизема. Сужение — сморщивание или инфильтрация верхушки (туберкулёз, пневмосклероз).</p></div></details>
+  <details class="q"><summary>Нижняя граница правого лёгкого по всем линиям?</summary><div class="a"><p>Окологрудинная — V межреберье; среднеключичная — VI ребро; передняя подмышечная — VII; средняя подмышечная — VIII; задняя подмышечная — IX; лопаточная — X ребро; околопозвоночная — остистый отросток XI грудного позвонка.</p></div></details>
+  <details class="q"><summary>Чем нижняя граница левого лёгкого отличается от правого?</summary><div class="a"><p>По окологрудинной и среднеключичной линиям не определяется (сердце). По остальным линиям — как справа; по средней подмышечной в части руководств — IX ребро.</p></div></details>
+  <details class="q"><summary>Нижние границы опущены с двух сторон. Причины?</summary><div class="a"><p>Эмфизема лёгких, острое вздутие лёгких (приступ бронхиальной астмы), низкое стояние диафрагмы (спланхноптоз).</p></div></details>
+  <details class="q"><summary>Нижняя граница поднята с одной стороны. Причины?</summary><div class="a"><p>Сморщивание лёгкого (пневмосклероз), обтурационный ателектаз, жидкость или воздух в плевральной полости, резкое увеличение печени или селезёнки.</p></div></details>
+  <details class="q"><summary>Подвижность нижнего края лёгких в норме?</summary><div class="a"><p>По средней подмышечной линии 6–8 см (по 3–4 см на вдохе и выдохе), по среднеключичной и лопаточной — 4–6 см.</p></div></details>
+  <details class="q"><summary>Когда подвижность нижнего края уменьшена?</summary><div class="a"><p>Эмфизема, воспалительная инфильтрация, застой, пневмосклероз, плевральные сращения; жидкость или воздух в плевральной полости (не определяется); парез диафрагмы, высокое внутрибрюшное давление, боль при дыхании.</p></div></details>
+  <details class="q"><summary>Почему подвижность больше всего по средней подмышечной линии?</summary><div class="a"><p>Там самый глубокий рёберно-диафрагмальный синус: лёгкое на VIII ребре, плевра на X — лёгкому есть куда опускаться на вдохе.</p></div></details>
+  <details class="q"><summary>Пространство Траубе: что это, границы, когда уменьшается?</summary><div class="a"><p>Зона тимпанита слева внизу спереди от газового пузыря желудка. Границы: печень справа, лёгкое и сердце сверху, селезёнка слева, рёберная дуга снизу. Уменьшается при левостороннем экссудативном плеврите, спленомегалии, увеличении левой доли печени, выпоте в перикард, после еды.</p></div></details>
+  <details class="q"><summary>Как на человеке найти II ребро и VII ребро?</summary><div class="a"><p>II ребро прикрепляется к грудине на уровне угла грудины (angulus sterni). Нижний угол лопатки при опущенных руках — на уровне VII ребра.</p></div></details>
+</section>
+
+<section id="dalee">
+  <div class="sec-head"><h2>Нормы на следующие темы</h2><span class="skill">навыки № 43, 48–50, 78, 84</span></div>
+  <p>По тематическому плану перкуссия сердца — на 8-м занятии, печени и селезёнки — на 12-м. Коротко, чтобы цифры были под рукой.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Что</th><th>Норма</th></tr></thead>
+    <tbody>
+      <tr><td>Относительная тупость сердца</td><td>правая — IV межреберье, 1–1,5 см кнаружи от правого края грудины; левая — V межреберье, 1–1,5 см кнутри от левой среднеключичной линии; верхняя — III ребро по левой окологрудинной линии</td></tr>
+      <tr><td>Абсолютная тупость сердца</td><td>правая — левый край грудины; левая — 1–2 см кнутри от левой границы относительной тупости; верхняя — IV ребро</td></tr>
+      <tr><td>Поперечник сосудистого пучка</td><td class="num">5–6 см во II межреберье</td></tr>
+      <tr><td>Печень по Курлову</td><td class="num">9 · 8 · 7 см (±1–2 см)</td></tr>
+      <tr><td>Селезёнка</td><td class="num">длинник 6–8 см, поперечник 4–6 см</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="istochniki">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ul class="links">
+    <li>Гребенев А. Л. Пропедевтика внутренних болезней. — 6-е изд., перераб. и доп. — М.: Медицина. Разделы «Перкуссия» и «Исследование органов дыхания».</li>
+    <li>Кафедра пропедевтики внутренних болезней с курсом лучевой диагностики ЧГУ, <a href="http://propedevtika-med.ru/" target="_blank" rel="noopener">propedevtika-med.ru</a>: <a href="http://propedevtika-med.ru/index.php/2012-08-03-07-39-28/2012-08-07-09-30-41" target="_blank" rel="noopener">тематический план 2026 и экзаменационные вопросы</a>, <a href="http://propedevtika-med.ru/index.php/2012-08-03-07-39-28/2012-08-07-09-44-38/28-2012-08-03-05-36-11" target="_blank" rel="noopener">перечень практических навыков</a>, <a href="http://propedevtika-med.ru/images/dokumenti/dop-materiale-v-tablicah.docx" target="_blank" rel="noopener">дополнительные материалы в таблицах</a>.</li>
+    <li>Курс кафедры в Moodle ЧГУ — <a href="https://study.chuvsu.ru/" target="_blank" rel="noopener">study.chuvsu.ru</a>, нужен вход под учётной записью студента.</li>
+  </ul>
+  <footer>Где руководства расходятся в цифрах, приведены оба варианта. Если преподаватель даёт другую норму, на занятии отвечай его цифрой.</footer>
+</section>
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('toggle-all');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    var all = document.querySelectorAll('details.q');
+    var open = btn.getAttribute('data-open') === '1';
+    all.forEach(function(d){ d.open = !open; });
+    btn.setAttribute('data-open', open ? '0' : '1');
+    btn.textContent = open ? 'Показать все ответы' : 'Скрыть ответы';
+  });
+})();
+</script>
+
+</body></html>
