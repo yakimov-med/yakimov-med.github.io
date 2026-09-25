@@ -375,7 +375,11 @@ var LS = {
 var K_PROG="physio.progress.v1", K_STAT="physio.stats.v1", K_SET="physio.settings.v1", K_THEME="physio.theme.v1";
 var stats = LS.get(K_STAT, {wrong:{}, marked:[], answered:0, right:0});
 if(!stats.wrong) stats.wrong={}; if(!stats.marked) stats.marked=[]; if(!stats.level) stats.level={};
+if(!stats.seen) stats.seen={};
 function saveStats(){ LS.set(K_STAT, stats); }
+/* Сколько подходов вопрос уже попадался. Счётчика раньше не было: вопросы с отметкой
+   выученности или ошибкой из старой статистики считаем попадавшимися один раз. */
+function seenOf(id){ return stats.seen[id] || ((stats.level[id] || stats.wrong[id]) ? 1 : 0); }
 
 var settings = LS.get(K_SET, null) || {
   sections: SEC.map(function(_,i){return i;}),
@@ -492,9 +496,9 @@ function paintMenu(){
   $("btn-marked").disabled = !stats.marked.length;
 
   var MODE_HINT = {
-    test: "Обычный тест: вопрос за вопросом, в конце — результат и разбор ошибок. Годится, чтобы проверить себя перед экзаменом.",
-    learn: "Вопросы идут по кругу: ошибся — вопрос вернётся через пару заданий, ответил верно дважды подряд — уходит из круга. Уже выученные в круг не попадают, поэтому каждый подход продолжает с того, что ещё не выучено.",
-    cards: "Карточки: сначала вспоминаешь ответ сам, потом открываешь и честно отмечаешь «знал» или «не знал». Быстрый способ повторять уже знакомое."
+    test: "Обычный тест: вопрос за вопросом, в конце — результат и разбор ошибок. Сначала попадаются вопросы, которых ещё не было, — повторы начнутся, только когда пройдёшь все вопросы выбранных разделов.",
+    learn: "Ответил верно — вопрос уходит из круга. Ошибся — вопрос вернётся через пару заданий и уйдёт, когда ответишь верно два раза подряд. Сначала идут вопросы, которых ещё не было; выученные в круг не попадают.",
+    cards: "Карточки: сначала вспоминаешь ответ сам, потом открываешь и честно отмечаешь «знал» или «не знал». «Не знал» — карточка вернётся через пару заданий. Быстрый способ повторять уже знакомое."
   };
   Array.prototype.forEach.call(document.querySelectorAll("#mode-list .chip"), function(b){
     b.classList.toggle("on", settings.mode === b.dataset.mode);
@@ -502,13 +506,14 @@ function paintMenu(){
   $("mode-hint").textContent = MODE_HINT[settings.mode] || "";
 
   var learned = learnedCount(), pool = QS.length;
+  var unseen = QS.filter(function(q){ return !seenOf(q.id); }).length;
   $("learned-box").innerHTML =
     '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">' +
       '<div><b style="font-size:20px">' + learned + '</b> <span class="muted">из ' + pool + ' вопросов выучено</span></div>' +
-      '<div class="small muted">в работе над ошибками: ' + w + '</div>' +
+      '<div class="small muted">в работе над ошибками: ' + w + ' · ещё не попадались: ' + unseen + '</div>' +
     '</div>' +
     '<div class="bar" style="margin-top:10px"><i style="width:' + (learned / pool * 100) + '%"></i></div>' +
-    '<div class="small muted" style="margin-top:8px">Вопрос считается выученным после двух верных ответов подряд в режимах «Учить» или «Карточки». Прогресс по разделам — в списке ниже.</div>';
+    '<div class="small muted" style="margin-top:8px">Вопрос считается выученным после двух верных ответов подряд в режимах «Учить» или «Карточки»: если первый был верным, второй раз вопрос попадётся, когда закончатся новые. Прогресс по разделам — в списке ниже.</div>';
 
   var p = loadProgress();
   $("resume-box").classList.toggle("hidden", !p);
@@ -516,15 +521,15 @@ function paintMenu(){
 }
 function resumeText(p){
   return (p.mode === "test" ? "Пройдено " + Object.keys(p.answers).length + " из " + p.order.length
-    : "Выучено " + p.learned + " из " + p.total + ", в круге " + p.queue.length)
+    : "Пройдено " + p.learned + " из " + p.total + ", в круге " + p.queue.length)
     + " · верных " + p.ok + ", ошибок " + p.bad;
 }
 /* ошибки и «выучено» считаются только по вопросам, которые есть в этой версии сборника */
 function wrongIds(){ return Object.keys(stats.wrong).filter(hasId); }
 
 $("btn-reset").onclick=function(){
-  if(!confirm("Стереть статистику, список ошибок и отметки? Сами вопросы останутся.")) return;
-  stats={wrong:{},marked:[],level:{},answered:0,right:0}; saveStats(); LS.del(K_PROG); paintMenu();
+  if(!confirm("Стереть статистику, историю показов, список ошибок и отметки? Сами вопросы останутся.")) return;
+  stats={wrong:{},marked:[],level:{},seen:{},answered:0,right:0}; saveStats(); LS.del(K_PROG); paintMenu();
 };
 
 /* ================= СЕССИЯ ================= */
@@ -571,10 +576,14 @@ function learnedCount(){
    Без перемешивания (mix=false) внутри раздела сохраняется порядок сборника, а в каждом «круге»
    разделы идут по номерам. */
 function balancedOrder(list, n, mix){
-  var groups = {};
+  var groups = {}, part = n && n < list.length;
   list.forEach(function(q){ (groups[q.s] = groups[q.s] || []).push(q.i); });
   var keys = Object.keys(groups), quota = {};
-  keys.forEach(function(k){ if(mix) shuffle(groups[k]); quota[k] = n && n < list.length ? 0 : groups[k].length; });
+  keys.forEach(function(k){
+    if(mix) shuffle(groups[k]);
+    if(mix || part) groups[k] = leastSeenFirst(groups[k]);
+    quota[k] = part ? 0 : groups[k].length;
+  });
   if(n && n < list.length){
     var left = n, open = keys.slice();
     while(left > 0 && open.length){
@@ -589,10 +598,21 @@ function balancedOrder(list, n, mix){
   }
   var items = [];
   keys.forEach(function(k, ki){
-    for(var j = 0; j < quota[k]; j++) items.push({qi: groups[k][j], key: j + (mix ? Math.random() : ki / keys.length)});
+    var chosen = groups[k].slice(0, quota[k]);
+    if(!mix) chosen.sort(byIndex);
+    for(var j = 0; j < chosen.length; j++) items.push({qi: chosen[j], key: j + (mix ? Math.random() : ki / keys.length)});
   });
   items.sort(function(a, b){ return a.key - b.key; });
   return items.map(function(x){ return x.qi; });
+}
+function byIndex(a, b){ return a - b; }
+
+/* Чтобы вопросы не шли по второму кругу, пока есть новые: сначала те, что попадались реже всего.
+   При равенстве порядок сохраняется — он уже случайный или по сборнику. */
+function leastSeenFirst(arr){
+  return arr.map(function(qi, k){ return {qi: qi, n: seenOf(QS[qi].id), k: k}; })
+    .sort(function(a, b){ return a.n - b.n || a.k - b.k; })
+    .map(function(x){ return x.qi; });
 }
 
 function buildSession(list, label, mode){
@@ -601,9 +621,12 @@ function buildSession(list, label, mode){
   if(!label && settings.balance){
     order = balancedOrder(list, settings.len, mix);
   } else {
+    // «Работа над ошибками» и «Избранное» (label) берут весь список, без отбора по новизне
     order = list.map(function(q){ return q.i; });
     if(mix) shuffle(order);
-    if(settings.len && !label) order = order.slice(0, settings.len);
+    var part = !label && settings.len && settings.len < order.length;
+    if(!label && (mix || part)) order = leastSeenFirst(order);
+    if(part){ order = order.slice(0, settings.len); if(!mix) order.sort(byIndex); }
   }
   var perms = {};
   order.forEach(function(qi){
@@ -615,7 +638,7 @@ function buildSession(list, label, mode){
   S = {
     mode: mode, order: order, perms: perms, pos: 0, answers: {}, missed: {},
     ok: 0, bad: 0, started: Date.now(), active: 0, last: Date.now(), label: label || "",
-    strict: settings.strict, total: order.length, learned: 0,
+    strict: settings.strict, total: order.length, learned: 0, mastered: 0,
     queue: order.map(function(qi){ return {qi: qi, streak: 0}; })
   };
   saveProgress(); show("quiz"); renderQ();
@@ -650,7 +673,7 @@ function unpackProgress(p){
   s.missed = byQi(p.missed, checkAns);
   s.queue = p.queue.map(function(it){ return {qi: qiOf(it.id), streak: +it.streak || 0}; });
   if(!(s.pos >= 0 && s.pos <= s.order.length)) return null;
-  ["ok", "bad", "learned", "active"].forEach(function(f){ s[f] = +s[f] || 0; });
+  ["ok", "bad", "learned", "mastered", "active"].forEach(function(f){ s[f] = +s[f] || 0; });
   s.total = s.total || s.order.length;
   delete s.v;
   return (s.mode === "test" ? s.pos < s.order.length : s.queue.length) ? s : null;
@@ -682,7 +705,7 @@ function renderQ(){
 
   var head = S.mode === "test"
     ? (S.pos + 1) + " / " + S.order.length
-    : "осталось " + S.queue.length + " · выучено " + S.learned;
+    : "осталось\u00a0" + S.queue.length + " · пройдено\u00a0" + S.learned;
   $("q-pos").textContent = (S.label ? S.label + " · " : "") + (S.mode === "learn" ? "Учить · " : S.mode === "cards" ? "Карточки · " : "") + head;
   $("c-ok").textContent = "✓ " + S.ok;
   $("c-no").textContent = "✗ " + S.bad;
@@ -790,7 +813,11 @@ function commit(surrender, selfGraded){
   var qi = curQi, q = QS[qi];
   var multi = q.c.length > 1 || (S.strict && SEC[q.s].multi);
   var ok = !surrender && same(curSel, q.c);
-  S.answers[qi] = {given: curSel.slice(), ok: ok, gaveUp: !!surrender};
+  var prev = S.answers[qi];
+  // попавшимся вопрос считается один раз за подход, сколько бы раз его ни спросили
+  if(!prev) stats.seen[q.id] = seenOf(q.id) + 1;
+  // lvl0 — уровень вопроса до подхода: по нему видно, что вопрос выучен именно сейчас
+  S.answers[qi] = {given: curSel.slice(), ok: ok, gaveUp: !!surrender, lvl0: prev ? prev.lvl0 : levelOf(q.id)};
   // в «Учить» и «Карточках» вопрос отвечают, пока не выучат; для итогов важна первая ошибка
   if(!ok && !S.missed[qi]) S.missed[qi] = {given: curSel.slice(), ok: false, gaveUp: !!surrender};
   tick();
@@ -804,7 +831,13 @@ function commit(surrender, selfGraded){
     var item = S.queue.shift();
     if(ok){
       item.streak++;
-      if(item.streak >= 2){ S.learned++; S.answers[qi].fate = "out"; }
+      /* Верно с первого показа — вопрос сразу уходит из круга (второй раз он попадётся, когда
+         закончатся новые). После ошибки нужны два верных подряд, но тот же вопрос дважды
+         подряд не показываем: если он остался в круге один, хватает одного верного. */
+      if(!S.missed[qi] || item.streak >= 2 || !S.queue.length){
+        S.learned++; S.answers[qi].fate = "out";
+        if(levelOf(q.id) >= 2 && !(S.answers[qi].lvl0 >= 2)) S.mastered = (S.mastered || 0) + 1;
+      }
       else { insertLater(item, 8); S.answers[qi].fate = "again"; }
     } else { item.streak = 0; insertLater(item, 3); S.answers[qi].fate = "back"; }
   }
@@ -861,7 +894,9 @@ function paintAnswer(q, multi, replay){
     var note = document.createElement("div");
     note.className = "small muted";
     note.style.marginTop = "8px";
-    note.textContent = ans.fate === "out" ? "Два верных ответа подряд — вопрос выучен и убран из круга."
+    note.textContent = ans.fate === "out"
+        ? (levelOf(q.id) >= 2 ? "Вопрос выучен и убран из круга."
+          : "Вопрос убран из круга. Ещё раз он попадётся, когда закончатся новые: верный ответ — и он выучен.")
       : ans.fate === "again" ? "Ещё один верный ответ — и вопрос уйдёт из круга."
       : "Вопрос вернётся через несколько заданий.";
     fb.appendChild(note);
@@ -919,12 +954,12 @@ function finish(){
     ? "Верных " + clean + " из " + answered + (answered < total ? " (не отвечено " + (total - answered) + ")" : "")
       + " · примерно " + mins + " " + plural(mins, "минута", "минуты", "минут")
     : "Без ошибок " + clean + " из " + answered + " " + plural(answered, "вопроса", "вопросов", "вопросов")
-      + " · выучено " + S.learned + " из " + total + " · ответов верных " + ok + ", ошибок " + bad
+      + " · ответов верных " + ok + ", ошибок " + bad
       + " · примерно " + mins + " " + plural(mins, "минута", "минуты", "минут");
   $("r-grid").innerHTML =
     '<div class="stat"><b class="c-ok">' + ok + '</b><span class="small muted">верных ответов</span></div>' +
     '<div class="stat"><b class="c-no">' + bad + '</b><span class="small muted">ошибок</span></div>' +
-    '<div class="stat"><b>' + (S.mode === "test" ? total : S.learned) + '</b><span class="small muted">' +
+    '<div class="stat"><b>' + (S.mode === "test" ? total : S.mastered || 0) + '</b><span class="small muted">' +
       (S.mode === "test" ? "вопросов в попытке" : "выучено за подход") + '</span></div>' +
     '<div class="stat"><b>' + learnedCount() + '</b><span class="small muted">выучено всего</span></div>';
 
