@@ -144,6 +144,7 @@ a.btn{text-decoration:none}
 .verdict{margin-top:14px;padding:12px 14px;border-radius:12px;font-weight:600;font-size:15px;border:1px solid}
 .verdict.ok{background:var(--ok-bg);border-color:var(--ok-line);color:var(--ok)}
 .verdict.no{background:var(--no-bg);border-color:var(--no-line);color:var(--no)}
+.verdict.wait{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .note{margin-top:10px;padding:11px 13px;border-radius:12px;background:var(--warn-bg);border:1px solid var(--warn-line);font-size:14px;line-height:1.5}
 .note b{display:block;margin-bottom:2px}
 .note + .note{margin-top:8px}
@@ -218,6 +219,7 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
       <button class="chip" data-mode="test">Тест</button>
       <button class="chip" data-mode="learn">Учить с повторами</button>
       <button class="chip" data-mode="cards">Карточки</button>
+      <button class="chip" data-mode="exam">Экзамен</button>
     </div>
     <p class="small muted" style="margin:10px 0 0" id="mode-hint"></p>
 
@@ -248,7 +250,7 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
       <b>Сразу к следующему:</b> после верного ответа вопрос сам листается дальше.
     </p>
 
-    <h2>Сколько вопросов</h2>
+    <h2 id="len-h">Сколько вопросов</h2>
     <div class="row" id="len-list"></div>
 
     <div style="margin-top:22px">
@@ -448,13 +450,44 @@ Array.prototype.forEach.call(document.querySelectorAll("#opt-list .chip"), funct
   b.onclick=function(){ settings[b.dataset.opt]=!settings[b.dataset.opt]; saveSettings(); paintMenu(); };
 });
 
-var LENS=[[0,"Все"],[10,"10"],[25,"25"],[50,"50"],[100,"100"],[200,"200"]];
+var LENS=[[0,"Все"],[10,"10"],[15,"15"],[20,"20"],[25,"25"],[50,"50"],[100,"100"],[200,"200"]];
 var lenBox=$("len-list");
 LENS.forEach(function(l){
   var b=document.createElement("button"); b.className="chip"; b.dataset.len=l[0]; b.textContent=l[1];
   b.onclick=function(){ settings.len=l[0]; saveSettings(); paintMenu(); };
   lenBox.appendChild(b);
 });
+
+/* ---------- экзамен ---------- */
+/* Переэкзаменовка, со слов преподавателя: было 15 вопросов и порог 51 %, могут сделать 20 и 60 %.
+   Тренируемся по более строгому варианту; точные цифры станут известны позже — поменять здесь. */
+var EXAM = {
+  n: 20, pass: 60,
+  // точно будет вопрос про потенциал действия из раздела 1: фазы ПД и возбудимости, КУД, заряд на пике
+  pd: [1, 3, 4, 6, 8, 11, 12, 42, 43, 45, 46, 48, 49, 50, 54, 60, 61, 63],
+  // вопрос с несколькими верными ответами — скорее всего про пищеварение (раздел 5)
+  dig: [38, 39, 47, 48, 49, 51, 52, 54, 55, 60, 61, 62, 65, 66, 67, 68, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 84, 87, 88, 92, 94]
+};
+function lin(mode){ return mode === "test" || mode === "exam"; }  // вопросы по порядку, без круга
+function idsOf(num, list){
+  var s = -1;
+  SEC.forEach(function(x, i){ if(x.num === num) s = i; });
+  return list.map(function(n){ return s + "-" + n; }).filter(hasId);
+}
+/* Вариант экзамена: по одному вопросу из двух обязательных списков (сначала те, что попадались реже),
+   остальные — из выбранных разделов, как в тесте. Порядок перемешивает buildSession. */
+function examList(){
+  var must = [];
+  [idsOf(1, EXAM.pd), idsOf(5, EXAM.dig)].forEach(function(ids){
+    var cand = leastSeenFirst(shuffle(ids.map(function(id){ return BY_ID[id]; })));
+    if(cand.length) must.push(cand[0]);
+  });
+  var rest = QS.filter(function(q){ return settings.sections.indexOf(q.s) >= 0 && must.indexOf(q.i) < 0; });
+  var n = Math.max(0, EXAM.n - must.length), order;
+  if(settings.balance) order = balancedOrder(rest, n, true);
+  else order = leastSeenFirst(shuffle(rest.map(function(q){ return q.i; }))).slice(0, n);
+  return must.concat(order).map(function(qi){ return QS[qi]; });
+}
 
 /* в режиме «Учить» выученные вопросы в круг не берутся, пока в выбранных разделах есть невыученные */
 function startList(){
@@ -485,8 +518,12 @@ function paintMenu(){
   Array.prototype.forEach.call(lenBox.children,function(b){
     b.classList.toggle("on", settings.len===+b.dataset.len);
   });
-  var n = startList().length, take = settings.len ? Math.min(settings.len,n) : n;
-  var startWord = settings.mode === "learn" ? "Начать учить" : settings.mode === "cards" ? "Открыть карточки" : "Начать тест";
+  var exam = settings.mode === "exam";
+  var n = startList().length, take = exam ? Math.min(EXAM.n, n + 2) : settings.len ? Math.min(settings.len,n) : n;
+  var startWord = settings.mode === "learn" ? "Начать учить" : settings.mode === "cards" ? "Открыть карточки"
+    : exam ? "Начать экзамен" : "Начать тест";
+  $("len-h").classList.toggle("hidden", exam);
+  lenBox.classList.toggle("hidden", exam);
   $("btn-start").textContent = n ? startWord + " — " + take + " " + plural(take,"вопрос","вопроса","вопросов") : "Выберите хотя бы один раздел";
   $("btn-start").disabled = !n;
   var w = wrongIds().length;
@@ -498,7 +535,11 @@ function paintMenu(){
   var MODE_HINT = {
     test: "Обычный тест: вопрос за вопросом, в конце — результат и разбор ошибок. Сначала попадаются вопросы, которых ещё не было, — повторы начнутся, только когда пройдёшь все вопросы выбранных разделов.",
     learn: "Ответил верно — вопрос уходит из круга. Ошибся — вопрос вернётся через пару заданий и уйдёт, когда ответишь верно два раза подряд. Сначала идут вопросы, которых ещё не было; выученные в круг не попадают.",
-    cards: "Карточки: сначала вспоминаешь ответ сам, потом открываешь и честно отмечаешь «знал» или «не знал». «Не знал» — карточка вернётся через пару заданий. Быстрый способ повторять уже знакомое."
+    cards: "Карточки: сначала вспоминаешь ответ сам, потом открываешь и честно отмечаешь «знал» или «не знал». «Не знал» — карточка вернётся через пару заданий. Быстрый способ повторять уже знакомое.",
+    exam: "Как на переэкзаменовке: " + EXAM.n + " вопросов, правильные ответы и счёт — только в конце, зачёт от " + EXAM.pass +
+      "\u00a0% (" + Math.ceil(EXAM.n * EXAM.pass / 100) + " из " + EXAM.n + "). В каждом варианте есть вопрос про потенциал действия (раздел 1) " +
+      "и вопрос с несколькими верными ответами про пищеварение (раздел 5), остальные — из выбранных разделов. " +
+      "Где сборник не говорит, сколько ответов верных, всегда чекбоксы."
   };
   Array.prototype.forEach.call(document.querySelectorAll("#mode-list .chip"), function(b){
     b.classList.toggle("on", settings.mode === b.dataset.mode);
@@ -520,7 +561,8 @@ function paintMenu(){
   if(p) $("resume-info").textContent = resumeText(p);
 }
 function resumeText(p){
-  return (p.mode === "test" ? "Пройдено " + Object.keys(p.answers).length + " из " + p.order.length
+  if(p.mode === "exam") return "Экзамен: отвечено " + Object.keys(p.answers).length + " из " + p.order.length;
+  return (lin(p.mode) ? "Пройдено " + Object.keys(p.answers).length + " из " + p.order.length
     : "Пройдено " + p.learned + " из " + p.total + ", в круге " + p.queue.length)
     + " · верных " + p.ok + ", ошибок " + p.bad;
 }
@@ -550,11 +592,11 @@ function tick(){
 
 function currentQi(){
   if(!S) return null;
-  if(S.mode === "test") return S.order[S.pos];
+  if(lin(S.mode)) return S.order[S.pos];
   return S.queue.length ? S.queue[0].qi : null;
 }
 function leftCount(){
-  return S.mode === "test"
+  return lin(S.mode)
     ? S.order.length - Object.keys(S.answers).length
     : S.queue.length;
 }
@@ -638,7 +680,7 @@ function buildSession(list, label, mode){
   S = {
     mode: mode, order: order, perms: perms, pos: 0, answers: {}, missed: {},
     ok: 0, bad: 0, started: Date.now(), active: 0, last: Date.now(), label: label || "",
-    strict: settings.strict, total: order.length, learned: 0, mastered: 0,
+    strict: settings.strict || mode === "exam", total: order.length, learned: 0, mastered: 0,
     queue: order.map(function(qi){ return {qi: qi, streak: 0}; })
   };
   saveProgress(); show("quiz"); renderQ();
@@ -659,7 +701,7 @@ function packProgress(s){
 }
 function unpackProgress(p){
   if(!p || typeof p !== "object" || !DATA_VER || p.v !== DATA_VER) return null;
-  if(["test", "learn", "cards"].indexOf(p.mode) < 0 || !Array.isArray(p.order) || !Array.isArray(p.queue)) return null;
+  if(["test", "exam", "learn", "cards"].indexOf(p.mode) < 0 || !Array.isArray(p.order) || !Array.isArray(p.queue)) return null;
   function qiOf(id){ if(!hasId(id)) throw new Error("нет вопроса " + id); return BY_ID[id]; }
   function byQi(o, check){ var r = {}; for(var id in (o || {})){ var qi = qiOf(id); check(QS[qi], o[id]); r[qi] = o[id]; } return r; }
   function checkAns(q, a){ if(!a || !Array.isArray(a.given) || a.given.some(function(x){ return !(x >= 0 && x < q.o.length); })) throw new Error("ответ"); }
@@ -676,7 +718,7 @@ function unpackProgress(p){
   ["ok", "bad", "learned", "mastered", "active"].forEach(function(f){ s[f] = +s[f] || 0; });
   s.total = s.total || s.order.length;
   delete s.v;
-  return (s.mode === "test" ? s.pos < s.order.length : s.queue.length) ? s : null;
+  return (lin(s.mode) ? s.pos < s.order.length : s.queue.length) ? s : null;
 }
 function loadProgress(){
   var p = LS.get(K_PROG, null);
@@ -692,26 +734,24 @@ function renderQ(){
   if(!S) return;
   cancelAuto();
   var qi = currentQi();
-  if(qi === null || (S.mode === "test" && S.pos >= S.order.length)) return finish();
+  if(qi === null || (lin(S.mode) && S.pos >= S.order.length)) return finish();
   curQi = qi;
 
   var q = QS[qi], perm = S.perms[qi] || q.o.map(function(_, k){ return k; });
-  var prev = S.mode === "test" ? S.answers[qi] : null;
+  var prev = lin(S.mode) ? S.answers[qi] : null;
   curSel = prev ? prev.given.slice() : [];
   curDone = !!prev;
   revealed = curDone;
   var multi = q.c.length > 1 || (S.strict && SEC[q.s].multi);
   var cards = S.mode === "cards";
 
-  var head = S.mode === "test"
+  var head = lin(S.mode)
     ? (S.pos + 1) + " / " + S.order.length
     : "осталось\u00a0" + S.queue.length + " · пройдено\u00a0" + S.learned;
   $("q-pos").textContent = (S.label ? S.label + " · " : "") + (S.mode === "learn" ? "Учить · " : S.mode === "cards" ? "Карточки · " : "") + head;
-  $("c-ok").textContent = "✓ " + S.ok;
-  $("c-no").textContent = "✗ " + S.bad;
-  $("c-left").textContent = S.streak > 1 ? "серия " + S.streak : "";
-  var done = S.mode === "test" ? S.pos : S.learned;
-  var tot = S.mode === "test" ? S.order.length : S.total;
+  paintCounts();
+  var done = lin(S.mode) ? S.pos : S.learned;
+  var tot = lin(S.mode) ? S.order.length : S.total;
   $("bar-i").style.width = (tot ? done / tot * 100 : 0) + "%";
 
   var lvl = levelOf(q.id);
@@ -762,11 +802,11 @@ function renderActions(multi, marked){
     if(multi) add("Ответить", "primary", function(){ submitMulti(); }, "btn-submit");
     add("Не знаю", "", function(){ giveUp(); });
   } else {
-    var last = S.mode === "test" ? (S.pos + 1 >= S.order.length) : (S.queue.length === 0);
+    var last = lin(S.mode) ? (S.pos + 1 >= S.order.length) : (S.queue.length === 0);
     add(last ? "Показать результат →" : "Дальше →", "primary", function(){ next(); }, "btn-next");
   }
   add(marked ? "★ В избранном" : "☆ В избранное", "", function(){ toggleMark(); });
-  if(S.mode === "test" && S.pos > 0) add("← Назад", "", function(){ S.pos--; saveProgress(); renderQ(); });
+  if(lin(S.mode) && S.pos > 0) add("← Назад", "", function(){ S.pos--; saveProgress(); renderQ(); });
 }
 
 function paintSel(){
@@ -826,7 +866,7 @@ function commit(surrender, selfGraded){
   if(ok) delete stats.wrong[q.id];
   else stats.wrong[q.id] = (stats.wrong[q.id] || 0) + 1;
 
-  if(S.mode !== "test"){
+  if(!lin(S.mode)){
     bumpLevel(q.id, ok ? 1 : -1);
     var item = S.queue.shift();
     if(ok){
@@ -843,10 +883,9 @@ function commit(surrender, selfGraded){
   }
   saveStats(); curDone = true; revealed = true; saveProgress();
   paintAnswer(q, multi, false);
-  $("c-ok").textContent = "✓ " + S.ok;
-  $("c-no").textContent = "✗ " + S.bad;
-  $("c-left").textContent = S.streak > 1 ? "серия " + S.streak : "";
-  if(ok && settings.instant && !surrender){
+  paintCounts();
+  // в экзамене листаем после любого ответа, иначе по паузе было бы видно, верен ли он
+  if(settings.instant && (S.mode === "exam" || (ok && !surrender))){
     var sess = S, pos = S.pos;
     cancelAuto();
     autoTimer = setTimeout(function(){
@@ -854,7 +893,7 @@ function commit(surrender, selfGraded){
       // пока ждали, могли нажать «Дальше», «Назад» или уйти в меню
       if(S !== sess || curQi !== qi || S.pos !== pos || !curDone || $("screen-quiz").classList.contains("hidden")) return;
       next();
-    }, selfGraded ? 250 : 650);
+    }, selfGraded || S.mode === "exam" ? 250 : 650);
   }
 }
 function insertLater(item, gap){
@@ -862,7 +901,31 @@ function insertLater(item, gap){
   S.queue.splice(pos, 0, item);
 }
 
+/* во время экзамена счёт и серия не видны — они подсказывали бы, верен ли ответ */
+function paintCounts(){
+  var exam = S.mode === "exam";
+  $("c-ok").textContent = exam ? "" : "✓ " + S.ok;
+  $("c-no").textContent = exam ? "" : "✗ " + S.bad;
+  $("c-left").textContent = exam ? "ответов " + Object.keys(S.answers).length : S.streak > 1 ? "серия " + S.streak : "";
+}
+/* экзамен: выбранный вариант отмечен, но верен ли он и какой правильный — только в итогах */
+function paintHidden(q, multi, replay){
+  var ans = S.answers[curQi];
+  Array.prototype.forEach.call($("q-opts").children, function(b){
+    b.classList.add("done"); b.classList.remove("ok", "no", "dim", "miss");
+    b.classList.toggle("sel", ans.given.indexOf(+b.dataset.oi) >= 0);
+    b.querySelector(".mark").textContent = "";
+  });
+  var fb = $("q-feedback"); fb.innerHTML = "";
+  var v = document.createElement("div");
+  v.className = "verdict wait";
+  v.textContent = ans.gaveUp ? "Без ответа. Правильные ответы — в конце." : "Ответ принят. Правильные ответы — в конце.";
+  fb.appendChild(v);
+  renderActions(multi, stats.marked.indexOf(q.id) >= 0);
+  if(!replay){ var nb = $("btn-next"); if(nb) nb.focus(); }
+}
 function paintAnswer(q, multi, replay){
+  if(S.mode === "exam") return paintHidden(q, multi, replay);
   var ans = S.answers[curQi];
   var hit = 0, extra = 0, tried = !ans.gaveUp && ans.given.length > 0;
   Array.prototype.forEach.call($("q-opts").children, function(b){
@@ -890,7 +953,7 @@ function paintAnswer(q, multi, replay){
     }
   }
   fb.appendChild(v);
-  if(S.mode !== "test" && ans.fate){
+  if(!lin(S.mode) && ans.fate){
     var note = document.createElement("div");
     note.className = "small muted";
     note.style.marginTop = "8px";
@@ -925,7 +988,7 @@ function toggleMark(){
 function next(){
   cancelAuto();
   tick();
-  if(S.mode === "test"){
+  if(lin(S.mode)){
     S.pos++;
     saveProgress();
     if(S.pos >= S.order.length) finish(); else renderQ();
@@ -940,7 +1003,7 @@ function next(){
 function finish(){
   cancelAuto(); tick();
   var ok = S.ok, bad = S.bad;
-  var total = S.mode === "test" ? S.order.length : S.total;
+  var total = lin(S.mode) ? S.order.length : S.total;
   /* Вопрос считается ошибочным, если в этой попытке на него хоть раз ответили неверно.
      В «Тесте» ответ один, в «Учить» и «Карточках» последний ответ всегда верный — смотрим на первую ошибку. */
   var seen = Object.keys(S.answers);
@@ -949,8 +1012,13 @@ function finish(){
   var answered = seen.length, clean = answered - wrongIdx.length;
   var pct = answered ? Math.round(clean / answered * 100) : 0;
   var mins = Math.max(1, Math.round((S.active || 0) / 60000));
+  var exam = S.mode === "exam", need = Math.ceil(total * EXAM.pass / 100), passed = clean >= need;
   $("r-score").textContent = pct + "%";
-  $("r-line").textContent = S.mode === "test"
+  $("r-score").style.color = exam ? (passed ? "var(--ok)" : "var(--no)") : "";
+  $("r-line").textContent = exam
+    ? (passed ? "Зачёт" : "Не сдано") + ": верных " + clean + " из " + total + ", нужно " + need + " (" + EXAM.pass + "\u00a0%)"
+      + " · примерно " + mins + " " + plural(mins, "минута", "минуты", "минут")
+    : lin(S.mode)
     ? "Верных " + clean + " из " + answered + (answered < total ? " (не отвечено " + (total - answered) + ")" : "")
       + " · примерно " + mins + " " + plural(mins, "минута", "минуты", "минут")
     : "Без ошибок " + clean + " из " + answered + " " + plural(answered, "вопроса", "вопросов", "вопросов")
@@ -959,9 +1027,10 @@ function finish(){
   $("r-grid").innerHTML =
     '<div class="stat"><b class="c-ok">' + ok + '</b><span class="small muted">верных ответов</span></div>' +
     '<div class="stat"><b class="c-no">' + bad + '</b><span class="small muted">ошибок</span></div>' +
-    '<div class="stat"><b>' + (S.mode === "test" ? total : S.mastered || 0) + '</b><span class="small muted">' +
-      (S.mode === "test" ? "вопросов в попытке" : "выучено за подход") + '</span></div>' +
-    '<div class="stat"><b>' + learnedCount() + '</b><span class="small muted">выучено всего</span></div>';
+    '<div class="stat"><b>' + (lin(S.mode) ? total : S.mastered || 0) + '</b><span class="small muted">' +
+      (lin(S.mode) ? "вопросов в попытке" : "выучено за подход") + '</span></div>' +
+    (exam ? '<div class="stat"><b>' + need + '</b><span class="small muted">нужно для зачёта</span></div>'
+      : '<div class="stat"><b>' + learnedCount() + '</b><span class="small muted">выучено всего</span></div>');
 
   var bySec = {};
   seen.forEach(function(qi){
@@ -993,6 +1062,7 @@ function finish(){
         (q.warn ? '<div class="small" style="margin-top:4px;color:var(--accent)">Замечание проверки: ' + esc(q.warn) + '</div>' : '');
       det.appendChild(d);
     });
+    if(exam) det.open = true;
     wb.appendChild(det);
   }
   $("r-again").disabled = !wrongIdx.length;
@@ -1000,7 +1070,9 @@ function finish(){
     var list = wrongIdx.map(function(qi){ return QS[qi]; });
     if(list.length) buildSession(list, "Работа над ошибками", S.mode === "test" ? "test" : "learn");
   };
+  $("r-restart").textContent = exam ? "↻ Новый вариант" : "↻ Пройти заново";
   $("r-restart").onclick = function(){
+    if(S.mode === "exam") return buildSession(examList(), "Экзамен", "exam");
     var list = S.order.map(function(qi){ return QS[qi]; });
     buildSession(list, S.label, S.mode);
   };
@@ -1017,7 +1089,9 @@ function okToDrop(){
 }
 $("btn-start").onclick = function(){
   var list = startList();
-  if(list.length && okToDrop()) buildSession(list, "", settings.mode);
+  if(!list.length || !okToDrop()) return;
+  if(settings.mode === "exam") buildSession(examList(), "Экзамен", "exam");
+  else buildSession(list, "", settings.mode);
 };
 $("btn-wrong").onclick = function(){
   var ids = wrongIds();
@@ -1143,7 +1217,7 @@ document.addEventListener("keydown", function(e){
     if(curDone) next();
     else if(multi && curSel.length) submitMulti();
   }
-  if(e.key === "ArrowLeft" && S.mode === "test" && S.pos > 0){
+  if(e.key === "ArrowLeft" && lin(S.mode) && S.pos > 0){
     e.preventDefault(); S.pos--; saveProgress(); renderQ();
   }
 });
