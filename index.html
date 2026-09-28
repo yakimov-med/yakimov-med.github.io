@@ -205,6 +205,12 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
       <button class="icon-btn" id="theme-btn" title="Тема оформления">Тема</button>
     </div>
 
+    <div id="storage-warn" class="note hidden" style="margin:0 0 16px">
+      <b>Этот браузер не сохраняет прогресс</b>
+      Поэтому тренажёр не помнит, какие вопросы уже были, и в новых тестах они будут повторяться.
+      Так бывает в частном режиме и во встроенном браузере Telegram или VK. Откройте ссылку
+      в обычном Chrome или Safari.
+    </div>
     <div id="resume-box" class="card pad hidden" style="margin-bottom:16px">
       <div style="font-weight:600;margin-bottom:4px">Есть незаконченная попытка</div>
       <div class="small muted" id="resume-info" style="margin-bottom:12px"></div>
@@ -242,8 +248,8 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
     </div>
     <p class="small muted" style="margin:10px 0 0">
       <b>Поровну из разделов:</b> вопросы идут из выбранных разделов по очереди, а не пропорционально
-      их размеру. Иначе большие «Кровь» (149) и «Дыхание» (155) выпадают почти втрое чаще, чем
-      «Мышцы» (59) или «ВНД» (51).<br>
+      их размеру. Раздел, в котором новые вопросы кончились, ждёт, пока не попадутся все вопросы
+      остальных выбранных разделов, — повторы начинаются только после этого.<br>
       <b>Строгий режим:</b> в разделах 3, 5, 7, 8, 9, 10 сборник не говорит, один ответ или несколько.
       Со включённым строгим режимом там всегда чекбоксы — как на настоящем тесте. Без него чекбоксы
       появляются только там, где верных ответов правда несколько.<br>
@@ -374,6 +380,13 @@ var LS = {
   set:function(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} },
   del:function(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
+/* Без сохранения тренажёр не помнит показанные вопросы — об этом надо предупредить. Заодно просим
+   браузер не стирать данные сайта при нехватке места (Safari и Chrome иногда чистят их сами). */
+var STORAGE_OK = (function(){
+  try{ localStorage.setItem("physio.check", "1"); var ok = localStorage.getItem("physio.check") === "1";
+       localStorage.removeItem("physio.check"); return ok; }catch(e){ return false; }
+})();
+try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function(){}); }catch(e){}
 var K_PROG="physio.progress.v1", K_STAT="physio.stats.v1", K_SET="physio.settings.v1", K_THEME="physio.theme.v1";
 var stats = LS.get(K_STAT, {wrong:{}, marked:[], answered:0, right:0});
 if(!stats.wrong) stats.wrong={}; if(!stats.marked) stats.marked=[]; if(!stats.level) stats.level={};
@@ -425,6 +438,7 @@ function show(name){
 
 /* ================= МЕНЮ ================= */
 $("menu-sub").textContent = RAW.subtitle;
+$("storage-warn").classList.toggle("hidden", STORAGE_OK);
 
 var secBox = $("sec-list");
 var SEC_N = SEC.map(function(_,i){ return QS.filter(function(q){return q.s===i;}).length; });
@@ -612,21 +626,31 @@ function learnedCount(){
   return n;
 }
 
-/* Поровну из разделов: квота делится между разделами поровну (маленький раздел отдаёт всё,
-   что есть, остаток уходит остальным), затем разделы чередуются — j-й вопрос каждого раздела
-   попадает в j-й «круг». Так любой отрезок сессии, хоть первые 20 вопросов, ровный по разделам.
+/* Поровну из разделов. Сначала всегда берутся вопросы, которые попадались реже всего, — по всем
+   выбранным разделам сразу: пока где-то есть новые, уже виденные не повторяются. Поровну делятся
+   только вопросы одного «яруса» показов, иначе маленькие разделы («ВНД», 51) шли бы по второму
+   кругу, пока в больших («Дыхание», 155) остаются непоказанные. */
+function balancedOrder(list, n, mix){
+  var take = n && n < list.length ? n : list.length, tiers = {}, out = [];
+  // без перемешивания и когда берутся все вопросы — порядок сборника, ярусы не нужны
+  var byShows = mix || take < list.length;
+  list.forEach(function(q){ var c = byShows ? seenOf(q.id) : 0; (tiers[c] = tiers[c] || []).push(q); });
+  Object.keys(tiers).map(Number).sort(byIndex).forEach(function(c){
+    var left = take - out.length;
+    if(left > 0) out = out.concat(evenPick(tiers[c], Math.min(left, tiers[c].length), mix));
+  });
+  return out;
+}
+/* n вопросов из list поровну по разделам (маленький раздел отдаёт всё, что есть, остаток уходит
+   остальным), затем разделы чередуются — j-й вопрос каждого раздела попадает в j-й «круг».
    Без перемешивания (mix=false) внутри раздела сохраняется порядок сборника, а в каждом «круге»
    разделы идут по номерам. */
-function balancedOrder(list, n, mix){
-  var groups = {}, part = n && n < list.length;
+function evenPick(list, n, mix){
+  var groups = {};
   list.forEach(function(q){ (groups[q.s] = groups[q.s] || []).push(q.i); });
   var keys = Object.keys(groups), quota = {};
-  keys.forEach(function(k){
-    if(mix) shuffle(groups[k]);
-    if(mix || part) groups[k] = leastSeenFirst(groups[k]);
-    quota[k] = part ? 0 : groups[k].length;
-  });
-  if(n && n < list.length){
+  keys.forEach(function(k){ if(mix) shuffle(groups[k]); quota[k] = n < list.length ? 0 : groups[k].length; });
+  if(n < list.length){
     var left = n, open = keys.slice();
     while(left > 0 && open.length){
       var share = Math.floor(left / open.length);
