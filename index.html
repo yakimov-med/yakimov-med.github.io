@@ -253,7 +253,7 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
       <b>Строгий режим:</b> в разделах 3, 5, 7, 8, 9, 10 сборник не говорит, один ответ или несколько.
       Со включённым строгим режимом там всегда чекбоксы — как на настоящем тесте. Без него чекбоксы
       появляются только там, где верных ответов правда несколько.<br>
-      <b>Сразу к следующему:</b> после верного ответа вопрос сам листается дальше.
+      <b>Сразу к следующему:</b> после верного ответа вопрос сам листается дальше (в экзамене — после любого).
     </p>
 
     <h2 id="len-h">Сколько вопросов</h2>
@@ -295,7 +295,7 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
 <div id="screen-quiz" class="hidden">
   <div class="top">
     <div class="top-in">
-      <button class="icon-btn" id="q-menu">☰</button>
+      <button class="icon-btn" id="q-menu" aria-label="В меню">☰</button>
       <div class="small muted" id="q-pos"></div>
       <div class="counts">
         <span class="c-ok" id="c-ok">✓ 0</span>
@@ -343,7 +343,7 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
 <div id="screen-browse" class="hidden">
   <div class="top">
     <div class="top-in">
-      <button class="icon-btn" id="b-menu">☰</button>
+      <button class="icon-btn" id="b-menu" aria-label="В меню">☰</button>
       <div class="small muted">Просмотр и поиск</div>
       <div class="counts small muted" id="b-count"></div>
     </div>
@@ -388,9 +388,13 @@ var STORAGE_OK = (function(){
 })();
 try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function(){}); }catch(e){}
 var K_PROG="physio.progress.v1", K_STAT="physio.stats.v1", K_SET="physio.settings.v1", K_THEME="physio.theme.v1";
-var stats = LS.get(K_STAT, {wrong:{}, marked:[], answered:0, right:0});
-if(!stats.wrong) stats.wrong={}; if(!stats.marked) stats.marked=[]; if(!stats.level) stats.level={};
-if(!stats.seen) stats.seen={};
+var stats = LS.get(K_STAT, null);
+// что угодно, кроме объекта нужной формы (испорченная запись, чужая версия), заменяем пустым
+function obj(v){ return v && typeof v === "object" && !Array.isArray(v) ? v : {}; }
+stats = obj(stats);
+stats.wrong = obj(stats.wrong); stats.level = obj(stats.level); stats.seen = obj(stats.seen);
+if(!Array.isArray(stats.marked)) stats.marked = [];
+stats.answered = +stats.answered || 0; stats.right = +stats.right || 0;
 function saveStats(){ LS.set(K_STAT, stats); }
 /* Сколько подходов вопрос уже попадался. Счётчика раньше не было: вопросы с отметкой
    выученности или ошибкой из старой статистики считаем попадавшимися один раз. */
@@ -400,8 +404,13 @@ var settings = LS.get(K_SET, null) || {
   sections: SEC.map(function(_,i){return i;}),
   shuffleQ:true, balance:true, shuffleO:false, strict:false, instant:false, len:0, mode:"learn", brief:false
 };
-if(!settings.mode) settings.mode = "learn";
+settings = obj(settings);
+if(["test", "learn", "cards", "exam"].indexOf(settings.mode) < 0) settings.mode = "learn";
 if(settings.balance === undefined) settings.balance = true;
+if(!Array.isArray(settings.sections)) settings.sections = SEC.map(function(_, i){ return i; });
+// номера разделов — только существующие и без повторов
+settings.sections = settings.sections.filter(function(x, k, a){ return x >= 0 && x < SEC.length && x === Math.floor(x) && a.indexOf(x) === k; });
+if(!(settings.len >= 0)) settings.len = 0;
 function saveSettings(){ LS.set(K_SET, settings); }
 
 /* ---------- тема ---------- */
@@ -886,9 +895,7 @@ function commit(surrender, selfGraded){
   if(!ok && !S.missed[qi]) S.missed[qi] = {given: curSel.slice(), ok: false, gaveUp: !!surrender};
   tick();
   if(ok){ S.ok++; S.streak = (S.streak || 0) + 1; } else { S.bad++; S.streak = 0; }
-  stats.answered++; if(ok) stats.right++;
-  if(ok) delete stats.wrong[q.id];
-  else stats.wrong[q.id] = (stats.wrong[q.id] || 0) + 1;
+  if(S.mode !== "exam") record(q.id, ok);
 
   if(!lin(S.mode)){
     bumpLevel(q.id, ok ? 1 : -1);
@@ -919,6 +926,11 @@ function commit(surrender, selfGraded){
       next();
     }, selfGraded || S.mode === "exam" ? 250 : 650);
   }
+}
+function record(id, ok){
+  stats.answered++; if(ok) stats.right++;
+  if(ok) delete stats.wrong[id];
+  else stats.wrong[id] = (stats.wrong[id] || 0) + 1;
 }
 function insertLater(item, gap){
   var pos = Math.min(S.queue.length, gap);
@@ -1037,6 +1049,11 @@ function finish(){
   var pct = answered ? Math.round(clean / answered * 100) : 0;
   var mins = Math.max(1, Math.round((S.active || 0) / 60000));
   var exam = S.mode === "exam", need = Math.ceil(total * EXAM.pass / 100), passed = clean >= need;
+  // в экзамене ответы попадают в «Мои ошибки» и общий счёт только сейчас (во время экзамена это было бы подсказкой)
+  if(exam && !S.recorded){
+    seen.forEach(function(qi){ record(QS[qi].id, S.answers[qi].ok); });
+    S.recorded = true; saveStats();
+  }
   $("r-score").textContent = pct + "%";
   $("r-score").style.color = exam ? (passed ? "var(--ok)" : "var(--no)") : "";
   $("r-line").textContent = exam
@@ -1124,7 +1141,7 @@ $("btn-wrong").onclick = function(){
 };
 $("btn-marked").onclick = function(){
   var list = QS.filter(function(q){ return stats.marked.indexOf(q.id) >= 0; });
-  if(list.length && okToDrop()) buildSession(list, "Избранное", settings.mode);
+  if(list.length && okToDrop()) buildSession(list, "Избранное", settings.mode === "exam" ? "test" : settings.mode);
 };
 $("btn-resume").onclick = function(){
   var p = loadProgress();
@@ -1218,7 +1235,7 @@ document.addEventListener("keydown", function(e){
   if(e.key === "Escape"){ toMenu(); return; }
 
   if(S.mode === "cards"){
-    if(e.key === "Enter" || e.key === " "){
+    if((e.key === "Enter" || e.key === " ") && e.target.tagName !== "BUTTON"){
       e.preventDefault();
       if(!revealed) reveal();
       else if(!curDone) selfGrade(true);
@@ -1236,6 +1253,7 @@ document.addEventListener("keydown", function(e){
     if(idx < opts.length){ e.preventDefault(); pick(+opts[idx].dataset.oi, multi); }
     return;
   }
+  if((e.key === "Enter" || e.key === " ") && e.target.tagName === "BUTTON") return;
   if(e.key === "Enter" || e.key === " " || e.key === "ArrowRight"){
     e.preventDefault();
     if(curDone) next();
