@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Медицинская сортировка</title>
+<meta name="description" content="Медицина катастроф: медицинская сортировка — цель и признаки, сортировочный пост, выборочная и конвейерная сортировка, сортировочные марки, опасные для окружающих, площадка специальной обработки, сортировочные группы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#9E2A2B; --accent-soft:#F6E4E2;
+  --blue:#1C5A8C; --blue-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E3F1E7; --ok-fg:#1F6B3A;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#F0928A; --accent-soft:#3A1F1E;
+    --blue:#82B6E4; --blue-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#15301F; --ok-fg:#8FD6A6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#F0928A; --accent-soft:#3A1F1E;
+  --blue:#82B6E4; --blue-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#15301F; --ok-fg:#8FD6A6;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:780px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--blue); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2rem, 6vw, 2.8rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.5rem; font-weight:700}
+h3{font-size:1.1rem; font-weight:700; margin-top:1.5rem}
+p{margin:.6rem 0}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.05rem; color:var(--muted); max-width:64ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--blue-soft); color:var(--blue); text-decoration:none}
+a.chip.pdf{background:var(--accent); color:var(--surface)}
+nav.toc{margin:1.4rem 0 0; font-size:.93rem}
+nav.toc ol{padding-left:1.6rem; margin:.5rem 0 0; columns:2 250px; column-gap:1.8rem}
+nav.toc li{padding:.14rem 0; break-inside:avoid}
+nav.toc li::marker{font-family:var(--mono); color:var(--muted); font-size:.85em}
+section{padding-top:2.5rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .8rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.qn{font:500 .8rem/1 var(--mono); color:var(--surface); background:var(--accent); padding:.3rem .45rem; border-radius:5px; flex:none}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.32rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.4rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.def{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.75rem 1rem; margin:.9rem 0}
+.def .k{font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.25rem}
+.def p{margin:.2rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.3rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .7rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td.lv{font-weight:600; white-space:nowrap}
+.note{background:var(--blue-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.star{color:var(--accent); font-weight:600}
+.src{font:400 .78rem/1.4 var(--mono); color:var(--muted); margin-top:.4rem}
+/* лесенка уровней */
+.levels{display:grid; gap:8px; margin:1rem 0}
+.lvl{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem .9rem; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.65rem .85rem; border-left:5px solid var(--accent)}
+.lvl:nth-child(2){margin-left:4%} .lvl:nth-child(3){margin-left:8%} .lvl:nth-child(4){margin-left:12%} .lvl:nth-child(5){margin-left:16%}
+.lvl b{font-family:var(--serif); font-size:1rem}
+.lvl small{display:block; color:var(--muted); font-size:.78rem; line-height:1.3}
+.lvl .who{font-size:.9rem}
+@media (max-width:560px){ .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0} }
+/* цепочки этапов */
+.flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:1rem 0}
+.st{flex:1 1 130px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.6rem .7rem; position:relative; display:grid; gap:.25rem; align-content:start}
+.st .n{font:500 .74rem/1.2 var(--mono); color:var(--muted)}
+.st b{font-family:var(--serif); font-size:.98rem; line-height:1.25}
+.st .h{font-size:.82rem; color:var(--ink); line-height:1.35}
+.st .h em{font-style:normal; font-weight:600; color:var(--accent)}
+.st.zone{background:var(--accent-soft); border-color:transparent}
+.arrow{flex:0 0 auto; align-self:center; font:500 1.1rem/1 var(--mono); color:var(--muted)}
+@media (max-width:560px){ .flow{flex-direction:column} .arrow{transform:rotate(90deg); align-self:center} .st{flex-basis:auto} }
+/* хронология */
+.tl{list-style:none; padding:0; margin:1rem 0; border-left:2px solid var(--line)}
+.tl li{position:relative; padding:.1rem 0 .7rem 1.1rem}
+.tl li::before{content:""; position:absolute; left:-6px; top:.55rem; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+.tl .y{font:500 .85rem/1.3 var(--mono); color:var(--accent); display:block}
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin:.8rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .9rem}
+.card h4{margin:0 0 .35rem; font:600 .98rem/1.3 var(--sans)}
+.card ul{margin:.2rem 0; padding-left:1.05rem} .card li{margin:.22rem 0; font-size:.92rem}
+.card.a{border-top:4px solid var(--accent)} .card.b{border-top:4px solid var(--blue)}
+/* самопроверка */
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--blue); background:transparent; color:var(--blue); cursor:pointer}
+button:hover{background:var(--blue-soft)}
+details.q{border-bottom:1px solid var(--line)}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.7rem 2rem .7rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.58rem; font:500 1.2rem/1 var(--mono); color:var(--blue)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .85rem; font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.45rem; padding-left:1.1rem; font-size:.92rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.32rem} th,td{padding:.5rem .55rem} }
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.48}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar, a.chip.pdf{display:none}
+  section{padding-top:1.1rem}
+  h1{font-size:21pt} h2{font-size:14.5pt} h2, h3, .sec-head{break-after:avoid}
+  .tile, .lvl, .st, details.q, .tl li, tr, ol.steps li, ul.facts li{break-inside:avoid}
+  .tbl{overflow:visible}
+  .tbl, .def, .tile, .lvl, .st, .card{border-color:#ccc}
+  table{font-size:8.6pt} th,td{padding:.3rem .4rem}
+  .tiles{grid-template-columns:1fr 1fr}
+  .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0}
+  .flow{flex-direction:column} .arrow{transform:rotate(90deg)} .st{flex:0 0 auto}
+  .cols{grid-template-columns:1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  a{color:inherit; text-decoration:none}
+}
+/* сортировочные марки */
+.marks{display:grid; grid-template-columns:repeat(auto-fill, minmax(96px, 1fr)); gap:14px 8px; margin:1rem 0}
+.mkw{display:grid; justify-items:center; align-content:start; gap:.4rem; text-align:center}
+.mkw small{font-size:.76rem; color:var(--muted); line-height:1.25}
+.mk{width:60px; height:60px; display:grid; place-items:center; font:600 .8rem/1 var(--mono); background:var(--ink); color:var(--surface); -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.mk.lt{background:var(--line); color:var(--ink)}
+.mk.dia{clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.mk.cir{border-radius:50%}
+.mk.tri{clip-path:polygon(50% 2%,100% 100%,0 100%); padding-top:18px}
+.mk.ova{width:44px; border-radius:50%}
+.mk.pen{clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%); padding-bottom:12px}
+.mk.hex{clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+.mk.rec{height:46px; width:54px; margin-block:7px; border-radius:9px}
+/* цветные метки и полосы */
+.sw{display:inline-block; width:.95em; height:.95em; border-radius:3px; vertical-align:-.12em; margin-right:.4em; border:1px solid var(--line); -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.sw.r{background:#D32F2F} .sw.y{background:#F5C518} .sw.g{background:#2E7D32} .sw.k{background:#111} .sw.b{background:#1E6FD9}
+@media print{ .mkw{break-inside:avoid} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Медицина катастроф · 3 курс · медфак ЧГУ</div>
+  <h1>Медицинская сортировка</h1>
+  <p class="lead">Зачем сортируют пострадавших, как их принимают на этапе медицинской эвакуации — сортировочный пост, площадка специальной обработки, изоляторы, — чем выборочный способ отличается от конвейерного, что показывает сортировочная марка и на какие группы делят при внутрипунктовой сортировке.</p>
+  <div class="chips">
+    <a class="chip pdf" href="sortirovka.pdf">скачать PDF для телефона</a>
+    <span class="chip">7 вопросов занятия</span>
+    <span class="chip">учебник Линченко, КубГМУ, 2015, с. 50–53</span>
+    <span class="chip">приказ № 1202н в редакции 2024</span>
+    <span class="chip">алгоритм Минздрава 2022</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Вопросы</div>
+    <ol>
+      <li><a href="#q1">Зачем нужна медицинская сортировка</a></li>
+      <li><a href="#q2">Функции сортировочного поста</a></li>
+      <li><a href="#q3">Выборочная и конвейерная сортировка</a></li>
+      <li><a href="#q4">Что показывает сортировочная марка</a></li>
+      <li><a href="#q5">«Опасные для окружающих»</a></li>
+      <li><a href="#q6">Зачем площадка специальной обработки</a></li>
+      <li><a href="#q7">Группы при внутрипунктовой сортировке</a></li>
+    </ol>
+    <p style="margin:.6rem 0 0"><a href="#links">Связи с другими предметами</a> · <a href="#quiz">Самопроверка</a> · <a href="#src">Источники</a></p>
+  </nav>
+</header>
+
+<section id="top">
+  <div class="sec-head"><h2>Главное за пять минут</h2></div>
+  <div class="tiles">
+    <div class="tile"><b>3 признака</b><span>сортировки: опасность для окружающих, нуждаемость в помощи, эвакуационный — учебник, с. 50–51</span></div>
+    <div class="tile"><b>2 вида</b><span>внутрипунктовая и эвакуационно-транспортная; при массовом поступлении их совмещают</span></div>
+    <div class="tile"><b>2 способа</b><span>сначала выборочный, затем последовательный (конвейерный)</span></div>
+    <div class="tile"><b>30–40 в час</b><span>носилочных сортирует одна сортировочная бригада конвейерным способом</span></div>
+    <div class="tile"><b>5 групп</b><span>при внутрипунктовой сортировке по учебнику, с. 53</span></div>
+    <div class="tile"><b>до 20 %</b><span>может составлять каждая из I, II и III групп</span></div>
+    <div class="tile"><b>1855</b><span>Пирогов в Севастополе: ~600 раненых за ночь на 10 врачей — помощь всем за полтора дня благодаря сортировке</span></div>
+    <div class="tile"><b>≥ 25 м</b><span>от других подразделений с подветренной стороны — площадка санитарной обработки 20 × 30 м</span></div>
+  </div>
+  <div class="note">
+    <p><b>Одна мысль на всё занятие.</b> Сортировка — это не лечение, а <b>распределение</b>. Когда пострадавших больше, чем рук и средств, она решает, кто опасен для окружающих, кому помогать первым, где и в каком объёме, кого, куда и в какую очередь эвакуировать. Так имеющимися силами спасают <b>наибольшее число людей</b>. Начинается сортировка ещё на месте ЧС, а на этапе медицинской эвакуации — у сортировочного поста, который первым встречает транспорт, и продолжается во всех подразделениях этапа.</p>
+  </div>
+  <div class="warn">
+    <p><strong class="t">Где источники расходятся</strong> — отвечай по учебнику, остальное добавляй как плюс:</p>
+    <ul>
+      <li><b>Число групп.</b> В учебнике их пять (с. 53), в методичке БГМУ 2024 года — четыре (средней тяжести отнесены к III группе), в алгоритме Минздрава 2022 года для места ЧС — три цветные группы и погибшие (<a href="#q7">вопрос 7</a>).</li>
+      <li><b>Цвета.</b> В учебнике у групп цветов нет: марки различаются формой и буквами. Цветные марки упоминают военное пособие ОшГУ и методичка БГМУ, а в действующем алгоритме Минздрава 2022 года — красная, жёлтая, зелёная метки и чёрный пакет для погибших (<a href="#q4">вопрос 4</a>).</li>
+      <li><b>Форма марок</b> в разных пособиях разная (Ш — треугольник на рисунке учебника и круг в пособии ОшГУ, с. 26). Как правило, <b>буква — куда, цифра — очередь</b>.</li>
+      <li>На с. 9 учебник датирует землетрясение в Армении 1987 годом — на самом деле оно было в 1988 году (ВПХ, руководство к практическим занятиям, разд. 1.4; в прошлом конспекте — Спитак, 7 декабря 1988 года).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="q1">
+  <div class="sec-head"><span class="qn">01</span><h2>Зачем нужна медицинская сортировка</h2></div>
+  <p><b>Ответ за минуту.</b> При ЧС санитарные потери возникают практически одновременно, а сил и средств здравоохранения рядом мало (учебник, с. 44). Помочь всем сразу нельзя, поэтому пострадавших делят на группы: кто опасен для окружающих, кому помощь нужна немедленно, кому её можно отсрочить, кому уже не помочь, кого куда и в какую очередь эвакуировать. Сортировка определяет <b>очерёдность, место и объём</b> помощи и эвакуации — это и позволяет спасти наибольшее число людей имеющимися силами.</p>
+  <div class="def"><span class="k">Определение · учебник, с. 50 <span class="star">★</span></span>
+    <p><b>Медицинская сортировка</b> — распределение поражённых на группы по признакам нуждаемости в однородных лечебно-профилактических и эвакуационных мероприятиях в соответствии с медицинскими показаниями, установленным объёмом помощи на данном этапе медицинской эвакуации и принятым порядком эвакуации.</p>
+  </div>
+  <div class="def"><span class="k">Цель сортировки · учебник, с. 50 <span class="star">★</span></span>
+    <p>Обеспечить оказание поражённым своевременной медицинской помощи в оптимальном объёме, разумно использовать имеющиеся силы и средства и провести рациональную эвакуацию.</p>
+  </div>
+  <h3>Три сортировочных признака</h3>
+  <p class="src" style="margin-top:0">учебник, с. 50–51 — формулировки дословно</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Признак</th><th>Формулировка учебника</th><th>Что решают</th></tr></thead>
+    <tbody>
+      <tr><td><b>1. Опасность для окружающих</b></td><td>нуждаемость поражённых в изоляции или в специальной обработке (учёт признаков опасности для окружающих)</td><td>площадка специальной обработки, изолятор — или дальше на сортировку (<a href="#q5">вопрос 5</a>)</td></tr>
+      <tr><td><b>2. Лечебный</b></td><td>нуждаемость поражённых в медицинской помощи — место и очерёдность её оказания</td><td>куда: перевязочная, операционная, противошоковая, госпитальное отделение; в какую очередь</td></tr>
+      <tr><td><b>3. Эвакуационный</b></td><td>целесообразность и возможность дальнейшей эвакуации</td><td>эвакуировать или оставить; куда, в какую очередь, каким транспортом, лёжа или сидя</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Где сортируют</h3>
+  <ul class="facts">
+    <li><b>На каждом этапе медицинской эвакуации</b>: по определению этап обеспечивает приём, медицинскую сортировку, оказание помощи, лечение и подготовку к дальнейшей эвакуации (учебник, с. 45).</li>
+    <li><b>В больнице при массовом поступлении</b> — это прямая обязанность по действующему порядку: медицинская организация «должна осуществлять одновременный прием и оказание медицинской помощи пострадавшим при ЧС, перепрофилизацию или дополнительное развертывание коек, предусмотренных для пострадавших при ЧС, медицинскую сортировку и при необходимости подготовку пострадавших при ЧС к последующей медицинской эвакуации» (приказ № 1202н, п. 28).</li>
+    <li><b>На месте ЧС</b> — первая прибывшая бригада: при ДТП «первая прибывшая бригада (вне зависимости от профиля) выполняет роль „сортировочной“» (учебник, с. 73); по алгоритму Минздрава 2022 года сортировку проводит старший бригады СМП, первой прибывшей к месту ЧС («Алгоритм действий», п. 7).</li>
+  </ul>
+  <h3>Что бывает без сортировки</h3>
+  <p>При ликвидации последствий аварии на Чернобыльской АЭС и землетрясения в Армении <b>до 50 % врачей допускали ошибки</b>, в первую очередь при медицинской сортировке, ухудшая тем самым прогноз пострадавших (учебник, с. 9, по данным С. В. Трифонова, 2001).</p>
+  <h3>Откуда она взялась — Н. И. Пирогов</h3>
+  <ul class="tl">
+    <li><span class="y">1854, Севастополь</span>Работая на главном перевязочном пункте, Пирогов приходит к мысли «о выжидании и сортировании раненых», когда «пришлось иметь дело с тысячами раненых».</li>
+    <li><span class="y">ночь на 11 марта 1855 <span class="star">★</span></span>На пункт поступило около <b>600 раненых</b>, врачей было <b>10</b>; всем помощь оказали за полтора дня — благодаря сортировке на три группы: «отчаянные и безнадёжные», «раненые со сложными переломами», «раненые с простыми ранами».</li>
+    <li><span class="y">1863–1865</span>Первое подробное описание сортировки в печати — «Начала общей военно-полевой хирургии»; в нём раненых делят на <b>пять групп</b> (<a href="#q7">вопрос 7</a>).</li>
+  </ul>
+  <div class="def"><span class="k">Н. И. Пирогов · цит. по: Богдан В. Г. и др., 2018</span>
+    <p>«Хорошо организованная сортировка на перевязочных пунктах и в военно-временных госпиталях — есть главное средство для оказания правильной помощи и к предупреждению беспомощности и вредной, по своим последствиям, неурядицы».</p>
+  </div>
+  <div class="note"><p><b>Частая ошибка:</b> «сортировка — это деление по тяжести». Тяжесть — лишь одна из характеристик: делят по <b>нуждаемости в однородных мероприятиях</b> — лечебных и эвакуационных — на конкретном этапе и в конкретной обстановке. В тесте учебника (с. 134, № 16) вариант «комплекс мероприятий по розыску, сбору и вывозу пострадавших из ЧС» — неверный: это сокращённое определение ЛЭО (с. 44), а не сортировки.</p></div>
+</section>
+
+<section id="q2">
+  <div class="sec-head"><span class="qn">02</span><h2>Функции сортировочного поста</h2></div>
+  <p><b>Ответ за минуту.</b> Сортировочный пост — первое звено приёмно-сортировочного отделения этапа: он первым <b>встречает транспорт</b> с пострадавшими, <b>выявляет опасных для окружающих</b> и направляет их на площадку специальной обработки или в изоляторы, а <b>остальных делит на носилочных и ходячих</b> и направляет в приёмно-сортировочное отделение (на сортировочную площадку). Врачебной сортировки по тяжести на посту нет — она дальше.</p>
+  <div class="def"><span class="k">Определение · Термины МЧС России, «Приёмно-сортировочное отделение» <span class="star">★</span></span>
+    <p><b>Приёмно-сортировочное отделение</b> — функциональное подразделение этапа медицинской эвакуации, развёртываемое в чрезвычайной ситуации для приёма и медицинской сортировки поражённых (больных). Включает: сортировочный пост, сортировочную площадку, приёмное отделение.</p>
+    <p><b>Сортировочный пост</b> предназначен для встречи транспортных средств с поражёнными (больными), выявления среди поступивших нуждающихся в изоляции или санитарной обработке и распределения остальных поражённых на носилочных и ходячих. <b>Сортировочная площадка</b> предназначена для размещения (при благоприятных погодных условиях), сортировки поражённых (больных), выполнения неотложных медицинских мероприятий первой врачебной помощи.</p>
+  </div>
+  <h3>Функции по порядку</h3>
+  <ol class="steps">
+    <li><b>Встреча транспорта</b> с поражёнными (больными), прибывающего на этап (Термины МЧС).</li>
+    <li><b>Радиационный и химический контроль.</b> При поступлении из очагов заражения необходимость специальной обработки определяет на сортировочном посту <b>санитарный инструктор-дозиметрист</b> с приборами радиационной и химической разведки (ВПХР, ДП-5В). Поступивших он делит на три группы: нуждающиеся в санитарной обработке, не нуждающиеся в ней, подлежащие изоляции (СОГМА, 2020).</li>
+    <li><b>Выявление опасных для окружающих и направление их</b>: заражённых — на площадку специальной обработки, подлежащих изоляции — в изолятор (Термины МЧС; пособие ОшГУ, с. 24). На рис. 3 учебника (с. 52) от поста идут марки <b>СО</b> — на площадку специальной обработки и <b>ПИ</b> — в психиатрический изолятор; марка <b>ИИ</b> ведёт в инфекционный изолятор от площадки специальной обработки.</li>
+    <li><b>Деление остальных на носилочных и ходячих</b> и направление в приёмно-сортировочное отделение. Ходячие идут от поста пешком, носилочных доставляют на том же транспорте, на котором они прибыли (пособие ОшГУ, с. 24).</li>
+    <li>Там, где легкораненых выделяют в отдельный поток, на посту отбирают ходячих раненых и сразу направляют в сортировочную для легкораненых — это около половины всего их потока (ВПХ, руководство к практическим занятиям, разд. 1.1).</li>
+  </ol>
+  <h3>Кто работает</h3>
+  <ul class="facts">
+    <li>В медицинском пункте полка — <b>санитар или санитарный инструктор</b> (пособие ОшГУ, с. 24); при угрозе заражения — <b>санитарный инструктор-дозиметрист</b> в средствах защиты органов дыхания и кожи (СОГМА, 2020).</li>
+    <li>В больнице при угрозе ЧС на улице и внутри помещения устанавливают пикетаж с указанием направления движения потока поражённых, проверяют знание персоналом инструкции по приёму и сортировке поражённых (учебник, с. 35).</li>
+    <li>В полевом многопрофильном госпитале ВСМК сортировочный пост входит в приёмно-сортировочное отделение: в его структуре рекомендуется предусматривать «сортировочный пост, сортировочные и эвакуационные палатки, санитарный пропускник и пост специальной обработки» (приказ № 1202н, прил. 4, п. 6).</li>
+  </ul>
+  <h3>Место поста на пути пострадавшего</h3>
+  <p class="src" style="margin-top:0">по рис. 3 учебника «Оформление результатов медицинской сортировки» (плакат «Использование сортировочных марок в работе ОПМ»), с. 52</p>
+  <div class="flow">
+    <div class="st"><span class="n">вход</span><b>Сортировочный пост</b><span class="h">опасен ли для окружающих? носилочный или ходячий?</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="st zone"><span class="n">если опасен</span><b>Площадка специальной обработки, изоляторы</b><span class="h">марки <em>СО</em>, <em>ИИ</em>, <em>ПИ</em>; после обработки — на сортировку</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="st"><span class="n">врачебная сортировка</span><b>Приёмно-сортировочное отделение</b><span class="h">распределение на I–V группы, марки подразделения и очереди</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="st"><span class="n">по марке</span><b>Функциональные подразделения</b><span class="h">операционно-перевязочное, противошоковая, госпитальное, эвакуационное; лёгкие — на амбулаторное лечение</span></div>
+  </div>
+  <div class="note"><p><b>Не путай пост и площадку.</b> Сортировочный пост решает только два вопроса — «опасен ли для окружающих» и «носилочный или ходячий». Диагноз, группа, очерёдность помощи и эвакуации — это врачебная сортировка на сортировочной площадке и в приёмно-сортировочном отделении. На этапе <b>в первую очередь выделяют представляющих опасность для окружающих</b> (СОГМА, 2020, тест № 9). Связь с радиационной гигиеной: «загрязнение выше допустимых уровней» определяют дозиметром именно здесь.</p></div>
+</section>
+
+<section id="q3">
+  <div class="sec-head"><span class="qn">03</span><h2>Чем выборочная сортировка отличается от конвейерной</h2></div>
+  <p><b>Ответ за минуту.</b> Это два способа сортировки (учебник, с. 51), и применяют их <b>по очереди</b>. <b>Выборочный</b> — первый: беглым осмотром из общей массы выхватывают опасных для окружающих и нуждающихся в неотложной помощи (наружное кровотечение, асфиксия, шок, судороги), а также детей и рожениц, и сразу направляют по назначению. Затем бригада переходит к <b>последовательному (конвейерному)</b> осмотру всех остальных по порядку: две группы работают одновременно у двух носилок — пока врач принимает решение по одному пострадавшему, фельдшер уже собирает сведения о следующем. Так одна бригада сортирует <b>30–40 носилочных в час</b>.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Признак</th><th>Выборочная</th><th>Конвейерная (последовательная)</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Суть</td><td>выборочно выделяют из общей массы тех, у кого есть бросающиеся в глаза признаки</td><td>последовательно, одного за другим, осматривают всех</td></tr>
+      <tr><td class="lv">Когда</td><td>первой, сразу при поступлении</td><td>после выборочной — для всех остальных</td></tr>
+      <tr><td class="lv">Кого выявляют</td><td>опасных для окружающих; нуждающихся в помощи по жизненным показаниям — наружное кровотечение, асфиксия, шок, судороги; рожениц, детей</td><td>всех распределяют по группам: назначают помощь, место, очередь, эвакуацию и марку</td></tr>
+      <tr><td class="lv">Как</td><td>беглый осмотр, без очереди</td><td>две группы у двух носилок, врач переходит от одного к другому</td></tr>
+      <tr><td class="lv">Результат</td><td>самые срочные сразу уходят в профильные подразделения</td><td>30–40 носилочных в час на одну бригаду</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">учебник, с. 51; «Медицинская сортировка. Методика проведения», БГМУ, 2024</p>
+  <div class="def"><span class="k">Конвейерный способ · учебник, с. 51 <span class="star">★</span></span>
+    <p>Способы сортировки: выборочный; последовательный (конвейерный) предполагает одновременную работу двух бригад с двумя носилочными пострадавшими, например: <b>1-я сортировочная бригада</b> (фельдшер, медсестра или регистратор) собирает информацию о пациенте, краткий анамнез, общие данные о характере поражения путём опроса, анализа медицинской документации. <b>2-я сортировочная бригада</b> (врач, медсестра, регистратор) продолжает работу с этим пациентом. Врач принимает сортировочное решение, отдаёт медицинской сестре распоряжение о необходимых медицинских мероприятиях и обозначении сортировочного заключения, затем переходит к следующему пострадавшему, с которым уже отработала первая бригада.</p>
+    <p>Такая организация обеспечивает сортировку <b>30–40 носилочных</b> пострадавших травматологического профиля или отравленных СДЯВ <b>за 1 час</b> работы.</p>
+  </div>
+  <p><b>Одна бригада или две?</b> «1-я» и «2-я сортировочные бригады» учебника — это две группы одной сортировочной бригады: вместе они и дают её оптимальный состав (врач, фельдшер, медсестра, два регистратора — с. 51). Норматив 30–40 в час — на такую бригаду целиком: «одна сортировочная бригада может за час рассортировать до 30–40 носилочных поражённых» (БГМУ, 2024); в тесте учебника № 17 (с. 134) есть вариант «30–40 человек за час».</p>
+  <h3>Оптимальный состав сортировочной бригады</h3>
+  <p class="src" style="margin-top:0">учебник, с. 51</p>
+  <div class="cols">
+    <div class="card a"><h4>Для носилочных</h4><ul><li>врач</li><li>фельдшер (медицинская сестра)</li><li>медицинская сестра</li><li>два регистратора</li><li>звено носильщиков</li></ul></div>
+    <div class="card b"><h4>Для легкопоражённых</h4><ul><li>врач</li><li>медицинская сестра</li><li>регистратор</li></ul></div>
+  </div>
+  <h3>Правила работы</h3>
+  <ul class="facts">
+    <li>Сортируют, <b>не снимая повязок</b> и не применяя трудоёмких методов исследования, — по внешнему осмотру, опросу и медицинским документам (БГМУ, 2024; пособие ОшГУ, с. 24).</li>
+    <li>Время на одного пострадавшего: на первом этапе, в пункте сбора поражённых, — <b>15–40 секунд</b>, в приёмно-сортировочном отделении больницы — <b>2–5 минут</b>; там возможность одной бригады — <b>20–25 поражённых в час</b>, а 30–40 в час достигаются конвейерным способом (БГМУ, 2024).</li>
+    <li>Звено носильщиков выполняет решение врача <b>по сортировочной марке</b> (БГМУ, 2024).</li>
+  </ul>
+  <h3>Условия, без которых сортировка не работает</h3>
+  <p class="src" style="margin-top:0">учебник, с. 51</p>
+  <ol class="steps">
+    <li>выделение самостоятельных функциональных подразделений с достаточной ёмкостью помещений и удобством подхода к пострадавшим;</li>
+    <li>организация сортировочных постов, сортировочных площадок;</li>
+    <li>создание сортировочных бригад и оснащение их необходимыми простейшими средствами диагностики;</li>
+    <li>обязательная фиксация результатов сортировки (сортировочные марки, первичные медицинские карточки) в момент её проведения;</li>
+    <li>выделение медицинской сестры — диспетчера для регулирования размещения поступающих поражённых и их дальнейшего движения.</li>
+  </ol>
+  <h3>Задача из учебника</h3>
+  <p><b>Задача 3 (с. 56):</b> на предприятии взорвались баллоны с хлором, пострадали 190 человек. Сколько сортировочных бригад нужно, чтобы рассортировать их за час? По нормативу одна сортировочная бригада конвейерным способом сортирует 30–40 человек в час (учебник, с. 51; БГМУ, 2024): 190 ÷ 40 ≈ 5, 190 ÷ 30 ≈ 6,3 — нужно <b>5–7 бригад</b>. Для ответа проговори норматив, потом деление.</p>
+  <div class="note"><p><b>Не путай способы с видами.</b> Способы — выборочный и конвейерный (как сортируют); виды — внутрипунктовая и эвакуационно-транспортная (для чего сортируют, <a href="#q7">вопрос 7</a>). <b>Связь с общей хирургией:</b> в войсковом звене при выборочной сортировке первыми выделяют раненых с продолжающимся кровотечением, промокшими кровью повязками и наложенными жгутами — их направляют в перевязочную в первую очередь для остановки кровотечения и контроля жгута (ВПХ, руководство к практическим занятиям, разд. 1.5).</p></div>
+</section>
+
+<section id="q4">
+  <div class="sec-head"><span class="qn">04</span><h2>Что показывает сортировочная бирка (марка)</h2></div>
+  <p><b>Ответ за минуту.</b> Сортировочная марка закрепляет решение сортировки на самом пострадавшем. Её прикрепляют к одежде или носилкам, и по ней санитары без врача знают, <b>куда нести и в какую очередь</b>. Буквы — сокращённое сортировочное заключение, то есть подразделение или мероприятие, цифра — очерёдность: О-1 — операционная в первую очередь, П-2 — перевязочная во вторую, Ш — противошоковая, Э-1 — эвакуация в первую очередь, СО — санитарная обработка, И — изоляция. Решение дублируют записью в первичной медицинской карточке.</p>
+  <div class="def"><span class="k">Определение · Термины МЧС России, «Сортировочные марки» <span class="star">★</span></span>
+    <p><b>Сортировочные марки</b> — средство закрепления результата медицинской сортировки населения и спасателей в условиях ликвидации чрезвычайных ситуаций. Изготавливаются из плотного картона, пластмассы, металла, имеют различную форму (круг, прямоугольник, треугольник, овал и др.), отверстие для толстой нитки, позволяющей прикрепить марку к одежде поражённого или носилкам, и сокращённое название сортировочного заключения (И — изоляция; СО — санитарная обработка; О-1 (О-2) — операционная первая (вторая) очередь; П-1 (П-2) — перевязочная первая (вторая) очередь; Ш — противошоковая; Э-1 (Э-2) — эвакуация в первую (во вторую) очередь и т. д.; размеры 5 × 5 см; 5 × 3 см.</p>
+  </div>
+  <p>Учебник: результаты медицинской сортировки фиксируются с помощью <b>сортировочных марок</b>, а также записи в <b>первичной медицинской карточке</b> поражённого, истории болезни; фиксировать нужно в момент сортировки (с. 51).</p>
+  <h3>Марки на схеме учебника</h3>
+  <p class="src" style="margin-top:0">рис. 3 «Оформление результатов медицинской сортировки» (плакат «Использование сортировочных марок в работе ОПМ»), с. 52; форма — как на рисунке</p>
+  <div class="marks">
+    <div class="mkw"><div class="mk pen lt">ПИ</div><small>психиатрический изолятор</small></div>
+    <div class="mkw"><div class="mk ova lt">СО</div><small>площадка специальной обработки</small></div>
+    <div class="mkw"><div class="mk rec">ИИ</div><small>инфекционный изолятор</small></div>
+    <div class="mkw"><div class="mk dia lt">Г</div><small>госпитальное отделение</small></div>
+    <div class="mkw"><div class="mk tri">Ш</div><small>противо&shy;шоковая палата</small></div>
+    <div class="mkw"><div class="mk dia">О-1</div><small>операционная, 1-я и 2-я очередь</small></div>
+    <div class="mkw"><div class="mk cir">П-1</div><small>перевязочная, 1-я и 2-я очередь</small></div>
+    <div class="mkw"><div class="mk hex lt">Э-1</div><small>эвакуация, 1-я и 2-я очередь</small></div>
+    <div class="mkw"><div class="mk dia lt">ЛП</div><small>лёгкие — на амбулаторное лечение</small></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Марка</th><th>Что значит → куда</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">И (ИИ)</td><td>изоляция: инфекционный больной или подозрительный → <b>инфекционный изолятор</b></td></tr>
+      <tr><td class="lv">ПИ</td><td>острые психические расстройства → <b>психиатрический изолятор</b></td></tr>
+      <tr><td class="lv">СО</td><td>санитарная обработка: заражён ОВ, РВ, БС → <b>площадка специальной обработки</b></td></tr>
+      <tr><td class="lv">Ш</td><td>противошоковые мероприятия → <b>противошоковая палата</b></td></tr>
+      <tr><td class="lv">О-1, О-2</td><td>операция в первую (вторую) очередь → <b>операционно-перевязочное отделение</b></td></tr>
+      <tr><td class="lv">П-1, П-2</td><td>перевязка в первую (вторую) очередь → <b>операционно-перевязочное отделение</b></td></tr>
+      <tr><td class="lv">«Анаэробная»</td><td>анаэробная инфекция — так подписана кольцевая марка на рис. 3 → <b>операционно-перевязочное отделение</b></td></tr>
+      <tr><td class="lv">Г</td><td>остаётся на этапе (на рис. 3 — у I группы) → <b>госпитальное отделение</b></td></tr>
+      <tr><td class="lv">Э-1, Э-2</td><td>эвакуация в первую (вторую) очередь → <b>эвакуационное отделение</b></td></tr>
+      <tr><td class="lv">ЛП</td><td>легкопоражённый → <b>на амбулаторное лечение</b></td></tr>
+      <tr><td class="lv">ПСО-1, ПСО-2, ЧСО</td><td>объём (полная или частичная) и очерёдность санитарной обработки — их ставят уже в отделении специальной обработки (СОГМА, 2020)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Первичная медицинская карточка</h3>
+  <p class="src" style="margin-top:0">учебник, прил. 4, с. 144 — первичная медицинская карточка ГО, форма 1 МСГО</p>
+  <div class="cols">
+    <div class="card a"><h4>Сигнальные полосы по краям (отрывные — БГМУ, 2024)</h4><ul>
+      <li><span class="sw r"></span><b>красная</b> — «Неотложная помощь»</li>
+      <li><span class="sw k"></span><b>чёрная</b> — «Изоляция»</li>
+      <li><span class="sw y"></span><b>жёлтая</b> — «Санитарная обработка»</li>
+      <li><span class="sw b"></span><b>синяя</b> — «Радиационное поражение»</li>
+    </ul></div>
+    <div class="card b"><h4>Что в ней отмечают</h4><ul>
+      <li>вид поражения, диагноз, локализацию на схеме тела</li>
+      <li>оказанную помощь: антибиотик, сыворотка ПСС, ПГС, анатоксин, антидот, обезболивающее, переливание, иммобилизация, перевязка</li>
+      <li>время наложения жгута; санитарную обработку — полная, частичная, не проводилась</li>
+      <li>как эвакуировать — лёжа или сидя, вид транспорта, очерёдность I или II, куда</li>
+      <li>отрывной корешок дублирует основные сведения: кто, когда поражён, помощь, диагноз, куда эвакуирован</li>
+    </ul></div>
+  </div>
+  <h3>Цветные метки на месте ЧС — алгоритм Минздрава 2022 года</h3>
+  <p class="src" style="margin-top:0">письмо Минздрава России от 28.04.2022 № 30-2/И/2-6824: Типовой алгоритм реагирования Службы медицины катастроф на ЧС природного характера — лесные и другие ландшафтные пожары, прил. 3 «Инструкция по медицинской сортировке», п. 2</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Метка</th><th>Группа и критерии</th><th>Эвакуация</th></tr></thead>
+    <tbody>
+      <tr><td class="lv"><span class="sw r"></span>красная</td><td><b>Экстренная</b> — нарушения проходимости дыхательных путей, дыхания и кровообращения. Критерии: «дыхание есть, ЧДД чаще 30 и реже 10 в минуту» (то есть вне пределов 10–30), нет пульса на периферии, нет сознания</td><td>первая очередь</td></tr>
+      <tr><td class="lv"><span class="sw y"></span>жёлтая</td><td><b>Неотложная</b> — серьёзные травмы без угрозы для жизни в ближайшие несколько часов. Критерии: ЧДД 10–30, пульс на периферии есть, выполняет простые команды, не может передвигаться сам</td><td>вторая очередь</td></tr>
+      <tr><td class="lv"><span class="sw g"></span>зелёная</td><td><b>Отсроченная</b> — способны передвигаться, нет непосредственной угрозы для жизни в течение ближайших суток; те же критерии, но может передвигаться сам</td><td>третья очередь</td></tr>
+      <tr><td class="lv"><span class="sw k"></span>чёрный пакет</td><td><b>Погибшие</b>: дыхания нет и оно не появилось после ручного восстановления проходимости дыхательных путей. Их накрывают чёрными пакетами, чтобы бригады не осматривали повторно</td><td>при возможности — на площадку сбора погибших после сортировки</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><p><b>Марка — это решение, а не диагноз.</b> Её форма и буквы понятны без слов санитару, носильщику, водителю, поэтому поток движется без врача. При занятости персонала зелёные метки пострадавшие могут закреплять себе сами (алгоритм Минздрава 2022). <b>Связь с общей хирургией:</b> время наложения жгута обязательно пишут в карточку — по нему решают, снимать ли жгут на следующем этапе.</p></div>
+</section>
+
+<section id="q5">
+  <div class="sec-head"><span class="qn">05</span><h2>Кто такие «опасные для окружающих»</h2></div>
+  <p><b>Ответ за минуту.</b> Это пострадавшие, которые могут навредить другим пострадавшим и персоналу этапа, даже если сами поражены легко: <b>заражённые</b> отравляющими и аварийно-опасными химическими веществами, радиоактивными веществами выше допустимых уровней, биологическими средствами; <b>инфекционные больные</b>; люди с <b>острыми психическими расстройствами</b> — возбуждённые, агрессивные. Их выявляют первыми — ещё на сортировочном посту — и направляют на площадку специальной обработки, в инфекционный или психиатрический изолятор.</p>
+  <div class="def"><span class="k">Первый сортировочный признак · учебник, с. 50</span>
+    <p>Нуждаемость поражённых в изоляции или в специальной обработке (учёт признаков опасности для окружающих).</p>
+  </div>
+  <div class="def"><span class="k">Действующий документ · приказ № 1202н, прил. 4, п. 7 <span class="star">★</span></span>
+    <p>Одна из основных функций приёмно-сортировочного отделения ПМГ — «выявление пострадавших при ЧС, представляющих опасность для окружающих (инфекционные больные; пострадавшие, пораженные аварийно-опасными химическими веществами; имеющие радиоактивные поражения и загрязнение выше допустимых уровней)».</p>
+  </div>
+  <div class="def"><span class="k">Все категории одной фразой · ВПХ, руководство к практическим занятиям, разд. 1.1 <span class="star">★</span></span>
+    <p>Представляющие опасность для окружающих: инфекционные больные, заражённые отравляющими веществами, имеющие загрязнение кожного покрова и обмундирования радиоактивными веществами с мощностью доз излучения, превышающей безопасные, в состоянии резкого психомоторного возбуждения, а также подлежащие частичной или полной санитарной обработке.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Кто</th><th>Чем опасен</th><th>Куда</th></tr></thead>
+    <tbody>
+      <tr><td><b>Заражённые ОВ, АОХВ</b></td><td>вещество на коже и одежде продолжает поражать самого пострадавшего — десорбция с одежды (учебник, с. 49) — и грозит вторичными поражениями другим раненым и персоналу (СОГМА, 2020)</td><td>площадка специальной обработки — марка <b>СО</b></td></tr>
+      <tr><td><b>Загрязнённые РВ выше допустимых уровней</b></td><td>загрязняют и облучают окружающих, помещения, имущество</td><td>площадка специальной обработки — марка <b>СО</b></td></tr>
+      <tr><td><b>Заражённые БС</b></td><td>переносят возбудитель на людей и предметы</td><td>санитарная обработка (пособие ОшГУ, с. 23) — марка <b>СО</b></td></tr>
+      <tr><td><b>Инфекционные больные и подозрительные на инфекцию</b></td><td>заражение пострадавших и персонала</td><td>инфекционный изолятор — марка <b>И (ИИ)</b></td></tr>
+      <tr><td><b>С выраженными психическими нарушениями</b></td><td>психомоторное возбуждение, агрессия — угроза себе и окружающим</td><td>психиатрический изолятор — марка <b>ПИ</b></td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">учебник, с. 45 (изоляция инфекционных больных и лиц с выраженными психическими нарушениями — задачи этапа), с. 50, рис. 3; приказ № 1202н, прил. 4, п. 7; БГМУ, 2024</p>
+  <h3>Группы по признаку опасности для окружающих</h3>
+  <ol class="steps">
+    <li>нуждающиеся в специальной (санитарной) обработке — частичной или полной;</li>
+    <li>подлежащие временной изоляции — в инфекционном или психиатрическом (психоневрологическом) изоляторе;</li>
+    <li>не нуждающиеся в специальной (санитарной) обработке.</li>
+  </ol>
+  <p class="src" style="margin-top:0">СОГМА, 2020, тест № 4; учебник, тест № 10, с. 132</p>
+  <p><b>Правило сортировочного поста:</b> все поражённые ОВ, прибывшие из очагов поражения стойкими ОВ и из радиационных очагов, считаются заражёнными (загрязнёнными) и нуждаются в санитарной обработке (СОГМА, 2020).</p>
+  <div class="def"><span class="k">Изолятор · Термины МЧС России</span>
+    <p>Обособленное помещение, оборудованное и оснащённое всем необходимым для поддержания строгого противоэпидемического режима, предназначенное для временного размещения инфекционных больных и лиц, у которых заподозрены инфекционные заболевания, а при определённых болезнях также лиц, находившихся в общении с больными. <b>И. психиатрический</b> — специально оборудованное помещение в психиатрической больнице (с неразбивающимися оконными стёклами, привинченной к полу мебелью, звукопоглощающими стенами и т. д.), предназначается для возбуждённых, агрессивных, опасных для окружающих больных.</p>
+    <p>На этапе медицинской эвакуации психиатрический изолятор — отдельное подразделение для таких пострадавших (учебник, рис. 3, с. 52).</p>
+  </div>
+  <div class="note"><p><b>Частая ошибка — путать опасность с тяжестью.</b> Опасный для окружающих может быть лёгким (ходячий с ОВ на одежде), а тяжёлый — неопасным. Поэтому опасных выделяют <b>до</b> врачебной сортировки. <b>Связи:</b> эпидемиология и инфекционные болезни — изоляция и противоэпидемический режим; психиатрия — острые реакции на стресс; токсикология — стойкие ОВ и десорбция с одежды.</p></div>
+</section>
+
+<section id="q6">
+  <div class="sec-head"><span class="qn">06</span><h2>Зачем на этапе медицинской эвакуации площадка специальной обработки</h2></div>
+  <p><b>Ответ за минуту.</b> Пострадавшие из очагов химического, радиационного или биологического заражения приносят ОВ, РВ или БС на коже, одежде, в ранах и на носилках. Если сразу завести их в приёмно-сортировочное отделение, заражение продолжит поражать их самих, перейдёт на персонал и других пострадавших, загрязнит помещения и имущество — этап может выйти из строя. Поэтому между сортировочным постом и приёмно-сортировочным отделением развёртывают <b>площадку специальной обработки</b>: там проводят частичную санитарную обработку людей, специальную обработку одежды, носилок и транспорта, при необходимости оказывают неотложную помощь (антидоты) — и только потом пострадавшие идут на сортировку.</p>
+  <div class="def"><span class="k">Определения · Термины МЧС России</span>
+    <p><b>Специальная обработка</b> — проведение обезвреживания и обеззараживания (дегазации, дезактивации и дезинфекции) людей, техники, объектов и др. с целью сохранения здоровья и жизни населению, восстановления боеспособности войск, спасательных формирований и др., подвергшихся загрязнению (заражению) радиоактивными и отравляющими веществами и биологическими средствами, как в мирное так и в военное время. М. б. частичной и полной.</p>
+    <p><b>Санитарная обработка</b> — механическая очистка и мытьё кожных покровов и слизистых оболочек людей, подвергшихся заражению и загрязнению радиоактивными, опасными химическими и биологическими веществами, а также обеззараживание (обезвреживание) их одежды и обуви при выходе из зоны чрезвычайной ситуации; часть специальной обработки, м. б. полной и частичной.</p>
+  </div>
+  <p>Функциональные подразделения специальной обработки на этапе — «для санитарной обработки раненых и больных, дезактивации, дегазации и дезинфекции их обмундирования, снаряжения и личного имущества» (пособие ОшГУ, с. 19).</p>
+  <h3>Зачем она нужна</h3>
+  <ol class="steps">
+    <li><b>Предотвратить вторичные поражения</b>: «для предотвращения возможности вторичных радиационных или химических поражений раненых и больных (поражённых ОВ), а также личного состава медицинской службы» проводится частичная специальная обработка (СОГМА, 2020).</li>
+    <li><b>Не занести заражение внутрь этапа</b> — в приёмно-сортировочное, операционную, палаты. Специальная обработка поражённых, дезактивация, дегазация и дезинфекция их одежды и снаряжения — одна из задач этапа медицинской эвакуации (учебник, с. 45); в ПМГ — «выполнение санитарной и частичной специальной обработки пострадавших при ЧС» (приказ № 1202н, прил. 4, п. 7).</li>
+    <li><b>Снять противогаз без риска</b>: специальную обработку пострадавших из очага химического поражения проводят «перед снятием противогаза для исключения десорбции химических веществ с одежды» (учебник, с. 49; то же — с. 68).</li>
+    <li><b>Вовремя помочь заражённым</b>: на площадке держат запас антидотов и перевязочных пакетов и оказывают неотложную помощь (СОГМА, 2020).</li>
+    <li><b>Вернуть в работу транспорт и носилки</b> после дегазации и дезактивации (СОГМА, 2020).</li>
+  </ol>
+  <h3>Как устроена площадка медицинского пункта</h3>
+  <p class="src" style="margin-top:0">СОГМА, 2020</p>
+  <ul class="facts">
+    <li><b>Из чего состоит.</b> Площадка <b>санитарной обработки</b> (люди) и площадка <b>специальной обработки транспорта и имущества</b>; каждая разделена на «грязную» и «чистую» половины.</li>
+    <li><b>Размер и место.</b> Площадка санитарной обработки — <b>20 × 30 м</b>, невдалеке от сортировочного поста, <b>не ближе 25 м</b> от других функциональных подразделений, <b>с подветренной стороны</b>; площадка для транспорта — вне путей движения, в 20–25 м от площадки санитарной обработки.</li>
+    <li><b>Потоки.</b> Две части — для тяжелопоражённых и легкопоражённых.</li>
+    <li><b>Кто работает.</b> Руководит санитарный инструктор, с ним 1–2 звена санитаров-носильщиков и 2–3 военнослужащих из команды выздоравливающих; при поступлении из радиационных и химических очагов все работают в средствах защиты органов дыхания и кожи.</li>
+    <li><b>Что делают с людьми.</b> Легкопоражённые проводят частичную санитарную обработку сами, в порядке само- и взаимопомощи под руководством санитара; тяжелопоражённым её проводят санитары и при необходимости меняют заражённое обмундирование на обмундирование из обменного фонда; заражённые ОВ повязки обрабатывают порошком ДПС-1.</li>
+    <li><b>Что делают с имуществом.</b> Водители сами обрабатывают машины комплектами ДК-4 или ИДК-1; санитар дегазирует и дезактивирует носилки, клеёнки, простыни; снятые СИЗ, бельё и обмундирование в герметичных мешках отправляют на пункт специальной обработки (ПуСО).</li>
+  </ul>
+  <div class="flow">
+    <div class="st"><span class="n">марка СО</span><b>Сортировочный пост</b><span class="h">дозиметрист выявил заражение</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="st zone"><span class="n">«грязная» половина</span><b>Снятие заражённого, обработка кожи</b><span class="h">СИЗ кожи — в мешок; открытые участки кожи — ИПП; <em>антидоты</em> по показаниям</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="st"><span class="n">«чистая» половина</span><b>Смена белья и обмундирования</b><span class="h">из обменного фонда</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="st"><span class="n">дальше</span><b>Приёмно-сортировочное отделение</b><span class="h">обычная врачебная сортировка</span></div>
+  </div>
+  <h3>Частичная и полная обработка</h3>
+  <ul class="facts">
+    <li><b>Частичная санитарная обработка</b> — механическая очистка одежды, индивидуальных средств защиты, обмундирования и обуви с предварительной обработкой открытых участков кожи содержимым индивидуального противохимического пакета (Термины МЧС). Её проводят на площадке специальной обработки медицинского пункта, а при химической аварии — уже в очаге (учебник, с. 66–67).</li>
+    <li><b>Полная санитарная обработка</b> — мытьё под душем тёплой водой с мылом с предварительным обеззараживанием открытых участков кожи, выдача чистого белья, дезинфекция или замена одежды, обуви и СИЗ (Термины МЧС). Её проводят в отделении специальной обработки медицинского батальона — оно развёртывается в 30–50 м от других подразделений с подветренной стороны (СОГМА, 2020), — а в больнице и ПМГ — в санитарном пропускнике: в больнице его готовят «к проведению частичной и полной санитарной обработки» (учебник, с. 35), в ПМГ приёмно-сортировочное отделение развёртывается «с санитарным пропускником» (приказ № 1202н, прил. 1, п. 12).</li>
+    <li>При радиационной аварии на первом этапе нужны сортировочный пост, отделение санитарной обработки, сортировочно-эвакуационное и эвакуационное отделения (учебник, с. 71).</li>
+  </ul>
+  <div class="note"><p><b>Кому мыться нельзя.</b> При шоке, обширных ранах и ожогах, проникающих ранениях помывка противопоказана — таким проводят только частичную санитарную обработку со сменой обмундирования; объём и очерёдность санитарной обработки в отделении специальной обработки закрепляют марками ПСО-1, ПСО-2, ЧСО (СОГМА, 2020). <b>Связь с прошлым занятием:</b> ИПП-11 из табельного оснащения военнослужащего (конспект «ВСМК и эвакуация», вопрос 17) — это и есть средство частичной специальной обработки: индивидуальный противохимический пакет «предназначен для частичной специальной обработки» (учебник, с. 26).</p></div>
+</section>
+
+<section id="q7">
+  <div class="sec-head"><span class="qn">07</span><h2>Сортировочные группы при внутрипунктовой сортировке</h2></div>
+  <p><b>Ответ за минуту.</b> Внутрипунктовая сортировка распределяет пострадавших по группам для направления в функциональные подразделения данного этапа и устанавливает очерёдность их направления туда (СОГМА, 2020, тест № 2). В учебнике пять групп (они названы там просто «сортировочные группы»): <b>I</b> — несовместимые с жизнью повреждения и агония, симптоматическая терапия, не эвакуируют; <b>II</b> — тяжёлые с нарастающими расстройствами жизненных функций (шок), помощь по неотложным показаниям, эвакуация в первую очередь лёжа; <b>III</b> — тяжёлые и средней тяжести без непосредственной угрозы для жизни, помощь во вторую очередь или отсрочена; <b>IV</b> — средней тяжести, на следующий этап без помощи; <b>V</b> — лёгкие, на амбулаторное лечение.</p>
+  <div class="def"><span class="k">Виды сортировки · учебник, с. 51 <span class="star">★</span></span>
+    <p><b>Внутрипунктовая сортировка</b> — это распределение поражённых и больных на группы в зависимости от нуждаемости в лечебно-профилактических мероприятиях на данном этапе медицинской эвакуации, по месту и очерёдности их выполнения.</p>
+    <p><b>Эвакуационно-транспортная сортировка</b> предполагает разделение поражённых и больных в интересах чёткой и своевременной их дальнейшей эвакуации.</p>
+    <p>В условиях ЧС, при массовом поступлении пострадавших необходимость в уточнении видов сортировки отпадает в связи с их совмещением по сути процесса сортировки.</p>
+  </div>
+  <h3>Пять сортировочных групп</h3>
+  <p class="src" style="margin-top:0">учебник, с. 53</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Группа</th><th>Кто</th><th>Помощь и прогноз</th><th>Эвакуация</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">I</td><td>крайне тяжёлые, несовместимые с жизнью повреждения; агональное состояние</td><td>симптоматическая терапия; прогноз неблагоприятный для жизни</td><td>не подлежат; до 20 %</td></tr>
+      <tr><td class="lv">II</td><td>тяжёлые повреждения и отравления с нарастающими расстройствами жизненных функций (шок)</td><td>мероприятия по неотложным показаниям; временно нетранспортабельны; прогноз может быть благоприятен при своевременной и адекватной терапии</td><td><b>в 1-ю очередь</b> после помощи, медицинским транспортом, с медработником, <b>лёжа</b>; до 20 %</td></tr>
+      <tr><td class="lv">III</td><td>тяжёлые и средней тяжести повреждения без непосредственной угрозы для жизни</td><td>во 2-ю очередь или отсрочена до следующего этапа; прогноз благоприятный</td><td>во 2-ю очередь, медицинский транспорт; до 20 %</td></tr>
+      <tr><td class="lv">IV</td><td>повреждения средней тяжести, нерезко выраженные функциональные расстройства или без них</td><td>на этом этапе не оказывают</td><td>на следующий этап</td></tr>
+      <tr><td class="lv">V</td><td>лёгкие повреждения</td><td>—</td><td>на амбулаторное лечение</td></tr>
+    </tbody>
+  </table></div>
+  <p>На рис. 3 учебника (с. 52) от групп идут марки: у I группы — <b>Г</b> (госпитальное отделение), у II — <b>Ш</b> (противошоковая) и <b>О-1</b>, от II–V групп — марки операционной и перевязочной первой или второй очереди, у IV — <b>Э-2</b> (эвакуация во вторую очередь), у V — <b>ЛП</b> (на амбулаторное лечение).</p>
+  <h3>Те же группы — по трём сортировочным признакам</h3>
+  <div class="cols">
+    <div class="card a"><h4>По опасности для окружающих</h4><ul>
+      <li>нуждающиеся в специальной обработке — частичной или полной</li>
+      <li>подлежащие изоляции — инфекционный, психиатрический изолятор</li>
+      <li>не опасные</li>
+    </ul></div>
+    <div class="card b"><h4>По лечебному признаку</h4><ul>
+      <li>нуждающиеся в помощи на этом этапе — где (операционная, перевязочная, противошоковая, госпитальное) и в какую очередь</li>
+      <li>помощь может быть отсрочена до следующего этапа</li>
+      <li>нуждающиеся только в симптоматической (паллиативной) помощи</li>
+    </ul></div>
+    <div class="card a"><h4>По эвакуационному признаку</h4><ul>
+      <li>подлежащие эвакуации — куда, в какую очередь, каким транспортом, лёжа или сидя</li>
+      <li>не подлежащие эвакуации или временно нетранспортабельные — агонирующие (I), II группа до оказания помощи</li>
+      <li>на амбулаторное лечение</li>
+    </ul></div>
+  </div>
+  <p class="src">учебник, с. 50–53; СОГМА, 2020, тесты № 4, 5; пособие ОшГУ, с. 23</p>
+  <h3>Другие схемы групп — если спросят</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Где</th><th>Группы</th></tr></thead>
+    <tbody>
+      <tr><td><b>На месте ЧС, бригада СМП</b></td><td>экстренная — красная метка, неотложная — жёлтая, отсроченная — зелёная, погибшие (алгоритм Минздрава 2022, прил. 3; <a href="#q4">вопрос 4</a>). Словами («Алгоритм действий», п. 8): нуждающиеся в СМП в экстренной форме по жизненным показаниям; с тяжёлыми или средней тяжести повреждениями без непосредственной угрозы для жизни; с лёгкими повреждениями, не нуждающиеся в помощи на данном этапе; погибшие</td></tr>
+      <tr><td><b>Стационар при химической аварии</b></td><td>нуждающиеся в помощи по жизненным показаниям и лечении до выведения из нетранспортабельности (тяжелопоражённые); нуждающиеся в помощи (средней тяжести); нуждающиеся в обсервации (легкопоражённые); нуждающиеся в амбулаторной помощи (легкопоражённые); практически здоровые (учебник, с. 66)</td></tr>
+      <tr><td><b>Н. И. Пирогов, 1860-е</b></td><td>1) «безнадёжно и смертельно раненые, нуждающиеся лишь в уходе и облегчении страданий»; 2) «тяжело и опасно раненые, нуждающиеся в безотлагательной помощи»; 3) «тяжело раненые, требующие также безотлагательного, но более предохранительного пособия»; 4) «раненые, для которых непосредственное хирургическое пособие необходимо только для того, чтобы сделать возможной их дальнейшую транспортировку»; 5) «легко раненые или такие, у которых первое пособие ограничивается наложением лёгкой повязки или удалением поверхностно сидящей пули» (Богдан В. Г. и др., 2018)</td></tr>
+      <tr><td><b>Методичка БГМУ, 2024</b></td><td>четыре группы: IV — легкопоражённые, нуждающиеся в амбулаторно-поликлиническом лечении, около 40 % (соответствует V учебника); средней тяжести отнесены к III; к I группе относят и умерших</td></tr>
+      <tr><td><b>ВПХ, руководство к практическим занятиям, разд. 1.1</b></td><td>представляющие опасность для окружающих; нуждающиеся в медицинской помощи на данном этапе; подлежащие дальнейшей эвакуации без помощи на данном этапе; получившие ранения или поражения, несовместимые с жизнью, и нуждающиеся в симптоматической терапии (агонирующие); подлежащие возвращению в строй после помощи и кратковременного отдыха</td></tr>
+      <tr><td><b>Медпункт полка, пособие ОшГУ, с. 26</b></td><td>нуждающиеся в помощи в перевязочной (в первую или во вторую очередь); подлежащие дальнейшей эвакуации в первую или во вторую очередь, лёжа или сидя, непосредственно из приёмно-сортировочной; подлежащие возвращению в свои подразделения</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><p><b>Как не перепутать.</b> Группы идут «сверху вниз» — от безнадёжных (I) к лёгким (V); первая очередь помощи и эвакуации — у <b>II</b> группы, а не у I. У Пирогова тоже пять групп: первая и пятая совпадают с I и V группами учебника, средние разбиты иначе — удобно сказать это на ответе. <b>Связь с патофизиологией:</b> II группа — это травматический шок и нарастающая дыхательная недостаточность, то есть расстройства, которые без помощи быстро декомпенсируются; I группа — терминальные состояния (агония).</p></div>
+</section>
+
+<section id="links">
+  <div class="sec-head"><h2>Связи с другими предметами</h2></div>
+  <ul class="facts">
+    <li><b>Патофизиология</b> — травматический шок и декомпенсация кровообращения (почему II группа первой получает помощь и эвакуируется лёжа), терминальные состояния и агония (I группа), синдром длительного сдавления (жгут перед извлечением из завала).</li>
+    <li><b>Общая хирургия</b> — временная остановка наружного кровотечения, жгут и время его наложения в карточке, асфиксия; именно их первыми ищет выборочная сортировка.</li>
+    <li><b>Эпидемиология и инфекционные болезни</b> — изоляция инфекционных больных и подозрительных, противоэпидемический режим изолятора, анаэробная инфекция ран.</li>
+    <li><b>Токсикология и фармакология</b> — стойкие ОВ и десорбция с одежды, антидоты на площадке специальной обработки, ИПП; задача учебника про хлор.</li>
+    <li><b>Психиатрия</b> — острые реакции на стресс и психомоторное возбуждение: почему такие пострадавшие опасны для окружающих и идут в психиатрический изолятор.</li>
+    <li><b>Радиационная гигиена</b> — допустимые уровни радиоактивного загрязнения, дозиметрический контроль на сортировочном посту.</li>
+  </ul>
+</section>
+
+<section id="quiz">
+  <div class="sec-head"><h2>Самопроверка: ответ одной фразой</h2></div>
+  <div class="quiz-bar"><p>Сначала ответь вслух, потом открой.</p><button type="button" id="toggle-all">Открыть все</button></div>
+  <details class="q"><summary>1. Зачем нужна медицинская сортировка?</summary><div class="a"><p>Чтобы при массовых потерях обеспечить поражённым своевременную помощь в оптимальном объёме, разумно использовать имеющиеся силы и средства и провести рациональную эвакуацию; это распределение на группы по нуждаемости в однородных лечебно-профилактических и эвакуационных мероприятиях (учебник, с. 50).</p></div></details>
+  <details class="q"><summary>2. Функции сортировочного поста?</summary><div class="a"><p>Встречает транспорт с поражёнными, выявляет нуждающихся в изоляции или санитарной обработке и направляет их на площадку специальной обработки и в изоляторы, остальных распределяет на носилочных и ходячих и направляет в приёмно-сортировочное отделение.</p></div></details>
+  <details class="q"><summary>3. Чем выборочная сортировка отличается от конвейерной?</summary><div class="a"><p>Выборочная — первая: беглым осмотром выхватывают опасных для окружающих и нуждающихся в неотложной помощи; конвейерная — затем последовательно осматривают всех остальных двумя группами у двух носилок, 30–40 носилочных в час на бригаду.</p></div></details>
+  <details class="q"><summary>4. Что показывает сортировочная марка?</summary><div class="a"><p>Результат сортировки: куда направить пострадавшего и в какую очередь — О-1/О-2 операционная, П-1/П-2 перевязочная, Ш противошоковая, Э-1/Э-2 эвакуация, СО санитарная обработка, И изоляция; крепится к одежде или носилкам, дублируется в первичной медицинской карточке.</p></div></details>
+  <details class="q"><summary>5. Кто такие «опасные для окружающих»?</summary><div class="a"><p>Заражённые ОВ (АОХВ), РВ выше допустимых уровней и БС — нуждаются в специальной обработке; инфекционные больные — в инфекционном изоляторе; с острыми психическими расстройствами — в психиатрическом изоляторе.</p></div></details>
+  <details class="q"><summary>6. Зачем на этапе площадка специальной обработки?</summary><div class="a"><p>Чтобы до приёма на этап провести частичную санитарную обработку заражённых и специальную обработку их одежды, носилок и транспорта — предотвратить вторичные поражения самих пострадавших и персонала и не занести заражение в подразделения этапа.</p></div></details>
+  <details class="q"><summary>7. Сортировочные группы при внутрипунктовой сортировке?</summary><div class="a"><p>I — несовместимые с жизнью и агонирующие (симптоматическая терапия, не эвакуируют); II — нарастающие расстройства жизненных функций, шок (неотложная помощь, эвакуация в 1-ю очередь лёжа); III — без непосредственной угрозы жизни (помощь во 2-ю очередь); IV — средней тяжести (на следующий этап без помощи); V — лёгкие (амбулаторно).</p></div></details>
+</section>
+
+<section id="src">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ol class="links">
+    <li>Основы медицины катастроф: учебно-методическое пособие / С. Н. Линченко и др. — Краснодар: КубГМУ, 2015 — с. 9, 26, 35, 44–53 (ЛЭО и сортировка), рис. 3 (с. 52), 56 (задачи), 66–68, 71, 73, тесты с. 132–134, прил. 4 (с. 144).</li>
+    <li>Приказ Минздрава России от 06.11.2020 № 1202н «Об утверждении Порядка организации и оказания Всероссийской службой медицины катастроф медицинской помощи при чрезвычайных ситуациях, в том числе медицинской эвакуации» (ред. от 29.10.2024) — п. 28; прил. 1, п. 12; прил. 4, пп. 6–7 — <a href="https://base.garant.ru/74894212/">Гарант</a>.</li>
+    <li>Письмо Минздрава России от 28.04.2022 № 30-2/И/2-6824 «Типовой алгоритм реагирования Службы медицины катастроф Министерства здравоохранения Российской Федерации на чрезвычайные ситуации природного характера — лесные и другие ландшафтные пожары», «Алгоритм действий», пп. 7–8; прил. 3 «Инструкция по медицинской сортировке пострадавших в ЧС» — <a href="https://sudact.ru/law/pismo-minzdrava-rossii-ot-28042022-n-30-2i2-6824/tipovoi-algoritm-reagirovaniia-sluzhby-meditsiny/prilozhenie-3/2/">СудАкт</a>.</li>
+    <li>Термины МЧС России: <a href="https://mchs.gov.ru/ministerstvo/o-ministerstve/terminy-mchs-rossii/term/3575">«Приёмно-сортировочное отделение»</a>, <a href="https://mchs.gov.ru/ministerstvo/o-ministerstve/terminy-mchs-rossii/term/1550">«Сортировочные марки»</a>, <a href="https://mchs.gov.ru/ministerstvo/o-ministerstve/terminy-mchs-rossii/term/2179">«Специальная обработка»</a>, <a href="https://mchs.gov.ru/ministerstvo/o-ministerstve/terminy-mchs-rossii/term/1989">«Санитарная обработка»</a>, <a href="https://mchs.gov.ru/ministerstvo/o-ministerstve/terminy-mchs-rossii/term/3121">«Изолятор»</a>.</li>
+    <li>Дзацеева Д. В., Сабаев С. С., Калоев С. З. Организация и проведение специальной обработки в очаге и на этапах медицинской эвакуации: методические рекомендации по медицине катастроф. — Владикавказ: СОГМА, кафедра травматологии и ортопедии, 2020.</li>
+    <li>Медицинская сортировка. Методика проведения. — Минск: БГМУ, 2024 — <a href="https://www.bsmu.by/upload/docs/kafedri/k-skoroj-med-pom/2024/4.pdf">материалы кафедры скорой медицинской помощи</a> (кафедра и год — по адресу файла).</li>
+    <li>Пособие по военно-медицинской подготовке / сост. К. М. Мусаахунов и др. — Ош: ОшГУ, 2011 — с. 19–26.</li>
+    <li>Военно-полевая хирургия: руководство к практическим занятиям / под ред. М. В. Лысенко. — 2010 — разд. 1.1, 1.4, 1.5.</li>
+    <li>Богдан В. Г., Ишутин О. С., Соколов Ю. А., Николаев Д. В. Медицинская сортировка: исторический аспект развития. Сообщение 1 // Военная медицина. — 2018. — № 2. — С. 2–6; Соколов Ю. А., Богдан В. Г., Николаев Д. В. Медицинская сортировка: особенности становления и развития отечественной и западной систем. Сообщение 2 // Военная медицина. — 2018. — № 3. — С. 2–7.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Конспект к занятию по медицине катастроф, группа М-03-24, медфак ЧГУ, 30.09.2026. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('toggle-all'); if(!b) return;
+  b.addEventListener('click',function(){
+    var d=document.querySelectorAll('#quiz details.q');
+    var open=b.getAttribute('data-open')!=='1';
+    d.forEach(function(x){x.open=open;});
+    b.setAttribute('data-open',open?'1':'0');
+    b.textContent=open?'Свернуть все':'Открыть все';
+  });
+})();
+</script>
+</body>
+</html>
