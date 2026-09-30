@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Аускультация лёгких</title>
+<meta name="description" content="Аускультация лёгких за одну ночь: методика, дыхательные шумы, хрипы, крепитация, шум трения плевры, бронхофония, синдромы. Плюс сжато пальпация и перкуссия. Пропедевтика внутренних болезней, медфак ЧГУ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#1C5A8C; --accent-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E2F1E6; --ok-fg:#1E6A36;
+  --bad-bg:#FBE5E2; --bad-fg:#9B2C22;
+  --clear-bg:#E2EEF9; --clear-fg:#1B4F7A;
+  --dull-bg:#E4E2DE; --dull-fg:#3D3A35;
+  --tymp-bg:#FBEBD0; --tymp-fg:#7A4A0C;
+  --box-bg:#ECE5F6; --box-fg:#4E3782;
+  --blunt-bg:#EDEFF1; --blunt-fg:#4A5460;
+  --bone:#AEB8C2; --rib:#D5DCE3;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#82B6E4; --accent-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#14301D; --ok-fg:#8FD6A4;
+    --bad-bg:#3A1A17; --bad-fg:#F2A69C;
+    --clear-bg:#16324A; --clear-fg:#A9D0F2;
+    --dull-bg:#33312D; --dull-fg:#DDD8CF;
+    --tymp-bg:#3F2E12; --tymp-fg:#F2C97E;
+    --box-bg:#2E2544; --box-fg:#CDB9F2;
+    --blunt-bg:#252C33; --blunt-fg:#B8C3CE;
+    --bone:#5B6876; --rib:#2F3A45;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#82B6E4; --accent-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#14301D; --ok-fg:#8FD6A4;
+  --bad-bg:#3A1A17; --bad-fg:#F2A69C;
+  --clear-bg:#16324A; --clear-fg:#A9D0F2;
+  --dull-bg:#33312D; --dull-fg:#DDD8CF;
+  --tymp-bg:#3F2E12; --tymp-fg:#F2C97E;
+  --box-bg:#2E2544; --box-fg:#CDB9F2;
+  --blunt-bg:#252C33; --blunt-fg:#B8C3CE;
+  --bone:#5B6876; --rib:#2F3A45;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:760px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--accent); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:4px}
+h1,h2,h3,h4{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2.1rem, 6vw, 2.9rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.55rem; font-weight:700}
+h3{font-size:1.12rem; font-weight:700; margin-top:1.6rem}
+h4{font-size:1.02rem; font-weight:700}
+p{margin:.6rem 0}
+.lat{font-family:var(--mono); font-size:.86em; color:var(--muted); font-style:normal}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.06rem; color:var(--muted); max-width:62ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
+nav.toc{margin:1.4rem 0 0; font-size:.94rem}
+nav.toc ul{list-style:none; padding:0; margin:.5rem 0 0; columns:2 220px; column-gap:1.6rem}
+nav.toc li{padding:.18rem 0; break-inside:avoid}
+section{padding-top:2.6rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:.3rem 1rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.skill{font:500 .72rem/1.3 var(--mono); color:var(--muted); letter-spacing:.04em}
+.key{font:500 .72rem/1.3 var(--mono); color:var(--warn-fg); letter-spacing:.04em}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.35rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.35rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tile.wide{grid-column:1/-1}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.92rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .72rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:transparent}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono)}
+.snd{display:inline-block; max-width:100%; font-weight:600; font-size:.86em; padding:.12rem .45rem; border-radius:5px}
+.snd.clear{background:var(--clear-bg); color:var(--clear-fg)}
+.snd.dull{background:var(--dull-bg); color:var(--dull-fg)}
+.snd.tymp{background:var(--tymp-bg); color:var(--tymp-fg)}
+.snd.box{background:var(--box-bg); color:var(--box-fg)}
+.snd.blunt{background:var(--blunt-bg); color:var(--blunt-fg)}
+.up{color:var(--ok-fg); font-weight:600} .down{color:var(--bad-fg); font-weight:600}
+.note{background:var(--accent-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); color:var(--ink); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.say{border-left:3px solid var(--accent); background:var(--surface); border-radius:0 10px 10px 0; padding:.75rem 1rem; margin:1rem 0; font-size:.96rem}
+.say .lbl{display:block; font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin-bottom:.3rem}
+.say p{margin:.35rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.45rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.plan{list-style:none; padding:0; margin:.8rem 0; display:grid; gap:8px; counter-reset:pl}
+.plan li{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.7rem .9rem .75rem; display:grid; gap:.15rem}
+.plan .tm{font:500 .74rem/1.3 var(--mono); color:var(--accent); letter-spacing:.04em}
+.plan b{font-weight:600}
+.plan span.d{color:var(--muted); font-size:.9rem; line-height:1.45}
+.cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:10px; margin:1rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.8rem .95rem}
+.card h4{margin-bottom:.35rem}
+.card p{margin:.3rem 0; font-size:.93rem}
+.card ul{margin:.3rem 0; padding-left:1.05rem; font-size:.93rem} .card li{margin:.2rem 0}
+.ladder{list-style:none; margin:1rem 0; padding:0 0 0 1.15rem; border-left:3px solid var(--accent-soft); display:grid; gap:.75rem}
+.ladder li{position:relative}
+.ladder li::before{content:""; position:absolute; left:calc(-1.15rem - 8px); top:.45rem; width:13px; height:13px; border-radius:50%; background:var(--accent)}
+.ladder b{display:block; font-family:var(--serif); font-size:1.03rem}
+.ladder span{display:block; font-size:.93rem; color:var(--muted)}
+.tree{font-size:.95rem; margin:.6rem 0}
+.tree ul{list-style:none; margin:0; padding-left:1.1rem; border-left:1px dashed var(--line)}
+.tree > ul{padding-left:0; border-left:0}
+.tree li{padding:.16rem 0}
+.tree li > b{font-weight:600}
+figure{margin:1rem 0; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.8rem .6rem .5rem}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:.84rem; color:var(--muted); padding:.4rem .4rem 0}
+.views{display:grid; grid-template-columns:repeat(auto-fit, minmax(165px, 1fr)); gap:14px 10px}
+.view{display:grid; gap:.35rem; justify-items:center; align-content:start}
+.view svg{max-width:250px}
+.vcap{font:500 .8rem/1.3 var(--sans); color:var(--ink); text-align:center}
+ol.legend{margin:.7rem .3rem .2rem; padding-left:1.6rem; font-size:.9rem; display:grid; gap:.3rem}
+ol.legend li::marker{font-weight:600; color:var(--accent)}
+.phases{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px 10px}
+.phase{display:grid; gap:.2rem; justify-items:center; text-align:center; min-width:0}
+.phase svg{width:100%; max-width:190px; height:auto}
+.phase b{font-size:.9rem} .phase span{font-size:.8rem; color:var(--muted); line-height:1.35}
+svg .body{fill:var(--surface); stroke:var(--muted); stroke-width:1.4}
+svg .rib{fill:none; stroke:var(--rib); stroke-width:1.3}
+svg .bone{fill:none; stroke:var(--bone); stroke-width:2.2; stroke-linecap:round}
+svg .clav{fill:none; stroke:var(--bone); stroke-width:4; stroke-linecap:round}
+svg .sternum, svg .scap{fill:var(--rib); stroke:var(--bone); stroke-width:1.2}
+svg .spine{stroke:var(--bone); stroke-width:4.5; stroke-linecap:round; stroke-dasharray:0 14}
+svg .c7{fill:var(--muted)}
+svg .z-dull{fill:var(--dull-bg)}
+svg .z-br{fill:var(--tymp-bg); stroke:var(--tymp-fg); stroke-width:1; stroke-dasharray:3 2}
+svg .tline{fill:none; stroke:var(--muted); stroke-width:1.1; stroke-dasharray:4 3}
+svg .arm-o{stroke:var(--muted); stroke-width:31; stroke-linecap:round}
+svg .arm-i{stroke:var(--surface); stroke-width:28; stroke-linecap:round}
+svg .badge circle{fill:var(--accent)}
+svg .badge text{fill:var(--surface); font:600 10.5px var(--sans); text-anchor:middle; dominant-baseline:central}
+svg .t{fill:var(--ink); font:500 11px var(--sans)}
+svg .t.s{fill:var(--muted); font-size:10px}
+svg .axis{stroke:var(--line); stroke-width:1.2}
+svg .ins{stroke:var(--accent); fill:none; stroke-linecap:round}
+svg .exp{stroke:var(--warn-fg); fill:none; stroke-linecap:round}
+svg .cap{fill:var(--muted); font:500 10px var(--sans)}
+.listen{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.7rem .85rem .6rem; margin:1rem 0}
+.listen .lh{font-size:.93rem} .listen .lh b{font-weight:600}
+.listen audio{display:block; width:100%; margin:.5rem 0 .2rem; height:40px}
+.listen .src{font-size:.76rem; color:var(--muted); margin:.2rem 0 0}
+.matrix{margin:.9rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface); overflow-x:auto}
+.matrix table{font-size:.88rem}
+.matrix td:first-child{font-weight:600}
+.record{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem; font-size:.95rem}
+.record p{margin:.45rem 0}
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1.2 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--accent); background:transparent; color:var(--accent); cursor:pointer}
+button:hover{background:var(--accent-soft)}
+details.q{border-bottom:1px solid var(--line); background:transparent}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.75rem 2rem .75rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.62rem; font:500 1.2rem/1 var(--mono); color:var(--accent)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .9rem; color:var(--ink); font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.qgroup{font:500 .74rem/1.4 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--muted); margin:1.4rem 0 .3rem}
+.vtabs{display:flex; flex-wrap:wrap; gap:.45rem; margin:.6rem 0 1rem}
+.vtabs button[aria-pressed="true"]{background:var(--accent); color:var(--surface)}
+.qitem{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.8rem .9rem; margin:.7rem 0}
+.qitem .qq{margin:0 0 .5rem; font-weight:500}
+.qitem .ql{margin:.2rem 0 .6rem; padding-left:1.1rem; font-size:.93rem; list-style:none}
+.qitem .ql li{margin:.12rem 0}
+.opts{display:grid; gap:.4rem}
+button.opt{text-align:left; border-color:var(--line); color:var(--ink); padding:.55rem .75rem}
+button.opt:hover{border-color:var(--accent); background:transparent}
+button.opt.ok{background:var(--ok-bg); border-color:var(--ok-fg); color:var(--ok-fg); font-weight:600}
+button.opt.bad{background:var(--bad-bg); border-color:var(--bad-fg); color:var(--bad-fg)}
+.ans{margin-top:.6rem; padding-top:.5rem; border-top:1px dashed var(--line); font-size:.93rem}
+.ans p{margin:.25rem 0} .ans .why{color:var(--muted)}
+.score{font:500 .82rem/1.3 var(--mono); color:var(--muted)}
+.links{display:grid; gap:.5rem; padding-left:1.1rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:640px){
+  .matrix{overflow:visible; border:0; background:transparent}
+  .matrix table, .matrix tbody, .matrix tr, .matrix td{display:block}
+  .matrix thead{display:none}
+  .matrix tr{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.55rem .15rem; margin-bottom:8px}
+  .matrix td{border:0; padding:.16rem .7rem}
+  .matrix td::before{content:attr(data-l); display:block; font:500 .66rem/1.35 var(--mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+  .matrix td:first-child{font-family:var(--serif); font-size:1.04rem; padding-bottom:.3rem}
+  .matrix td:first-child::before{content:none}
+}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.35rem} th,td{padding:.5rem .55rem} }
+@media (prefers-reduced-motion:reduce){ *{scroll-behavior:auto!important} }
+html{scroll-behavior:smooth}
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.6pt; line-height:1.5}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar button, .listen audio, .vtabs, #quiz, .qnote{display:none}
+  section{padding-top:1.2rem}
+  h1{font-size:22pt} h2{font-size:15pt; break-after:avoid} h3{break-after:avoid}
+  .tbl, figure, .record, .tile, .note, .warn, .say, .card{break-inside:avoid; border-color:#ccc}
+  table{font-size:8.8pt} th,td{padding:.3rem .4rem}
+  details.q summary::after{content:none}
+  details.q{break-inside:avoid}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Пропедевтика внутренних болезней · занятие 5 · медфак ЧГУ</div>
+  <h1>Аускультация лёгких</h1>
+  <p class="lead">Подготовка за одну ночь, с нуля. Что и как слушать, какие бывают дыхательные шумы, как отличить хрипы от крепитации и шума трения плевры и что отвечать преподавателю. В конце — сжато пальпация и перкуссия для тех, кто пропустил прошлые занятия, и тест кафедры по перкуссии с эталонами.</p>
+  <div class="chips">
+    <span class="chip">навыки № 35–37 перечня кафедры</span>
+    <span class="chip">лекция 29.09</span>
+    <span class="chip">таблицы кафедры</span>
+    <span class="chip">презентация кафедры</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Содержание</div>
+    <ul>
+      <li><a href="#plan">План на ночь</a></li>
+      <li><a href="#glavnoe">Главное за 10 минут</a></li>
+      <li><a href="#chto">Что такое аускультация</a></li>
+      <li><a href="#metodika">Как слушать: правила и точки</a></li>
+      <li><a href="#osnovnye">Основные дыхательные шумы</a></li>
+      <li><a href="#vezik">Изменения везикулярного дыхания</a></li>
+      <li><a href="#bronh">Патологическое бронхиальное дыхание</a></li>
+      <li><a href="#pobochnye">Побочные дыхательные шумы</a></li>
+      <li><a href="#otlichiya">Как отличить хрипы, крепитацию и трение плевры</a></li>
+      <li><a href="#bronhofoniya">Бронхофония</a></li>
+      <li><a href="#sindromy">Синдромы: всё в одной таблице</a></li>
+      <li><a href="#kushetka">У кушетки: что делать и говорить</a></li>
+      <li><a href="#otvety">Как отвечать и где ловушки</a></li>
+      <li><a href="#test">Самопроверка по аускультации</a></li>
+      <li><a href="#palpaciya">Хвост 1: осмотр и пальпация</a></li>
+      <li><a href="#perkussiya">Хвост 2: перкуссия</a></li>
+      <li><a href="#test-perk">Тест кафедры по перкуссии</a></li>
+      <li><a href="#istochniki">Источники</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="plan">
+  <div class="sec-head"><h2>План на ночь</h2><span class="skill">≈ 3,5 часа + 15 минут утром</span></div>
+  <p>По тематическому плану кафедры занятие 5 — аускультация лёгких, а следом коллоквиум по анамнезу, осмотру и всему исследованию органов дыхания. Поэтому идём от главного к хвостам. Готовься к двум вещам: ответить теорию и показать методику на одногруппнике.</p>
+  <ol class="plan">
+    <li><span class="tm">15 мин</span><b>Главное за 10 минут</b><span class="d">Прочитай и перескажи вслух. Послушай записи шумов — так термины сразу станут звуками.</span></li>
+    <li><span class="tm">45 мин</span><b>Методика и основные дыхательные шумы</b><span class="d">Точки и правила, везикулярное и бронхиальное дыхание, их изменения. Нарисуй на листке четыре «домика» вдоха и выдоха.</span></li>
+    <li><span class="tm">45 мин</span><b>Побочные шумы, отличия, бронхофония</b><span class="d">Хрипы, крепитация, шум трения плевры. Таблицу отличий — выучить наизусть.</span></li>
+    <li><span class="tm">30 мин</span><b>Синдромы</b><span class="d">Одна таблица связывает пальпацию, перкуссию и аускультацию. Здесь начинаешь понимать, а не зубрить.</span></li>
+    <li><span class="tm">30 мин</span><b>Хвосты: пальпация и перкуссия</b><span class="d">Цифры границ лёгких и таблицы кафедры. Пройди тест кафедры по перкуссии.</span></li>
+    <li><span class="tm">20 мин</span><b>Самопроверка и сценарий у кушетки</b><span class="d">Отвечай вслух, потом открывай ответ. Проговори сценарий осмотра целиком.</span></li>
+    <li><span class="tm">утром, 15 мин</span><b>Повтор</b><span class="d">«Главное за 10 минут», таблица отличий побочных шумов, таблица синдромов.</span></li>
+  </ol>
+  <div class="note"><p>Поспи хотя бы 5–6 часов: выученное закрепляется во сне, а на занятии нужна голова, а не конспект.</p></div>
+</section>
+
+<section id="glavnoe">
+  <div class="sec-head"><h2>Главное за 10 минут</h2><span class="key">★ выучить первым</span></div>
+  <ul class="facts">
+    <li><b>Аускультация</b> <i class="lat">(auscultatio — выслушивание)</i> — метод исследования внутренних органов, основанный на выслушивании звуковых явлений, связанных с их деятельностью. Предложил Рене Лаэннек, он же создал первый стетоскоп (1816).</li>
+    <li><b>При аускультации лёгких оценивают три вещи:</b> основные дыхательные шумы, побочные (дополнительные) дыхательные шумы и бронхофонию.</li>
+    <li><b>Слушают в симметричных точках</b>, всегда сравнивая правую и левую сторону: надключичные, подключичные области, передняя поверхность, надлопаточные, межлопаточные, подлопаточные и подмышечные области.</li>
+    <li><b>Основных дыхательных шумов два</b> — везикулярное и бронхиальное дыхание; их смесь — везикулобронхиальное (смешанное).</li>
+    <li><b>Везикулярное</b> — рождается в альвеолах: колебание их эластических элементов при наполнении воздухом на вдохе. Мягкий дующий шум, похож на звук «ф». Слышен <b>весь вдох и первую треть выдоха</b>. Это норма над лёгкими.</li>
+    <li><b>Бронхиальное (ларинготрахеальное)</b> — рождается в гортани: завихрения воздуха у голосовой щели. Похоже на звук «х». Слышно на вдохе и выдохе, <b>выдох громче, грубее и длиннее</b>. В норме — только над гортанью, трахеей, рукояткой грудины и между лопатками на уровне III–IV грудных позвонков. В любом другом месте — патология.</li>
+    <li><b>Побочные шумы:</b> хрипы (сухие и влажные), крепитация, шум трения плевры; реже — шум плеска Гиппократа, шум падающей капли, плевроперикардиальный шум.</li>
+    <li><b>Где рождаются:</b> хрипы — в бронхах, трахее и полостях; крепитация — в альвеолах; шум трения — в плевре.</li>
+    <li><b>Как отличить:</b> хрипы меняются после кашля, крепитация и трение плевры — нет. Крепитация — только на высоте вдоха. Шум трения плевры усиливается при надавливании фонендоскопом и слышен при пробе Вотчала (ложные дыхательные движения при закрытом рте и зажатом носе).</li>
+    <li><b>Бронхофония</b> — проведение шёпотной речи («чашка чая») на грудную клетку. Усилена над плотной тканью с проходимым бронхом и над полостью, ослаблена при жидкости или воздухе в плевральной полости и закрытом бронхе. Меняется так же, как голосовое дрожание.</li>
+  </ul>
+  <div class="tiles">
+    <div class="tile"><b>вдох + ⅓ выдоха</b><span>везикулярное дыхание, звук «ф»</span></div>
+    <div class="tile"><b>выдох &gt; вдоха</b><span>бронхиальное дыхание, звук «х»</span></div>
+    <div class="tile"><b>Th III–IV</b><span>межлопаточная зона физиологического бронхиального дыхания</span></div>
+    <div class="tile"><b>конец вдоха</b><span>единственная фаза, где слышна крепитация</span></div>
+  </div>
+</section>
+
+<section id="chto">
+  <div class="sec-head"><h2>Что такое аускультация</h2></div>
+  <p><b>Аускультация</b> — метод исследования внутренних органов, основанный на выслушивании звуковых явлений, связанных с их деятельностью. <b>Аускультация лёгких</b> — выслушивание звуков, возникающих в грудной клетке при нормальной или патологической работе органов дыхания (формулировки лекции кафедры).</p>
+  <h3>Немного истории</h3>
+  <p>Метод предложил французский врач <b>Рене Лаэннек</b> (1781–1826). В 1816 году он свернул в трубку лист бумаги, чтобы выслушать сердце пациентки, — так появился стетоскоп. В 1819 году вышел его трактат о посредственной аускультации.</p>
+  <h3>Виды и инструменты</h3>
+  <ul class="facts">
+    <li><b>Непосредственная</b> — ухом прямо к телу. Сегодня так определяют только шум плеска Гиппократа.</li>
+    <li><b>Посредственная</b> — через инструмент: стетоскоп (жёсткая трубка), бинауральный стетоскоп, стетофонендоскоп. Головка с мембраной лучше передаёт высокие звуки, раструб без мембраны — низкие.</li>
+  </ul>
+  <h3>От чего зависит, что мы слышим</h3>
+  <p>Звук оценивают по <b>громкости, продолжительности и высоте</b>. Что дойдёт до уха, зависит от звукопроводности тканей между органом и ухом: <b>плотные ткани проводят звук хорошо, мягкие и воздушные — гасят</b>. Запомни эту фразу — на ней держится половина ответов: почему над уплотнённым лёгким появляется бронхиальное дыхание, а жидкость в плевре делает дыхание тихим.</p>
+</section>
+
+<section id="metodika">
+  <div class="sec-head"><h2>Как слушать: правила и точки</h2><span class="skill">навык № 35</span></div>
+  <h3>Правила аускультации</h3>
+  <p>По слайду лекции кафедры:</p>
+  <ol class="steps">
+    <li>Тишина в помещении.</li>
+    <li>Тепло: тёплое помещение, тёплые руки врача и фонендоскоп.</li>
+    <li>Положение больного — стоя или сидя; свободной рукой больного придерживают.</li>
+    <li>В каждой точке выслушивают до конца и вдох, и выдох.</li>
+    <li>В каждой точке сначала оценивают <b>основной дыхательный шум — при дыхании через нос</b>.</li>
+    <li>Затем оценивают <b>побочные дыхательные шумы — при дыхании ртом</b>, глубоко.</li>
+  </ol>
+  <p>От себя добавь очевидное, что тоже любят спросить: головку фонендоскопа прижимать плотно, всей поверхностью; трубки не трогать пальцами и не допускать их трения об одежду — это даёт посторонние шумы; всегда сравнивать симметричные точки справа и слева. Если услышал побочный шум — попроси покашлять и послушай снова (зачем — в разделе <a href="#otlichiya">об отличиях</a>).</p>
+
+  <h3>Точки выслушивания</h3>
+  <p>Проводится в симметричных участках: надключичные области, подключичные области, передние поверхности грудной клетки, надлопаточные, межлопаточные, подлопаточные области и подмышечные области сверху вниз. Это те же точки, что при сравнительной перкуссии. Спереди слева ниже II–III межреберья слушать мешает сердце.</p>
+  <figure>
+    <div class="views">
+      <div class="view">
+        <svg viewBox="0 0 200 260" role="img" aria-label="Спереди: 1 — надключичные области, 2 — подключичные, 3 — передняя поверхность по среднеключичным линиям; ниже слева сердце">
+          <path class="body" d="M84 4C84 22 82 30 72 36L38 46C26 50 20 60 20 72L22 104C28 108 34 112 36 120L38 180C38 208 41 230 44 250H156C159 230 162 208 162 180L164 120C166 112 172 108 178 104L180 72C180 60 174 50 162 46L128 36C118 30 116 22 116 4Z"/>
+          <path class="rib" d="M93 58Q66 61 40 74M93 70Q66 73 40 86M93 84Q66 87 40 100M93 98Q66 101 40 114M93 112Q66 115 40 128M93 126Q66 129 40 142M93 140Q66 143 40 156M107 58Q134 61 160 74M107 70Q134 73 160 86M107 84Q134 87 160 100M107 98Q134 101 160 114M107 112Q134 115 160 128M107 126Q134 129 160 142M107 140Q134 143 160 156"/>
+          <path class="z-dull" d="M100 94Q130 96 142 132Q124 148 100 146Z"/>
+          <rect class="sternum" x="93" y="55" width="14" height="93" rx="5"/>
+          <path class="clav" d="M94 54Q70 55 44 50M106 54Q130 55 156 50"/>
+          <text class="t s" x="124" y="124" text-anchor="middle">сердце</text>
+          <text class="t s" x="22" y="14">правая</text>
+          <text class="t s" x="178" y="14" text-anchor="end">левая</text>
+          <g class="badge"><circle cx="68" cy="40" r="8"/><text x="68" y="40">1</text></g>
+          <g class="badge"><circle cx="132" cy="40" r="8"/><text x="132" y="40">1</text></g>
+          <g class="badge"><circle cx="64" cy="66" r="8"/><text x="64" y="66">2</text></g>
+          <g class="badge"><circle cx="136" cy="66" r="8"/><text x="136" y="66">2</text></g>
+          <g class="badge"><circle cx="62" cy="90" r="8"/><text x="62" y="90">3</text></g>
+          <g class="badge"><circle cx="138" cy="86" r="8"/><text x="138" y="86">3</text></g>
+          <g class="badge"><circle cx="60" cy="116" r="8"/><text x="60" y="116">3</text></g>
+        </svg>
+        <div class="vcap">Спереди · руки опущены</div>
+      </div>
+      <div class="view">
+        <svg viewBox="0 0 200 260" role="img" aria-label="Сбоку: 7 — подмышечные области сверху вниз по средней подмышечной линии, руки за головой">
+          <line class="arm-o" x1="104" y1="52" x2="84" y2="8"/>
+          <line class="arm-i" x1="104" y1="52" x2="84" y2="8"/>
+          <path class="body" d="M60 40C52 70 48 100 50 140C52 180 56 215 58 250H150C150 215 156 180 156 140C156 100 150 70 140 40Z"/>
+          <path class="rib" d="M52 62L154 80M52 82L154 100M52 102L154 120M52 122L154 140M52 142L154 160M52 162L154 180M52 182L154 200"/>
+          <line class="tline" x1="100" y1="62" x2="100" y2="246"/>
+          <g class="badge"><circle cx="100" cy="84" r="8"/><text x="100" y="84">7</text></g>
+          <g class="badge"><circle cx="100" cy="114" r="8"/><text x="100" y="114">7</text></g>
+          <g class="badge"><circle cx="100" cy="144" r="8"/><text x="100" y="144">7</text></g>
+          <g class="badge"><circle cx="100" cy="174" r="8"/><text x="100" y="174">7</text></g>
+          <text class="t s" x="8" y="14">правый бок</text>
+          <text class="t s" x="64" y="242">спина</text>
+          <text class="t s" x="146" y="242" text-anchor="end">грудь</text>
+        </svg>
+        <div class="vcap">Сбоку · руки за головой</div>
+      </div>
+      <div class="view">
+        <svg viewBox="0 0 200 260" role="img" aria-label="Сзади: 4 — надлопаточные области, 5 — межлопаточные на двух уровнях, 6 — подлопаточные">
+          <path class="body" d="M84 4C84 22 82 30 72 36L38 46C26 50 20 60 20 72L22 104C28 108 34 112 36 120L38 180C38 208 41 230 44 250H156C159 230 162 208 162 180L164 120C166 112 172 108 178 104L180 72C180 60 174 50 162 46L128 36C118 30 116 22 116 4Z"/>
+          <path class="scap" d="M76 58L40 54Q46 98 68 134ZM124 58L160 54Q154 98 132 134Z"/>
+          <path class="bone" d="M76 68L40 58M124 68L160 58"/>
+          <line class="spine" x1="100" y1="54" x2="100" y2="236"/>
+          <circle class="c7" cx="100" cy="40" r="4"/>
+          <text class="t s" x="100" y="30" text-anchor="middle">C7</text>
+          <text class="t s" x="22" y="14">левая</text>
+          <text class="t s" x="178" y="14" text-anchor="end">правая</text>
+          <g class="badge"><circle cx="58" cy="47" r="8"/><text x="58" y="47">4</text></g>
+          <g class="badge"><circle cx="142" cy="47" r="8"/><text x="142" y="47">4</text></g>
+          <g class="badge"><circle cx="87" cy="82" r="8"/><text x="87" y="82">5</text></g>
+          <g class="badge"><circle cx="113" cy="82" r="8"/><text x="113" y="82">5</text></g>
+          <g class="badge"><circle cx="87" cy="112" r="8"/><text x="87" y="112">5</text></g>
+          <g class="badge"><circle cx="113" cy="112" r="8"/><text x="113" y="112">5</text></g>
+          <g class="badge"><circle cx="66" cy="160" r="8"/><text x="66" y="160">6</text></g>
+          <g class="badge"><circle cx="134" cy="160" r="8"/><text x="134" y="160">6</text></g>
+          <g class="badge"><circle cx="66" cy="190" r="8"/><text x="66" y="190">6</text></g>
+          <g class="badge"><circle cx="134" cy="190" r="8"/><text x="134" y="190">6</text></g>
+        </svg>
+        <div class="vcap">Сзади · руки скрещены на груди</div>
+      </div>
+    </div>
+    <ol class="legend">
+      <li>Надключичные области.</li>
+      <li>Подключичные области.</li>
+      <li>Передние поверхности — по среднеключичным линиям; справа можно опуститься ниже, слева мешает сердце.</li>
+      <li>Надлопаточные области.</li>
+      <li>Межлопаточные области, на нескольких уровнях.</li>
+      <li>Подлопаточные области.</li>
+      <li>Подмышечные области — сверху вниз.</li>
+    </ol>
+    <figcaption>Цифры — зоны в том порядке, как они перечислены на слайде лекции. Каждую пару точек слушают справа и слева, по одному-два полных дыхательных цикла в точке. Схема, не в масштабе.</figcaption>
+  </figure>
+</section>
+
+<section id="osnovnye">
+  <div class="sec-head"><h2>Основные дыхательные шумы</h2><span class="key">★ главное</span></div>
+  <p>На лекции основных дыхательных шумов три: <b>везикулярное</b>, <b>бронхиальное</b> и <b>везикулобронхиальное</b> (смешанное, в учебниках чаще «бронховезикулярное»). Первые два — самостоятельные шумы, третье — их смесь.</p>
+  <div class="cards">
+    <div class="card">
+      <h4>Везикулярное <i class="lat">(vesicula — пузырёк)</i></h4>
+      <ul>
+        <li><b>Где рождается:</b> в альвеолах.</li>
+        <li><b>Механизм:</b> колебание эластических элементов альвеол в момент наполнения их воздухом в фазу вдоха.</li>
+        <li><b>Звук:</b> продолжительный мягкий дующий шум, напоминает звук «ф».</li>
+        <li><b>Фазы:</b> весь вдох, постепенно усиливаясь, и первая треть выдоха.</li>
+        <li><b>Где в норме:</b> над всей поверхностью лёгких.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Бронхиальное <i class="lat">(ларинготрахеальное)</i></h4>
+      <ul>
+        <li><b>Где рождается:</b> в гортани и трахее.</li>
+        <li><b>Механизм:</b> воздух проходит через узкую голосовую щель в более широкое пространство — возникают завихрения; звуковые волны расходятся по бронхиальному дереву.</li>
+        <li><b>Звук:</b> грубый, похож на звук «х».</li>
+        <li><b>Фазы:</b> вдох и выдох; на выдохе звук сильнее, грубее и продолжительнее, потому что голосовая щель на выдохе уже.</li>
+        <li><b>Где в норме:</b> только в зонах проекции гортани, трахеи и бифуркации трахеи (ниже).</li>
+      </ul>
+    </div>
+  </div>
+
+  <figure>
+    <div class="phases">
+      <div class="phase">
+        <svg viewBox="0 0 160 84" role="img" aria-label="Везикулярное: длинная восходящая линия вдоха и короткая нисходящая линия выдоха">
+          <line class="axis" x1="8" y1="72" x2="152" y2="72"/>
+          <path class="ins" stroke-width="3" d="M14 72L100 18"/>
+          <path class="exp" stroke-width="2" d="M100 18L126 46"/>
+          <text class="cap" x="48" y="82" text-anchor="middle">вдох</text>
+          <text class="cap" x="124" y="82" text-anchor="middle">выдох</text>
+        </svg>
+        <b>Везикулярное</b><span>весь вдох, нарастая; выдох — только первая треть</span>
+      </div>
+      <div class="phase">
+        <svg viewBox="0 0 160 84" role="img" aria-label="Бронхиальное: короткая линия вдоха, пауза и длинная более толстая линия выдоха">
+          <line class="axis" x1="8" y1="72" x2="152" y2="72"/>
+          <path class="ins" stroke-width="2" d="M14 72L48 40"/>
+          <path class="exp" stroke-width="4.5" d="M62 18L146 72"/>
+          <text class="cap" x="32" y="82" text-anchor="middle">вдох</text>
+          <text class="cap" x="108" y="82" text-anchor="middle">выдох</text>
+        </svg>
+        <b>Бронхиальное</b><span>выдох громче, грубее и длиннее вдоха</span>
+      </div>
+      <div class="phase">
+        <svg viewBox="0 0 160 84" role="img" aria-label="Жёсткое: вдох и выдох одинаково громкие и длинные">
+          <line class="axis" x1="8" y1="72" x2="152" y2="72"/>
+          <path class="ins" stroke-width="4" d="M14 72L80 18"/>
+          <path class="exp" stroke-width="4" d="M80 18L146 72"/>
+          <text class="cap" x="46" y="82" text-anchor="middle">вдох</text>
+          <text class="cap" x="114" y="82" text-anchor="middle">выдох</text>
+        </svg>
+        <b>Жёсткое</b><span>усилены обе фазы, выдох слышен так же, как вдох</span>
+      </div>
+      <div class="phase">
+        <svg viewBox="0 0 160 84" role="img" aria-label="Везикулобронхиальное: вдох как у везикулярного, выдох как у бронхиального">
+          <line class="axis" x1="8" y1="72" x2="152" y2="72"/>
+          <path class="ins" stroke-width="3" d="M14 72L84 26"/>
+          <path class="exp" stroke-width="3.5" d="M92 24L146 72"/>
+          <text class="cap" x="48" y="82" text-anchor="middle">вдох</text>
+          <text class="cap" x="120" y="82" text-anchor="middle">выдох</text>
+        </svg>
+        <b>Везикуло&shy;бронхиальное</b><span>вдох — черты везикулярного, выдох — бронхиального</span>
+      </div>
+    </div>
+    <figcaption>Так эти шумы рисуют на лекции и в учебниках: синяя линия — вдох, оранжевая — выдох; длина — продолжительность, толщина — громкость. Нарисуй их сам — на занятии это отличный ответ.</figcaption>
+  </figure>
+
+  <h3>Где везикулярное дыхание слышно лучше</h3>
+  <p>Там, где под стенкой больше всего лёгочной ткани: спереди ниже II ребра латеральнее окологрудинной линии, в подмышечных областях и ниже углов лопаток. Слабее — над верхушками и в нижних отделах.</p>
+  <p><b>Нормальная разница сторон</b>, о которой спрашивают: справа выдох громче и продолжительнее, чем слева, — правый главный бронх короче и шире и лучше проводит ларинготрахеальное дыхание. Над правой верхушкой может быть везикулобронхиальное дыхание: правый верхнедолевой бронх расположен поверхностнее и горизонтальнее. Это норма, а не патология.</p>
+
+  <h3>Где в норме слышно бронхиальное дыхание</h3>
+  <ul class="facts">
+    <li>над гортанью;</li>
+    <li>над трахеей;</li>
+    <li>в области проекции бифуркации трахеи: <b>спереди — над рукояткой грудины</b>, <b>сзади — в межлопаточном пространстве на уровне III и IV грудных позвонков</b>.</li>
+  </ul>
+  <div class="say"><span class="lbl">Как сказать на паре</span>
+    <p>«Везикулярное дыхание возникает в альвеолах в результате колебания их эластических элементов в момент наполнения воздухом во время вдоха. Это мягкий дующий шум, напоминающий звук „ф“, который выслушивается на протяжении всего вдоха и в первой трети выдоха. В норме выслушивается над всей поверхностью лёгких».</p>
+    <p>«Бронхиальное, или ларинготрахеальное, дыхание возникает в гортани при прохождении воздуха через голосовую щель. Напоминает звук „х“, выслушивается на вдохе и на выдохе, причём выдох громче и продолжительнее. В норме слышно над гортанью, трахеей, рукояткой грудины и в межлопаточном пространстве на уровне III–IV грудных позвонков».</p>
+  </div>
+</section>
+
+<section id="vezik">
+  <div class="sec-head"><h2>Изменения везикулярного дыхания</h2></div>
+  <p>Везикулярное дыхание бывает ослабленным и усиленным, и каждое изменение — физиологическим или патологическим.</p>
+  <h3>Ослабление</h3>
+  <p><b>Физиологическое</b> — соотношение вдоха и выдоха не меняется, дыхание равномерно тише над всей поверхностью лёгких: толстая грудная стенка за счёт жировой клетчатки или развитых мышц.</p>
+  <p><b>Патологическое</b> — дыхание тише и короче, местами может не выслушиваться. Причины из лекции удобно разложить по механизму — так их легко вспомнить на ходу:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Что случилось</th><th>Примеры</th></tr></thead>
+    <tbody>
+      <tr><td>Альвеол мало или они потеряли эластичность</td><td>эмфизема лёгких</td></tr>
+      <tr><td>Стенки альвеол набухли и плохо колеблются</td><td>начальная стадия крупозной пневмонии</td></tr>
+      <tr><td>Воздух не доходит до альвеол</td><td>сужение дыхательных путей опухолью или инородным телом; обтурационный ателектаз (бронх закрыт полностью — дыхание не слышно)</td></tr>
+      <tr><td>Лёгкое плохо расправляется: больно или нет сил дышать</td><td>воспаление дыхательных мышц, межрёберных нервов, перелом рёбер, резкая слабость больного</td></tr>
+      <tr><td>Звук не доходит до уха</td><td>утолщение плевральных листков; гидроторакс; пневмоторакс</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Усиление</h3>
+  <p><b>Физиологическое:</b> тонкая грудная клетка (слабо развиты мышцы или подкожная клетчатка); тяжёлая физическая работа; детский возраст — тонкая грудная клетка и высокая эластичность лёгких дают громкое <b>пуэрильное</b> дыхание <i class="lat">(puer — мальчик)</i>.</p>
+  <p><b>Патологическое</b> бывает двух видов:</p>
+  <ul class="facts">
+    <li><b>Усиление выдоха</b> — выдох становится громче и длиннее при сужении мелких бронхов: воспалительный отёк слизистой или бронхоспазм.</li>
+    <li><b>Усиление в обе фазы — жёсткое дыхание</b>, характерно для бронхитов. Слизистая бронхов неравномерно отёчна, просвет неровный — дыхание грубое, выдох слышен так же хорошо, как вдох.</li>
+  </ul>
+
+  <h3>Саккадированное дыхание</h3>
+  <p>Вдох состоит из коротких прерывистых вдохов с паузами между ними. Причина — неравномерное сокращение дыхательных мышц: нервная дрожь, выслушивание в холодном помещении, патология дыхательных мышц; или затруднённое прохождение воздуха из бронхиол в альвеолы (бронхиолит).</p>
+
+  <div class="warn"><strong class="t">Не перепутай:</strong> жёсткое дыхание — это изменённое <b>везикулярное</b> (оно рождается в альвеолах, просто стало грубым из-за бронхита). Бронхиальное дыхание рождается в гортани и над лёгкими в норме не слышно. «Жёсткое» и «бронхиальное» — разные ответы.</div>
+</section>
+
+<section id="bronh">
+  <div class="sec-head"><h2>Патологическое бронхиальное дыхание</h2><span class="key">★ главное</span></div>
+  <p>Это бронхиальное дыхание там, где должно быть везикулярное, — вместо него или вместе с ним. Логика простая: звук из гортани в норме гасится воздушным лёгким. Если лёгочная ткань стала плотной, а бронх остался проходимым, плотная ткань хорошо проводит звук — и мы слышим гортань через грудную стенку.</p>
+  <p><b>Причины</b> (лекция): заполнение альвеол экссудатом при крупозной пневмонии; заполнение альвеол кровью при инфаркте лёгкого; сдавление альвеол плевральной жидкостью; пневмосклероз; карнификация доли лёгкого; полость в лёгком (абсцесс, каверна), свободная от содержимого и сообщающаяся с бронхом.</p>
+  <h3>Разновидности (по лекции)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Вид</th><th>Какой звук</th><th>Когда</th></tr></thead>
+    <tbody>
+      <tr><td><b>Громкое</b></td><td>под самым ухом, высокий тембр</td><td>массивное поверхностное уплотнение — крупозная пневмония в стадии «опеченения»</td></tr>
+      <tr><td><b>Тихое</b></td><td>в глубине грудной клетки, ниже тембр, тише</td><td>уплотнение сегмента или его части в глубине ткани — очаговая пневмония</td></tr>
+      <tr><td><b>Типа «эхо»</b></td><td>очень тихое, очень низкое, как слабое эхо издалека</td><td>компрессионный ателектаз</td></tr>
+      <tr><td><b>Амфорическое</b> <i class="lat">(amphora — сосуд)</i></td><td>как если сильно дуть над горлом пустой бутылки</td><td>гладкостенная полость не менее 5–6 см в диаметре, сообщающаяся с крупным бронхом; к низкому тону добавляются высокие обертоны от резонанса</td></tr>
+      <tr><td><b>Металлическое</b></td><td>очень громкое, очень высокого тембра</td><td>открытый пневмоторакс</td></tr>
+      <tr><td><b>Стенотическое</b></td><td>усиленное бронхиальное</td><td>сужение трахеи или крупного бронха опухолью; слышно в местах физиологического бронхиального дыхания</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Везикулобронхиальное (смешанное)</b>: вдох с чертами везикулярного, выдох — бронхиального. Бывает при глубоко расположенных очагах уплотнения, на значительном расстоянии от поверхности: очаговая пневмония, туберкулёз лёгких, пневмосклероз.</p>
+
+  <h3>Стридорозное дыхание</h3>
+  <p>На лекции этот термин прозвучал вместе со слайдом о стенотическом дыхании. <b>Стридор</b> — громкое, свистящее, «хрипящее» дыхание, которое слышно на расстоянии, без фонендоскопа. Возникает при сужении гортани, трахеи или крупного бронха: отёк гортани, опухоль, инородное тело, сдавление трахеи извне, например зобом. При сужении верхних дыхательных путей затруднён прежде всего вдох — одышка инспираторная.</p>
+  <div class="listen">
+    <div class="lh"><b>Послушать:</b> стридор на вдохе и выдохе</div>
+    <audio controls preload="none" src="audio/stridor.mp3"></audio>
+    <p class="src">Запись электронным стетоскопом. James Heilman, MD, обработка Natural Philo · Wikimedia Commons · CC BY-SA 3.0</p>
+  </div>
+</section>
+
+<section id="pobochnye">
+  <div class="sec-head"><h2>Побочные дыхательные шумы</h2><span class="skill">навык № 36</span></div>
+  <p>Побочные (дополнительные) шумы накладываются на основной дыхательный шум. В норме их нет. Классификация со слайда лекции:</p>
+  <div class="tree">
+    <ul>
+      <li><b>Хрипы</b> <i class="lat">(rhonchi)</i>
+        <ul>
+          <li><b>сухие</b>
+            <ul>
+              <li>высокие, дискантовые, свистящие <i class="lat">(rhonchi sibilantes)</i></li>
+              <li>низкие, басовые, жужжащие, гудящие <i class="lat">(rhonchi sonori)</i></li>
+            </ul>
+          </li>
+          <li><b>влажные</b>: мелкопузырчатые, среднепузырчатые, крупнопузырчатые; звучные и незвучные</li>
+        </ul>
+      </li>
+      <li><b>Крепитация</b> <i class="lat">(crepitatio)</i></li>
+      <li><b>Шум трения плевры</b></li>
+      <li><b>Шум падающей капли</b></li>
+      <li><b>Шум плеска Гиппократа</b></li>
+    </ul>
+  </div>
+  <p class="qnote" style="font-size:.86rem;color:var(--muted)">На одном слайде лекции слово «свистящие» попало в группу низких хрипов — это опечатка: на следующем слайде и в учебнике свистящие — высокие хрипы мелких бронхов.</p>
+
+  <h3>Где какой звук рождается</h3>
+  <p>Главная картинка темы. Пройди по дыхательным путям сверху вниз:</p>
+  <ol class="ladder">
+    <li><b>Гортань и трахея</b><span>бронхиальное (ларинготрахеальное) дыхание; при сужении — стенотическое дыхание и стридор</span></li>
+    <li><b>Крупные и средние бронхи</b><span>низкие (басовые, жужжащие) сухие хрипы; крупно- и среднепузырчатые влажные хрипы</span></li>
+    <li><b>Мелкие бронхи и бронхиолы</b><span>высокие (свистящие) сухие хрипы; мелкопузырчатые влажные хрипы</span></li>
+    <li><b>Альвеолы</b><span>везикулярное дыхание в норме; крепитация при патологии</span></li>
+    <li><b>Полость в лёгком</b><span>крупнопузырчатые звучные влажные хрипы, амфорическое дыхание</span></li>
+    <li><b>Плевра</b><span>шум трения плевры; у сердца — плевроперикардиальный шум; жидкость и воздух в полости — шум плеска Гиппократа</span></li>
+  </ol>
+
+  <h3>Хрипы: общее</h3>
+  <ul class="facts">
+    <li>Формируются в трахее, бронхах, полости лёгкого.</li>
+    <li>Выслушиваются и на вдохе, и на выдохе.</li>
+    <li><b>Изменяются или исчезают после покашливания</b> — мокрота смещается.</li>
+  </ul>
+
+  <h3>Сухие хрипы</h3>
+  <p><b>Возникают при сужении просвета бронхов</b>: тотальном (бронхиальная астма), неравномерном (бронхит), очаговом (опухоль, туберкулёз). Сужение вызывают спазм гладких мышц бронхов, набухание и отёк слизистой при воспалении, скопление вязкой мокроты в виде нитей. Воздух с завихрениями проходит через суженный просвет, нити мокроты колеблются, как струны.</p>
+  <ul class="facts">
+    <li><b>Свистящие</b> <i class="lat">(rhonchi sibilantes)</i> — высокие, дискантовые; при поражении <b>мелких</b> бронхов.</li>
+    <li><b>Жужжащие, гудящие</b> <i class="lat">(rhonchi sonori)</i> — низкие, басовые; при поражении бронхов <b>среднего и крупного</b> калибра. Правило: чем уже бронх, тем выше звук.</li>
+    <li><b>Дистанционные хрипы</b> — во время приступа бронхиальной астмы масса свистящих и жужжащих хрипов слышна на расстоянии от больного.</li>
+  </ul>
+  <div class="listen">
+    <div class="lh"><b>Послушать:</b> сухие свистящие хрипы (англ. wheeze)</div>
+    <audio controls preload="none" src="audio/svistyashchie-hripy.mp3"></audio>
+    <p class="src">James Heilman, MD, шумоподавление Natural Philo · Wikimedia Commons · CC BY-SA 3.0</p>
+  </div>
+
+  <h3>Влажные хрипы</h3>
+  <p><b>Возникают</b> при скоплении в бронхах жидкого секрета: мокроты, крови, отёчной жидкости. <b>Напоминают</b> звук лопающихся пузырьков: воздух проходит через слой жидкости пузырьками. <b>Выслушиваются</b> в обе фазы, <b>лучше — на вдохе</b>, потому что скорость воздуха выше.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>По калибру</th><th>Где образуются</th></tr></thead>
+    <tbody>
+      <tr><td>Мелкопузырчатые</td><td>мелкие бронхи</td></tr>
+      <tr><td>Среднепузырчатые</td><td>бронхи среднего калибра</td></tr>
+      <tr><td>Крупнопузырчатые</td><td>крупные бронхи, бронхоэктазы, полости в лёгком</td></tr>
+    </tbody>
+  </table></div>
+  <p>При полости и сегментарных бронхоэктазах хрипы слышны <b>на ограниченном участке</b>; при хроническом бронхите и застое в лёгких — <b>над всей поверхностью</b>, с двух сторон (так на лекции). При застое они сначала появляются в нижних, особенно задних отделах и поднимаются выше, когда застой нарастает.</p>
+  <div class="cards">
+    <div class="card">
+      <h4>Звучные (консонирующие)</h4>
+      <p>Слышны под самым ухом. Бывают, когда вокруг бронха <b>уплотнённая безвоздушная ткань</b> (пневмония) или когда есть <b>гладкостенная полость с уплотнённым валиком</b> вокруг. Плотная ткань проводит и резонирует звук.</p>
+    </div>
+    <div class="card">
+      <h4>Незвучные (неконсонирующие)</h4>
+      <p>Слышны в глубине. Жидкий секрет в бронхах, а <b>ткань вокруг не уплотнена</b> (бронхит, застой). Звук глушит «воздушная подушка» лёгкого вокруг бронхов.</p>
+    </div>
+  </div>
+
+  <h3>Крепитация</h3>
+  <ul class="facts">
+    <li><b>Возникает в альвеолах</b>, когда в их просвете немного жидкого секрета.</li>
+    <li><b>Механизм:</b> на выдохе стенки альвеол слипаются, а в конце вдоха, когда давление воздуха максимально, разлипаются.</li>
+    <li><b>Слышна только в конце вдоха</b> — «вспышкой» множественного потрескивания. Похожа на потрескивание соли в огне; в учебниках — на треск при растирании пучка волос у уха.</li>
+    <li><b>Не меняется после кашля</b> — в альвеолах нечего откашливать.</li>
+  </ul>
+  <p><b>Характерна для</b> (лекция): начальной и конечной стадии пневмонии <i class="lat">(crepitatio indux и crepitatio redux)</i>; инфильтративного туберкулёза; застоя в лёгких; компрессионного ателектаза; снижения эластичности лёгких у пожилых — при первых вдохах после горизонтального положения, потом исчезает.</p>
+  <div class="listen">
+    <div class="lh"><b>Послушать:</b> потрескивания при пневмонии</div>
+    <audio controls preload="none" src="audio/krepitaciya-pnevmoniya.mp3"></audio>
+    <p class="src">James Heilman, MD · Wikimedia Commons · CC BY-SA 3.0</p>
+  </div>
+  <div class="listen">
+    <div class="lh"><b>Послушать:</b> крепитация при лёгочном фиброзе — «треск застёжки-липучки»</div>
+    <audio controls preload="none" src="audio/krepitaciya-fibroz.mp3"></audio>
+    <p class="src">IPFeditor · Wikimedia Commons · CC BY-SA 3.0</p>
+  </div>
+  <p class="qnote" style="font-size:.86rem;color:var(--muted)">В англоязычной медицине крепитацию и влажные хрипы называют одним словом crackles, поэтому подписи к записям — примерные. Звуки лучше слушать в наушниках.</p>
+
+  <h3>Шум трения плевры</h3>
+  <p><b>Условия появления</b> (лекция): шероховатость плевральных листков — отложение фибрина при воспалении (сухой плеврит), соединительнотканные рубцы и спайки, раковое или туберкулёзное обсеменение плевры; сухость листков — обезвоживание при неукротимой рвоте, диарее, большой кровопотере.</p>
+  <ul class="facts">
+    <li>Слышен и на вдохе, и на выдохе.</li>
+    <li>Похож на шелест шёлка или бумаги, трение кожи пальцев под ухом, хруст снега, скрип кожи.</li>
+    <li>Чаще в нижнебоковых отделах — там лёгкие больше всего смещаются при дыхании.</li>
+    <li>Может определяться пальпаторно; нередко сопровождается выраженной болью при дыхании.</li>
+    <li>Усиливается при надавливании фонендоскопом и не меняется после кашля.</li>
+  </ul>
+
+  <h3>Редкие шумы</h3>
+  <ul class="facts">
+    <li><b>Плевроперикардиальный шум</b> — при воспалении плевры рядом с сердцем: слышен на вдохе и выдохе, в систолу и диастолу, усиливается на высоте глубокого вдоха.</li>
+    <li><b>Шум плеска Гиппократа</b> <i class="lat">(succussio Hippocratis)</i> — при гидропневмотораксе (в плевральной полости жидкость и воздух). Определяют непосредственной аускультацией: ухо к грудной клетке над жидкостью и быстро встряхнуть больного. Иногда плеск при резких поворотах ощущает сам больной.</li>
+    <li><b>Шум падающей капли</b> — звонкий звук падения капли жидкости со свода в большой полости или в плевральной полости, где есть жидкость и воздух (гидропневмоторакс), обычно когда больной меняет положение.</li>
+  </ul>
+
+  <h3>Таблица кафедры: побочные шумы</h3>
+  <p>Сжатая версия таблицы из «Дополнительных материалов» кафедры; опечатки оригинала исправлены.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Шум</th><th>Звук</th><th>Где</th><th>Условия</th><th>При чём</th></tr></thead>
+    <tbody>
+      <tr><td>Сухие басовые</td><td>низкие, гудящие, жужжащие, протяжные; вдох и выдох</td><td>трахея, крупные и средние бронхи</td><td>нити, перемычки, тяжи вязкой мокроты</td><td>трахеит, бронхит</td></tr>
+      <tr><td>Сухие дискантовые</td><td>высокие, свистящие, протяжные; вдох и выдох</td><td>мелкие бронхи</td><td>вязкая мокрота, сужение бронхов отёком слизистой и бронхоспазмом</td><td>бронхиальная астма, бронхиолит</td></tr>
+      <tr><td>Влажные крупнопузырчатые</td><td>приглушённые, как лопаются крупные пузырьки; вдох и выдох</td><td>трахея, крупные бронхи</td><td>жидкий секрет: жидкая мокрота, транссудат, кровь</td><td>отёк лёгких, лёгочное кровотечение</td></tr>
+      <tr><td>Влажные крупнопузырчатые звучные</td><td>очень громкие, крупные пузырьки</td><td>крупные полости, соединённые с бронхом</td><td>в полости жидкий секрет, гной, кровь и воздух</td><td>абсцесс лёгкого, каверна</td></tr>
+      <tr><td>Влажные среднепузырчатые</td><td>как лопаются пузырьки среднего размера</td><td>бронхи среднего калибра, бронхоэктазы</td><td>гной, кровь в бронхах и бронхоэктазах</td><td>бронхоэктатическая болезнь, реже бронхит</td></tr>
+      <tr><td>Влажные мелкопузырчатые незвучные</td><td>приглушённые, мелкие пузырьки</td><td>мелкие бронхи, бронхиолы</td><td>жидкая мокрота; ткань вокруг мало изменена</td><td>застой в малом круге, реже бронхит</td></tr>
+      <tr><td>Влажные мелкопузырчатые звучные</td><td>очень громкие, мелкие пузырьки</td><td>мелкие бронхи, бронхиолы</td><td>жидкая мокрота; вокруг уплотнённая ткань</td><td>бронхопневмония</td></tr>
+      <tr><td>Крепитация</td><td>однообразное потрескивание на высоте глубокого вдоха</td><td>альвеолы</td><td>стенки альвеол слипаются; в них немного экссудата, транссудата или крови</td><td>I стадия крупозной пневмонии, компрессионный ателектаз, инфаркт лёгкого</td></tr>
+      <tr><td>Шум трения плевры</td><td>хруст снега, скрип кожи, шорох бумаги</td><td>листки плевры</td><td>воспаление листков, отложение фибрина</td><td>сухой плеврит, плевропневмония, реже шварты</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="otlichiya">
+  <div class="sec-head"><h2>Как отличить хрипы, крепитацию и шум трения плевры</h2><span class="key">★ спросят наверняка</span></div>
+  <p>Все три шума могут звучать похоже, особенно мелкопузырчатые хрипы и крепитация. Поэтому есть четыре приёма. Таблица — с лекции и из таблиц кафедры:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Признак</th><th>Хрипы</th><th>Крепитация</th><th>Шум трения плевры</th></tr></thead>
+    <tbody>
+      <tr><td>Фаза дыхания</td><td>вдох и выдох</td><td><b>только на высоте вдоха</b></td><td>вдох и выдох</td></tr>
+      <tr><td>После покашливания</td><td><b>изменяются</b> или исчезают</td><td>не изменяется</td><td>не изменяется</td></tr>
+      <tr><td>Характер звука</td><td>разнообразные</td><td>однообразные</td><td>разнообразные</td></tr>
+      <tr><td>Сильное надавливание фонендоскопом</td><td>не меняются</td><td>не меняется</td><td><b>усиливается</b></td></tr>
+      <tr><td>Проба Вотчала</td><td>не слышны</td><td>не слышна</td><td><b>слышен</b></td></tr>
+    </tbody>
+  </table></div>
+  <h3>Как делать каждый приём</h3>
+  <ol class="steps">
+    <li><b>Кашель.</b> Попроси больного покашлять и послушай ту же точку. Мокрота в бронхах сместилась — хрипы изменились, исчезли или появились. Крепитация и шум трения останутся прежними.</li>
+    <li><b>Фаза.</b> Проследи, когда появляется звук. Потрескивание только в конце глубокого вдоха — крепитация.</li>
+    <li><b>Надавливание.</b> Сильнее прижми фонендоскоп: листки плевры прижимаются друг к другу, трение громче. Хрипы и крепитация не меняются.</li>
+    <li><b>Проба Вотчала</b> — так её называют на лекции и в таблице кафедры; в учебниках это приём ложных дыхательных движений. Больной закрывает рот, зажимает нос и делает несколько движений животом, как при дыхании. Диафрагма двигается, листки плевры скользят и трутся, а воздух по бронхам не идёт. Шум трения плевры слышен, хрипов и крепитации нет.</li>
+  </ol>
+  <div class="say"><span class="lbl">Запоминалка</span>
+    <p><b>Кашель</b> отделяет хрипы от остальных. <b>Фаза</b> отделяет крепитацию. <b>Надавливание и проба Вотчала</b> отделяют трение плевры. Плюс по месту: хрипы — бронхи, крепитация — альвеолы, трение — плевра.</p>
+  </div>
+</section>
+
+<section id="bronhofoniya">
+  <div class="sec-head"><h2>Бронхофония</h2><span class="skill">навык № 37</span></div>
+  <p><b>Бронхофония</b> — проведение голоса с гортани по бронхам и лёгочной ткани на поверхность грудной клетки, которое оценивают аускультацией.</p>
+  <h3>Методика</h3>
+  <ol class="steps">
+    <li>Фонендоскоп ставят в те же симметричные точки, что при аускультации.</li>
+    <li>Больной <b>шёпотом</b> произносит слова с шипящими и свистящими звуками: «чашка чая», «шестьдесят шесть».</li>
+    <li>Сравнивают, как проводится речь над симметричными участками.</li>
+  </ol>
+  <ul class="facts">
+    <li><b>Норма:</b> слова неразборчивы, слышен неясный шёпот, одинаково с двух сторон.</li>
+    <li><b class="up">Усиление</b> — слова слышны отчётливо: уплотнение лёгочной ткани с проходимым бронхом (крупозная пневмония, инфаркт лёгкого), полость, сообщающаяся с бронхом, компрессионный ателектаз.</li>
+    <li><b class="down">Ослабление</b> или отсутствие: жидкость или воздух в плевральной полости (гидроторакс, пневмоторакс), обтурационный ателектаз, эмфизема, шварты.</li>
+  </ul>
+  <div class="note"><p><b>Одно правило на три метода.</b> Голосовое дрожание, бронхофония и патологическое бронхиальное дыхание меняются вместе: плотная ткань с открытым бронхом проводит звук <span class="up">лучше</span>, а жидкость или воздух между лёгким и стенкой и закрытый бронх — <span class="down">хуже</span>. Бронхофония чувствительнее голосового дрожания: помогает найти небольшие очаги уплотнения.</p></div>
+</section>
+
+<section id="sindromy">
+  <div class="sec-head"><h2>Синдромы: всё в одной таблице</h2><span class="key">★ понять, а не зубрить</span></div>
+  <p>Отдельно по одному методу диагноз не ставят. Врач складывает пальпацию, перкуссию и аускультацию в синдром. Первые два столбца — из таблиц кафедры, аускультация — по лекции и классическим учебникам пропедевтики.</p>
+  <div class="matrix"><table>
+    <thead><tr><th>Синдром</th><th>Голосовое дрожание</th><th>Перкуссия</th><th>Дыхание</th><th>Побочные шумы</th><th>Бронхофония</th></tr></thead>
+    <tbody>
+      <tr><td>Норма</td><td data-l="Голосовое дрожание">не изменено</td><td data-l="Перкуссия"><span class="snd clear">ясный лёгочный</span></td><td data-l="Дыхание">везикулярное</td><td data-l="Побочные шумы">нет</td><td data-l="Бронхофония">не изменена</td></tr>
+      <tr><td>Сужение бронхов (бронхиальная обструкция)</td><td data-l="Голосовое дрожание">не изменено</td><td data-l="Перкуссия"><span class="snd clear">ясный лёгочный</span></td><td data-l="Дыхание">жёсткое, выдох удлинён</td><td data-l="Побочные шумы">сухие хрипы; при приступе астмы — дистанционные</td><td data-l="Бронхофония">не изменена</td></tr>
+      <tr><td>Эмфизема лёгких</td><td data-l="Голосовое дрожание"><span class="down">ослаблено</span> с двух сторон</td><td data-l="Перкуссия"><span class="snd box">коробочный</span></td><td data-l="Дыхание">ослабленное везикулярное</td><td data-l="Побочные шумы">нет; сухие хрипы — если есть бронхит</td><td data-l="Бронхофония"><span class="down">ослаблена</span></td></tr>
+      <tr><td>Долевое уплотнение (крупозная пневмония, разгар)</td><td data-l="Голосовое дрожание"><span class="up">усилено</span></td><td data-l="Перкуссия"><span class="snd dull">тупой</span></td><td data-l="Дыхание">громкое бронхиальное</td><td data-l="Побочные шумы">нередко шум трения плевры</td><td data-l="Бронхофония"><span class="up">усилена</span></td></tr>
+      <tr><td>Очаговое уплотнение (очаговая пневмония)</td><td data-l="Голосовое дрожание"><span class="up">усилено</span></td><td data-l="Перкуссия"><span class="snd dull">притупление</span></td><td data-l="Дыхание">тихое бронхиальное или везикулобронхиальное</td><td data-l="Побочные шумы">звучные мелкопузырчатые влажные хрипы, крепитация</td><td data-l="Бронхофония"><span class="up">усилена</span></td></tr>
+      <tr><td>Начальная стадия воспаления (крупозная пневмония, прилив)</td><td data-l="Голосовое дрожание"><span class="up">усилено</span></td><td data-l="Перкуссия"><span class="snd blunt">притупление с тимпаническим оттенком</span></td><td data-l="Дыхание">ослабленное везикулярное</td><td data-l="Побочные шумы">крепитация <i class="lat">(indux)</i></td><td data-l="Бронхофония">усилена или не изменена</td></tr>
+      <tr><td>Полость, сообщающаяся с бронхом (абсцесс после прорыва, каверна)</td><td data-l="Голосовое дрожание"><span class="up">усилено</span></td><td data-l="Перкуссия"><span class="snd tymp">тимпанический</span></td><td data-l="Дыхание">бронхиальное; над большой гладкостенной полостью — амфорическое</td><td data-l="Побочные шумы">звучные крупнопузырчатые влажные хрипы</td><td data-l="Бронхофония"><span class="up">усилена</span></td></tr>
+      <tr><td>Компрессионный ателектаз (лёгкое поджато, бронх открыт)</td><td data-l="Голосовое дрожание"><span class="up">усилено</span></td><td data-l="Перкуссия"><span class="snd blunt">притупление с тимпаническим оттенком</span></td><td data-l="Дыхание">тихое бронхиальное — «эхо»</td><td data-l="Побочные шумы">крепитация</td><td data-l="Бронхофония"><span class="up">усилена</span></td></tr>
+      <tr><td>Обтурационный ателектаз (бронх закрыт)</td><td data-l="Голосовое дрожание"><span class="down">ослаблено</span> или нет</td><td data-l="Перкуссия"><span class="snd dull">тупой</span></td><td data-l="Дыхание">резко ослаблено или не выслушивается</td><td data-l="Побочные шумы">нет</td><td data-l="Бронхофония"><span class="down">ослаблена</span> или нет</td></tr>
+      <tr><td>Гидроторакс (жидкость в плевральной полости)</td><td data-l="Голосовое дрожание"><span class="down">ослаблено</span> или нет</td><td data-l="Перкуссия"><span class="snd dull">тупой</span></td><td data-l="Дыхание">резко ослаблено или не выслушивается</td><td data-l="Побочные шумы">нет</td><td data-l="Бронхофония"><span class="down">ослаблена</span> или нет</td></tr>
+      <tr><td>Пневмоторакс (воздух в плевральной полости)</td><td data-l="Голосовое дрожание"><span class="down">ослаблено</span> или нет</td><td data-l="Перкуссия"><span class="snd tymp">тимпанический</span></td><td data-l="Дыхание">резко ослаблено или нет; при открытом — металлическое</td><td data-l="Побочные шумы">нет</td><td data-l="Бронхофония"><span class="down">ослаблена</span></td></tr>
+      <tr><td>Фиброторакс, шварты</td><td data-l="Голосовое дрожание"><span class="down">ослаблено</span></td><td data-l="Перкуссия"><span class="snd dull">притупление</span></td><td data-l="Дыхание">ослабленное везикулярное</td><td data-l="Побочные шумы">иногда шум трения плевры</td><td data-l="Бронхофония"><span class="down">ослаблена</span></td></tr>
+      <tr><td>Сухой (фибринозный) плеврит</td><td data-l="Голосовое дрожание">не изменено</td><td data-l="Перкуссия"><span class="snd clear">ясный лёгочный</span></td><td data-l="Дыхание">ослабленное везикулярное — больной щадит больной бок</td><td data-l="Побочные шумы">шум трения плевры</td><td data-l="Бронхофония">не изменена</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><p><b>Как читать:</b> усилено всё (дрожание, бронхофония, бронхиальное дыхание) — лёгкое плотное и бронх открыт: уплотнение, полость, компрессионный ателектаз. Ослаблено всё — звук что-то гасит: жидкость, воздух, шварты или закрытый бронх. Дальше решает перкуссия: тупой звук — жидкость или безвоздушная ткань, тимпанит — воздух, коробочный — эмфизема.</p></div>
+</section>
+
+<section id="kushetka">
+  <div class="sec-head"><h2>У кушетки: что делать и говорить</h2></div>
+  <p>Если попросят показать аускультацию на одногруппнике.</p>
+  <ol class="steps">
+    <li>Представиться, объяснить, что будешь делать, попросить раздеться до пояса. Согреть руки и головку фонендоскопа.</li>
+    <li>Больной стоит или сидит. «Дышите глубоко через нос» — оценить основной дыхательный шум в симметричных точках спереди: надключичные, подключичные области, передняя поверхность.</li>
+    <li>Бока: руки за голову, подмышечные области сверху вниз.</li>
+    <li>Сзади: руки скрестить на груди — надлопаточные, межлопаточные, подлопаточные области.</li>
+    <li>Повторить, попросив дышать глубоко ртом, — ищем побочные шумы. Нашёл — «покашляйте» и послушать снова.</li>
+    <li>Бронхофония: «шёпотом: чашка чая» в тех же точках.</li>
+    <li>Вывод одной фразой (ниже).</li>
+  </ol>
+  <div class="say"><span class="lbl">Вывод вслух</span>
+    <p>«Над всей поверхностью лёгких выслушивается везикулярное дыхание, побочных дыхательных шумов нет. Бронхофония над симметричными участками одинаковая, не изменена».</p>
+  </div>
+  <h3>Запись в историю болезни</h3>
+  <div class="record">
+    <p><b>Аускультация лёгких.</b> При аускультации над всей поверхностью лёгких выслушивается везикулярное дыхание. Побочные дыхательные шумы не выслушиваются. Бронхофония над симметричными участками грудной клетки одинаковая, не изменена.</p>
+  </div>
+</section>
+
+<section id="otvety">
+  <div class="sec-head"><h2>Как отвечать и где ловушки</h2></div>
+  <p>Любой шум рассказывай по одной схеме — так ответ звучит по-учебному, даже если волнуешься:</p>
+  <ol class="steps">
+    <li><b>Определение</b> — что это.</li>
+    <li><b>Механизм</b> — где и почему возникает.</li>
+    <li><b>Как звучит и в какую фазу</b>.</li>
+    <li><b>Где в норме или при каких заболеваниях</b>.</li>
+  </ol>
+  <div class="say"><span class="lbl">Пример: крепитация</span>
+    <p>«Крепитация — побочный дыхательный шум, который возникает в альвеолах при скоплении в их просвете небольшого количества жидкого секрета. На выдохе стенки альвеол слипаются, а в конце вдоха разлипаются. Выслушивается только на высоте вдоха в виде множественного потрескивания, после кашля не изменяется. Характерна для начальной и конечной стадии пневмонии, застоя в лёгких, компрессионного ателектаза, инфильтративного туберкулёза».</p>
+  </div>
+  <div class="say"><span class="lbl">Пример: сухие хрипы</span>
+    <p>«Сухие хрипы возникают при сужении просвета бронхов — спазме гладких мышц, отёке слизистой или скоплении вязкой мокроты в виде нитей. Выслушиваются на вдохе и выдохе, изменяются после кашля. Высокие, свистящие хрипы образуются в мелких бронхах, низкие, жужжащие — в средних и крупных. Бывают при бронхиальной астме и бронхитах».</p>
+  </div>
+  <div class="say"><span class="lbl">Пример: шум трения плевры</span>
+    <p>«Шум трения плевры возникает при трении шероховатых листков плевры — при отложении фибрина, например при сухом плеврите, а также при спайках, обсеменении плевры, обезвоживании. Слышен на вдохе и выдохе, напоминает хруст снега или скрип кожи, чаще в нижнебоковых отделах. В отличие от хрипов не меняется после кашля, усиливается при надавливании фонендоскопом и сохраняется при пробе Вотчала».</p>
+  </div>
+  <h3>Ловушки</h3>
+  <div class="warn">
+    <ul>
+      <li><b>Бронхиальное дыхание над лёгкими в норме не слышно</b> — только над гортанью, трахеей, рукояткой грудины и между лопатками на уровне III–IV грудных позвонков.</li>
+      <li><b>Жёсткое ≠ бронхиальное.</b> Жёсткое — изменённое везикулярное при бронхите.</li>
+      <li><b>Крепитация — не хрип.</b> Хрипы — в бронхах, крепитация — в альвеолах.</li>
+      <li><b>Свистящие хрипы — высокие</b>, из мелких бронхов; жужжащие — низкие, из крупных.</li>
+      <li><b>Ателектазы противоположны:</b> при обтурационном бронх закрыт — дыхание не слышно, дрожание и бронхофония ослаблены; при компрессионном бронх открыт — тихое бронхиальное дыхание, дрожание и бронхофония усилены.</li>
+      <li><b>Основной шум слушают при дыхании через нос, побочные — ртом</b> (правило кафедры).</li>
+      <li>Если преподаватель даёт другую формулировку или цифру — на занятии отвечай его вариантом.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="test">
+  <div class="sec-head"><h2>Самопроверка по аускультации</h2></div>
+  <div class="quiz-bar">
+    <p>Сначала ответь вслух, потом открывай ответ.</p>
+    <button type="button" id="toggle-all">Показать все ответы</button>
+  </div>
+  <div class="qgroup">Основа</div>
+  <details class="q"><summary>Что такое аускультация и кто её предложил?</summary><div class="a"><p>Метод исследования внутренних органов, основанный на выслушивании звуковых явлений, связанных с их деятельностью. Предложил Рене Лаэннек, он же создал стетоскоп (1816).</p></div></details>
+  <details class="q"><summary>Что оценивают при аускультации лёгких?</summary><div class="a"><p>Основные дыхательные шумы, побочные дыхательные шумы и бронхофонию.</p></div></details>
+  <details class="q"><summary>Назови правила аускультации.</summary><div class="a"><p>Тишина; тепло (помещение, руки, фонендоскоп); больной стоит или сидит, его придерживают свободной рукой; в каждой точке слушают весь вдох и весь выдох; основной шум — при дыхании через нос, побочные — при дыхании ртом; сравнивают симметричные точки.</p></div></details>
+  <details class="q"><summary>В каких точках выслушивают лёгкие?</summary><div class="a"><p>В симметричных: надключичные, подключичные области, передние поверхности, надлопаточные, межлопаточные, подлопаточные и подмышечные области сверху вниз.</p></div></details>
+  <div class="qgroup">Основные шумы</div>
+  <details class="q"><summary>Какие бывают основные дыхательные шумы?</summary><div class="a"><p>Везикулярное и бронхиальное дыхание; смешанное — везикулобронхиальное.</p></div></details>
+  <details class="q"><summary>Как возникает везикулярное дыхание, на что похоже, в какие фазы слышно?</summary><div class="a"><p>Колебание эластических элементов альвеол при наполнении воздухом на вдохе. Мягкий дующий шум, как звук «ф». Слышно весь вдох, нарастая, и первую треть выдоха.</p></div></details>
+  <details class="q"><summary>Как возникает бронхиальное дыхание и где в норме слышно?</summary><div class="a"><p>Завихрения воздуха при прохождении через голосовую щель в гортани. Звук «х», выдох громче и длиннее вдоха. В норме — над гортанью, трахеей, рукояткой грудины, в межлопаточном пространстве на уровне III–IV грудных позвонков.</p></div></details>
+  <details class="q"><summary>Почему справа выдох громче, а над правой верхушкой может быть смешанное дыхание?</summary><div class="a"><p>Правый главный бронх короче и шире — лучше проводит ларинготрахеальное дыхание; правый верхнедолевой бронх расположен поверхностнее и горизонтальнее. Это вариант нормы.</p></div></details>
+  <details class="q"><summary>Причины патологического ослабления везикулярного дыхания?</summary><div class="a"><p>Эмфизема; набухание стенок альвеол (начальная стадия крупозной пневмонии); сужение дыхательных путей опухолью или инородным телом, обтурационный ателектаз; боль или слабость (миозит, межрёберная невралгия, перелом рёбер, резкая слабость); утолщение плевры, гидроторакс, пневмоторакс.</p></div></details>
+  <details class="q"><summary>Что такое пуэрильное дыхание?</summary><div class="a"><p>Физиологически усиленное везикулярное дыхание у детей: тонкая грудная клетка и высокая эластичность лёгких.</p></div></details>
+  <details class="q"><summary>Что такое жёсткое дыхание и когда бывает?</summary><div class="a"><p>Везикулярное дыхание, усиленное в обе фазы: грубое, выдох слышен так же, как вдох. Характерно для бронхитов (неравномерное сужение бронхов отёком слизистой).</p></div></details>
+  <details class="q"><summary>Что такое саккадированное дыхание?</summary><div class="a"><p>Прерывистый вдох из коротких вдохов с паузами. Неравномерное сокращение дыхательных мышц (нервная дрожь, холодное помещение, патология мышц) или затруднённый проход воздуха из бронхиол в альвеолы (бронхиолит).</p></div></details>
+  <details class="q"><summary>При каком условии над лёгким появляется бронхиальное дыхание?</summary><div class="a"><p>Лёгочная ткань уплотнена (экссудат, кровь, сдавление, склероз) при проходимом бронхе, или есть пустая полость, сообщающаяся с бронхом. Плотная ткань проводит звук из гортани к грудной стенке.</p></div></details>
+  <details class="q"><summary>Назови разновидности патологического бронхиального дыхания и когда каждая бывает.</summary><div class="a"><p>Громкое — крупозная пневмония, стадия опеченения; тихое — очаговая пневмония; «эхо» — компрессионный ателектаз; амфорическое — гладкостенная полость ≥ 5–6 см, сообщающаяся с крупным бронхом; металлическое — открытый пневмоторакс; стенотическое — сужение трахеи или крупного бронха опухолью.</p></div></details>
+  <details class="q"><summary>Что такое везикулобронхиальное дыхание?</summary><div class="a"><p>Смешанное: вдох как у везикулярного, выдох как у бронхиального. При глубоко расположенных очагах уплотнения: очаговая пневмония, туберкулёз, пневмосклероз.</p></div></details>
+  <div class="qgroup">Побочные шумы</div>
+  <details class="q"><summary>Классификация побочных дыхательных шумов?</summary><div class="a"><p>Хрипы (сухие: высокие свистящие и низкие жужжащие; влажные: мелко-, средне-, крупнопузырчатые, звучные и незвучные), крепитация, шум трения плевры, шум падающей капли, шум плеска Гиппократа.</p></div></details>
+  <details class="q"><summary>Механизм сухих хрипов? Чем отличаются высокие и низкие?</summary><div class="a"><p>Сужение просвета бронхов: спазм, отёк слизистой, вязкая мокрота-нити. Высокие (свистящие) — мелкие бронхи; низкие (жужжащие, гудящие) — средние и крупные.</p></div></details>
+  <details class="q"><summary>Что такое дистанционные хрипы?</summary><div class="a"><p>Сухие хрипы, слышные на расстоянии от больного, — во время приступа бронхиальной астмы.</p></div></details>
+  <details class="q"><summary>Механизм влажных хрипов, в какую фазу лучше слышны?</summary><div class="a"><p>Жидкий секрет в бронхах (мокрота, кровь, отёчная жидкость); воздух проходит через жидкость пузырьками, они лопаются. Обе фазы, лучше на вдохе — выше скорость воздуха.</p></div></details>
+  <details class="q"><summary>Когда влажные хрипы звучные, а когда незвучные?</summary><div class="a"><p>Звучные — вокруг бронха уплотнённая ткань (пневмония) или гладкостенная полость с уплотнённым валиком. Незвучные — ткань вокруг воздушная (бронхит, застой), звук гасит «воздушная подушка».</p></div></details>
+  <details class="q"><summary>Как возникает крепитация и когда слышна?</summary><div class="a"><p>В альвеолах с небольшим количеством жидкого секрета: на выдохе стенки слипаются, в конце вдоха разлипаются. Только в конце вдоха, после кашля не меняется.</p></div></details>
+  <details class="q"><summary>При каких состояниях бывает крепитация?</summary><div class="a"><p>Начальная и конечная стадии пневмонии, инфильтративный туберкулёз, застой в лёгких, компрессионный ателектаз, у пожилых — при первых вдохах после горизонтального положения.</p></div></details>
+  <details class="q"><summary>Причины и свойства шума трения плевры?</summary><div class="a"><p>Шероховатость листков (фибрин при сухом плеврите, рубцы, спайки, обсеменение плевры) или их сухость (обезвоживание). Вдох и выдох; хруст снега, скрип кожи; нижнебоковые отделы; бывает боль; усиливается при надавливании.</p></div></details>
+  <details class="q"><summary>Как отличить хрипы, крепитацию и шум трения плевры?</summary><div class="a"><p>Хрипы меняются после кашля. Крепитация — только на высоте вдоха. Шум трения усиливается при надавливании фонендоскопом и слышен при пробе Вотчала.</p></div></details>
+  <details class="q"><summary>Что такое проба Вотчала?</summary><div class="a"><p>Ложные дыхательные движения: больной закрывает рот, зажимает нос и двигает животом. Воздух по бронхам не идёт, а листки плевры скользят — слышен только шум трения плевры.</p></div></details>
+  <details class="q"><summary>Плевроперикардиальный шум и шум плеска Гиппократа — что это?</summary><div class="a"><p>Плевроперикардиальный — при воспалении плевры у сердца: в систолу и диастолу, на вдохе и выдохе, усиливается на глубоком вдохе. Плеск Гиппократа — при гидропневмотораксе, ухом к грудной клетке при встряхивании больного.</p></div></details>
+  <details class="q"><summary>Бронхофония: методика, норма, изменения?</summary><div class="a"><p>Шёпотом «чашка чая», «шестьдесят шесть» в симметричных точках. Норма — неразборчиво, одинаково. Усилена — уплотнение, полость, компрессионный ателектаз. Ослаблена — жидкость или воздух в плевре, обтурационный ателектаз, эмфизема.</p></div></details>
+  <div class="qgroup">Задачи по синдромам</div>
+  <details class="q"><summary>Тупой звук, дрожание и бронхофония усилены, громкое бронхиальное дыхание.</summary><div class="a"><p>Долевое уплотнение — крупозная пневмония в стадии разгара.</p></div></details>
+  <details class="q"><summary>Тупой звук, дрожание ослаблено, дыхание не выслушивается.</summary><div class="a"><p>Гидроторакс или обтурационный ателектаз (а также шварты при ослабленном дыхании).</p></div></details>
+  <details class="q"><summary>Тимпанит, дрожание ослаблено, дыхание резко ослаблено.</summary><div class="a"><p>Пневмоторакс.</p></div></details>
+  <details class="q"><summary>Тимпанит, дрожание усилено, амфорическое дыхание, звучные крупнопузырчатые хрипы.</summary><div class="a"><p>Полость в лёгком, сообщающаяся с бронхом (абсцесс после прорыва, каверна).</p></div></details>
+  <details class="q"><summary>Коробочный звук с двух сторон, дрожание ослаблено, ослабленное везикулярное дыхание.</summary><div class="a"><p>Эмфизема лёгких.</p></div></details>
+  <details class="q"><summary>Ясный лёгочный звук, жёсткое дыхание с удлинённым выдохом, сухие свистящие хрипы.</summary><div class="a"><p>Сужение бронхов — бронхиальная обструкция (бронхиальная астма, обструктивный бронхит).</p></div></details>
+</section>
+
+<section id="palpaciya">
+  <div class="sec-head"><h2>Хвост 1: осмотр и пальпация</h2><span class="skill">занятие 3 · навыки № 24–26</span></div>
+  <p>Сжато — то, что нужно для аускультации и коллоквиума. Источник — презентация кафедры «Исследование больных с заболеваниями органов дыхания».</p>
+  <h3>Осмотр грудной клетки</h3>
+  <ul class="facts">
+    <li><b>Нормальные формы:</b> коническая (нормостеническая: эпигастральный угол около 90°), астеническая (узкая, длинная, угол меньше 90°, лопатки отстают), гиперстеническая (цилиндрическая, угол больше 90°).</li>
+    <li><b>Патологические формы:</b> эмфизематозная (бочкообразная), паралитическая, рахитическая («куриная», килевидная, «рахитические чётки»), воронкообразная, ладьевидная (сирингомиелия), кифосколиотическая.</li>
+    <li><b>Асимметрия:</b> увеличение половины — выпот в плевральную полость, пневмоторакс; уменьшение — спайки, пневмосклероз, после удаления лёгкого, ателектаз.</li>
+    <li><b>Типы дыхания:</b> грудной (чаще у женщин), брюшной (чаще у мужчин), смешанный (у пожилых и при патологии).</li>
+    <li><b>ЧДД у взрослого — 12–20 в минуту.</b> Больше 20 — тахипноэ, меньше 12 — брадипноэ. Считают незаметно для больного, после пульса.</li>
+    <li><b>Патологические типы дыхания:</b> <b>Чейна–Стокса</b> — дыхание нарастает по глубине до 5–7-го вдоха, затем угасает, пауза до минуты; <b>Биота</b> — ровные дыхательные движения чередуются с длинными паузами (до полуминуты и дольше); <b>Куссмауля</b> — большое шумное дыхание: редкие глубокие шумные вдохи, слышны на расстоянии (в учебнике — при глубокой коме: диабетической, уремической, печёночной; на слайде кафедры — «терминальные состояния»); <b>Грокка</b> — «волнообразное», как Чейна–Стокса, но вместо паузы — слабое поверхностное дыхание.</li>
+    <li><b>Окружность грудной клетки</b> — лентой на уровне IV ребра спереди и углов лопаток сзади. По слайду кафедры на вдохе она на 8–12 см больше, чем на выдохе; в учебниках чаще 6–8 см. На занятии называй цифру кафедры.</li>
+  </ul>
+  <h3>Пальпация грудной клетки</h3>
+  <p><b>Что определяют</b> (презентация): ширину эпигастрального угла; резистентность — эластичная, резистентная, ригидная; болезненность мышц, рёбер, межреберий; отёчность кожи; подкожную крепитацию; трение плевры; плеск жидкости в плевральной полости; крепитацию отломков рёбер; <b>голосовое дрожание</b>.</p>
+  <p><b>Резистентность</b> — сопротивление грудной клетки сдавлению. Сдавливают ладонями спереди назад (одна на грудине, другая на спине) и с боков. В норме грудная клетка эластичная, податливая; ригидной становится при эмфиземе, у пожилых (окостенение хрящей), при большом плевральном выпоте.</p>
+  <h3>Голосовое дрожание</h3>
+  <p>Ладони кладут на симметричные участки; больной громко, низким голосом повторяет слова со звуком «р» — «тридцать три», «раз-два-три». Сравнивают вибрацию под ладонями справа и слева. Точки — как при аускультации: над ключицами, под ключицами, по подмышечным линиям, над лопатками, в межлопаточной области, под лопатками.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Голосовое дрожание</th><th>Синдромы (таблица кафедры)</th></tr></thead>
+    <tbody>
+      <tr><td>Не изменено</td><td>норма; сужение бронхов</td></tr>
+      <tr><td><span class="down">Ослаблено</span> на стороне поражения</td><td>гидроторакс; обтурационный ателектаз; фиброторакс, шварты; пневмоторакс</td></tr>
+      <tr><td><span class="up">Усилено</span> на стороне поражения</td><td>полость, сообщающаяся с бронхом; долевое уплотнение; очаговое уплотнение; компрессионный ателектаз</td></tr>
+      <tr><td>Ослаблено симметрично с двух сторон</td><td>эмфизема лёгких</td></tr>
+    </tbody>
+  </table></div>
+  <p>Физиологически дрожание <b>сильнее</b> при низком голосе (у мужчин) и тонкой грудной стенке, <b>слабее</b> — при высоком голосе (у женщин и детей), ожирении, развитых мышцах, тихом голосе.</p>
+</section>
+
+<section id="perkussiya">
+  <div class="sec-head"><h2>Хвост 2: перкуссия</h2><span class="skill">занятие 4 · навыки № 27–34</span></div>
+  <p>Самое нужное. Подробно, со схемами и техникой — в <a href="perkussiya.html" target="_blank" rel="noopener">конспекте «Перкуссия лёгких»</a>.</p>
+  <ul class="facts">
+    <li><b>Перкуссия</b> — выстукивание участков тела с оценкой звука: по нему судят о воздушности тканей и о границах органов.</li>
+    <li><b>Основной способ</b> — пальце-пальцевая: средний палец левой руки (плессиметр) плотно прижат, средним пальцем правой руки — короткий удар по его средней фаланге, движение только в лучезапястном суставе.</li>
+    <li><b>Звуки:</b> <span class="snd clear">ясный лёгочный</span> — громкий, низкий, продолжительный (норма над лёгкими); <span class="snd dull">тупой</span> — тихий, высокий, короткий (жидкость, безвоздушная ткань); <span class="snd tymp">тимпанический</span> — полость с газом; <span class="snd box">коробочный</span> — эмфизема; <span class="snd blunt">притупление с тимпаническим оттенком</span> — начальная стадия воспаления, компрессионный ателектаз.</li>
+    <li><b>Сравнительная</b> (громкая) — одинаков ли звук в симметричных точках. Спереди: надключичные ямки → ключицы (непосредственная перкуссия) → I и II межреберья по среднеключичным линиям (в части пособий — до III), ниже слева мешает сердце; бока — руки на затылке; сзади — руки скрещены: надлопаточные, межлопаточные, подлопаточные области.</li>
+    <li><b>Топографическая</b> (тихая) — где граница: палец параллельно границе, от ясного звука к тупому, отметка по краю пальца со стороны ясного звука.</li>
+  </ul>
+  <div class="tiles">
+    <div class="tile"><b>3–4 см</b><span>над ключицей — верхушка спереди</span></div>
+    <div class="tile"><b>C<sub>VII</sub></b><span>остистый отросток VII шейного позвонка — верхушка сзади</span></div>
+    <div class="tile"><b>5–6 см</b><span>ширина полей Кренига (колебания 3,5–8 см)</span></div>
+    <div class="tile"><b>6–8 см</b><span>подвижность нижнего края по средней подмышечной линии</span></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Линия</th><th>Правое лёгкое</th><th>Левое лёгкое</th></tr></thead>
+    <tbody>
+      <tr><td>Окологрудинная</td><td class="num">V межреберье</td><td class="num">—</td></tr>
+      <tr><td>Среднеключичная</td><td class="num">VI ребро</td><td class="num">—</td></tr>
+      <tr><td>Передняя подмышечная</td><td class="num">VII ребро</td><td class="num">VII ребро</td></tr>
+      <tr><td>Средняя подмышечная</td><td class="num">VIII ребро</td><td class="num">VIII ребро*</td></tr>
+      <tr><td>Задняя подмышечная</td><td class="num">IX ребро</td><td class="num">IX ребро</td></tr>
+      <tr><td>Лопаточная</td><td class="num">X ребро</td><td class="num">X ребро</td></tr>
+      <tr><td>Околопозвоночная</td><td class="num">остистый отросток Th<sub>XI</sub></td><td class="num">остистый отросток Th<sub>XI</sub></td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:.86rem;color:var(--muted)">Слева по окологрудинной и среднеключичной линиям границу не определяют — мешает сердце. * В части руководств слева по средней подмышечной — IX ребро. Запоминалка для правого лёгкого сверху вниз: 5–6–7–8–9–10–11.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Перкуторный звук</th><th>Голосовое дрожание</th><th>Синдром (таблица кафедры)</th></tr></thead>
+    <tbody>
+      <tr><td><span class="snd clear">Ясный лёгочный</span></td><td>не изменено</td><td>норма; сужение бронхов</td></tr>
+      <tr><td><span class="snd dull">Притупление или тупой</span></td><td>ослаблено</td><td>гидроторакс; обтурационный ателектаз; фиброторакс, шварты</td></tr>
+      <tr><td><span class="snd dull">Притупление или тупой</span></td><td>усилено</td><td>очаговое уплотнение; долевое уплотнение</td></tr>
+      <tr><td><span class="snd tymp">Тимпанический</span></td><td>ослаблено</td><td>пневмоторакс</td></tr>
+      <tr><td><span class="snd tymp">Тимпанический</span></td><td>усилено</td><td>полость в лёгком, сообщающаяся с бронхом</td></tr>
+      <tr><td><span class="snd box">Коробочный</span></td><td>ослаблено</td><td>эмфизема лёгких</td></tr>
+      <tr><td><span class="snd blunt">Притупление с тимпаническим оттенком</span></td><td>усилено</td><td>начальная стадия воспаления; компрессионный ателектаз</td></tr>
+    </tbody>
+  </table></div>
+  <p><b>Нижние границы смещены вниз</b> — эмфизема, приступ бронхиальной астмы, спланхноптоз; <b>вверх</b> — сморщивание лёгкого, ателектаз, жидкость или воздух в плевральной полости, асцит, метеоризм, резкое увеличение печени. <b>Подвижность нижнего края уменьшена</b> — воспаление лёгких, эмфизема, выпот в плевральной полости, сращение плевральных листков.</p>
+</section>
+
+<section id="test-perk">
+  <div class="sec-head"><h2>Тест кафедры по перкуссии</h2><span class="skill">4 варианта · эталоны кафедры</span></div>
+  <p>«Программированный контроль к практическому занятию по теме „Перкуссия грудной клетки“» — листки, которые раздают на занятии; вопросы и эталоны сверены с фото листков. Где эталон на листке пустой, ответ дан по учебнику. Выбери вариант и отвечай: у вопросов с выбором ответ проверяется сразу, у открытых — открой эталон.</p>
+  <div class="vtabs" id="vtabs" role="group" aria-label="Вариант теста">
+    <button type="button" data-v="0" aria-pressed="true">Вариант 1</button>
+    <button type="button" data-v="1" aria-pressed="false">Вариант 2</button>
+    <button type="button" data-v="2" aria-pressed="false">Вариант 3</button>
+    <button type="button" data-v="3" aria-pressed="false">Вариант 4</button>
+  </div>
+  <p class="score" id="score" aria-live="polite"></p>
+  <div id="quiz"></div>
+  <noscript><p>Для теста нужен JavaScript.</p></noscript>
+</section>
+
+<section id="istochniki">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ul class="links">
+    <li>Лекция «Аускультация лёгких», кафедра пропедевтики внутренних болезней с курсом лучевой диагностики ЧГУ, 29.09.2026 (фотографии слайдов).</li>
+    <li>Презентация кафедры «Исследование больных с заболеваниями органов дыхания».</li>
+    <li>Учебник кафедры, если нужны подробности: Гребенев А. Л. Пропедевтика внутренних болезней. — 6-е изд., перераб. и доп. — М., 2018, раздел «Исследование органов дыхания». Формулировки конспекта взяты из лекции и таблиц кафедры.</li>
+    <li>Кафедра, <a href="http://propedevtika-med.ru/" target="_blank" rel="noopener">propedevtika-med.ru</a>: <a href="http://propedevtika-med.ru/images/dokumenti/dop-materiale-v-tablicah.docx" target="_blank" rel="noopener">дополнительные материалы в таблицах</a>, тематический план 2026, перечень практических навыков 3 курса.</li>
+    <li>Программированный контроль к занятию «Перкуссия грудной клетки», варианты 1–4, с эталонами кафедры.</li>
+    <li>Конспект <a href="perkussiya.html" target="_blank" rel="noopener">«Перкуссия лёгких»</a> — цифры топографической перкуссии.</li>
+    <li>Записи звуков — <a href="https://commons.wikimedia.org/wiki/Category:Audios_of_respiratory_sounds" target="_blank" rel="noopener">Wikimedia Commons</a>, лицензия <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.ru" target="_blank" rel="noopener">CC BY-SA 3.0</a>: Crackles pneumonia, Wheeze2O noise reduced, Stridor NP OGG (James Heilman, MD; обработка Natural Philo), IPF Lung Sound (IPFeditor). Перекодированы в MP3.</li>
+  </ul>
+  <footer>
+  <p>Где лекция, презентация и учебник формулируют по-разному, дана версия кафедры с пометкой. Если преподаватель даёт другую норму или формулировку, на занятии отвечай его вариантом.</p>
+  <p>Конспект к занятию 5 по пропедевтике внутренних болезней составил Евгений Якимов, группа М-03-24, медфак ЧГУ. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+  <p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+  </footer>
+</section>
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('toggle-all');
+  if (btn) btn.addEventListener('click', function(){
+    var all = document.querySelectorAll('details.q');
+    var open = btn.getAttribute('data-open') === '1';
+    for (var i = 0; i < all.length; i++) all[i].open = !open;
+    btn.setAttribute('data-open', open ? '0' : '1');
+    btn.textContent = open ? 'Показать все ответы' : 'Скрыть ответы';
+  });
+
+  var T = [
+    [
+      {q:'Притупленно-тимпанический перкуторный звук бывает при', o:['эмфиземе лёгких','начальной стадии крупозной пневмонии','пневмотораксе','абсцессе лёгких'], a:1,
+       w:'В альвеолах немного экссудата, но воздух ещё есть, а стенки теряют эластичность. Эмфизема — коробочный звук, пневмоторакс — тимпанический.'},
+      {q:'Используется ли плессиметр при непосредственной перкуссии?', o:['Да','Нет'], a:1, yn:1,
+       w:'При непосредственной перкуссии бьют прямо по телу, например согнутым пальцем по ключице. Плессиметр — это посредственная перкуссия.'},
+      {q:'При каких состояниях над лёгкими будет звук: 1) тупой; 2) тимпанический?', l:['а) пневмоторакс','б) жидкость в плевральной полости','в) каверна','г) абсцесс лёгких после вскрытия','д) крупозная пневмония, II стадия','е) рак лёгкого'],
+       e:'1) тупой — б, д, е; 2) тимпанический — а, в, г.', w:'Жидкость и безвоздушная ткань — тупой звук; воздух в полости — тимпанический.'},
+      {q:'Назовите расположение нижних границ левого лёгкого в норме.', e:'Окологрудинная и среднеключичная — не определяются (сердце); передняя подмышечная — VII ребро; средняя подмышечная — VIII ребро (в части руководств IX); задняя подмышечная — IX ребро; лопаточная — X ребро; околопозвоночная — остистый отросток XI грудного позвонка.',
+       w:'На листке эталон пустой — ответ по учебнику и конспекту «Перкуссия лёгких».'},
+      {q:'Для определения нижних границ лёгких используется перкуссия', o:['сравнительная','топографическая'], a:1, w:'Топографическая — для границ, сравнительная — для сравнения звука справа и слева.'}
+    ],
+    [
+      {q:'На сколько сантиметров верхушки лёгких выступают над ключицами у здоровых людей?', o:['на 1–2 см','на 2–2,5 см','на 3–4 см','на 4–5 см'], a:2, w:'Спереди 3–4 см над ключицей, сзади — на уровне остистого отростка VII шейного позвонка.'},
+      {q:'Как называется и чем объясняется участок тимпанического звука в левой подмышечной области?', e:'Пространство Траубе — под левым куполом диафрагмы расположен газовый пузырь желудка.'},
+      {q:'Выберите причины смещения нижних границ лёгких: 1) вниз; 2) вверх.', l:['а) приступ бронхиальной астмы','б) метеоризм','в) асцит','г) спланхноптоз','д) ателектаз лёгкого','е) резкое увеличение печени'],
+       e:'1) вниз — а, г; 2) вверх — б, в, д, е.', w:'Вниз — лёгкие вздуты или диафрагма опущена; вверх — лёгкое спалось или диафрагму подпирает снизу.'},
+      {q:'Назовите 4 причины уменьшения активной подвижности нижнего лёгочного края.', e:'Воспаление лёгких; эмфизема; выпот в плевральной полости; облитерация (сращение) плевральных листков.'},
+      {q:'Нижняя граница правого лёгкого в норме располагается на уровне IX ребра по линии', o:['среднеключичной','передней подмышечной','средней подмышечной','задней подмышечной','лопаточной'], a:3, w:'Считалка 5–6–7–8–9–10–11: IX ребро — пятая линия, задняя подмышечная.'}
+    ],
+    [
+      {q:'Когда над лёгкими бывает тупой перкуторный звук?', o:['стадия разрешения крупозной пневмонии','жидкость в плевральной полости','отёк лёгкого','абсцесс после вскрытия в бронхи'], a:1,
+       w:'Стадия разрешения — притупление с тимпаническим оттенком; значительный отёк лёгких — притупление (вопрос 3); вскрывшийся абсцесс — тимпанит.'},
+      {q:'Укажите, в каких областях при перкуссии лёгких у здорового человека отмечается некоторое укорочение перкуторного звука, и объясните почему.',
+       e:'Над правой верхушкой; во втором и третьем межреберье слева над верхними долями лёгких; в правой подмышечной области.', w:'Обычно объясняют так: над правой верхушкой сильнее развиты мышцы правого плечевого пояса; слева во II–III межреберье близко сердце; в правой подмышечной области близко печень. В эталоне на листке объяснения нет.'},
+      {q:'При каких состояниях над лёгкими будет звук: 1) притупленный; 2) притупленно-тимпанический?', l:['а) компрессионный ателектаз','б) пневмосклероз','в) облитерация плевральной полости','г) значительный отёк лёгких','д) крупозное воспаление лёгких, I стадия'],
+       e:'1) притупленный — б, в, г; 2) притупленно-тимпанический — а, д.'},
+      {q:'Назовите 6 основных правил пальце-пальцевой перкуссии.', e:'Положение больного стоя или сидя; тепло в помещении; врач в удобном положении; плессиметр (III палец) плотно прилегает к поверхности тела; движение кисти только в лучезапястном суставе; при топографической перкуссии палец-плессиметр параллелен предполагаемой границе органа.'},
+      {q:'Определение нижней границы левого лёгкого не проводится по линии', o:['окологрудинной','передней подмышечной','средней подмышечной','задней подмышечной','лопаточной'], a:0, w:'Слева по окологрудинной и среднеключичной линиям мешает сердце.'}
+    ],
+    [
+      {q:'Когда над лёгкими бывает коробочный перкуторный звук?', o:['компрессионный ателектаз','пневмоторакс','крупозная пневмония','эмфизема лёгких'], a:3, w:'Коробочный — повышенная воздушность и сниженная эластичность лёгких.'},
+      {q:'Целесообразно ли применение громкой перкуссии для определения границ лёгких?', o:['Да','Нет'], a:1, yn:1, w:'Границы определяют тихой перкуссией, верхушки — тишайшей.'},
+      {q:'Что характерно для звуков: 1) тупого; 2) ясного?', l:['а) громкий','б) тихий','в) высокий','г) низкий','д) короткий','е) продолжительный'],
+       e:'1) тупой — б, в, д; 2) ясный — а, г, е.', w:'Тупой — тихий, высокий, короткий; ясный лёгочный — громкий, низкий, продолжительный.'},
+      {q:'Опишите последовательность проведения сравнительной перкуссии лёгких спереди.', e:'Надключичные ямки (палец параллельно ключице) → ключицы (непосредственная перкуссия по середине ключицы) → I и II межреберья по среднеключичным линиям (в части пособий — до III включительно); ниже слева мешает сердце.',
+       w:'На листке эталон пустой — ответ по учебнику и конспекту «Перкуссия лёгких».'},
+      {q:'Перкуссия молоточком по плессиметру или пальцем по пальцу называется', o:['непосредственной','топографической','сравнительной','громкой','все ответы неверны'], a:4, w:'Это посредственная (опосредованная) перкуссия — такого варианта в списке нет.'}
+    ]
+  ];
+
+  var box = document.getElementById('quiz'), tabs = document.getElementById('vtabs'), sc = document.getElementById('score');
+  if (!box || !tabs) return;
+  var L = 'абвгдеж', cur = 0, stat = [];
+  function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function showScore(){
+    var s = stat[cur], n = 0, ok = 0;
+    for (var k in s){ n++; if (s[k]) ok++; }
+    var total = 0; T[cur].forEach(function(it){ if (it.o) total++; });
+    sc.textContent = n ? ('Вопросы с выбором: верно ' + ok + ' из ' + n + ' (всего таких ' + total + ')') : '';
+  }
+  function render(v){
+    cur = v; stat[v] = {}; box.innerHTML = '';
+    T[v].forEach(function(it, qi){
+      var d = el('div', 'qitem');
+      d.appendChild(el('p', 'qq', (qi + 1) + '. ' + it.q));
+      if (it.l){ var ul = el('ul', 'ql'); it.l.forEach(function(x){ ul.appendChild(el('li', null, x)); }); d.appendChild(ul); }
+      var ans = el('div', 'ans'); ans.hidden = true;
+      var ansHtml = it.o ? '<p><b>Эталон:</b> ' + (it.yn ? it.o[it.a] : L[it.a] + ') ' + it.o[it.a]) + '</p>' : '<p><b>Эталон:</b> ' + it.e + '</p>';
+      if (it.w) ansHtml += '<p class="why">' + it.w + '</p>';
+      ans.innerHTML = ansHtml;
+      if (it.o){
+        var o = el('div', 'opts');
+        it.o.forEach(function(x, oi){
+          var b = el('button', 'opt', (it.yn ? '' : L[oi] + ') ') + x); b.type = 'button';
+          b.addEventListener('click', function(){
+            if (d.getAttribute('data-done')) return;
+            d.setAttribute('data-done', '1');
+            if (oi !== it.a) b.className += ' bad';
+            o.children[it.a].className += ' ok';
+            ans.hidden = false; stat[v][qi] = (oi === it.a); showScore();
+          });
+          o.appendChild(b);
+        });
+        d.appendChild(o);
+      } else {
+        var sb = el('button', 'show', 'Показать эталон'); sb.type = 'button';
+        sb.addEventListener('click', function(){ ans.hidden = !ans.hidden; sb.textContent = ans.hidden ? 'Показать эталон' : 'Скрыть эталон'; });
+        d.appendChild(sb);
+      }
+      d.appendChild(ans);
+      box.appendChild(d);
+    });
+    showScore();
+  }
+  tabs.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-v]'); if (!b) return;
+    var bs = tabs.querySelectorAll('button');
+    for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', bs[i] === b ? 'true' : 'false');
+    render(+b.getAttribute('data-v'));
+  });
+  render(0);
+})();
+</script>
+</body>
+</html>
