@@ -105,6 +105,7 @@ a.btn{text-decoration:none}
 .top-in > .small{min-width:0}
 .counts{margin-left:auto;display:flex;gap:10px;font-size:14px;font-weight:600;white-space:nowrap}
 .c-ok{color:var(--ok)} .c-no{color:var(--no)} .c-left{color:var(--muted)}
+.c-left.low{color:var(--no)}
 .bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:8px;max-width:780px;margin-left:auto;margin-right:auto}
 .bar > i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s}
 
@@ -487,13 +488,13 @@ LENS.forEach(function(l){
 });
 
 /* ---------- экзамен ---------- */
-/* Экзамен: 20 вопросов, зачёт от 51 % — 11 верных из 20 (10 из 20 — это 50 %, мало).
-   Цифры подтверждены 01.10.2026; изменятся — поменять здесь. */
+/* Экзамен, со слов преподавателя: 20 вопросов за 12 минут, зачёт — 11 верных (51 %; 10 из 20 —
+   это 50 %, мало). Вопросы с несколькими верными ответами — из пищеварения. Изменится — поменять здесь. */
 var EXAM = {
-  n: 20, pass: 51,
+  n: 20, pass: 51, min: 12,
   // точно будет вопрос про потенциал действия из раздела 1: фазы ПД и возбудимости, КУД, заряд на пике
   pd: [1, 3, 4, 6, 8, 11, 12, 42, 43, 45, 46, 48, 49, 50, 54, 60, 61, 63],
-  // вопрос с несколькими верными ответами — скорее всего про пищеварение (раздел 5)
+  // вопрос с несколькими верными ответами — из пищеварения (раздел 5)
   dig: [38, 39, 47, 48, 49, 51, 52, 54, 55, 60, 61, 62, 65, 66, 67, 68, 70, 71, 72, 73, 75, 76, 77, 78, 79, 80, 81, 82, 84, 87, 88, 92, 94]
 };
 function lin(mode){ return mode === "test" || mode === "exam"; }  // вопросы по порядку, без круга
@@ -550,9 +551,10 @@ function paintMenu(){
   var n = startList().length, take = exam ? Math.min(EXAM.n, n + 2) : settings.len ? Math.min(settings.len,n) : n;
   var startWord = settings.mode === "learn" ? "Начать учить" : settings.mode === "cards" ? "Открыть карточки"
     : exam ? "Начать экзамен" : "Начать тест";
+  var startTail = exam ? " за " + EXAM.min + "\u00a0" + plural(EXAM.min, "минуту", "минуты", "минут") : "";
   $("len-h").classList.toggle("hidden", exam);
   lenBox.classList.toggle("hidden", exam);
-  $("btn-start").textContent = n ? startWord + " — " + take + " " + plural(take,"вопрос","вопроса","вопросов") : "Выберите хотя бы один раздел";
+  $("btn-start").textContent = n ? startWord + " — " + take + " " + plural(take,"вопрос","вопроса","вопросов") + startTail : "Выберите хотя бы один раздел";
   $("btn-start").disabled = !n;
   var w = wrongIds().length;
   $("wrong-n").textContent = w ? "("+w+")" : "(0)";
@@ -564,8 +566,10 @@ function paintMenu(){
     test: "Обычный тест: вопрос за вопросом, в конце — результат и разбор ошибок. Сначала попадаются вопросы, которых ещё не было, — повторы начнутся, только когда пройдёшь все вопросы выбранных разделов.",
     learn: "Ответил верно — вопрос уходит из круга. Ошибся — вопрос вернётся через пару заданий и уйдёт, когда ответишь верно два раза подряд. Сначала идут вопросы, которых ещё не было; выученные в круг не попадают.",
     cards: "Карточки: сначала вспоминаешь ответ сам, потом открываешь и честно отмечаешь «знал» или «не знал». «Не знал» — карточка вернётся через пару заданий. Быстрый способ повторять уже знакомое.",
-    exam: "Как на экзамене: " + EXAM.n + " вопросов, правильные ответы и счёт — только в конце, зачёт от " + EXAM.pass +
-      "\u00a0% (" + Math.ceil(EXAM.n * EXAM.pass / 100) + " из " + EXAM.n + "). В каждом варианте есть вопрос про потенциал действия (раздел 1) " +
+    exam: "Как на экзамене: " + EXAM.n + " вопросов за " + EXAM.min + "\u00a0" + plural(EXAM.min, "минуту", "минуты", "минут") +
+      ", зачёт — " + Math.ceil(EXAM.n * EXAM.pass / 100) + " верных из " + EXAM.n + " (" + EXAM.pass + "\u00a0%). Правильные ответы и счёт — только в конце. " +
+      "Время идёт, пока экзамен открыт на экране: вышел в меню — пауза. Кончилось время — экзамен завершается, " +
+      "вопросы без ответа не засчитываются. В каждом варианте есть вопрос про потенциал действия (раздел 1) " +
       "и вопрос с несколькими верными ответами про пищеварение (раздел 5), остальные — из выбранных разделов. " +
       "Где сборник не говорит, сколько ответов верных, всегда чекбоксы."
   };
@@ -589,7 +593,8 @@ function paintMenu(){
   if(p) $("resume-info").textContent = resumeText(p);
 }
 function resumeText(p){
-  if(p.mode === "exam") return "Экзамен: отвечено " + Object.keys(p.answers).length + " из " + p.order.length;
+  if(p.mode === "exam") return "Экзамен: отвечено " + Object.keys(p.answers).length + " из " + p.order.length +
+    (p.limit ? ", осталось " + clockFmt(p.limit - p.used) : "");
   return (lin(p.mode) ? "Пройдено " + Object.keys(p.answers).length + " из " + p.order.length
     : "Пройдено " + p.learned + " из " + p.total + ", в круге " + p.queue.length)
     + " · верных " + p.ok + ", ошибок " + p.bad;
@@ -612,6 +617,48 @@ var autoTimer = null;  // «Сразу к следующему»
 var PAUSE = 5 * 60000; // паузы длиннее этого во время не входят
 
 function cancelAuto(){ if(autoTimer){ clearTimeout(autoTimer); autoTimer = null; } }
+
+/* Часы экзамена: S.limit — сколько дано, S.used — сколько прошло (оба хранятся в попытке).
+   Время идёт, пока экзамен на экране: в меню, в свёрнутой вкладке и с закрытой страницей — пауза. */
+var clockTimer = null, clockAt = 0, clockN = 0;
+function clockOn(){ return !!S && S.mode === "exam" && S.limit > 0; }
+function clockSync(){
+  var now = Date.now();
+  if(clockAt) S.used = (S.used || 0) + Math.max(0, now - clockAt);
+  clockAt = document.hidden ? 0 : now;
+}
+function clockStart(){
+  clockStop();
+  if(!clockOn()) return;
+  clockAt = document.hidden ? 0 : Date.now();
+  clockTimer = setInterval(clockTick, 1000);
+  clockTick();
+}
+function clockStop(){
+  if(clockTimer){ clearInterval(clockTimer); clockTimer = null; if(S) clockSync(); }
+  clockAt = 0;
+}
+function clockTick(){
+  if(!clockOn()){ clockStop(); return; }
+  clockSync();
+  paintCounts();
+  if(S.used >= S.limit) return timeUp();
+  if(++clockN % 5 === 0) saveProgress();
+}
+function clockFmt(ms){
+  var s = Math.max(0, Math.ceil((ms || 0) / 1000));
+  return Math.floor(s / 60) + ":" + ("0" + s % 60).slice(-2);
+}
+function timeUp(){
+  clockStop(); cancelAuto();
+  S.used = S.limit; S.timeUp = true;
+  finish();
+}
+document.addEventListener("visibilitychange", function(){
+  if(!clockTimer) return;
+  clockSync();  // свернули — досчитать и встать на паузу, вернулись — часы идут дальше
+  if(document.hidden) saveProgress(); else clockTick();
+});
 function tick(){
   var now = Date.now(), d = now - (S.last || now);
   if(d > 0 && d <= PAUSE) S.active = (S.active || 0) + d;
@@ -714,14 +761,15 @@ function buildSession(list, label, mode){
     if(settings.shuffleO) shuffle(p);
     perms[qi] = p;
   });
-  cancelAuto();
+  cancelAuto(); clockStop();
   S = {
     mode: mode, order: order, perms: perms, pos: 0, answers: {}, missed: {},
     ok: 0, bad: 0, started: Date.now(), active: 0, last: Date.now(), label: label || "",
     strict: settings.strict || mode === "exam", total: order.length, learned: 0, mastered: 0,
-    queue: order.map(function(qi){ return {qi: qi, streak: 0}; })
+    queue: order.map(function(qi){ return {qi: qi, streak: 0}; }),
+    limit: mode === "exam" ? EXAM.min * 60000 : 0, used: 0
   };
-  saveProgress(); show("quiz"); renderQ();
+  saveProgress(); show("quiz"); renderQ(); clockStart();
 }
 
 /* Прогресс хранится по id вопросов («раздел-номер») с версией данных: индексы в массиве
@@ -753,8 +801,9 @@ function unpackProgress(p){
   s.missed = byQi(p.missed, checkAns);
   s.queue = p.queue.map(function(it){ return {qi: qiOf(it.id), streak: +it.streak || 0}; });
   if(!(s.pos >= 0 && s.pos <= s.order.length)) return null;
-  ["ok", "bad", "learned", "mastered", "active"].forEach(function(f){ s[f] = +s[f] || 0; });
+  ["ok", "bad", "learned", "mastered", "active", "limit", "used"].forEach(function(f){ s[f] = +s[f] || 0; });
   s.total = s.total || s.order.length;
+  if(s.mode === "exam" && !s.limit) s.limit = EXAM.min * 60000;  // попытка, начатая до появления часов
   delete s.v;
   return (lin(s.mode) ? s.pos < s.order.length : s.queue.length) ? s : null;
 }
@@ -947,7 +996,10 @@ function paintCounts(){
   var exam = S.mode === "exam";
   $("c-ok").textContent = exam ? "" : "✓ " + S.ok;
   $("c-no").textContent = exam ? "" : "✗ " + S.bad;
-  $("c-left").textContent = exam ? "ответов " + Object.keys(S.answers).length : S.streak > 1 ? "серия " + S.streak : "";
+  var left = S.limit - S.used;
+  $("c-left").textContent = exam ? (S.limit ? "⏱ " + clockFmt(left) : "ответов " + Object.keys(S.answers).length)
+    : S.streak > 1 ? "серия " + S.streak : "";
+  $("c-left").classList.toggle("low", exam && S.limit > 0 && left <= 60000);
 }
 /* экзамен: выбранный вариант отмечен, но верен ли он и какой правильный — только в итогах */
 function paintHidden(q, multi, replay){
@@ -1042,18 +1094,25 @@ function next(){
 
 /* ================= ИТОГИ ================= */
 function finish(){
-  cancelAuto(); tick();
+  cancelAuto(); clockStop(); tick();
   var ok = S.ok, bad = S.bad;
   var total = lin(S.mode) ? S.order.length : S.total;
+  var exam = S.mode === "exam";
   /* Вопрос считается ошибочным, если в этой попытке на него хоть раз ответили неверно.
-     В «Тесте» ответ один, в «Учить» и «Карточках» последний ответ всегда верный — смотрим на первую ошибку. */
+     В «Тесте» ответ один, в «Учить» и «Карточках» последний ответ всегда верный — смотрим на первую ошибку.
+     В экзамене вопросы, до которых не дошли (кончилось время), тоже не засчитываются и идут в разбор. */
   var seen = Object.keys(S.answers);
-  function missOf(qi){ return S.missed[qi] || (S.answers[qi].ok ? null : S.answers[qi]); }
-  var wrongIdx = seen.filter(missOf);
-  var answered = seen.length, clean = answered - wrongIdx.length;
-  var pct = answered ? Math.round(clean / answered * 100) : 0;
+  function missOf(qi){
+    var a = S.answers[qi];
+    if(!a) return {given: [], ok: false, none: true};
+    return S.missed[qi] || (a.ok ? null : a);
+  }
+  var wrongIdx = (exam ? S.order : seen).filter(missOf);
+  var answered = seen.length, clean = seen.filter(function(qi){ return !missOf(qi); }).length;
+  var none = exam ? total - answered : 0;
+  var pct = exam ? Math.round(clean / total * 100) : answered ? Math.round(clean / answered * 100) : 0;
   var mins = Math.max(1, Math.round((S.active || 0) / 60000));
-  var exam = S.mode === "exam", need = Math.ceil(total * EXAM.pass / 100), passed = clean >= need;
+  var need = Math.ceil(total * EXAM.pass / 100), passed = clean >= need;
   // в экзамене ответы попадают в «Мои ошибки» и общий счёт только сейчас (во время экзамена это было бы подсказкой)
   if(exam && !S.recorded){
     seen.forEach(function(qi){ record(QS[qi].id, S.answers[qi].ok); });
@@ -1063,7 +1122,9 @@ function finish(){
   $("r-score").style.color = exam ? (passed ? "var(--ok)" : "var(--no)") : "";
   $("r-line").textContent = exam
     ? (passed ? "Зачёт" : "Не сдано") + ": верных " + clean + " из " + total + ", нужно " + need + " (" + EXAM.pass + "\u00a0%)"
-      + " · примерно " + mins + " " + plural(mins, "минута", "минуты", "минут")
+      + (S.timeUp ? " · время вышло" + (none ? ", без ответа " + none : "") : "")
+      + (S.limit ? " · время " + clockFmt(Math.min(S.used, S.limit)) + " из " + clockFmt(S.limit)
+        : " · примерно " + mins + " " + plural(mins, "минута", "минуты", "минут"))
     : lin(S.mode)
     ? "Верных " + clean + " из " + answered + (answered < total ? " (не отвечено " + (total - answered) + ")" : "")
       + " · примерно " + mins + " " + plural(mins, "минута", "минуты", "минут")
@@ -1072,14 +1133,14 @@ function finish(){
       + " · примерно " + mins + " " + plural(mins, "минута", "минуты", "минут");
   $("r-grid").innerHTML =
     '<div class="stat"><b class="c-ok">' + ok + '</b><span class="small muted">верных ответов</span></div>' +
-    '<div class="stat"><b class="c-no">' + bad + '</b><span class="small muted">ошибок</span></div>' +
+    '<div class="stat"><b class="c-no">' + (bad + none) + '</b><span class="small muted">' + (none ? "ошибок и без ответа" : "ошибок") + '</span></div>' +
     '<div class="stat"><b>' + (lin(S.mode) ? total : S.mastered || 0) + '</b><span class="small muted">' +
       (lin(S.mode) ? "вопросов в попытке" : "выучено за подход") + '</span></div>' +
     (exam ? '<div class="stat"><b>' + need + '</b><span class="small muted">нужно для зачёта</span></div>'
       : '<div class="stat"><b>' + learnedCount() + '</b><span class="small muted">выучено всего</span></div>');
 
   var bySec = {};
-  seen.forEach(function(qi){
+  (exam ? S.order : seen).forEach(function(qi){
     var q = QS[qi]; bySec[q.s] = bySec[q.s] || {ok: 0, n: 0};
     bySec[q.s].n++; if(!missOf(qi)) bySec[q.s].ok++;
   });
@@ -1097,7 +1158,7 @@ function finish(){
     det.innerHTML = '<summary>Разбор ошибок — ' + wrongIdx.length + '</summary>';
     wrongIdx.forEach(function(qi){
       var q = QS[qi], a = missOf(qi);
-      var given = a.given.length ? a.given.map(function(oi){ return q.o[oi]; }).join("; ") : "— нет ответа";
+      var given = a.none ? "— не успел ответить" : a.given.length ? a.given.map(function(oi){ return q.o[oi]; }).join("; ") : "— нет ответа";
       var right = q.c.map(function(oi){ return q.o[oi]; }).join("; ");
       var d = document.createElement("div"); d.className = "wrongitem";
       d.innerHTML = '<div class="q">' + esc(secLabel(q.s) + " №" + pad3(q.n) + ". " + q.q) + '</div>' +
@@ -1153,14 +1214,14 @@ $("btn-resume").onclick = function(){
   if(!p){ paintMenu(); return; }
   try{
     S = p; S.last = Date.now(); curDone = false; revealed = false; curSel = [];
-    show("quiz"); renderQ();
+    show("quiz"); renderQ(); clockStart();
   }catch(e){
-    cancelAuto(); S = null; LS.del(K_PROG); show("menu"); paintMenu();
+    cancelAuto(); clockStop(); S = null; LS.del(K_PROG); show("menu"); paintMenu();
   }
 };
 $("btn-drop").onclick = function(){ LS.del(K_PROG); paintMenu(); };
 function toMenu(){
-  cancelAuto();
+  cancelAuto(); clockStop();
   if(S){ tick(); saveProgress(); }
   show("menu"); paintMenu();
 }
