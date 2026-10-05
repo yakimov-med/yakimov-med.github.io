@@ -219,6 +219,7 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
 .n-list{margin:0;padding-left:20px} .n-list li{margin-bottom:8px} .n-list li:last-child{margin-bottom:0}
 .cheat ul{margin:0 0 6px;padding-left:20px} .cheat li{margin-bottom:7px;line-height:1.45}
 .cheat h3{font-size:15px;margin:16px 0 8px}
+#screen-night h2{scroll-margin-top:76px}
 .cheat .btn{margin-top:12px}
 @media (max-width:520px){
   .wrap{padding:12px}
@@ -384,6 +385,7 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
       <button class="btn primary" id="r-again">Прорешать ошибки</button>
       <button class="btn" id="r-restart">↻ Пройти заново</button>
       <button class="btn" id="r-menu">☰ В меню</button>
+      <button class="btn primary hidden" id="r-night">🌙 К плану</button>
     </div>
   </div>
 </div>
@@ -703,14 +705,15 @@ function idsOf(num, list){
   return list.map(function(n){ return s + "-" + n; }).filter(hasId);
 }
 /* Вариант экзамена: по одному вопросу из двух обязательных списков (сначала те, что попадались реже),
-   остальные — из выбранных разделов, как в тесте. Порядок перемешивает buildSession. */
-function examList(){
+   остальные — из выбранных разделов, как в тесте (all — из всех, как на настоящем экзамене).
+   Порядок перемешивает buildSession. */
+function examList(all){
   var must = [];
   [idsOf(1, EXAM.pd), idsOf(5, EXAM.dig)].forEach(function(ids){
     var cand = leastSeenFirst(shuffle(ids.map(function(id){ return BY_ID[id]; })));
     if(cand.length) must.push(cand[0]);
   });
-  var rest = QS.filter(function(q){ return settings.sections.indexOf(q.s) >= 0 && must.indexOf(q.i) < 0; });
+  var rest = QS.filter(function(q){ return (all || settings.sections.indexOf(q.s) >= 0) && must.indexOf(q.i) < 0; });
   var n = Math.max(0, EXAM.n - must.length), order;
   if(settings.balance) order = balancedOrder(rest, n, true);
   else order = leastSeenFirst(shuffle(rest.map(function(q){ return q.i; }))).slice(0, n);
@@ -1376,16 +1379,20 @@ function finish(){
     if(exam) det.open = true;
     wb.appendChild(det);
   }
+  // занятие начато из «Подготовки за ночь» — следующие тоже ведут обратно к плану
+  var from = S.from || "";
+  $("r-night").classList.toggle("hidden", from !== "night");
+  $("r-night").onclick = function(){ LS.del(K_PROG); openNight(); };
   $("r-again").disabled = !wrongIdx.length;
   $("r-again").onclick = function(){
     var list = wrongIdx.map(function(qi){ return QS[qi]; });
-    if(list.length) buildSession(list, "Работа над ошибками", S.mode === "test" ? "test" : "learn");
+    if(list.length){ buildSession(list, "Работа над ошибками", S.mode === "test" ? "test" : "learn"); markFrom(from); }
   };
   $("r-restart").textContent = exam ? "↻ Новый вариант" : "↻ Пройти заново";
   $("r-restart").onclick = function(){
-    if(S.mode === "exam") return buildSession(examList(), "Экзамен", "exam");
+    if(S.mode === "exam"){ buildSession(examList(from === "night"), "Экзамен", "exam"); markFrom(from); return; }
     var list = S.order.map(function(qi){ return QS[qi]; });
-    buildSession(list, S.label, S.mode);
+    buildSession(list, S.label, S.mode); markFrom(from);
   };
   $("r-menu").onclick = function(){ LS.del(K_PROG); show("menu"); paintMenu(); };
   LS.del(K_PROG);
@@ -1427,8 +1434,10 @@ $("btn-drop").onclick = function(){ LS.del(K_PROG); paintMenu(); };
 function toMenu(){
   cancelAuto(); clockStop();
   if(S){ tick(); saveProgress(); }
+  if(S && S.from === "night"){ openNight(); return; }
   show("menu"); paintMenu();
 }
+function markFrom(from){ if(S && from){ S.from = from; saveProgress(); } }
 $("q-menu").onclick = toMenu;
 var browseFrom = "";   // «night» — просмотр открыт из «Подготовки за ночь», туда и вернуться
 $("b-menu").onclick = function(){
@@ -1473,7 +1482,8 @@ function renderBrowse(){
           q.c.map(function(k){ return hl(q.o[k], term); }).join(" · ")+'</div></div>';
     }).join("");
     if(found.length > LIMIT * 3) brief += '<div class="browse-item muted small">Показаны первые '+(LIMIT*3)+'. Уточните запрос.</div>';
-    bList.innerHTML = brief || '<div class="browse-item muted">Ничего не найдено</div>';
+    bList.innerHTML = (brief || '<div class="browse-item muted">Ничего не найдено</div>') + browseNext(si, term);
+    wireBrowseNext();
     return;
   }
   var html = found.slice(0,LIMIT).map(function(q){
@@ -1487,7 +1497,27 @@ function renderBrowse(){
       '</div>';
   }).join("");
   if(found.length>LIMIT) html += '<div class="browse-item muted small">Показаны первые '+LIMIT+'. Уточните запрос.</div>';
-  bList.innerHTML = html || '<div class="browse-item muted">Ничего не найдено</div>';
+  bList.innerHTML = (html || '<div class="browse-item muted">Ничего не найдено</div>') + browseNext(si, term);
+  wireBrowseNext();
+}
+/* внизу раздела — переход к следующему, чтобы не листать вверх к списку; из плана на ночь
+   запоминается раздел, на котором остановился */
+function browseNext(si, term){
+  if(si < 0 || term) return "";
+  if(browseFrom === "night"){ night.skimSec = si; saveNight(); }
+  var last = si >= SEC.length - 1;
+  return '<div class="browse-item" style="text-align:center">' +
+    '<div class="small muted" style="margin-bottom:8px">Раздел ' + (si + 1) + ' из ' + SEC.length + (last ? ' — последний' : '') + '</div>' +
+    (last ? (browseFrom === "night" ? '<button class="btn primary" id="b-next" data-to="night">🌙 Все разделы пройдены — к плану</button>' : '')
+      : '<button class="btn primary" id="b-next" data-to="' + (si + 1) + '">Следующий раздел: ' + esc(("0" + SEC[si + 1].num).slice(-2) + ". " + SEC[si + 1].title) + ' →</button>') +
+    '</div>';
+}
+function wireBrowseNext(){
+  var b = $("b-next");
+  if(b) b.onclick = function(){
+    if(b.dataset.to === "night"){ $("b-menu").onclick(); return; }
+    bSec.value = b.dataset.to; renderBrowse(); window.scrollTo(0, 0);
+  };
 }
 function hl(text, term){
   var e=esc(text);
@@ -1514,6 +1544,7 @@ function hmOf(v){
 Object.keys(NIGHT_DEF).forEach(function(k){ if(hmOf(night[k]) < 0) night[k] = NIGHT_DEF[k]; });
 night.done = obj(night.done);
 if(!(night.made > 0)) night.made = 0;
+if(!(night.skimSec >= 0 && night.skimSec < SEC.length && night.skimSec === Math.floor(night.skimSec))) night.skimSec = 0;
 function saveNight(){ LS.set(K_NIGHT, night); }
 
 /* minutes — минуты от полуночи дня, когда составлен план (могут быть больше суток) */
@@ -1591,8 +1622,7 @@ function nightCurrent(){
 var NIGHT_STEP = {
   sheet: ["📖", "Шпаргалка: потенциал действия и пищеварение", "", "К шпаргалке"],   // тексты с числами — в nightText
   learn: ["🧠", "Выучить вопросы, которые будут точно", "", "Учить"],
-  skim: ["👀", "Пролистать ответы всех разделов",
-    "«Шпаргалка: только ответы», раздел за разделом (выбирай в списке). Читай вопрос и ответ, не зубри: на тесте ответ надо узнать среди вариантов, а это получается даже после одного прочтения. Около 10 минут на раздел.", "Открыть шпаргалку"],
+  skim: ["👀", "Пролистать ответы всех разделов", "", "Открыть шпаргалку"],
   trial: ["⏱", "Пробный экзамен", "", "Начать экзамен"],
   loop: ["🔁", "Экзамен → ошибки, по кругу",
     "Круг — около 30 минут: экзамен, потом «Прорешать ошибки» в итогах. Каждый новый вариант сам берёт вопросы, которых ещё не было.", "Начать экзамен"],
@@ -1612,6 +1642,9 @@ function nightText(st, P){
   var X = examFacts();
   if(st.k === "sheet") return "Эти два вопроса есть в каждом варианте — 2 верных из " + X.need + " нужных. Прочитай обе шпаргалки ниже, вникая в каждую строку.";
   if(st.k === "learn") return "«Учить с повторами»: " + X.pd + " вопросов про потенциал действия и " + X.dig + " — про пищеварение. Ошибся — вопрос вернётся, пока не ответишь верно.";
+  if(st.k === "skim") return "«Шпаргалка: только ответы», раздел за разделом — внизу каждого кнопка «Следующий раздел». " +
+    "Читай вопрос и ответ, не зубри: на тесте ответ надо узнать среди вариантов, а это получается даже после одного прочтения. " +
+    "Примерно 6 секунд на вопрос." + (night.skimSec > 0 ? " Ты остановился на разделе " + (night.skimSec + 1) + " из " + SEC.length + "." : "");
   if(st.k === "trial") return "Как на настоящем: " + X.n + " вопросов за " + X.min + " минут. Результат не пугает — это замер. В итогах нажми «Прорешать ошибки».";
   if(st.k === "sleep"){
     var cyc = P.sleep % NP.cycle === 0 ? " — " + P.sleep / NP.cycle + " " + plural(P.sleep / NP.cycle, "цикл", "цикла", "циклов") + " по 1,5 часа" : "";
@@ -1623,7 +1656,7 @@ function nightText(st, P){
   return NIGHT_STEP[st.k][2];
 }
 function nightAct(k){
-  if(k === "sheet" || k === "final" || k === "road"){ var h = $("n-pd"); if(h) h.scrollIntoView({behavior: "smooth", block: "start"}); }
+  if(k === "sheet" || k === "final" || k === "road"){ var h = $("n-pd"); if(h) h.scrollIntoView({block: "start"}); }
   else if(k === "learn") learnMust("all");
   else if(k === "skim") skimAll();
   else if(k === "trial" || k === "loop") examNow();
@@ -1644,16 +1677,29 @@ function mustList(which){
   if(which !== "pd") ids = ids.concat(idsOf(5, EXAM.dig));
   return ids.map(function(id){ return QS[BY_ID[id]]; });
 }
-function learnMust(which){
-  var list = mustList(which);
-  if(list.length && okToDrop())
-    buildSession(list, which === "pd" ? "Потенциал действия" : which === "dig" ? "Пищеварение" : "Будут точно", "learn");
+/* Занятия из плана. Незаконченное то же самое занятие — продолжить, а не начинать заново;
+   незаконченное «Учить» из плана заменить без вопросов (ответы в нём уже записаны в статистику),
+   в остальных случаях — спросить, как в меню. */
+function nightStart(label, mode, make){
+  var p = loadProgress();
+  if(p && p.from === "night" && p.label === label && p.mode === mode){ $("btn-resume").onclick(); return; }
+  if(p && !(p.from === "night" && p.mode === "learn") && !okToDrop()) return;
+  var list = make();
+  if(!list.length) return;
+  buildSession(list, label, mode); markFrom("night");
 }
-function examNow(){ if(okToDrop()) buildSession(examList(), "Экзамен", "exam"); }
+function learnMust(which){
+  nightStart(which === "pd" ? "Потенциал действия" : which === "dig" ? "Пищеварение" : "Будут точно", "learn", function(){
+    // выученные (два верных подряд) — только когда невыученных не осталось
+    var list = mustList(which), fresh = list.filter(function(q){ return levelOf(q.id) < 2; });
+    return fresh.length ? fresh : list;
+  });
+}
+function examNow(){ nightStart("Экзамен", "exam", function(){ return examList(true); }); }
 function skimAll(){
   settings.brief = true; saveSettings();
   bQ.value = "";
-  if(+bSec.value < 0) bSec.value = "0";
+  bSec.value = String(night.skimSec >= 0 && night.skimSec < SEC.length ? night.skimSec : 0);
   browseFrom = "night"; show("browse"); renderBrowse();
 }
 
@@ -1732,6 +1778,18 @@ function renderNightPlan(){
       '<div class="small">' + esc(nightText(st, P)) + '</div>' +
       (S1[3] ? '<button class="btn primary" id="n-now-go">' + esc(S1[3]) + '</button>' : "") + '</div>';
     if(S1[3]) $("n-now-go").onclick = function(){ nightAct(st.k); };
+    // план составлен давно, а ничего не отмечено — возможно, сел учить только сейчас
+    // (после отбоя по плану это уже не опоздание, а утро — не предлагать)
+    var slept = P.sleep > 0 && m >= P.bed;
+    if(!slept && !Object.keys(night.done).length && Date.now() - night.made > 45 * 60000 && /^(sheet|learn|skim|trial|loop)$/.test(st.k)){
+      var d0 = new Date(), hm0 = d0.getHours() + ":" + ("0" + d0.getMinutes()).slice(-2);
+      var re = document.createElement("div");
+      re.className = "small"; re.style.marginTop = "10px";
+      re.innerHTML = 'План составлен в ' + fmtHM(P.n) + '. Начинаешь только сейчас? ';
+      var rb = document.createElement("button");
+      rb.className = "btn small"; rb.textContent = "↻ Пересчитать от " + hm0; rb.onclick = replanNight;
+      re.appendChild(rb); nowBox.firstChild.appendChild(re);
+    }
   } else nowBox.innerHTML = "";
 }
 
@@ -1804,6 +1862,11 @@ document.addEventListener("keydown", function(e){
 $("theme-btn").textContent = theme==="auto" ? "Тема" : theme==="light" ? "День" : "Ночь";
 paintMenu();
 if(location.hash === "#night") openNight();
+// переход по ссылке …#night во вкладке, где тренажёр уже открыт, страницу не перезагружает
+window.addEventListener("hashchange", function(){
+  if(location.hash === "#night"){ if($("screen-night").classList.contains("hidden")) openNight(); }
+  else if(!$("screen-night").classList.contains("hidden")){ show("menu"); paintMenu(); }
+});
 })();
 </script>
 </body>
