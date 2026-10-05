@@ -426,10 +426,17 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
 
     <div class="grid n-facts" id="n-facts"></div>
 
-    <h2>Мой план по часам</h2>
+    <h2 id="n-plan-h">Мой план по часам</h2>
     <div class="card pad">
+      <div class="small muted" style="margin-bottom:8px">Как у тебя сегодня?</div>
+      <div class="row" id="n-modes" style="margin-bottom:8px">
+        <button class="chip" data-nmode="sleep">🌙 Учу, потом сплю</button>
+        <button class="chip" data-nmode="allnight">☕ Всю ночь без сна</button>
+        <button class="chip" data-nmode="awake">🌅 Уже встал</button>
+      </div>
+      <p class="small muted" id="n-mode-hint" style="margin:0 0 12px"></p>
       <div class="n-times">
-        <label>Встаю в<input type="time" id="n-wake" data-k="wake"></label>
+        <label id="n-wake-row">Встаю в<input type="time" id="n-wake" data-k="wake"></label>
         <label>Выхожу из дома<input type="time" id="n-leave" data-k="leave"></label>
         <label>Экзамен в<input type="time" id="n-exam" data-k="exam"></label>
       </div>
@@ -538,13 +545,33 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
     <div class="card pad">
       <ul class="n-list">
         <li><b>Спать обязательно.</b> Во сне прочитанное закрепляется, а после бессонной ночи думаешь медленнее —
-          при <span data-x="sec"></span> секундах на вопрос это дорого. Ложись по плану, даже если что-то не успел.</li>
+          при <span data-x="sec"></span> секундах на вопрос это дорого. Ложись по плану, даже если что-то не успел. Не получается — ниже «Если не спишь всю ночь».</li>
         <li><b>Сон — целыми циклами по 1,5 часа,</b> если получается: проснуться в конце цикла обычно легче. План выше это учитывает.</li>
         <li><b>Кофе — утром, не ночью:</b> ночью он испортит и без того короткий сон.</li>
         <li><b>Два будильника</b> с разницей 5 минут.</li>
         <li><b>Позавтракай:</b> на пустой желудок думается хуже.</li>
         <li><b>С вечера собери:</b> халат, зачётку или студенческий, ручку, воду.</li>
       </ul>
+    </div>
+
+    <h2 id="n-allnight">Если не спишь всю ночь</h2>
+    <div class="card pad">
+      <ul class="n-list">
+        <li><b>Честно о главном:</b> даже 1,5 часа сна лучше, чем ни одного. Если есть возможность —
+          поспи, план выше пересчитается под это («Учу, потом сплю»).</li>
+        <li><b>Самое тяжёлое время — с 3 до 6 утра.</b> Клонит в сон над шпаргалкой — переключись
+          на экзамен или «Учить»: когда отвечаешь, уснуть труднее, чем когда читаешь.</li>
+        <li><b>Короткий сон 20 минут</b> с будильником в это время освежает. Дольше 30 минут —
+          проснёшься разбитым.</li>
+        <li><b>Свет поярче, в комнате прохладнее.</b> В перерывах — встать, пройтись, умыться прохладной водой.</li>
+        <li><b>Ешь легко и пей воду:</b> плотная еда ночью тянет в сон.</li>
+        <li><b>Кофе или чай — понемногу,</b> не больше 2–3 чашек за ночь; последняя — примерно за час
+          до экзамена, чтобы бодрость пришлась на него. Энергетики с кофе не смешивать.</li>
+        <li><b>Утром — душ, завтрак, свежая одежда и чистый халат:</b> это заметно бодрит.</li>
+        <li><b>За руль после бессонной ночи не садись.</b></li>
+        <li><b>После экзамена — сразу спать.</b></li>
+      </ul>
+      <button class="btn" id="n-to-allnight" style="margin-top:12px">☕ Составить план без сна</button>
     </div>
 
     <h2>Поделиться с группой</h2>
@@ -1515,7 +1542,7 @@ function browseNext(si, term){
 function wireBrowseNext(){
   var b = $("b-next");
   if(b) b.onclick = function(){
-    if(b.dataset.to === "night"){ $("b-menu").onclick(); return; }
+    if(b.dataset.to === "night"){ night.skimSec = 0; saveNight(); $("b-menu").onclick(); return; }
     bSec.value = b.dataset.to; renderBrowse(); window.scrollTo(0, 0);
   };
 }
@@ -1535,7 +1562,14 @@ function hl(text, term){
    не съезжали; «Пересчитать» и смена времени составляют его заново от текущего момента. */
 var K_NIGHT = "physio.night.v1";
 var NIGHT_DEF = {wake: "07:00", leave: "12:15", exam: "13:00"};
-var NP = {fall: 15, pre: 20, cycle: 90, cycles: 5, morning: 20, final: 15};
+var NP = {fall: 15, pre: 20, cycle: 90, cycles: 5, morning: 20, final: 15,
+  nap: 25, trough: 270, breakfast: 420, meal: 20};   // сон 20 мин + 5 встать; самое сонное — с 4:30; завтрак в 7:00
+/* sleep — учу, потом сплю до будильника; allnight — всю ночь без сна; awake — уже встал */
+var NIGHT_MODES = {
+  sleep: "Учишь, потом спишь до будильника. Сон — по возможности целыми циклами по 1,5 часа.",
+  allnight: "Без сна до экзамена. В самое сонное время — короткий сон на 20 минут, утром — душ и завтрак.",
+  awake: "Уже встал или выспался — план от этой минуты до выхода из дома."
+};
 var night = obj(LS.get(K_NIGHT, null));
 function hmOf(v){
   var m = /^(\d{1,2}):(\d{2})/.exec(v || "");
@@ -1544,6 +1578,7 @@ function hmOf(v){
 Object.keys(NIGHT_DEF).forEach(function(k){ if(hmOf(night[k]) < 0) night[k] = NIGHT_DEF[k]; });
 night.done = obj(night.done);
 if(!(night.made > 0)) night.made = 0;
+if(!NIGHT_MODES[night.mode]) night.mode = "sleep";
 if(!(night.skimSec >= 0 && night.skimSec < SEC.length && night.skimSec === Math.floor(night.skimSec))) night.skimSec = 0;
 function saveNight(){ LS.set(K_NIGHT, night); }
 
@@ -1556,57 +1591,87 @@ function fmtDur(m){
 
 function nightPlan(made){
   var base = new Date(made); base.setHours(0, 0, 0, 0);
-  var B = base.getTime(), n = Math.floor((made - B) / 60000), warn = [];
-  // last(t, v) — последний момент «v часов:минут», не позже t
+  var B = base.getTime(), n = Math.floor((made - B) / 60000), warn = [], mode = night.mode;
+  // last(t, v) — последний момент «v часов:минут», не позже t; next(t, v) — первый не раньше t
   function last(t, v){ return t - ((t - v) % 1440 + 1440) % 1440; }
+  function next(t, v){ return t + ((v - t) % 1440 + 1440) % 1440; }
   var ex = hmOf(night.exam); while(ex <= n) ex += 1440;
   var lv = last(ex, hmOf(night.leave));
   if(ex - lv > 360){ lv = ex - 30; warn.push("Выход из дома получился позже экзамена — считаю, что выходишь за 30 минут до него. Проверь время."); }
   if(lv < n) lv = n;
-  var w = last(lv, hmOf(night.wake));
-  if(lv - w > 18 * 60){ w = Math.max(n, lv - 60); warn.push("Подъём получился позже выхода из дома — считаю, что встаёшь за час до выхода. Проверь время."); }
-  var awake = w <= n, sleep = 0, bed = n;
-  if(!awake){
-    var most = w - n - NP.fall;                 // столько можно проспать, если лечь прямо сейчас
-    if(most < 30) awake = true;                 // меньше получаса — ложиться уже нет смысла
-    else {
+
+  // то, что учёбой не занято: сон, подъём, короткий сон, завтрак
+  var fixed = [], sleep = 0, bed = n, w = n, short = false;
+  if(mode === "sleep"){
+    w = last(lv, hmOf(night.wake));
+    if(lv - w > 18 * 60){ w = Math.max(n, lv - 60); warn.push("Подъём получился позже выхода из дома — считаю, что встаёшь за час до выхода. Проверь время."); }
+    var most = w - n - NP.fall;               // столько можно проспать, если лечь прямо сейчас
+    if(most >= NP.cycle){
       if(most >= NP.cycle * NP.cycles + NP.pre) sleep = NP.cycle * NP.cycles;
       else if(most - NP.pre >= NP.cycle){
-        sleep = most - NP.pre;                  // 20 минут на шпаргалку — и спать
+        sleep = most - NP.pre;                // 20 минут на шпаргалку — и спать
         if(sleep % NP.cycle <= 20) sleep -= sleep % NP.cycle;   // почти целый цикл — выровнять
-      } else sleep = most;                      // меньше двух часов — ложиться сразу
+      } else sleep = most;                    // меньше двух часов — ложиться сразу
       bed = w - NP.fall - sleep;
       if(bed % 5){ bed += 5 - bed % 5; sleep = w - NP.fall - bed; }
-    }
+      fixed.push({k: "sleep", a: bed, b: w});
+      if(w < lv) fixed.push({k: "wake", a: w, b: Math.min(w + NP.morning, lv)});
+    } else if(w - n >= 30) short = true;      // до будильника меньше полутора часов — полноценно не поспать
   }
-  var blocks = awake ? [[n, lv]] : [[n, bed], [Math.min(w + NP.morning, lv), lv]];
-  blocks = blocks.filter(function(b){ return b[1] - b[0] >= 5; });
+  if(mode !== "sleep" || short){
+    // короткий сон 20 минут: сразу, если до будильника не выспаться, или в самое сонное время ночи
+    var nap = -1;
+    if(short) nap = n;
+    else if(mode === "allnight"){
+      var tr = NP.trough; while(tr + 120 < n) tr += 1440;
+      nap = Math.max(n + 90, tr);
+      if(nap > tr + 180) nap = -1;            // сонное время уже прошло
+    }
+    if(nap >= 0 && nap + NP.nap <= lv - 90) fixed.push({k: "nap", a: nap, b: nap + NP.nap, short: short});
+    else nap = -1;
+    // душ и завтрак — во время будильника (или в 7:00), не вплотную к выходу
+    var bf = short ? w : next(n, NP.breakfast);
+    if(nap >= 0 && bf < nap + NP.nap && bf + NP.meal > nap) bf = nap + NP.nap;
+    if(bf - n >= 30 && bf + NP.meal <= lv - 30) fixed.push({k: "breakfast", a: bf, b: bf + NP.meal});
+  }
+  fixed.sort(function(x, y){ return x.a - y.a; });
 
-  var todo = [{k: "sheet", len: 20}, {k: "learn", len: 30}, {k: "skim", len: 100}, {k: "trial", len: 15}, {k: "loop", len: 1e9}];
+  // учёба — промежутки между ними до выхода из дома
+  var blocks = [], t0 = n;
+  fixed.forEach(function(f){ if(f.a > t0) blocks.push([t0, Math.min(f.a, lv)]); t0 = Math.max(t0, f.b); });
+  if(lv > t0) blocks.push([t0, lv]);
+  blocks = blocks.filter(function(b){ return b[1] - b[0] >= 10; });
+
+  // по выгоде: шпаргалка → обязательные → все ответы → пробный экзамен; дальше чередовать, чтобы
+  // долгая ночь не превращалась в один бесконечный круг: экзамены → ошибки → ответы второй раз → …
+  var todo = [{k: "sheet", len: 20}, {k: "learn", len: 30}, {k: "skim", len: 100}, {k: "trial", len: 15},
+    {k: "loop", len: 120}, {k: "review", len: 30}, {k: "skim2", len: 90}];
   var steps = [], study = 0;
   blocks.forEach(function(b, bi){
     var t = b[0], room = b[1] - b[0];
     var fin = bi === blocks.length - 1 ? (room >= 45 ? NP.final : room >= 25 ? 10 : 0) : 0;
     var end = b[1] - fin;
+    // после перерыва не доделывать начатое ради нескольких минут (экзамен — 12 минут), а взяться за следующее
+    if(todo[0].started && todo[0].len < 15){ todo.shift(); if(!todo.length) todo.push({k: "loop", len: 120}, {k: "review", len: 30}); }
     while(end - t >= 5 && todo.length){
-      // перед сном не начинать новое дело ради нескольких минут — пусть идут на то, что уже начато
+      // перед перерывом не начинать новое дело ради нескольких минут — пусть идут на то, что уже начато
       if(bi < blocks.length - 1 && t > b[0] && end - t < 15){ steps[steps.length - 1].b = end; t = end; break; }
       var task = todo[0], take = Math.min(task.len, end - t);
-      if(end - t - take < 5) take = end - t;    // хвост короче 5 минут — тому же делу
+      if(end - t - take < 5) take = end - t;  // хвост короче 5 минут — тому же делу
       steps.push({k: task.k, a: t, b: t + take, more: !!task.started});
       task.started = true; task.len -= take; t += take;
       if(task.len < 5) todo.shift();
+      if(!todo.length) todo.push({k: "loop", len: 120}, {k: "review", len: 30});
     }
     if(fin) steps.push({k: "final", a: end, b: b[1]});
     study += room;
   });
-  if(!awake) steps.push({k: "sleep", a: bed, b: w});
-  if(!awake && w < lv) steps.push({k: "wake", a: w, b: Math.min(w + NP.morning, lv)});
+  steps = steps.concat(fixed);
   if(ex > lv) steps.push({k: "road", a: lv, b: ex});
   steps.push({k: "exam", a: ex, b: ex + EXAM.min});
   steps.sort(function(x, y){ return x.a - y.a || x.b - y.b; });
-  return {B: B, n: n, ex: ex, lv: lv, w: w, bed: bed, sleep: sleep, awake: awake, steps: steps, study: study, warn: warn,
-    end: B + (ex + EXAM.min) * 60000};
+  return {B: B, n: n, ex: ex, lv: lv, w: w, bed: bed, sleep: sleep, mode: mode, short: short, steps: steps, study: study,
+    warn: warn, end: B + (ex + EXAM.min) * 60000};
 }
 /* сейчас по составленному плану: шаг, который идёт (или null), и сам план */
 function nightCurrent(){
@@ -1626,8 +1691,12 @@ var NIGHT_STEP = {
   trial: ["⏱", "Пробный экзамен", "", "Начать экзамен"],
   loop: ["🔁", "Экзамен → ошибки, по кругу",
     "Круг — около 30 минут: экзамен, потом «Прорешать ошибки» в итогах. Каждый новый вариант сам берёт вопросы, которых ещё не было.", "Начать экзамен"],
+  review: ["📝", "Повторить мои ошибки", "Все вопросы, где ошибался, в режиме «Учить с повторами». Ошибки — самое выгодное повторение.", "Повторить ошибки"],
+  skim2: ["👀", "Пролистать ответы второй раз", "Второй проход быстрее: задерживайся только на том, что не узнаёшь.", "Открыть шпаргалку"],
   final: ["📖", "Повторить шпаргалку ПД и пищеварения", "Только повторение — новое уже не учить.", "К шпаргалке"],
   sleep: ["🌙", "Сон", "", ""],
+  nap: ["😴", "Короткий сон 20 минут", "", ""],
+  breakfast: ["🍳", "Душ и завтрак", "Умыться прохладной водой, позавтракать, переодеться — это заметно бодрит. Проверь халат, зачётку и ручку.", ""],
   wake: ["☕", "Подъём, умыться, позавтракать", "На пустой желудок думается хуже. Проверь, что взял халат, зачётку и ручку.", ""],
   road: ["🚶", "Дорога", "Только шпаргалка ПД и пищеварения с телефона. Новое не учить.", "К шпаргалке"],
   exam: ["🎓", "Экзамен", "", ""]
@@ -1642,6 +1711,7 @@ function nightText(st, P){
   var X = examFacts();
   if(st.k === "sheet") return "Эти два вопроса есть в каждом варианте — 2 верных из " + X.need + " нужных. Прочитай обе шпаргалки ниже, вникая в каждую строку.";
   if(st.k === "learn") return "«Учить с повторами»: " + X.pd + " вопросов про потенциал действия и " + X.dig + " — про пищеварение. Ошибся — вопрос вернётся, пока не ответишь верно.";
+  if(st.k === "skim2") return NIGHT_STEP.skim2[2] + (night.skimSec > 0 ? " Сейчас — раздел " + (night.skimSec + 1) + " из " + SEC.length + "." : "");
   if(st.k === "skim") return "«Шпаргалка: только ответы», раздел за разделом — внизу каждого кнопка «Следующий раздел». " +
     "Читай вопрос и ответ, не зубри: на тесте ответ надо узнать среди вариантов, а это получается даже после одного прочтения. " +
     "Примерно 6 секунд на вопрос." + (night.skimSec > 0 ? " Ты остановился на разделе " + (night.skimSec + 1) + " из " + SEC.length + "." : "");
@@ -1649,16 +1719,21 @@ function nightText(st, P){
   if(st.k === "sleep"){
     var cyc = P.sleep % NP.cycle === 0 ? " — " + P.sleep / NP.cycle + " " + plural(P.sleep / NP.cycle, "цикл", "цикла", "циклов") + " по 1,5 часа" : "";
     return (P.bed - P.n < 5 ? "Ложись сразу. " : "Лечь в " + fmtHM(P.bed) + " — 15 минут на засыпание. ") +
-      "Будильник на " + fmtHM(P.w) + ", лучше два. Сон " + fmtDur(P.sleep) + cyc + "." +
-      (P.sleep < 90 ? " Даже короткий сон лучше, чем никакого." : " Во сне прочитанное закрепляется.");
+      "Будильник на " + fmtHM(P.w) + ", лучше два. Сон " + fmtDur(P.sleep) + cyc + ". Во сне прочитанное закрепляется." +
+      (P.bed - P.n < 5 ? " Уже выспался — выбери выше «Уже встал»." : "");
   }
+  if(st.k === "nap") return (st.short
+      ? "До будильника меньше полутора часов — полноценно не поспать, а 20 минут сна заметно освежают. "
+      : "Самое сонное время ночи — 20 минут сна заметно освежают. ") +
+    "Будильник через 20 минут, не дольше: из глубокого сна проснёшься разбитым. Не уснул — просто полежи с закрытыми глазами.";
   if(st.k === "exam") return X.n + " вопросов за " + X.min + " минут, нужно " + X.need + " верных. " + X.sec + " секунд на вопрос, ответить на все. Удачи!";
   return NIGHT_STEP[st.k][2];
 }
 function nightAct(k){
   if(k === "sheet" || k === "final" || k === "road"){ var h = $("n-pd"); if(h) h.scrollIntoView({block: "start"}); }
   else if(k === "learn") learnMust("all");
-  else if(k === "skim") skimAll();
+  else if(k === "skim" || k === "skim2") skimAll();
+  else if(k === "review") reviewWrong();
   else if(k === "trial" || k === "loop") examNow();
 }
 
@@ -1696,6 +1771,11 @@ function learnMust(which){
   });
 }
 function examNow(){ nightStart("Экзамен", "exam", function(){ return examList(true); }); }
+function reviewWrong(){
+  var ids = wrongIds();
+  if(!ids.length){ learnMust("all"); return; }   // ошибок нет — повторить обязательные
+  nightStart("Мои ошибки", "learn", function(){ return QS.filter(function(q){ return ids.indexOf(q.id) >= 0; }); });
+}
 function skimAll(){
   settings.brief = true; saveSettings();
   bQ.value = "";
@@ -1724,16 +1804,29 @@ function renderNight(){
     var inp = $("n-" + k), v = night[k].length === 4 ? "0" + night[k] : night[k];
     if(inp.value !== v) inp.value = v;
   });
+  Array.prototype.forEach.call(document.querySelectorAll("#n-modes .chip"), function(b){
+    b.classList.toggle("on", b.dataset.nmode === night.mode);
+  });
+  $("n-mode-hint").textContent = NIGHT_MODES[night.mode];
+  $("n-wake-row").classList.toggle("hidden", night.mode !== "sleep");
   renderNightPlan();
 }
 function renderNightPlan(){
   var cur = nightCurrent();
   if(!cur) return;
   var P = cur.plan, m = (Date.now() - P.B) / 60000;
+  var napSt = P.steps.filter(function(x){ return x.k === "nap"; })[0];
   $("n-sum").innerHTML = "План от <b>" + fmtHM(P.n) + "</b>: до экзамена " + fmtDur(P.ex - P.n) +
-    " — учёба " + fmtDur(P.study) + (P.sleep ? ", сон " + fmtDur(P.sleep) : "") + ".";
+    " — учёба " + fmtDur(P.study) + (P.sleep ? ", сон " + fmtDur(P.sleep) : napSt ? ", короткий сон 20 минут" : P.mode === "allnight" ? ", без сна" : "") + ".";
   var warn = P.warn.slice();
-  var morn = P.awake ? 0 : P.lv - Math.min(P.w + NP.morning, P.lv);
+  var morn = P.sleep ? P.lv - Math.min(P.w + NP.morning, P.lv) : 0;
+  if(P.short) warn.push("До будильника меньше полутора часов — полноценно поспать не выйдет, поэтому в плане короткий сон на 20 минут. " +
+    "Не хочешь спать — выбери «Всю ночь без сна», уже выспался — «Уже встал».");
+  var hn = P.n % 1440;
+  if(P.mode === "awake" && (hn >= 19 * 60 || hn < 4 * 60)) warn.push("«Уже встал» — для утра. Если впереди ночь, выбери «Учу, потом сплю» " +
+    "или «Всю ночь без сна» — в плане появятся сон или короткий сон и завтрак.");
+  if(P.mode === "allnight" && P.lv - P.n >= 240) warn.push("Без сна на экзамене думается медленнее. Если можешь поспать хотя бы 1,5 часа — " +
+    "выбери «Учу, потом сплю»: это выгоднее лишних часов учёбы.");
   if(P.sleep && P.sleep < 240) warn.push("Сна получается меньше 4 часов. Всё равно поспи — даже короткий сон лучше бессонной ночи." +
     (morn >= 180 ? " Если можно встать позже — передвинь «Встаю в» на час: утром до выхода ещё " + fmtDur(morn) +
       ", а сон сейчас важнее лишнего часа учёбы." : ""));
@@ -1796,6 +1889,13 @@ function renderNightPlan(){
 $("btn-night").onclick = openNight;
 $("n-menu").onclick = function(){ show("menu"); paintMenu(); };
 $("n-replan").onclick = replanNight;
+Array.prototype.forEach.call(document.querySelectorAll("#n-modes .chip"), function(b){
+  b.onclick = function(){ night.mode = b.dataset.nmode; replanNight(); };
+});
+$("n-to-allnight").onclick = function(){
+  night.mode = "allnight"; replanNight();
+  $("n-plan-h").scrollIntoView({block: "start"});
+};
 ["wake", "leave", "exam"].forEach(function(k){
   $("n-" + k).onchange = function(){
     if(hmOf(this.value) < 0){ this.value = night[k]; return; }
