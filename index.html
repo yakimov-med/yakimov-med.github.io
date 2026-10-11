@@ -24,6 +24,7 @@
   --ok:#2C6B40; --ok-bg:#EBF3EA; --ok-line:#AAC9AF; --on-ok:#FFFFFF;
   --no:#A23B2F; --no-bg:#F8EAE6; --no-line:#DCAAA1; --on-no:#FFFFFF;
   --warn:#7C5918; --warn-bg:#F7EFDB; --warn-line:#D8C08D;
+  --promo-a:#2456D6; --promo-b:#C9303A; --on-promo:#FFFFFF;
   --focus:#24604F; --link:#24604F; --selection:#D5E6DC; --shadow-c:#3B30200F;
   --radius:14px;
   --shadow:0 1px 2px var(--shadow-c);
@@ -39,6 +40,7 @@
     --ok:#96D3A8; --ok-bg:#1F3326; --ok-line:#47714F; --on-ok:#10261A;
     --no:#F2A99F; --no-bg:#3D2623; --no-line:#7D4C45; --on-no:#3A1612;
     --warn:#E7C67E; --warn-bg:#35301F; --warn-line:#74653C;
+    --promo-a:#2456D6; --promo-b:#C9303A; --on-promo:#FFFFFF;
     --focus:#B6DBC9; --link:#A9D4BF; --selection:#33493E; --shadow-c:#00000033;
     --shadow:0 1px 2px var(--shadow-c);
   }
@@ -50,6 +52,7 @@
   --ok:#96D3A8; --ok-bg:#1F3326; --ok-line:#47714F; --on-ok:#10261A;
   --no:#F2A99F; --no-bg:#3D2623; --no-line:#7D4C45; --on-no:#3A1612;
   --warn:#E7C67E; --warn-bg:#35301F; --warn-line:#74653C;
+  --promo-a:#2456D6; --promo-b:#C9303A; --on-promo:#FFFFFF;
   --focus:#B6DBC9; --link:#A9D4BF; --selection:#33493E; --shadow-c:#00000033;
   --shadow:0 1px 2px var(--shadow-c);
 }
@@ -182,10 +185,17 @@ details[open] > summary .ico.turn{transform:rotate(180deg)}
 .author b{font-size:16px}
 .author p{margin:6px 0 12px;font-size:14.5px;color:var(--muted);line-height:1.5}
 .offer{margin:0 0 14px;padding:12px 14px;border-radius:10px;background:var(--accent-soft);font-size:14.5px;line-height:1.5}
-.promo{padding:16px;margin-top:14px}
-.promo > b{font-size:16px}
+/* реклама бота: сине-красная рамка, чтобы отличалась от карточек тренажёра */
+.promo,.promo-line{border:2px solid transparent;
+  background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(120deg,var(--promo-a),var(--promo-b)) border-box}
+.promo{padding:16px;margin-top:14px;box-shadow:0 6px 18px -10px var(--promo-a)}
+.promo > b{display:block;font-size:16px}
 .promo p{margin:6px 0 12px;font-size:14.5px;color:var(--muted);line-height:1.5}
-.promo-line{font-size:13.5px;color:var(--muted);line-height:1.5;margin:18px 0 0}
+.promo-tag{display:inline-block;margin-bottom:8px;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:600;letter-spacing:.02em;
+  color:var(--on-promo);background:linear-gradient(120deg,var(--promo-a),var(--promo-b))}
+.btn.promo-btn{border:0;color:var(--on-promo);background:linear-gradient(120deg,var(--promo-a),var(--promo-b))}
+.btn.promo-btn:hover{filter:brightness(1.08)}
+.promo-line{font-size:14px;color:var(--muted);line-height:1.5;margin:18px 0 0;padding:12px 14px;border-radius:14px}
 .promo-line a{color:var(--link);font-weight:600}
 .foot{font-size:13.5px;color:var(--muted);line-height:1.5;margin:18px 0 0}
 .foot .btn{margin-top:12px}
@@ -535,13 +545,13 @@ html:not(.ready) *{transition:none !important}
       </div>
     </div>
     <div class="card promo" id="promo">
+      <span class="promo-tag">Telegram-бот</span>
       <b>Скачать видео из ВК, YouTube, TikTok</b>
       <p>
         Лекция или разбор темы, который хочется пересмотреть без интернета, — бот VideoSave
         сохранит видео из ВК, YouTube, TikTok, Instagram и RuTube: отправьте ему ссылку, он пришлёт файл.
-        Бота мы сделали вместе с другом.
       </p>
-      <a class="btn wide" href="https://t.me/welutsave_bot" target="_blank" rel="noopener"><svg class="ico s"><use href="#i-download"/></svg>Открыть бота: @welutsave_bot</a>
+      <a class="btn wide promo-btn" href="https://t.me/welutsave_bot?start=test-jenya" target="_blank" rel="noopener"><svg class="ico s"><use href="#i-download"/></svg>Открыть бота: @welutsave_bot</a>
     </div>
     <p class="foot" id="menu-reset">
       Прогресс, ошибки и отметки хранятся в этом браузере (localStorage). Файл можно копировать и
@@ -595,8 +605,9 @@ html:not(.ready) *{transition:none !important}
     <div class="card map" id="r-sections"></div>
     <div id="r-wrong"></div>
     <p class="promo-line">
+      <span class="promo-tag">Telegram-бот</span><br>
       Пересмотреть лекцию без интернета: бот
-      <a href="https://t.me/welutsave_bot" target="_blank" rel="noopener">@welutsave_bot</a>
+      <a href="https://t.me/welutsave_bot?start=test-jenya" target="_blank" rel="noopener">@welutsave_bot</a>
       сохраняет видео из ВК, YouTube, TikTok, Instagram и RuTube.
     </p>
   </div>
