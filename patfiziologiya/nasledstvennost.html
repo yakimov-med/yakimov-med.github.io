@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Патофизиология: наследственность</title>
+<meta name="description" content="Патофизиология, итоговое занятие № 1: этиология наследственных болезней, мутации, типы наследования, хромосомные болезни, фенилкетонурия, болезни, сцепленные с полом, митохондриальное наследование.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#9E2A2B; --accent-soft:#F6E4E2;
+  --blue:#1C5A8C; --blue-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E3F1E7; --ok-fg:#1F6B3A;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#F0928A; --accent-soft:#3A1F1E;
+    --blue:#82B6E4; --blue-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#15301F; --ok-fg:#8FD6A6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#F0928A; --accent-soft:#3A1F1E;
+  --blue:#82B6E4; --blue-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#15301F; --ok-fg:#8FD6A6;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:780px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--blue); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2rem, 6vw, 2.8rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.5rem; font-weight:700}
+h3{font-size:1.1rem; font-weight:700; margin-top:1.5rem}
+p{margin:.6rem 0}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.05rem; color:var(--muted); max-width:64ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--blue-soft); color:var(--blue); text-decoration:none}
+a.chip.pdf{background:var(--accent); color:var(--surface)}
+nav.toc{margin:1.4rem 0 0; font-size:.93rem}
+nav.toc ol{padding-left:1.6rem; margin:.5rem 0 0; columns:2 250px; column-gap:1.8rem}
+nav.toc li{padding:.14rem 0; break-inside:avoid}
+nav.toc li::marker{font-family:var(--mono); color:var(--muted); font-size:.85em}
+section{padding-top:2.5rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .8rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.qn{font:500 .8rem/1 var(--mono); color:var(--surface); background:var(--accent); padding:.3rem .45rem; border-radius:5px; flex:none}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.32rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.4rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.def{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.75rem 1rem; margin:.9rem 0}
+.def .k{font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.25rem}
+.def p{margin:.2rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.3rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .7rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td.lv{font-weight:600; white-space:nowrap}
+.note{background:var(--blue-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.star{color:var(--accent); font-weight:600}
+.src{font:400 .78rem/1.4 var(--mono); color:var(--muted); margin-top:.4rem}
+/* лесенка уровней */
+.levels{display:grid; gap:8px; margin:1rem 0}
+.lvl{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem .9rem; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.65rem .85rem; border-left:5px solid var(--accent)}
+.lvl:nth-child(2){margin-left:4%} .lvl:nth-child(3){margin-left:8%} .lvl:nth-child(4){margin-left:12%} .lvl:nth-child(5){margin-left:16%}
+.lvl b{font-family:var(--serif); font-size:1rem}
+.lvl small{display:block; color:var(--muted); font-size:.78rem; line-height:1.3}
+.lvl .who{font-size:.9rem}
+@media (max-width:560px){ .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0} }
+/* цепочки этапов */
+.flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:1rem 0}
+.st{flex:1 1 130px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.6rem .7rem; position:relative; display:grid; gap:.25rem; align-content:start}
+.st .n{font:500 .74rem/1.2 var(--mono); color:var(--muted)}
+.st b{font-family:var(--serif); font-size:.98rem; line-height:1.25}
+.st .h{font-size:.82rem; color:var(--ink); line-height:1.35}
+.st .h em{font-style:normal; font-weight:600; color:var(--accent)}
+.st.zone{background:var(--accent-soft); border-color:transparent}
+.arrow{flex:0 0 auto; align-self:center; font:500 1.1rem/1 var(--mono); color:var(--muted)}
+@media (max-width:560px){ .flow{flex-direction:column} .arrow{transform:rotate(90deg); align-self:center} .st{flex-basis:auto} }
+/* хронология */
+.tl{list-style:none; padding:0; margin:1rem 0; border-left:2px solid var(--line)}
+.tl li{position:relative; padding:.1rem 0 .7rem 1.1rem}
+.tl li::before{content:""; position:absolute; left:-6px; top:.55rem; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+.tl .y{font:500 .85rem/1.3 var(--mono); color:var(--accent); display:block}
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin:.8rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .9rem}
+.card h4{margin:0 0 .35rem; font:600 .98rem/1.3 var(--sans)}
+.card ul{margin:.2rem 0; padding-left:1.05rem} .card li{margin:.22rem 0; font-size:.92rem}
+.card.a{border-top:4px solid var(--accent)} .card.b{border-top:4px solid var(--blue)}
+/* самопроверка */
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--blue); background:transparent; color:var(--blue); cursor:pointer}
+button:hover{background:var(--blue-soft)}
+details.q{border-bottom:1px solid var(--line)}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.7rem 2rem .7rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.58rem; font:500 1.2rem/1 var(--mono); color:var(--blue)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .85rem; font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.45rem; padding-left:1.1rem; font-size:.92rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.32rem} th,td{padding:.5rem .55rem} }
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+/* патофизиология: части ответа */
+section[id^="q"] > h3{font:600 .78rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin:1.4rem 0 .3rem}
+.easy{background:var(--ok-bg); border-radius:10px; padding:.75rem 1rem; margin:.5rem 0}
+.easy > :first-child{margin-top:0} .easy > :last-child{margin-bottom:0}
+.lead-link{font-weight:600; color:var(--accent)}
+.kv{display:inline-block; font:500 .72rem/1.2 var(--mono); padding:.18rem .4rem; border-radius:5px; vertical-align:.08em}
+.kv.c{background:var(--ok-bg); color:var(--ok-fg)} .kv.d{background:var(--accent-soft); color:var(--accent)}
+details.more{border:1px solid var(--line); border-radius:8px; background:var(--surface); margin:.45rem 0}
+details.more summary{cursor:pointer; padding:.6rem .8rem; font-weight:500; list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"? "; font-family:var(--mono); color:var(--blue)}
+details.more .a{padding:0 .8rem .7rem; font-size:.95rem}
+details.more .a p{margin:.3rem 0}
+.uncheck{color:var(--warn-fg); font-weight:600; white-space:nowrap}
+dl.gloss{margin:.6rem 0} dl.gloss dt{font-weight:600; margin-top:.6rem} dl.gloss dd{margin:.1rem 0 0 0; color:var(--ink)}
+svg.scheme{width:100%; height:auto; max-width:560px; display:block; margin:.8rem auto}
+svg.scheme text{font-family:var(--sans); fill:var(--ink)}
+svg.scheme .box{fill:var(--surface); stroke:var(--line)}
+svg.scheme .bad{fill:var(--accent-soft); stroke:var(--accent)}
+svg.scheme .good{fill:var(--ok-bg); stroke:var(--ok-fg)}
+svg.scheme .ln{stroke:var(--muted); fill:none; stroke-width:1.6}
+svg.scheme text.acc{fill:var(--accent)}
+svg.scheme .lnr{stroke:var(--accent); fill:none; stroke-width:1.8}
+@media print{ details.more{break-inside:avoid} details.more summary::before{content:none} .easy{border:1px solid #ccc} }
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.48}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar, a.chip.pdf{display:none}
+  section{padding-top:1.1rem}
+  h1{font-size:21pt} h2{font-size:14.5pt} h2, h3, .sec-head{break-after:avoid}
+  .tile, .lvl, .st, details.q, .tl li, tr, ol.steps li, ul.facts li{break-inside:avoid}
+  .tbl{overflow:visible}
+  .tbl, .def, .tile, .lvl, .st, .card{border-color:#ccc}
+  table{font-size:8.6pt} th,td{padding:.3rem .4rem}
+  .tiles{grid-template-columns:1fr 1fr}
+  .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0}
+  .flow{flex-direction:column} .arrow{transform:rotate(90deg)} .st{flex:0 0 auto}
+  .cols{grid-template-columns:1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Патофизиология · итоговое занятие № 1 · медфак ЧГУ</div>
+  <h1>VI. Наследственность</h1>
+  <p class="lead">Откуда берутся наследственные болезни, какими бывают мутации, как болезнь передаётся детям, чем доминантные болезни отличаются от рецессивных, как устроены синдромы Дауна, Шерешевского–Тернера, Клайнфельтера и трисомии X, патогенез фенилкетонурии, болезни, сцепленные с полом, и митохондриальное наследование.</p>
+  <div class="chips">
+    <a class="chip pdf" href="nasledstvennost.pdf">скачать PDF для телефона</a>
+    <span class="chip">13 вопросов раздела</span>
+    <span class="chip">методичка кафедры, 6 листов</span>
+    <span class="chip">Адо, 2000, гл. 3.7</span>
+    <span class="chip">«Краткий курс», лекция XVI</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Вопросы</div>
+    <ol>
+      <li><a href="#q1">Этиология наследственных болезней</a></li>
+      <li><a href="#q2">Виды мутаций</a></li>
+      <li><a href="#q3">Типы наследования</a></li>
+      <li><a href="#q4">Аутосомно-доминантные болезни</a></li>
+      <li><a href="#q5">Аутосомно-рецессивные болезни</a></li>
+      <li><a href="#q6">Методы изучения</a></li>
+      <li><a href="#q7">Болезнь Дауна и др.</a></li>
+      <li><a href="#q8">Синдром Шерешевского–Тернера</a></li>
+      <li><a href="#q9">Синдром трисомии X</a></li>
+      <li><a href="#q10">Синдром Клайнфельтера</a></li>
+      <li><a href="#q11">Патогенез, фенилкетонурия</a></li>
+      <li><a href="#q12">Болезни, сцепленные с полом</a></li>
+      <li><a href="#q13">Митохондриальное наследование</a></li>
+    </ol>
+    <p style="margin:.6rem 0 0"><a href="#quiz">Самопроверка</a> · <a href="#slovar">Словарик</a> · <a href="#src">Источники</a> · <a href="index.html">Все разделы</a></p>
+  </nav>
+</header>
+
+<div class="warn"><p><strong class="t">Важно про кариотипы в методичке.</strong> В листах кафедры кариотипы записаны с ошибками: «44ХХУ», «47 (21 ХХХ)», «44 ХО», «44ХХХ», «44ХУУ». Здесь в тексте они цитируются как в методичке, а правильная запись дана рядом и в блоках «частая ошибка». На зачёте пишите правильно: <b>47,XXY</b> · <b>47,XX,+21</b> (или 47,XY,+21) · <b>45,X</b> · <b>47,XXX</b> · <b>47,XYY</b>. Адо пишет так же по смыслу: «44 аутосомы + XXY», «45 аутосом + XX» (стр. PDF 128).</p></div>
+
+<section id="top">
+  <div class="sec-head"><h2>Главное за пять минут</h2></div>
+  <div class="tiles">
+    <div class="tile"><b>≈4%</b><span>новорождённых имеют генетически обусловленные дефекты — по данным ВОЗ (методичка, лист 1)</span></div>
+    <div class="tile"><b>Мутация</b><span>главная причина наследственной болезни (Адо, PDF 121)</span></div>
+    <div class="tile"><b>3 вида мутаций</b><span>генные · хромосомные · геномные (методичка, листы 1–2)</span></div>
+    <div class="tile"><b>Аа — болен</b><span>аутосомно-доминантный тип: болеет гетерозигота, больные в каждом поколении (Адо, PDF 126)</span></div>
+    <div class="tile"><b>Аа — носитель</b><span>аутосомно-рецессивный тип: болеет только гомозигота аа (методичка, лист 3; Адо, PDF 127)</span></div>
+    <div class="tile"><b>Ген → фермент → реакция → признак</b><span>формула патогенеза генных болезней (Адо, PDF 123)</span></div>
+    <div class="tile"><b>1 на 500–800</b><span>новорождённых — болезнь Дауна, трисомия 21 (методичка, лист 1)</span></div>
+    <div class="tile"><b>Тельца Барра</b><span>Тернер — нет; трисомия X — два; Клайнфельтер — столько, сколько лишних X (Адо, PDF 128)</span></div>
+    <div class="tile"><b>≈92%</b><span>патологии человека — мультифакториальные болезни с наследственной предрасположенностью (Адо, PDF 130)</span></div>
+    <div class="tile"><b>Только от матери</b><span>митохондриальное наследование: мтДНК передаётся с яйцеклеткой (пересказ лекции 2; внешние источники)</span></div>
+  </div>
+  <p class="src">Номера страниц Адо — страницы PDF-файла учебника (печатная = PDF − 33).</p>
+</section>
+
+<section id="q1">
+  <div class="sec-head"><span class="qn">VI.1</span><h2>Этиология наследственных болезней.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры, лист 1</span>
+    <p><b>Наследственные заболевания</b> — заболевания, возникновение и развитие которых связано с дефектами в наследственном аппарате клеток, передаваемыми по наследству через гаметы.</p>
+    <p>Наследственная патология возникает под влиянием <b>мутагенных воздействий</b>, т.е. таких экзогенных и эндогенных факторов, которые вызывают изменения генотипа. Выделяют спонтанные и индуцированные мутации. Спонтанные мутации возникают под влиянием обычных, фоновых воздействий, а индуцированные мутации появляются при действии патогенных агентов. По своей природе мутагены могут быть физическими, химическими и биологическими.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Причина</b> — мутация: «Мутация — это главная причина возникновения наследственного заболевания» (Адо, PDF 121).</li>
+    <li><b>Мутагены</b> — физические, химические, биологические (таблица ниже).</li>
+    <li><b>Условие</b> — возраст родителей: «У матерей в возрасте после 35-40 лет частота спонтанных выкидышей и хромосомных болезней детей возрастает» (методичка, лист 1).</li>
+    <li><b>Наследственное ≠ врождённое.</b> Врождённые болезни могут быть вызваны внутриутробным повреждением — инфекцией (сифилис, краснуха, токсоплазмоз) или иными повреждающими факторами во время беременности (методичка, лист 1). Болезни, похожие на наследственные, но без изменения генотипа, — <b>фенокопии</b> (Адо, PDF 123).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy">
+    <p>ДНК — это книга рецептов, по которой клетка собирает белки. Мутация — опечатка в книге. Если опечатка в обычной клетке тела (кожа, печень), она умрёт вместе с хозяином. Если в половой клетке — книгу с опечаткой получат дети, и у них все клетки будут работать по испорченному рецепту. Это и есть наследственная болезнь.</p>
+    <p>Мутагены — то, что «портит книгу»: облучение, некоторые химикаты и лекарства, вирусы. Возраст матери — не мутаген, а условие: с годами при делении яйцеклетки чаще случаются ошибки.</p>
+  </div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Мутаген</b><span class="h">физический, химический, биологический; или спонтанная ошибка</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">защита</span><b>Стабильность генотипа</b><span class="h">диплоидность, доминирование нормального аллеля, оперон, <em>репарация ДНК</em></span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">пусковое звено</span><b>Мутация в гамете</b><span class="h">закрепляется и передаётся потомству</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">проявление</span><b>Наследственная болезнь</b><span class="h">генная или хромосомная</span></div>
+  </div>
+  <ol class="steps">
+    <li><span class="kv c">компенсация</span> Генотип защищён (Адо, PDF 120): <b>дублированность</b> (диплоидность); <b>доминирование нормального аллеля</b> — поэтому рецессивная болезнь не проявляется у гетерозиготы (носителем гена фенилпировиноградной олигофрении является 1 из 50 человек, но они не больны); <b>система оперона</b> — блокирует патологический ген (например, онкоген); <b>репарация ДНК</b> ферментами (инсертаза, экзо- и эндонуклеаза, ДНК-полимераза, лигаза).</li>
+    <li><span class="kv c">компенсация</span> Клетки-мутанты в теле удаляются макрофагами и естественными киллерами (Адо, PDF 122).</li>
+    <li><span class="kv d">повреждение</span> Если защита не справилась — мутация закрепляется. В соматической клетке она по наследству не передаётся (лейкодермические пятна, опухоль); в половой клетке (гаметическая мутация) передаётся из поколения в поколение (Адо, PDF 122).</li>
+    <li><b>Ведущее звено</b> — сама мутация: устранить её медицина не может, поэтому лечение наследственных болезней — симптоматическое и патогенетическое: «устранять причину, исправлять генотип медицина сегодня не может» (Адо, PDF 122).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Мутагены</th><th>Примеры — дословно по методичке</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Физические</td><td>коротковолновые излучения (рентгеновские лучи, ультрафиолетовые лучи), продукты радиоактивного распада</td></tr>
+      <tr><td class="lv">Химические</td><td>цитостатические препараты (винкристин, меркаптопурин), алкилирующие соединения (азотистый иприт, фенол, формальдегид, бензол), соли тяжелых металлов (ртуть, свинец, фосфор)</td></tr>
+      <tr><td class="lv">Биологические</td><td>ДНК- и РНК-содержащие вирусы (краснуха, инфекционный мононуклеоз, вирусный гепатит, СПИД), которые являются переносчиками онкогенов</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры, лист 1. Адо добавляет космические лучи и термические факторы (PDF 122).</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Вклад наследственности и среды (Адо)</th><th>Пример</th></tr></thead>
+    <tbody>
+      <tr><td>1. Проявление не зависит от среды; среда влияет лишь на выраженность</td><td>все описанные наследственные болезни — ФКУ, гемофилия и др.</td></tr>
+      <tr><td>2. Наследственные, но среда существенно влияет на проявление</td><td>подагра — только у 10% носителей гена; непереносимость молока при дефиците β-галактозидазы; гемолиз при фавизме после сульфаниламидов</td></tr>
+      <tr><td>3. С наследственной предрасположенностью (мультифакториальные) — главная причина в среде, гены создают условия</td><td>≈92% общей патологии: гипертоническая болезнь, ИБС, атеросклероз, сахарный диабет, язвенная болезнь, атопия</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 129–130</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему число наследственных болезней в популяции почти постоянно и что его нарушает?</summary><div class="a"><p>Естественный отбор удаляет мутантов, а новые мутации появляются — устанавливается равновесие (закон Харди–Вайнберга). Нарушают его: близкородственные браки (инбридинг), «мутационное давление» (сильный мутаген, например авария на Чернобыльской АЭС), «давление отбора» (благодаря лечению больные доживают до детородного возраста и передают ген), «дрейф генов» (Адо, PDF 122).</p></div></details>
+  <details class="more"><summary>Почему частота наследственных болезней растёт?</summary><div class="a"><p>Резко (в 10–12 раз) снизилась детская смертность, и мутантов выявляют в более позднем возрасте; увеличилась продолжительность жизни больных — они доживают до рождения детей («Краткий курс», лекция XVI).</p></div></details>
+  <details class="more"><summary>Какие бывают изменчивость и мутации по происхождению?</summary><div class="a"><p>Изменчивость: ненаследственная (модификационная) и наследственная — комбинативная (новые сочетания генов в мейозе и при оплодотворении) и мутационная (Адо, PDF 120–121). Мутации: спонтанные (от недостаточно изученных, вероятно эндогенных причин; с возрастом матери риск синдрома Дауна — 1:2000 у женщины 20 лет и 1:45 старше 45 лет) и индуцированные — мутагенами (Адо, PDF 122).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать врождённую болезнь наследственной. Врождённый сифилис или токсоплазмоз — врождённые, но не наследственные: генотип не изменён (Адо, PDF 123). И наоборот, наследственная болезнь может проявиться не при рождении, а в 35–40 лет (хорея Гентингтона, методичка, лист 3). <b>Неточность методички:</b> фосфор в списке «соли тяжелых металлов» — не металл (вывод конспекта); фенол, бензол и формальдегид — мутагены, но к алкилирующим соединениям в строгом смысле не относятся <span class="uncheck">⚠ не проверено</span> по источникам курса. <b>Связь с клиникой:</b> цитостатики (винкристин, меркаптопурин) сами мутагенны — поэтому при их приёме нужна контрацепция <span class="uncheck">⚠ не проверено</span>.</p></div>
+</section>
+
+<section id="q2">
+  <div class="sec-head"><span class="qn">VI.2</span><h2>Виды мутаций.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определения · методичка кафедры, листы 1–2</span>
+    <p><b>Генные мутации</b> связаны с изменением структуры отдельных генов. На молекулярном уровне механизмы генных мутаций могут быть обусловлены выпадением, заменой или вставкой новых нуклеотидов в цепи ДНК.</p>
+    <p><b>Хромосомные мутации</b> – это структурные перестройки хромосом: делеции (выпадение участка хромосомы), дупликации (удлинение участка хромосомы), транслокации (обмен сегментами между хромосомами) и инверсии (поворот плеча хромосом на 180 градусов).</p>
+    <p><b>Геномные мутации</b> характеризуются изменением числа хромосом в наборе. Различают полиплодии – кратное увеличение полного набора хромосом […] и анеуплоидии – это наиболее распространенный класс геномных мутаций, обуславливающих основные формы хромосомных болезней.</p>
+  </div>
+  <p>Деление на три вида — по трём уровням организации генетического материала: гены, хромосомы, геном (Адо, PDF 121). Другие классификации:</p>
+  <ul class="facts">
+    <li><b>По причине</b> — спонтанные и индуцированные (методичка, лист 1).</li>
+    <li><b>По клетке</b> — соматические (не наследуются) и гаметические (наследуются) (Адо, PDF 122).</li>
+    <li><b>По биологическому значению</b> — патогенные, нейтральные, благоприятные (otvety, вопрос 44); <b>летальные</b> — вызывают спонтанные аборты и мертворождения (Адо, PDF 121).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy">
+    <p>ДНК — библиотека из 46 томов (хромосом). <b>Генная мутация</b> — опечатка в одном рецепте. <b>Хромосомная</b> — из тома вырвали страницы (делеция), вклеили лишний раз (дупликация), вклеили вверх ногами (инверсия) или обменяли страницы с другим томом (транслокация). <b>Геномная</b> — в библиотеке не то число томов: лишний том (трисомия), недостаёт тома (моносомия) или вся библиотека в трёх экземплярах (полиплоидия).</p>
+  </div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li><b>Генная мутация</b> (Адо, PDF 121): модификация пуринового или пиримидинового основания с образованием ошибочных пар и их фиксацией (ионизирующая радиация, химические мутагены); таутомеризация оснований при высоких температурах; пиримидиновые (чаще тиминовые) димеры под действием УФО.</li>
+    <li><b>Последствие зависит от участка</b>: если изменён второстепенный участок белка (не активный центр фермента) — функция почти не страдает; мутации, искажающие принципиально важные участки, вызывают серьёзные расстройства функций, нарушения развития и даже гибель (Адо, PDF 121; методичка, лист 1). Пример — серповидно-клеточная анемия: в гемоглобине глутаминовая кислота заменена на валин (Адо, PDF 124).</li>
+    <li><b>Хромосомная мутация</b> — поломка и неправильное соединение участков хромосом; пример — делеция части короткого плеча 5-й хромосомы, синдром «кошачьего крика» (методичка, лист 6).</li>
+    <li><b>Геномная мутация</b> — нерасхождение хромосом при делении («Краткий курс», лекция XVI): гамета получает лишнюю хромосому или не получает её → после оплодотворения трисомия или моносомия.</li>
+    <li><span class="kv d">повреждение</span> Полиплоидии «приводят к нежизнеспособности организма и являются причиной спонтанных абортов и мертворождений»; анеуплоидии — основные хромосомные болезни (методичка, лист 2).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Вид</th><th>Что меняется</th><th>Пример</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Генная</td><td>нуклеотиды внутри гена: выпадение, замена, вставка</td><td>фенилкетонурия, серповидно-клеточная анемия</td></tr>
+      <tr><td class="lv">Хромосомная</td><td>структура хромосомы: делеция, дупликация, транслокация, инверсия</td><td>синдром «кошачьего крика» (5p−), Вольфа–Хиршхорна (делеция 4p)</td></tr>
+      <tr><td class="lv">Геномная</td><td>число хромосом: полиплоидия, анеуплоидия</td><td>трисомия 21 (Даун), моносомия X (Тернер)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры, листы 1–2, 6; Адо, стр. PDF 121, 124</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какие бывают хромосомные аберрации по расположению?</summary><div class="a"><p>Внутрихромосомные (делеция, инверсия, дупликация в пределах одной хромосомы), межхромосомные (обмен фрагментами между негомологичными хромосомами — транслокации) и изохромосомные (одинаковые, но зеркальные плечи) (otvety, вопрос 45).</p></div></details>
+  <details class="more"><summary>Что такое мозаицизм?</summary><div class="a"><p>Мутация в соматических клетках на ранних этапах эмбриогенеза: часть клеток с нормальным кариотипом, часть — с аномальным. Это мозаичные формы хромосомных болезней, проявления зависят от доли аномальных клеток (otvety, вопрос 46). Мутации в гаметах дают полные формы — изменения во всех клетках.</p></div></details>
+  <details class="more"><summary>Что тяжелее — потеря или избыток хромосомного материала?</summary><div class="a"><p>Как правило, потеря хромосомы или её части приводит к более тяжёлым последствиям, чем присоединение (otvety, вопрос 46). Поэтому моносомия Y (44 + Y0) нежизнеспособна (Адо, PDF 128), а трисомия 21 совместима с жизнью.</p></div></details>
+  <div class="note"><p><b>Частая ошибка — кариотипы методички.</b> На листе 2 методички в перечне анеуплоидий: «синдром Клайнфельтера 44ХХУ, болезнь Дауна 47 (21 ХХХ), синдром Шерешевского-Тернера 44 ХО». Правильно: <b>47,XXY</b>; <b>47,XX,+21</b> или <b>47,XY,+21</b>; <b>45,X</b> — по Адо «44 аутосомы + ХХУ», «45 аутосом + XX у девочек или + ХУ у мальчиков», «44 аутосом + Х0» (стр. PDF 128). Цифра 44 в методичке — число <b>аутосом</b>, а не всех хромосом. Ещё одна путаница — в пересказе лекции 2 генные мутации названы «делекцией, дубликацией, инверсией»: это хромосомные аберрации, а генные — замена, выпадение, вставка нуклеотидов (методичка, Адо).</p></div>
+</section>
+
+<section id="q3">
+  <div class="sec-head"><span class="qn">VI.3</span><h2>Типы наследования наследственных заболеваний.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры, лист 2</span>
+    <p>Передача наследственных признаков, возникших в результате генных мутаций, может осуществляться по доминантному или рецессивному типу, а также может быть сцепленной с полом (с Х-половой хромосомой).</p>
+  </div>
+  <p>Полный перечень по Адо (стр. PDF 126): «Различают аутосомно-доминантный, аутосомно-рецессивный, кодоминантный, промежуточный, смешанный и сцепленный с полом типы передачи наследственных заболеваний». Ответы студентов добавляют голандрический (сцепленный с Y) и <b>митохондриальный</b> (otvety, вопрос 49; см. VI.13).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy">
+    <p>У каждого гена две копии — от мамы и от папы. <b>Доминантная</b> болезнь — «громкий» испорченный ген: хватает одной копии, чтобы заболеть. <b>Рецессивная</b> — «тихий»: пока рядом есть нормальная копия, человек здоров (носитель); болеет только тот, кому обе копии достались испорченными. <b>Сцепленная с X</b> — у мальчика X одна, «запасной» нет, поэтому рецессивный ген на X у мальчиков проявляется сразу.</p>
+  </div>
+  <h3>Механизм по шагам</h3>
+  <p>Что определяет, проявится ли ген:</p>
+  <ol class="steps">
+    <li><b>Доминантность</b>: доминантный патологический ген проявляется в гетерозиготе (А'а); рецессивный — только в гомозиготе (а'а') (Адо, PDF 126–127).</li>
+    <li><b>Пенетрантность</b> — частота проявления патологического признака; <b>экспрессивность</b> — интенсивность его проявления; <b>плейотропия</b> — влияние гена на многие признаки («Краткий курс», лекция XVI). У аутосомно-доминантных болезней пенетрантность приближается к 100% (неполная встречается редко) (Адо, PDF 126).</li>
+    <li><b>Комбинативная изменчивость</b>: при встрече двух гетерозиготных носителей (а'а × а'а) может появиться гомозиготный больной а'а' (Адо, PDF 121).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Тип</th><th>Кто болен</th><th>Родословная, риск</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Аутосомно-доминантный</td><td>гетерозигота А'а</td><td>больные в каждом поколении (Адо, PDF 126); от больного родителя — 50% детей (вывод конспекта по законам Менделя)</td></tr>
+      <tr><td class="lv">Аутосомно-рецессивный</td><td>гомозигота а'а'; а'а — здоровый носитель</td><td>больные не в каждом поколении (Адо, PDF 127); у двух гетерозиготных родителей — 25% (тесты, задача о ФКУ)</td></tr>
+      <tr><td class="lv">Кодоминантный</td><td>проявляются оба гена</td><td>носитель серповидно-клеточной анемии: в крови и нормальный, и аномальный гемоглобин (Адо, PDF 127)</td></tr>
+      <tr><td class="lv">Промежуточный</td><td>ни один ген не доминирует</td><td>Адо, PDF 127</td></tr>
+      <tr><td class="lv">Смешанный</td><td>у одного больного ген доминантный, у другого — рецессивный</td><td>Адо, PDF 127</td></tr>
+      <tr><td class="lv">X-сцепленный рецессивный</td><td>почти только мужчины; матери — носительницы</td><td>сын никогда не наследует от отца; у носительницы больной мальчик — 50% (otvety, вопрос 47)</td></tr>
+      <tr><td class="lv">X-сцепленный доминантный</td><td>оба пола, женщины в 2 раза чаще</td><td>больной отец передаёт всем дочерям и ни одному сыну (otvety, вопрос 47)</td></tr>
+      <tr><td class="lv">Y-сцепленный (голандрический)</td><td>только мужчины</td><td>от отца всем сыновьям (otvety, вопрос 47)</td></tr>
+      <tr><td class="lv">Митохондриальный</td><td>оба пола</td><td>только от матери (см. VI.13)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 121, 126–127; otvety/patfiz-otvety.txt, вопросы 47, 49; тесты, задача о фенилкетонурии</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как по родословной отличить доминантный тип от рецессивного?</summary><div class="a"><p>Доминантный: больные в каждом поколении, болезнь «идёт по вертикали», у больного ребёнка болен один из родителей. Рецессивный: больные не в каждом поколении, родители больного обычно здоровы (гетерозиготные носители), чаще при кровнородственных браках (Адо, PDF 126–127; «Краткий курс», лекция XVI).</p></div></details>
+  <details class="more"><summary>Почему близкородственные браки опасны?</summary><div class="a"><p>Родственники чаще несут один и тот же рецессивный ген, поэтому возрастает вероятность встречи двух гетерозигот и рождения гомозиготного больного (Адо, PDF 122). «Краткий курс» называет кровные браки частой причиной рецессивных болезней и упоминает изоляты — замкнутые группы (лекция XVI).</p></div></details>
+  <details class="more"><summary>Что такое пенетрантность? (частый тестовый вопрос)</summary><div class="a"><p>Вероятность фенотипического проявления гена — процент носителей, у которых есть хотя бы один признак болезни (otvety, вопрос 49; в тестах «Наследственность» вопрос 18 — вариант «вероятность фенотипического проявления гена»). Тяжесть проявления — это экспрессивность.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать «рецессивная болезнь проявляется через поколение». Строгой периодичности нет — она может не проявляться в ряде поколений (тесты «Наследственность», вопрос 5). <b>Связь с клиникой:</b> медико-генетическая консультация рассчитывает риск именно по типу наследования: 50% при доминантном, 25% при рецессивном у двух носителей.</p></div>
+</section>
+
+<section id="q4">
+  <div class="sec-head"><span class="qn">VI.4</span><h2>Заболевания передающиеся по аутосомно-доминантному типу.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры, лист 3</span>
+    <p>При аутосомно-доминантном типе наследования патологический ген, находящийся в одной из аутосом, доминирует над нормальным геном – аллелем и проявляет себя в гетерозиготном состоянии Аа, при этом пенетрантность гена приближается к 100%.</p>
+  </div>
+  <p><b>Перечень методички (лист 3):</b> болезнь Альцгеймера; ахондроплазия; синдактилия (сращение пальцев рук), полидактилия (увеличение числа пальцев до 6 и более), брахидактилия (укорочение пальцев на руках и ногах); множественный нейрофиброматоз (болезнь Реклингхаузена); врождённая куриная слепота, врождённая атрофия слухового нерва, хорея Гентингтона, мозжечковая атаксия, поликистоз почек, полипоз толстой кишки, семейная гиперхолестеринемия, сосудистая гемофилия типа фон Виллебранда.</p>
+  <p>Адо добавляет миотонию Томсена (стр. PDF 127).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Одного испорченного рецепта достаточно, чтобы «блюдо» не получилось, хотя второй рецепт нормальный. Поэтому болезнь видна у одного из родителей и у половины детей — её как бы «видно насквозь» по родословной.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Пример цепи — <b>болезнь Альцгеймера</b> по Адо (стр. PDF 126):</p>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Патологический ген</b><span class="h">белка-предшественника β-амилоида (21-я хромосома), пресенилина-1 (14-я) или пресенилина-2 (1-я)</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">ведущее звено</span><b>Удлинённый β-амилоид</b><span class="h">откладывается: сенильные бляшки, нейрофибриллярные клубки</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">цепь</span><b>Гибель нейронов</b><span class="h">↓ ацетилхолинтрансферазы и ацетилхолина, нарушение синапсов, ↓ потребления O₂ и глюкозы, ухудшение кровоснабжения мозга</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">проявления</span><b>Слабоумие</b><span class="h">после 40 лет, длится от 1 до 15 лет</span></div>
+  </div>
+  <p>Проявления: «неуклонным прогрессированием расстройств памяти, распадом интеллекта, эмоциональной нестабильностью, неврологическими расстройствами» (методичка, лист 3); Адо добавляет утрату условных рефлексов. Всё здесь — <span class="kv d">повреждение</span>; компенсаторная роль у нормального аллеля при доминантной болезни не срабатывает.</p>
+  <p><b>Хорея Гентингтона</b>: ген в 4-й хромосоме; гибель ГАМК-эргических нейронов и преобладание дофаминергических; подёргивания мышц, нарушения психики (Адо, PDF 126); проявляется в 35–40 лет дрожанием рук, непроизвольными движениями (методичка, лист 3).</p>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Болезнь</th><th>Суть</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Ахондроплазия</td><td>нарушение развития конечностей в длину, повышенная ломкость костей; туловище нормальное, интеллект сохранён (методичка, лист 3; Адо, PDF 126)</td></tr>
+      <tr><td class="lv">Нейрофиброматоз</td><td>множественные подкожные узлы — разрастание соединительной ткани по ходу нервных стволов (методичка, лист 3)</td></tr>
+      <tr><td class="lv">Болезнь Виллебранда</td><td>нарушение гемостаза (Адо, PDF 127)</td></tr>
+      <tr><td class="lv">Поли-, син-, брахидактилия</td><td>6 и более пальцев · сращение · укорочение (методичка, лист 3)</td></tr>
+      <tr><td class="lv">Хорея Гентингтона</td><td>начало в 35–40 лет (методичка), ген в 4-й хромосоме (Адо)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры, лист 3; Адо, стр. PDF 126–127</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему доминантная болезнь может «пропустить» поколение?</summary><div class="a"><p>Из-за неполной пенетрантности — ген есть, а признака нет. Для аутосомно-доминантных болезней это редкость (Адо, PDF 126). Пример неполной пенетрантности — подагра: проявляется лишь у 10% носителей доминантного гена, обычно при обилии мясной пищи и вина (Адо, PDF 129).</p></div></details>
+  <details class="more"><summary>Что общего у болезни Альцгеймера и синдрома Дауна?</summary><div class="a"><p>Ген белка-предшественника β-амилоида — в 21-й хромосоме. При трисомии 21 к 30 годам в мозге появляются сенильные бляшки и дегенеративные изменения, как при болезни Альцгеймера (Адо, PDF 129).</p></div></details>
+  <details class="more"><summary>Какие доминантные болезни назвал лектор?</summary><div class="a"><p>Ахондроплазию, нейрофиброматоз, семейную гиперлипидемию, болезнь Меньера и др.; подчеркнул признаки хореи Гентингтона: одинаковая частота у мужчин и женщин, вертикальное распределение, риск для ребёнка 50% (пересказ лекции 2 — только акценты).</p></div></details>
+  <div class="note"><p><b>Методичка и учебник:</b> методичка и Адо относят болезнь Альцгеймера к аутосомно-доминантным. Уточнение: по доминантному типу передаются лишь редкие семейные формы с ранним началом (как раз гены, которые называет Адо), большинство случаев спорадические <span class="uncheck">⚠ не проверено</span> по источникам курса. <b>Неточность Адо:</b> учебник пишет, что хорея Гентингтона «развивается у мужчин», а у женщин «не проявляется» (стр. PDF 126), — это противоречит аутосомному типу наследования; лектор подчёркивал одинаковую частоту у обоих полов (пересказ лекции 2). На зачёте говорить: болеют оба пола.</p></div>
+</section>
+
+<section id="q5">
+  <div class="sec-head"><span class="qn">VI.5</span><h2>Заболевания передающиеся по аутосомно-рецессивному типу.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры, лист 3</span>
+    <p>По аутосомно – рецессивному типу передаются большинство наследственных болезней, которые развиваются у гомозиготных детей (аа), оба родителя которых являются гетерозиготными носителями патологического признака и фенотипически здоровы.</p>
+  </div>
+  <p><b>Перечень методички (листы 3–4):</b> заячья губа, волчья пасть (расщелина неба), микроцефалия, галактоземия, генерализованный гликогеноз, талассемия, гипофизарная карликовость, шизофрения, ихтиоз; дефекты аминокислотного обмена — альбинизм, фенилкетонурия, алкаптонурия.</p>
+  <p>Адо (стр. PDF 127) добавляет гомоцистинурию, некоторые формы эпилепсии, болезнь Коновалова–Вильсона, наследственную юношескую эмфизему лёгких (дефицит α1-антитрипсина). Первичные энзимопатии наследуются в основном по аутосомно-рецессивному типу (otvety, раздел «Энзимопатии»; «Краткий курс», лекция XVI).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Оба родителя здоровы, но каждый тайно носит одну «испорченную» копию. Ребёнок получает по одной копии от каждого: шанс, что обе окажутся испорченными, — один из четырёх. Отсюда «гром среди ясного неба»: в семье никто не болел, а ребёнок болен.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Большинство рецессивных болезней — <b>энзимопатии</b>: у гетерозиготы нормальный аллель даёт достаточно фермента (<span class="kv c">компенсация</span>), у гомозиготы фермента нет (<span class="kv d">повреждение</span>). Пример — <b>галактоземия</b> (Адо, стр. PDF 125–126):</p>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Дефицит фермента</b><span class="h">галактозо-1-фосфат-уридилтрансферазы</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">ведущее звено</span><b>Накопление галактозо-1-фосфата</b><span class="h">подавляет реакции углеводного обмена</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">цепь</span><b>Галактитол</b><span class="h">образуется в жидкостях организма → помутнение хрусталика</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">проявления</span><b>Триада</b><span class="h">гепатоспленомегалия, умственная отсталость, катаракта</span></div>
+  </div>
+  <p><b>Терапия</b> — исключение галактозы из пищи («Краткий курс», лекция XVI: ранняя диагностика и лечение — исключение пищи фенилаланина, галактозы).</p>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Болезнь</th><th>Дефект и проявления</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Альбинизм</td><td>нет тирозиназы, превращающей тирозин в меланин; молочно-белая кожа, белёсые волосы, светобоязнь, просвечивание радужки, ↓ остроты зрения (методичка, лист 3)</td></tr>
+      <tr><td class="lv">Фенилкетонурия</td><td>↓ фенилаланингидроксилазы — подробно VI.11</td></tr>
+      <tr><td class="lv">Алкаптонурия</td><td>недостаток оксидазы гомогентизиновой кислоты; охроноз — пигментация соединительной ткани (методичка, лист 4); моча темнеет на воздухе, после 40 лет поражаются суставы, позвоночник, клапаны сердца (Адо, PDF 125)</td></tr>
+      <tr><td class="lv">Гликогеноз</td><td>понижение активности глюкозо-6-фосфатазы, гликоген накапливается в органах (методичка, лист 3)</td></tr>
+      <tr><td class="lv">Ихтиоз</td><td>кожа покрыта обширными кровоточащими трещинами и ороговевшими пластами (методичка, лист 3)</td></tr>
+      <tr><td class="lv">Талассемия</td><td>гемоглобинопатия: при α-талассемии нет α-цепей, при β — β-цепей глобина; гемолитическая анемия (Адо, PDF 124)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры, листы 3–4; Адо, стр. PDF 124–125</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Чем отличается альбинизм от фенилкетонурии, если обе — нарушение обмена тирозина?</summary><div class="a"><p>При альбинизме блок на этапе тирозин → меланин (нет тирозиназы): страдает только пигментация. При ФКУ блок раньше — фенилаланин → тирозин: накапливаются токсичные фенилаланин и фенилпировиноградная кислота, страдает ЦНС; гипопигментация вторична (Адо, PDF 125; методичка, листы 3–4).</p></div></details>
+  <details class="more"><summary>Почему рецессивных болезней больше среди родственных браков и изолятов?</summary><div class="a"><p>Растёт вероятность встречи двух носителей одного гена (Адо, PDF 122; «Краткий курс», лекция XVI).</p></div></details>
+  <div class="note"><p><b>Методичка и учебник расходятся.</b> (1) Методичка: галактоземия «возникает из-за дефекта лактазы- фермента, расщепляющего лактозу». По Адо — дефицит <b>галактозо-1-фосфат-уридилтрансферазы</b> (стр. PDF 125); дефицит лактазы (β-галактозидазы) — другое состояние, непереносимость молока (Адо, PDF 129–130). (2) Шизофрения: в методичке на листе 3 — рецессивная, а на листе 2 — среди полигенных болезней с наследственной предрасположенностью; Адо — «некоторые формы шизофрении» (PDF 127). Правильнее — мультифакториальная болезнь. (3) Гипофизарная карликовость рецессивной названа и у Адо (PDF 127). (4) «Генерализованный гликогеноз» с дефицитом глюкозо-6-фосфатазы — так в методичке; дефицит этого фермента — болезнь Гирке, гликогеноз I типа, с поражением печени (otvety, раздел «Энзимопатии»), а генерализованным обычно называют гликогеноз II типа (Помпе) <span class="uncheck">⚠ не проверено</span>. (5) Заячья губа и волчья пасть могут быть и ненаследственными — фенокопиями (Адо, PDF 123).</p></div>
+</section>
+
+<section id="q6">
+  <div class="sec-head"><span class="qn">VI.6</span><h2>Методы изучения наследственной патологии.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Перечень · Адо, стр. PDF 130–131</span>
+    <p>При изучении наследования как нормальных, так и патологических признаков человека медицинская генетика использует несколько методов: <b>клинико-генеалогический</b>, <b>близнецовый</b>, <b>популяционно-статистический</b>, <b>цитогенетические</b> (анализ кариотипа и полового хроматина), <b>дерматоглифика</b>; наряду с ними — биохимические, цитологические, иммунологические и др.</p>
+  </div>
+  <p>В методичке кафедры этого вопроса нет — ответ по Адо и «Краткому курсу». «Краткий курс» (лекция XVI) называет восемь методов: генеалогический, близнецовый, географический и популяционно-статистический, кариологический, генетика соматических клеток (гибридизация в культуре), иммунологический, иммуногематологический (группы крови), биохимический.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Генеалогический — «семейный альбом»: кто болел в каких поколениях. Близнецовый — природный эксперимент: у однояйцевых близнецов гены одинаковые, и если болезнь у них совпадает намного чаще, чем у разнояйцевых, — виноваты гены. Цитогенетический — посчитать хромосомы под микроскопом. Биохимический — найти в крови или моче вещество, которое копится из-за сломанного фермента.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Как метод выбирают по задаче (Адо, стр. PDF 130–131):</p>
+  <ol class="steps">
+    <li><b>Наследственный ли признак и какой тип наследования?</b> — клинико-генеалогический: родословная начинается от <b>пробанда</b> — лица, первым попавшего в поле зрения врача.</li>
+    <li><b>Что важнее — гены или среда?</b> — близнецовый: сравнивают <b>конкордантность</b> (совпадение) и дискордантность у моно- и дизиготных близнецов. Для мультифакториальных болезней конкордантность монозиготных близнецов относительно невысокая — около 60% (Адо, PDF 130).</li>
+    <li><b>Как часто и где?</b> — популяционно-статистический: частота болезней в разных расах, этнических группах, изолятах.</li>
+    <li><b>Есть ли хромосомная болезнь?</b> — цитогенетический: кариотип и половой хроматин. Показания: признаки хромосомного синдрома, множественные пороки развития неясной этиологии, многократные спонтанные аборты и мертворождения у супругов, прогноз потомства.</li>
+    <li><b>Ранняя диагностика</b> — скрининг новорождённых на фенилкетонурию, галактоземию; при подозрении во время беременности — исследование амниотической жидкости в 12–16 недель («Краткий курс», лекция XVI).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Кариотип</th><th>Синдром</th><th>Тельца Барра</th></tr></thead>
+    <tbody>
+      <tr><td>46,XY</td><td>норма, мужчина</td><td>нет</td></tr>
+      <tr><td>46,XX</td><td>норма, женщина</td><td>1 (вывод конспекта из правила ниже)</td></tr>
+      <tr><td>45,X</td><td>Шерешевского–Тернера</td><td>нет</td></tr>
+      <tr><td>47,XXX</td><td>трипло-X</td><td>2</td></tr>
+      <tr><td>47,XXY; 48,XXXY</td><td>Клайнфельтера</td><td>столько, сколько лишних X (1; 2)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 128. Правило «телец Барра на одно меньше, чем X-хромосом» — вывод конспекта из данных Адо; в тестах «Наследственность» вопрос 3 проверяет именно его.</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что доказывает наследственный характер болезни в близнецовом методе?</summary><div class="a"><p>Высокая конкордантность у однояйцевых близнецов, живущих в разных, резко контрастирующих условиях: среда разная, а болезнь совпадает — значит, решают гены (тесты «Наследственность», вопрос 1; логика — Адо, PDF 131).</p></div></details>
+  <details class="more"><summary>Что такое дерматоглифика?</summary><div class="a"><p>Изучение рельефных узоров кожи, образуемых папиллярными линиями; рисунок ладоней под генетическим контролем, и по его изменению можно заподозрить наследственную болезнь (Адо, PDF 131). Пример — поперечная «обезьянья» складка при синдроме Дауна (Адо, PDF 128).</p></div></details>
+  <details class="more"><summary>Какие методы добавил лектор?</summary><div class="a"><p>Молекулярно-генетические, в том числе полимеразную цепную реакцию, и метод биологического моделирования на животных (пересказ лекции 2 — только акценты).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> путать конкордантность (совпадение признака у близнецов) с пенетрантностью (частота проявления гена). <b>Связь с клиникой:</b> кровь новорождённого на скрининг ФКУ берут на 3–5-й день, ещё в роддоме (тесты, задача о фенилкетонурии); исследование кариотипа — первый шаг у ребёнка с множественными пороками развития.</p></div>
+</section>
+
+<section id="q7">
+  <div class="sec-head"><span class="qn">VI.7</span><h2>Хромосомные болезни. Болезнь Дауна и др.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · Адо, стр. PDF 127–128</span>
+    <p>В отличие от генных возникновение <b>хромосомных болезней</b> связано с более грубыми изменениями генетического материала, вызванными нарушением числа или структуры хромосом, т.е. геномными или хромосомными мутациями. Хромосомная болезнь может возникнуть в результате мутаций в гаметах родителей или в клетках эмбриона на стадии дробления зиготы.</p>
+  </div>
+  <div class="def"><span class="k">Болезнь Дауна · методичка кафедры, лист 4</span>
+    <p>У людей с болезнью Дауна в 21-й паре присутствует дополнительная хромосома, то есть имеет место трисомия по 21-й паре. Болезнь Дауна — врожденное нарушение развития, проявляющееся умственной отсталостью, нарушением роста костей и другими физическими аномалиями.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Внешность</b> (методичка, лист 4): округлая голова с уплощённым затылком, узкий лоб, широкое плоское лицо, эпикант, запавшая спинка носа, косой (монголоидный) разрез глаз, толстые губы, утолщённый язык с глубокими бороздами, маленькие низко расположенные уши, высокое нёбо, короткая шея.</li>
+    <li><b>Пороки</b>: сердца (дефекты межжелудочковой или межпредсердной перегородок), пищеварения (атрезия двенадцатиперстной кишки); чаще лейкемия и гипотиреоз (методичка, лист 4).</li>
+    <li>Адо (стр. PDF 128) добавляет: олигофрения разной степени, мышечная гипотония, разболтанность суставов, поперечная «обезьянья» складка, резкое снижение клеточного и гуморального иммунитета, ранняя катаракта.</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>У человека по две копии каждой хромосомы. При синдроме Дауна 21-я — в трёх. Каждого гена с 21-й хромосомы клетка делает «полторы порции». Ничего не сломано, просто всего слишком много — и тонко настроенное развитие сбивается, как оркестр, в котором одна группа инструментов играет в полтора раза громче.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">условие</span><b>Возраст матери</b><span class="h">риск 1:2000 в 20 лет, 1:45 после 45 (Адо, PDF 122)</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">пусковое звено</span><b>Нерасхождение 21-й пары</b><span class="h">гамета с двумя 21-ми хромосомами</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">ведущее звено</span><b>Избыток генов 21q22</b><span class="h">дисбаланс доз генов во всех клетках</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">проявления</span><b>Пороки, олигофрения, иммунодефицит</b><span class="h">лейкоз, катаракта, ранняя «альцгеймеризация»</span></div>
+  </div>
+  <p>Какие гены полосы q22 21-й хромосомы за что отвечают (Адо, стр. PDF 128–129):</p>
+  <ul class="facts">
+    <li>ген фермента синтеза пуринов → избыток пуринов → неврологические расстройства, умственная отсталость, дефекты иммунитета;</li>
+    <li>ets-2 (онкоген) → повышенный риск лейкоза;</li>
+    <li>ген α-А-кристаллина → катаракта; кератинсульфата → офтальмопатия;</li>
+    <li>ген супероксиддисмутазы (СОД) → умственная отсталость и преждевременное старение;</li>
+    <li>ген β-амилоида → к 30 годам сенильные бляшки, как при болезни Альцгеймера.</li>
+  </ul>
+  <p><b>Исход:</b> в 20-е годы XX в. больные доживали до 9 лет, в 80-е — до 30 лет, теперь 25% доживают до 50 лет (Адо, PDF 129); средняя продолжительность жизни — 35 лет (otvety, вопрос 46). Лечение — только коррекция пороков и симптомов (вывод конспекта: генотип исправить нельзя — Адо, PDF 122).</p>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Синдром</th><th>Хромосомы</th><th>Главное</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Дауна</td><td>трисомия 21</td><td>1 на 500–800 новорождённых (методичка); 1:750 (otvety); простая трисомия 94% (Адо) или 96%, транслокация 3%, мозаицизм 1% (otvety)</td></tr>
+      <tr><td class="lv">Патау</td><td>трисомия 13</td><td>пороки сердца у 80% (методичка; «Краткий курс» — 100%); 98% умирают до года (методичка); 1:6000 (otvety)</td></tr>
+      <tr><td class="lv">Эдвардса</td><td>трисомия 18</td><td>чаще у пожилых матерей; 60% умирают до 3 мес., до года доживает один из десяти (методичка); 1:7000 (otvety)</td></tr>
+      <tr><td class="lv">«Кошачьего крика»</td><td>делеция 5p−</td><td>крик из-за изменений гортани, лунообразное лицо, микроцефалия, пороки сердца (методичка, лист 6)</td></tr>
+      <tr><td class="lv">Вольфа–Хиршхорна</td><td>делеция короткого плеча 4</td><td>множественные пороки, резкая задержка развития (методичка, лист 6)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры, листы 1, 4–6; Адо, стр. PDF 128–129; «Краткий курс», лекция XVI; otvety/patfiz-otvety.txt, вопрос 46</p>
+  <p>Для всех аутосомных анеуплоидий характерна <b>триада</b>: множественные пороки развития органов, олигофрения и значительное сокращение продолжительности жизни (Адо, PDF 129).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Передаются ли хромосомные болезни по наследству?</summary><div class="a"><p>За редким исключением — нет (Адо, PDF 123): больные обычно не оставляют потомства, а сама болезнь возникает заново из-за нерасхождения у здоровых родителей. Исключение — транслокационная форма синдрома Дауна (перенос фрагмента 21-й хромосомы на 13, 14, 15 или 22-ю, Адо, PDF 128): родитель-носитель сбалансированной транслокации здоров <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div></details>
+  <details class="more"><summary>Как возраст матери влияет на частоту синдрома Дауна?</summary><div class="a"><p>В 19 лет — 0,04%, в 45–49 лет — 2,17%, более чем в 50 раз чаще («Краткий курс», лекция XVI); у Адо — 1:2000 в 20 лет и 1:45 старше 45 лет (PDF 122).</p></div></details>
+  <details class="more"><summary>Сколько всего хромосомных аномалий у человека?</summary><div class="a"><p>Только гаметического происхождения — около 750, из них около 50 количественных и свыше 700 структурных (Адо, PDF 128).</p></div></details>
+  <div class="note"><p><b>Ошибка методички:</b> на листе 2 — «болезнь Дауна 47 (21 ХХХ)». Правильно: <b>47,XX,+21</b> или <b>47,XY,+21</b> — лишняя 21-я хромосома, а не X; болезнь встречается у обоих полов одинаково часто («Краткий курс», лекция XVI). <b>Частота:</b> методичка, ответы и Адо дают разные числа — на зачёте лучше называть цифры методички и упомянуть источник. <b>Связь с клиникой:</b> пороки сердца и атрезия двенадцатиперстной кишки — повод для операции в первые дни жизни; повышенный риск лейкоза — для наблюдения гематологом.</p></div>
+</section>
+
+<section id="q8">
+  <div class="sec-head"><span class="qn">VI.8</span><h2>Хромосомные болезни. Синдром Шерешевского-Тернера.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · Адо, стр. PDF 128</span>
+    <p><b>Синдром Шерешевского—Тернера</b> (Х-моносомия) характеризуется наличием 44 аутосом + Х0 и отсутствием полового хроматина (телец Барра) в ядрах клеток.</p>
+  </div>
+  <ul class="facts">
+    <li><b>У новорождённых</b> (методичка, лист 5): короткая шея с крыловидными складками, лимфатический отёк стоп, голеней, кистей, множественные пигментные пятна, низкорослость.</li>
+    <li><b>У взрослых</b>: недоразвитие первичных и вторичных половых признаков, гипоплазия яичников, матки и маточных труб, первичная аменорея, скудное оволосение, недоразвитие молочных желёз, недостаточность эстрогенов; остеопороз, бочкообразная грудная клетка, низкий рост, антимонголоидный разрез глаз, птоз, эпикант, низко расположенные уши (методичка, лист 5).</li>
+    <li><b>Интеллект</b> большинства практически сохранён, однако частота олигофрении всё же выше (методичка, лист 5).</li>
+    <li><b>Диагноз</b> — по клинике, определению полового хроматина («тельца Барра и барабанная палочка отсутствуют») и кариотипу (методичка, лист 6).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Девочке досталась только одна X-хромосома, второй половой хромосомы нет. Для запуска «женской программы» её хватает — пол женский, но для нормального созревания яичников нужны обе X. Яичники не развиваются, эстрогенов мало — поэтому нет месячных, не растёт грудь, а кости становятся хрупкими. Ум при этом обычно в порядке.</p></div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li><b>Этиология</b> — нерасхождение половых хромосом: образуется гамета без половой хромосомы («0»); её слияние с гаметой X даёт 45,X (otvety, вопрос 46).</li>
+    <li><b>Пусковое звено</b> — моносомия X во всех клетках (или мозаицизм).</li>
+    <li><b>Ведущее звено</b> — дисгенезия гонад: гипоплазия яичников (методичка, лист 5).</li>
+    <li><span class="kv d">повреждение</span> недостаточность эстрогенов → первичная аменорея, бесплодие, недоразвитие половых признаков, остеопороз (методичка, лист 5); пороки сердца и почек, лимфатические отёки.</li>
+    <li><b>Терапия</b> — раннее лечение женскими половыми гормонами может быть эффективным (otvety, вопрос 46).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Показатель</th><th>Значение</th><th>Источник</th></tr></thead>
+    <tbody>
+      <tr><td>Кариотип</td><td>45,X (44 аутосомы + X0)</td><td>Адо, PDF 128</td></tr>
+      <tr><td>Тельца Барра</td><td>нет</td><td>Адо, PDF 128; методичка, лист 6</td></tr>
+      <tr><td>Пороки сердца</td><td>у 20% — коарктация аорты, стеноз аорты, пороки митрального клапана</td><td>методичка, лист 5</td></tr>
+      <tr><td>Пороки почек</td><td>у 40% — удвоение мочевыводящих путей, подковообразная почка</td><td>методичка, лист 5</td></tr>
+      <tr><td>Рост</td><td>125–140 см</td><td>«Краткий курс», лекция XVI</td></tr>
+      <tr><td>Частота</td><td>1:3000 новорождённых девочек</td><td>otvety, вопрос 46</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры, листы 5–6; Адо, стр. PDF 128; «Краткий курс», лекция XVI; otvety, вопрос 46</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>А если наоборот — Y без X?</summary><div class="a"><p>Синдром Y-моносомии (44 + Y0) — организм нежизнеспособен (Адо, PDF 128): без X-хромосомы нет жизненно необходимых генов («Краткий курс», лекция XVI).</p></div></details>
+  <details class="more"><summary>Какие болезни чаще сопровождают синдром?</summary><div class="a"><p>Сахарный диабет, воспаление толстого кишечника, зоб и тиреоидиты (методичка, лист 5).</p></div></details>
+  <div class="note"><p><b>Ошибка методички:</b> «моносомия 44 ХО» (лист 5) и «44 ХО» (лист 2) — правильно <b>45,X</b> (или 45,X0): 44 — это только аутосомы (Адо, PDF 128). <b>Частая ошибка:</b> считать, что при синдроме Тернера резко снижен интеллект — большинство больных сохраняют интеллект (методичка; Адо — «умственное развитие нормальное»). Название у «Краткого курса» — синдром Шерешевского–Тернера–Бонневи–Ульриха.</p></div>
+</section>
+
+<section id="q9">
+  <div class="sec-head"><span class="qn">VI.9</span><h2>Хромосомные болезни. Синдром трисомии X.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры, лист 6</span>
+    <p><b>Синдром трисомии 44ХХХ.</b> У некоторых больных отмечается гипоплазия яичников, матки, бесплодие, различные степени умственной неполноценности. Такие женщины чаще, чем в общей популяции страдают шизофренией.</p>
+  </div>
+  <ul class="facts">
+    <li><b>По Адо</b> (стр. PDF 128): синдром трипло-X (44 аутосомы + XXX) фенотипически может не проявляться или, наоборот, характеризуется задержкой физического, полового и умственного развития (слабоумие, шизофрения); часто высокое твёрдое нёбо и эпикант; в ядрах клеток — <b>два тельца Барра</b>.</li>
+    <li><b>Частота</b>: 1 на 750 девочек (методичка, лист 1); 1:1000 новорождённых девочек (otvety, вопрос 46).</li>
+    <li>Впервые описан у женщины с двумя тельцами полового хроматина; проявляется гипофункцией яичников, часто бесплодием, умственной отсталостью («Краткий курс», лекция XVI).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>У женщины в норме две X-хромосомы, и одна из них всё равно «свёрнута и выключена» — это и есть тельце Барра. При трисомии X лишняя тоже выключается — получается два тельца Барра. Поэтому многие женщины с XXX живут, не зная о синдроме, а у части лишняя X всё же проявляется — бесплодием или задержкой развития.</p></div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li><b>Этиология</b> — нерасхождение половых хромосом: аномальная гамета XX + нормальная X (otvety, вопрос 46).</li>
+    <li><span class="kv c">компенсация</span> Лишние X-хромосомы конденсируются в тельца Барра — их видно в ядрах (Адо, PDF 128). Что тельце Барра — неактивная X (инактивация X-хромосомы), в источниках курса прямо не сказано <span class="uncheck">⚠ не проверено</span>; этим обычно объясняют мягкость синдрома.</li>
+    <li><span class="kv d">повреждение</span> Неполная компенсация → гипоплазия яичников и матки, бесплодие, умственная неполноценность разной степени, чаще шизофрения (методичка, лист 6; Адо, PDF 128).</li>
+    <li><b>Исход</b> — чаще благоприятный: физическое и психическое развитие, как правило, без отклонений (otvety, вопрос 46).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Показатель</th><th>Значение</th><th>Источник</th></tr></thead>
+    <tbody>
+      <tr><td>Кариотип</td><td>47,XXX (44 аутосомы + XXX)</td><td>Адо, PDF 128; otvety</td></tr>
+      <tr><td>Тельца Барра</td><td>2</td><td>Адо, PDF 128</td></tr>
+      <tr><td>Частота</td><td>1:750 девочек · 1:1000</td><td>методичка, лист 1 · otvety, вопрос 46</td></tr>
+      <tr><td>Пол, фенотип</td><td>женский</td><td>otvety, вопрос 46</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры, листы 1, 6; Адо, стр. PDF 128; «Краткий курс», лекция XVI; otvety, вопрос 46</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Сколько телец Барра у мужчины 48,XXXY?</summary><div class="a"><p>Два — по числу лишних X-хромосом (Адо, PDF 128: при синдроме Клайнфельтера «телец Барра столько, сколько лишних Х-хромосом»).</p></div></details>
+  <details class="more"><summary>Как синдром диагностировать?</summary><div class="a"><p>Цитогенетически: половой хроматин (два тельца Барра) и кариотип (Адо, PDF 128, 131).</p></div></details>
+  <div class="note"><p><b>Ошибка методички:</b> «Синдром трисомии 44ХХХ» — правильно <b>47,XXX</b>. <b>Частая ошибка:</b> думать, что трисомия X всегда даёт тяжёлую клинику: синдром может фенотипически не проявляться (Адо, PDF 128). Не путать с синдромом Дауна — там трисомия 21-й, а не X-хромосомы.</p></div>
+</section>
+
+<section id="q10">
+  <div class="sec-head"><span class="qn">VI.10</span><h2>Хромосомные болезни. Синдром Клайнфельтера.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры, лист 6</span>
+    <p>В кариотипе больных выявили лишнюю половую Х-хромосому, их кариотип представлял собой 47 ХХУ. У больных чаще всего есть одна лишняя Х-хромосома, реже несколько Х-хромосом (кариотип 47 ХХУ, 48 ХХХУ, 49 ХХХХУ).</p>
+    <p>Генетический дисбаланс в связи с добавочной Х-хромосомой клинически проявляется в период полового созревания в виде недоразвития яичек и вторичных мужских половых признаков.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Внешность</b>: высокий рост, длинные конечности, узкие плечи, широкий таз, гинекомастия, слабое оволосение лица, подмышечных впадин и лобка (методичка, лист 6).</li>
+    <li><b>Интеллект</b> часто снижен, степень нарушения пропорциональна числу добавочных X-хромосом; склонность к депрессии, суициду, вспышкам неконтролируемой агрессии (методичка, лист 6).</li>
+    <li>По Адо (стр. PDF 128): астеническое телосложение евнухоидного типа, атрофия яичек и бесплодие, часто остеопороз; в ядрах — половой хроматин (у здоровых мужчин его нет).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Y-хромосома говорит «будь мальчиком» — и мальчик рождается. Но лишняя X мешает яичкам нормально созреть: в подростковом возрасте мужских гормонов мало, а женских относительно много. Отсюда высокий рост с длинными ногами (зоны роста дольше не закрываются <span class="uncheck">⚠ не проверено</span>), увеличенная грудь, слабая борода и бесплодие.</p></div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li><b>Этиология</b> — нерасхождение половых хромосом у одного из родителей (otvety, вопрос 46).</li>
+    <li><b>Пусковое звено</b> — кариотип 47,XXY: Y определяет мужской пол, лишняя X нарушает развитие яичек.</li>
+    <li><b>Ведущее звено</b> — гипогонадизм: нарушение сперматогенеза, снижение продукции тестостерона и увеличение продукции женских половых гормонов (otvety, вопрос 46).</li>
+    <li><span class="kv d">повреждение</span> евнухоидное телосложение, гинекомастия, атрофия яичек, бесплодие, остеопороз (Адо, PDF 128).</li>
+    <li><b>Терапия</b> — мужские половые гормоны корригируют вторичные половые признаки, но больные остаются бесплодными (otvety, вопрос 46).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Показатель</th><th>Значение</th><th>Источник</th></tr></thead>
+    <tbody>
+      <tr><td>Кариотип</td><td>47,XXY; реже 48,XXXY; 49,XXXXY</td><td>методичка, лист 6; otvety</td></tr>
+      <tr><td>Тельца Барра</td><td>столько, сколько лишних X</td><td>Адо, PDF 128</td></tr>
+      <tr><td>Частота</td><td>1,3 на 1000 мальчиков · 2–2,5 на 1000</td><td>методичка, лист 1 · otvety, вопрос 46</td></tr>
+      <tr><td>Когда проявляется</td><td>в период полового созревания</td><td>методичка, лист 6</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры, листы 1, 6; Адо, стр. PDF 128; otvety/patfiz-otvety.txt, вопрос 46</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое синдром 47,XYY?</summary><div class="a"><p>По методичке (лист 6, «Синдром 44ХУУ»): большинство мужчин не отличаются от нормы по физическому и умственному развитию, рост немного выше среднего, характерно импульсивное поведение с элементами агрессивности. Правильная запись — <b>47,XYY</b>.</p></div></details>
+  <details class="more"><summary>Почему мужчина с XXY «хроматин-положительный»?</summary><div class="a"><p>Лишняя X образует тельце Барра, которого у здоровых мужчин нет, — его находят в эпителии и лейкоцитах («Краткий курс», лекция XVI; Адо, PDF 128).</p></div></details>
+  <div class="note"><p><b>Ошибка методички:</b> на листе 2 — «синдром Клайнфельтера 44ХХУ»; на листе 6 той же методички уже правильно — «47 ХХУ». <b>Частота:</b> методичка — 1,3 на 1000 мальчиков, ответы — 2–2,5 на 1000. <b>Связь с клиникой:</b> часто диагноз ставят только при обследовании пары по поводу бесплодия <span class="uncheck">⚠ не проверено</span>.</p></div>
+</section>
+
+<section id="q11">
+  <div class="sec-head"><span class="qn">VI.11</span><h2>Патогенез наследственных болезней. Фенилкетонурия.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Патогенез · методичка кафедры, лист 2</span>
+    <p>Мутации гена проявляются в изменениях структуры молекул дезоксирибонуклеиновой кислоты (ДНК). С изменением структуры ДНК искажается генетический код. В результате нарушается развитие определенных признаков и свойств организма.</p>
+  </div>
+  <div class="def"><span class="k">Фенилкетонурия · методичка кафедры, лист 4</span>
+    <p>Фенилкетонурия (основу которой составляет понижение активности фенилаланингидроксилазы в печени, вследствие чего блокировано превращение фенилаланина в тирозин, что приводит к накоплению фенилаланина (в норме около 0,015 г/л). Продукты его метаболизма, в частности фенилпируват оказывают токсическое воздействие на нервную систему.</p>
+  </div>
+  <p>Общая формула по Адо (стр. PDF 123): <b>ген — фермент — биохимическая реакция — признак</b>. При мутации гена фермент не синтезируется или его меньше → нарушается биохимический процесс → нет конечного продукта, накапливаются промежуточные, появляются необычные побочные продукты.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Конвейер: фенилаланин из пищи должен превратиться в тирозин. При ФКУ рабочий на этом участке (фермент) не вышел на смену. Сырьё копится перед ним и уходит «в обход» — в токсичную фенилпировиноградную кислоту, которая отравляет растущий мозг. Дальше по конвейеру не хватает тирозина — поэтому кожа и волосы светлые. Лечение простое по идее: не подавать на конвейер сырьё — диета без фенилаланина.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Мутация гена</b><span class="h">рецессивный ген в 12-й хромосоме; болеют гомозиготы (Адо, PDF 125)</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">пусковое звено</span><b>Нет фенилаланин-4-гидроксилазы</b><span class="h">блок фенилаланин → тирозин</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">ведущее звено</span><b>Гиперфенилаланинемия</b><span class="h">накопление фенилаланина и фенилпировиноградной кислоты (otvety)</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">проявления</span><b>Поражение ЦНС</b><span class="h">олигофрения, микроцефалия, судороги</span></div>
+  </div>
+  <ol class="steps">
+    <li><span class="kv d">повреждение</span> Фенилпировиноградная кислота выделяется с мочой (отсюда название) и токсически действует на ЦНС: тяжёлые нарушения психики (второе название — фенилпировиноградная олигофрения), микроцефалия; торможение дофамингидроксилазы → снижение синтеза катехоламинов (Адо, PDF 125).</li>
+    <li><span class="kv d">повреждение</span> Дефицит тирозина → меньше ДОФА и меланина → обесцвечивание кожи и волос (методичка, лист 4; Адо, PDF 125).</li>
+    <li><b>Проявления</b> (методичка, лист 4): с 6-месячного возраста — отставание умственного развития, обесцвечивание кожи и волос, повышение тонуса мышц и основного обмена, эпилепсия, микроцефалия; понижается синтез катехоламинов, увеличивается выделение кетоновых тел с мочой. Ответы добавляют «мышиный» запах мочи и пота (otvety, раздел «Энзимопатии»).</li>
+    <li><span class="kv c">компенсация</span> У гетерозиготы нормальный аллель обеспечивает фермент — носитель здоров (1 из 50 человек, Адо, PDF 120).</li>
+    <li><b>Терапия</b> — строжайшая диета без фенилаланина; без неё, кроме слабоумия, развиваются гиперрефлексия, тремор, эпилепсия, мышечная гипертония, общее возбуждение, нарушения речи и движений (Адо, PDF 125). Диету соблюдают с момента диагноза и контролируют фенилаланин не менее 8–10 лет (otvety, раздел «Энзимопатии»).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Чем ген нарушает признак</th><th>Пример (Адо, PDF 123–126)</th></tr></thead>
+    <tbody>
+      <tr><td>Фермент — метаболический блок</td><td>фенилкетонурия, альбинизм, алкаптонурия, галактоземия, гликогенозы</td></tr>
+      <tr><td>Транспортный белок</td><td>дефицит трансферрина — железодефицитная анемия; лизинурическая непереносимость белка</td></tr>
+      <tr><td>Структурный белок</td><td>синдром Элерса–Данлоса (коллаген); спектрин эритроцитов — микросфероцитарная анемия Минковского–Шоффара</td></tr>
+      <tr><td>Гемоглобин</td><td>талассемии; серповидно-клеточная анемия (глутаминовая кислота → валин)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 123–126</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Принципы патогенетической терапии наследственных болезней</th></tr></thead>
+    <tbody>
+      <tr><td>1) диетическое ограничение субстрата; 2) возмещение дефицита конечного продукта; 3) истощение накапливающихся веществ; 4) усиление активности ферментов; 5) замещение мутантного белка; 6) трансплантация органов; 7) хирургическое вмешательство; 8) коррекция гормонального дисбаланса; 9) гензамещающая терапия</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">«Краткий курс лекций», лекция XVI: главная задача — фенотипическая коррекция при сохранении мутантного генотипа</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как выявляют ФКУ у новорождённых?</summary><div class="a"><p>Скрининг: уровень фенилаланина в плазме крови, фенилпируват в моче; кровь берут на 3–5-й день, ещё в роддоме (раньше 3 дней много ложноотрицательных результатов). Есть ориентировочная проба мочи с хлорным железом (тесты, задача о фенилкетонурии). «Краткий курс» (лекция XVI): у всех родившихся исследуется кровь на фенилкетонурию, галактоземию и др.</p></div></details>
+  <details class="more"><summary>Какие варианты последствий метаболического блока бывают?</summary><div class="a"><p>Недостаток конечного продукта (альбинизм — нет меланина), накопление предшественника (алкаптонурия — гомогентизиновая кислота), и то и другое (болезнь Гирке — гипогликемия и накопление гликогена в печени) (otvety, раздел «Энзимопатии»; Адо, PDF 123).</p></div></details>
+  <details class="more"><summary>Что общего у ФКУ и тирозиноза?</summary><div class="a"><p>Оба — блоки обмена фенилаланина/тирозина (схема 3.2 Адо). При дефиците тирозинтрансаминазы — тирозиноз, дети погибают к 6–7 мес. (Адо, PDF 125).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать ведущим звеном отсутствие тирозина. Главное повреждение — <b>накопление</b> фенилаланина и его токсичных производных (гиперфенилаланинемия, otvety); поэтому лечат ограничением фенилаланина, а не добавлением тирозина. <b>Связь с клиникой:</b> ФКУ — пример, когда наследственную болезнь удаётся предупредить: при ранней диете ребёнок развивается нормально (тесты, задача о ФКУ, ответ 6).</p></div>
+</section>
+
+<section id="q12">
+  <div class="sec-head"><span class="qn">VI.12</span><h2>Болезни, сцепленные с полом.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры, лист 4</span>
+    <p>Наследование, сцепленное с полом, характеризуется тем, что патологический ген находится в половой Х хромосоме. По этому типу наследуются такие заболевания, как дальтонизм, мышечная дистрофия Дюшена, сидеробластная анемия, почечный несахарный диабет (нечувствительность рецепторов канальцев почек к антидиуретическому гормону, АДГ), гемофилия А (дефицит фактора Y111 [VIII]), гемофилия В (дефицит фактора 1Х [IX]), агаммаглобулинемия Брутона.</p>
+  </div>
+  <p>Адо (стр. PDF 127): патологический ген находится в половой хромосоме — чаще в X — и может быть как рецессивным, так и доминантным; добавляет <b>фавизм</b> — дефицит глюкозо-6-фосфатдегидрогеназы, гемолиз после приёма сульфаниламидов. «Краткий курс» (лекция XVI): рецессивных, связанных с полом, — около 60 заболеваний.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>У женщины две X: если одна с «испорченным» геном, вторая подстрахует — она здоровая носительница. У мужчины X одна, а Y-хромосома маленькая и «запасной копии» не содержит. Поэтому гемофилией и дальтонизмом болеют почти только мужчины, а получают ген от матери-носительницы. От отца сын получает Y, поэтому гемофилию от отца сын не наследует.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>На примере <b>гемофилии А</b> (Адо, стр. PDF 127):</p>
+  <ol class="steps">
+    <li><b>Генотипы</b>: женщина X'X — носитель, болезнь не проявляется: во второй X-хромосоме нормальный аллель подавляет ген гемофилии (<span class="kv c">компенсация</span>). Мужчина X'Y — болен: в Y-хромосоме аналогичного аллеля нет.</li>
+    <li><b>Ведущее звено</b> — отсутствие VIII фактора свёртывания → нарушение гемостаза (<span class="kv d">повреждение</span>).</li>
+    <li><b>Проявления</b> — кровоточивость (вывод конспекта по сути «нарушения гемостаза»; подробно — в частной патофизиологии крови).</li>
+    <li><b>Терапия</b> — замещение недостающего фактора («Краткий курс», лекция XVI: «замещение недостающих факторов»).</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Признак</th><th>X-рецессивный</th><th>X-доминантный</th></tr></thead>
+    <tbody>
+      <tr><td>Кто болеет</td><td>почти исключительно мужчины; матери — облигатные носительницы</td><td>оба пола, женщины в 2 раза чаще, у мужчин тяжелее</td></tr>
+      <tr><td>От больного отца</td><td>сын никогда не наследует</td><td>всем дочерям и ни одному сыну</td></tr>
+      <tr><td>От матери</td><td>носительница: больной ребёнок — 25%, больной мальчик — 50%</td><td>больная мать: сыновьям и дочерям с равной вероятностью</td></tr>
+      <tr><td>Примеры</td><td>гемофилия А и В, дальтонизм, миодистрофия Дюшенна, агаммаглобулинемия Брутона</td><td>витамин D-резистентный рахит, одна из форм гипофосфатемии</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">otvety/patfiz-otvety.txt, вопрос 47; примеры X-рецессивных — также методичка, лист 4, и тесты «Наследственность», вопрос 8</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое голандрическое наследование?</summary><div class="a"><p>Сцепленное с Y-хромосомой: признак передаётся от отца всем сыновьям и только сыновьям, дочери никогда его не наследуют (otvety, вопрос 47).</p></div></details>
+  <details class="more"><summary>Почему у мужчин с агаммаглобулинемией Брутона частые инфекции?</summary><div class="a"><p>Нарушено образование антител: значительно снижены IgG и IgM (тесты, задача о гипогаммаглобулинемии Брутона). Подробно — в разделе IX «Иммунодефициты».</p></div></details>
+  <details class="more"><summary>Что такое почечный несахарный диабет?</summary><div class="a"><p>Нечувствительность рецепторов канальцев почек к АДГ (методичка, лист 4; Адо, PDF 127): гормона достаточно, но почка его «не слышит» и не концентрирует мочу.</p></div></details>
+  <div class="note"><p><b>Опечатки методички:</b> «фактора Y111» и «фактора 1Х» — по смыслу факторы <b>VIII</b> и <b>IX</b>. <b>Частая ошибка:</b> сказать, что больной гемофилией отец передаст её сыну. Сыну он передаёт Y, а все его дочери будут носительницами (вывод конспекта по Адо, PDF 127). <b>Связь с клиникой:</b> болезнь Виллебранда — тоже нарушение гемостаза, но аутосомно-доминантное (VI.4): болеют и женщины.</p></div>
+</section>
+
+<section id="q13">
+  <div class="sec-head"><span class="qn">VI.13</span><h2>Митохондриальное наследование.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · otvety, вопрос 49; пересказ лекции 2 (в методичке, Адо и «Кратком курсе» нет)</span>
+    <p><b>Митохондриальное наследование</b> — передача признаков, гены которых находятся не в ядре, а в собственной ДНК митохондрий (мтДНК). Тип наследования митохондриальный выделяют наряду с аутосомными, X- и Y-сцепленными (otvety, вопрос 49). Наследуется <b>от матери</b>: болезнь у всех детей больной матери (пересказ лекции 2).</p>
+  </div>
+  <ul class="facts">
+    <li><b>Геном митохондрии</b> — 16 569 пар оснований, кодирует компоненты дыхательной цепи (пересказ лекции 2); 37 генов: 13 белков системы окислительного фосфорилирования, 22 тРНК, 2 рРНК (внешние источники, сверено по выдержкам поиска).</li>
+    <li><b>Почему от матери</b>: зародыш получает митохондрии только из яйцеклетки, митохондрии сперматозоида не передаются (внешние источники, по выдержкам поиска).</li>
+    <li><b>Гетероплазмия</b> — в одной клетке и организме сосуществуют мутантная и нормальная мтДНК; мать передаёт детям разную долю мутантных копий, поэтому тяжесть болезни у детей разная (обзор «The inheritance of pathogenic mitochondrial DNA mutations», PMC2785871, по выдержке).</li>
+    <li><b>Примеры</b>: атрофия зрительного нерва (наследственная оптическая нейропатия Лебера), митохондриальная миоэнцефалопатия (пересказ лекции 2).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Митохондрии — «электростанции» клетки, и у них есть собственная маленькая инструкция — кольцевая ДНК. Яйцеклетка огромная и передаёт ребёнку свои электростанции, а сперматозоид — только ядро. Поэтому все митохондрии у нас мамины. Если в маминой инструкции ошибка, она достаётся всем детям, но в разной «дозе»: в каждой клетке сотни митохондрий, и испорченных среди них может быть мало или много.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Мутация мтДНК</b><span class="h">передана с яйцеклеткой</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">ведущее звено</span><b>Дефект дыхательной цепи</b><span class="h">↓ окислительного фосфорилирования, ↓ АТФ</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">цепь</span><b>Энергодефицит</b><span class="h">страдают самые энергозависимые ткани</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">проявления</span><b>Мозг, мышцы, зрение</b><span class="h">энцефалопатия, миопатия, атрофия зрительного нерва</span></div>
+  </div>
+  <ol class="steps">
+    <li><b>Пусковое звено</b> — мутация в генах белков дыхательной цепи (лекция 2: мтДНК кодирует компоненты дыхательной цепи).</li>
+    <li><span class="kv d">повреждение</span> Нарушение биоэнергетики клетки — то же, что при её повреждении: нарушение окислительного фосфорилирования в митохондриях ведёт к дефициту АТФ (Адо, гл. 2, стр. PDF 56: нарушение биоэнергетических функций митохондрий — одно из наиболее ранних проявлений повреждения клеток).</li>
+    <li><span class="kv c">компенсация</span> Нормальные копии мтДНК в той же клетке (гетероплазмия) частично обеспечивают энергией; болезнь проявляется, когда мутантных копий много <span class="uncheck">⚠ не проверено</span> (пороговый эффект — в источниках курса нет).</li>
+    <li><b>Проявления</b> — поражение наиболее энергозависимых тканей: мозг, скелетные мышцы, миокард, печень, почки, орган зрения (русскоязычный обзор митохондриальных болезней, neurology.ru, по выдержке поиска).</li>
+    <li><b>Терапия</b> — симптоматическая <span class="uncheck">⚠ не проверено</span>.</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Признак</th><th>Митохондриальный тип</th></tr></thead>
+    <tbody>
+      <tr><td>Кто передаёт</td><td>только мать; больной отец мтДНК детям не передаёт</td></tr>
+      <tr><td>Кто болеет</td><td>дети обоих полов</td></tr>
+      <tr><td>Выраженность</td><td>разная у детей одной матери — из-за гетероплазмии</td></tr>
+      <tr><td>мтДНК</td><td>16 569 пар оснований; 37 генов (13 белков, 22 тРНК, 2 рРНК)</td></tr>
+      <tr><td>Пример</td><td>оптическая нейропатия Лебера: более чем в 90% случаев — одна из трёх точечных мутаций мтДНК</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Пересказ лекции 2 (25.09.2025); внешние источники по выдержкам поиска: PMC2785871; обзор митохондриальных болезней (neurology.ru); статьи о нейропатии Лебера («Вестник офтальмологии», mediasphera.ru). Сами страницы из облака не открылись — <span class="uncheck">⚠ не проверено</span> по полному тексту.</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему болезнь у детей одной матери выражена по-разному?</summary><div class="a"><p>Из-за гетероплазмии: женщина-носитель передаёт детям разное количество мутантной мтДНК (PMC2785871, по выдержке). Соотношение мутантных и нормальных копий в тканях определяет проявления.</p></div></details>
+  <details class="more"><summary>Может ли больной мужчина передать митохондриальную болезнь детям?</summary><div class="a"><p>Нет: митохондрии сперматозоида потомству не передаются (внешние источники по выдержке; пересказ лекции 2 — «наследуется от матери»). Описаны единичные исключения с передачей мтДНК от отца (bioRxiv, 2020, по выдержке) — на зачёте это не нужно.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> путать митохондриальный тип с X-сцепленным: при X-сцепленном рецессивном болеют почти только мальчики, при митохондриальном — дети обоих полов, но только от больной матери. <b>Чего нет в источниках курса:</b> в методичке кафедры, учебнике Адо 2000 и «Кратком курсе» этого вопроса нет; лектор его разбирал (пересказ лекции 2) — ответ построен на лекции и внешних источниках, точные числа по возможности перепроверьте по Литвицкому <span class="uncheck">⚠ не проверено</span>.</p></div>
+</section>
+
+<section id="quiz">
+  <div class="sec-head"><h2>Самопроверка: ответ одной фразой</h2></div>
+  <div class="quiz-bar"><p>Сначала ответьте вслух, потом откройте.</p><button type="button" id="toggle-all">Открыть все</button></div>
+  <details class="q"><summary>VI.1. Что такое наследственная болезнь и чем она вызывается?</summary><div class="a"><p>Болезнь из-за дефектов наследственного аппарата клеток, передаваемых через гаметы; причина — мутации от физических, химических, биологических мутагенов или спонтанные; условие — возраст родителей.</p></div></details>
+  <details class="q"><summary>VI.2. Назовите три вида мутаций.</summary><div class="a"><p>Генные (выпадение, замена, вставка нуклеотидов), хромосомные (делеция, дупликация, транслокация, инверсия), геномные (полиплоидия, анеуплоидия).</p></div></details>
+  <details class="q"><summary>VI.3. Какие бывают типы наследования?</summary><div class="a"><p>Аутосомно-доминантный, аутосомно-рецессивный, кодоминантный, промежуточный, смешанный, сцепленный с полом (X, Y), митохондриальный.</p></div></details>
+  <details class="q"><summary>VI.4. Назовите 5 аутосомно-доминантных болезней.</summary><div class="a"><p>Ахондроплазия, поли- и синдактилия, нейрофиброматоз Реклингхаузена, хорея Гентингтона, болезнь Виллебранда, поликистоз почек, семейная гиперхолестеринемия, болезнь Альцгеймера (по методичке).</p></div></details>
+  <details class="q"><summary>VI.5. Назовите 5 аутосомно-рецессивных болезней.</summary><div class="a"><p>Фенилкетонурия, альбинизм, алкаптонурия, галактоземия, талассемия, гликогенозы, микроцефалия.</p></div></details>
+  <details class="q"><summary>VI.6. Методы изучения наследственной патологии?</summary><div class="a"><p>Клинико-генеалогический, близнецовый, популяционно-статистический, цитогенетический (кариотип, половой хроматин), дерматоглифика, биохимический, иммунологический.</p></div></details>
+  <details class="q"><summary>VI.7. Кариотип и главные признаки болезни Дауна?</summary><div class="a"><p>47,XX,+21 или 47,XY,+21; олигофрения, монголоидный разрез глаз, эпикант, плоское лицо, пороки сердца, иммунодефицит, лейкоз.</p></div></details>
+  <details class="q"><summary>VI.8. Кариотип и признаки синдрома Шерешевского–Тернера?</summary><div class="a"><p>45,X; низкий рост, крыловидные складки шеи, гипоплазия яичников, первичная аменорея, бесплодие, нет телец Барра, интеллект обычно сохранён.</p></div></details>
+  <details class="q"><summary>VI.9. Трисомия X: кариотип и тельца Барра?</summary><div class="a"><p>47,XXX; два тельца Барра; может не проявляться или давать гипоплазию яичников, бесплодие, умственную неполноценность.</p></div></details>
+  <details class="q"><summary>VI.10. Синдром Клайнфельтера: кариотип и признаки?</summary><div class="a"><p>47,XXY; высокий рост, евнухоидное телосложение, гинекомастия, атрофия яичек, бесплодие, есть половой хроматин; проявляется в пубертате.</p></div></details>
+  <details class="q"><summary>VI.11. Ведущее звено фенилкетонурии и лечение?</summary><div class="a"><p>Дефицит фенилаланингидроксилазы → гиперфенилаланинемия и токсичная фенилпировиноградная кислота поражают ЦНС; лечение — диета без фенилаланина с первых дней.</p></div></details>
+  <details class="q"><summary>VI.12. Почему гемофилией болеют мужчины?</summary><div class="a"><p>Ген рецессивный в X-хромосоме: у женщины X'X нормальный аллель второй X подавляет его, у мужчины X'Y второй копии нет.</p></div></details>
+  <details class="q"><summary>VI.13. Главные черты митохондриального наследования?</summary><div class="a"><p>Гены в мтДНК, передаются только от матери детям обоих полов; гетероплазмия даёт разную тяжесть; страдают энергозависимые ткани — мозг, мышцы, зрительный нерв.</p></div></details>
+</section>
+
+<section id="slovar">
+  <div class="sec-head"><h2>Словарик для начинающих</h2></div>
+  <dl class="gloss">
+    <dt>Ген, аллель</dt><dd>участок ДНК с «рецептом» одного белка; аллели — две копии гена (от матери и от отца).</dd>
+    <dt>Гомозигота / гетерозигота</dt><dd>обе копии гена одинаковые (аа) / разные (Аа).</dd>
+    <dt>Доминантный / рецессивный</dt><dd>проявляется при одной копии / только при двух одинаковых.</dd>
+    <dt>Аутосомы</dt><dd>все хромосомы, кроме половых; у человека их 44 (22 пары).</dd>
+    <dt>Кариотип</dt><dd>набор хромосом клетки; норма — 46,XX или 46,XY.</dd>
+    <dt>Трисомия / моносомия</dt><dd>лишняя третья хромосома в паре / одна вместо двух.</dd>
+    <dt>Тельце Барра (половой хроматин)</dt><dd>свёрнутая лишняя X-хромосома, видна в ядре; у здоровой женщины одно.</dd>
+    <dt>Пенетрантность</dt><dd>частота проявления гена у его носителей.</dd>
+    <dt>Экспрессивность</dt><dd>насколько сильно проявляется признак.</dd>
+    <dt>Пробанд</dt><dd>человек, с которого начинают составлять родословную.</dd>
+    <dt>Конкордантность</dt><dd>совпадение признака у близнецов.</dd>
+    <dt>Фенокопия</dt><dd>болезнь, похожая на наследственную, но без изменения генов.</dd>
+    <dt>Гетероплазмия</dt><dd>смесь нормальной и мутантной митохондриальной ДНК в клетке.</dd>
+  </dl>
+</section>
+
+<section id="src">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ol class="links">
+    <li>Методичка кафедры «Наследственная патология», листы 1–6 — <code>source/metodichki/nasledstvennost.md</code> (фото <code>_inbox/patfiziologiya/metodichki-foto/nasledstvennye-bolezni/</code>).</li>
+    <li>Патологическая физиология / под ред. А.Д. Адо и др. — М.: Триада-Х, 2000 — гл. 3.7 «Роль наследственности», стр. PDF 120–131.</li>
+    <li>«Краткий курс лекций по патологической физиологии» — лекция XVI «Патофизиология наследственных болезней».</li>
+    <li>Студенческие ответы на экзаменационный перечень ЧГУ, вопросы 44–47, 49 и раздел «Энзимопатии» (<code>source/otvety/patfiz-otvety.txt</code>) — сверять, бывают ошибки.</li>
+    <li>Тесты по патофизиологии, раздел «Наследственность и патология», вопросы 1, 3, 5, 8, 18; задачи о фенилкетонурии и гипогаммаглобулинемии Брутона (<code>source/otvety/testy-i-otvety.txt</code>).</li>
+    <li>Пересказ лекции 2 курса патофизиологии, 25.09.2025 (t.me/lklechfac) — только акценты лектора; для VI.13 — основа ответа.</li>
+    <li>Митохондриальное наследование — выдержки из поиска: обзор «The inheritance of pathogenic mitochondrial DNA mutations» (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2785871/">PMC2785871</a>); русскоязычный обзор митохондриальных болезней (<a href="https://neurology.ru/upload/iblock/c49/ie50vfpf28ibna553cwpvoax9cehac4b.pdf">neurology.ru</a>); о нейропатии Лебера — «Вестник офтальмологии» (<a href="https://www.mediasphera.ru/issues/vestnik-oftalmologii/2022/5-2/10042465X2022052208">mediasphera.ru</a>). Сайты из облака не открылись, сверено по выдержкам.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Конспект к итоговому занятию № 1 по патофизиологии составил Евгений Якимов, группа М-03-24, медфак ЧГУ, октябрь 2026. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+  <p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('toggle-all'); if(!b) return;
+  b.addEventListener('click',function(){
+    var d=document.querySelectorAll('#quiz details.q');
+    var open=b.getAttribute('data-open')!=='1';
+    d.forEach(function(x){x.open=open;});
+    b.setAttribute('data-open',open?'1':'0');
+    b.textContent=open?'Свернуть все':'Открыть все';
+  });
+})();
+</script>
+</body>
+</html>
