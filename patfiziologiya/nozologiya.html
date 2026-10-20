@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Патофизиология: нозология</title>
+<meta name="description" content="Патофизиология, итоговое занятие № 1: предмет и методы, разделы, типовые процессы, нозология, болезнь, стадии и исходы, этиология и патогенез.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#9E2A2B; --accent-soft:#F6E4E2;
+  --blue:#1C5A8C; --blue-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E3F1E7; --ok-fg:#1F6B3A;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#F0928A; --accent-soft:#3A1F1E;
+    --blue:#82B6E4; --blue-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#15301F; --ok-fg:#8FD6A6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#F0928A; --accent-soft:#3A1F1E;
+  --blue:#82B6E4; --blue-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#15301F; --ok-fg:#8FD6A6;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:780px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--blue); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2rem, 6vw, 2.8rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.5rem; font-weight:700}
+h3{font-size:1.1rem; font-weight:700; margin-top:1.5rem}
+p{margin:.6rem 0}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.05rem; color:var(--muted); max-width:64ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--blue-soft); color:var(--blue); text-decoration:none}
+a.chip.pdf{background:var(--accent); color:var(--surface)}
+nav.toc{margin:1.4rem 0 0; font-size:.93rem}
+nav.toc ol{padding-left:1.6rem; margin:.5rem 0 0; columns:2 250px; column-gap:1.8rem}
+nav.toc li{padding:.14rem 0; break-inside:avoid}
+nav.toc li::marker{font-family:var(--mono); color:var(--muted); font-size:.85em}
+section{padding-top:2.5rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .8rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.qn{font:500 .8rem/1 var(--mono); color:var(--surface); background:var(--accent); padding:.3rem .45rem; border-radius:5px; flex:none}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.32rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.4rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.def{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.75rem 1rem; margin:.9rem 0}
+.def .k{font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.25rem}
+.def p{margin:.2rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.3rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .7rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td.lv{font-weight:600; white-space:nowrap}
+.note{background:var(--blue-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.star{color:var(--accent); font-weight:600}
+.src{font:400 .78rem/1.4 var(--mono); color:var(--muted); margin-top:.4rem}
+/* лесенка уровней */
+.levels{display:grid; gap:8px; margin:1rem 0}
+.lvl{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem .9rem; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.65rem .85rem; border-left:5px solid var(--accent)}
+.lvl:nth-child(2){margin-left:4%} .lvl:nth-child(3){margin-left:8%} .lvl:nth-child(4){margin-left:12%} .lvl:nth-child(5){margin-left:16%}
+.lvl b{font-family:var(--serif); font-size:1rem}
+.lvl small{display:block; color:var(--muted); font-size:.78rem; line-height:1.3}
+.lvl .who{font-size:.9rem}
+@media (max-width:560px){ .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0} }
+/* цепочки этапов */
+.flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:1rem 0}
+.st{flex:1 1 130px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.6rem .7rem; position:relative; display:grid; gap:.25rem; align-content:start}
+.st .n{font:500 .74rem/1.2 var(--mono); color:var(--muted)}
+.st b{font-family:var(--serif); font-size:.98rem; line-height:1.25}
+.st .h{font-size:.82rem; color:var(--ink); line-height:1.35}
+.st .h em{font-style:normal; font-weight:600; color:var(--accent)}
+.st.zone{background:var(--accent-soft); border-color:transparent}
+.arrow{flex:0 0 auto; align-self:center; font:500 1.1rem/1 var(--mono); color:var(--muted)}
+@media (max-width:560px){ .flow{flex-direction:column} .arrow{transform:rotate(90deg); align-self:center} .st{flex-basis:auto} }
+/* хронология */
+.tl{list-style:none; padding:0; margin:1rem 0; border-left:2px solid var(--line)}
+.tl li{position:relative; padding:.1rem 0 .7rem 1.1rem}
+.tl li::before{content:""; position:absolute; left:-6px; top:.55rem; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+.tl .y{font:500 .85rem/1.3 var(--mono); color:var(--accent); display:block}
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin:.8rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .9rem}
+.card h4{margin:0 0 .35rem; font:600 .98rem/1.3 var(--sans)}
+.card ul{margin:.2rem 0; padding-left:1.05rem} .card li{margin:.22rem 0; font-size:.92rem}
+.card.a{border-top:4px solid var(--accent)} .card.b{border-top:4px solid var(--blue)}
+/* самопроверка */
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--blue); background:transparent; color:var(--blue); cursor:pointer}
+button:hover{background:var(--blue-soft)}
+details.q{border-bottom:1px solid var(--line)}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.7rem 2rem .7rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.58rem; font:500 1.2rem/1 var(--mono); color:var(--blue)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .85rem; font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.45rem; padding-left:1.1rem; font-size:.92rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.32rem} th,td{padding:.5rem .55rem} }
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+/* патофизиология: части ответа */
+section[id^="q"] > h3{font:600 .78rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin:1.4rem 0 .3rem}
+.easy{background:var(--ok-bg); border-radius:10px; padding:.75rem 1rem; margin:.5rem 0}
+.easy > :first-child{margin-top:0} .easy > :last-child{margin-bottom:0}
+.lead-link{font-weight:600; color:var(--accent)}
+.kv{display:inline-block; font:500 .72rem/1.2 var(--mono); padding:.18rem .4rem; border-radius:5px; vertical-align:.08em}
+.kv.c{background:var(--ok-bg); color:var(--ok-fg)} .kv.d{background:var(--accent-soft); color:var(--accent)}
+details.more{border:1px solid var(--line); border-radius:8px; background:var(--surface); margin:.45rem 0}
+details.more summary{cursor:pointer; padding:.6rem .8rem; font-weight:500; list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"? "; font-family:var(--mono); color:var(--blue)}
+details.more .a{padding:0 .8rem .7rem; font-size:.95rem}
+details.more .a p{margin:.3rem 0}
+.uncheck{color:var(--warn-fg); font-weight:600; white-space:nowrap}
+dl.gloss{margin:.6rem 0} dl.gloss dt{font-weight:600; margin-top:.6rem} dl.gloss dd{margin:.1rem 0 0 0; color:var(--ink)}
+svg.scheme{width:100%; height:auto; max-width:560px; display:block; margin:.8rem auto}
+svg.scheme text{font-family:var(--sans); fill:var(--ink)}
+svg.scheme .box{fill:var(--surface); stroke:var(--line)}
+svg.scheme .bad{fill:var(--accent-soft); stroke:var(--accent)}
+svg.scheme .good{fill:var(--ok-bg); stroke:var(--ok-fg)}
+svg.scheme .ln{stroke:var(--muted); fill:none; stroke-width:1.6}
+svg.scheme text.acc{fill:var(--accent)}
+svg.scheme .lnr{stroke:var(--accent); fill:none; stroke-width:1.8}
+@media print{ details.more{break-inside:avoid} details.more summary::before{content:none} .easy{border:1px solid #ccc} }
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.48}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar, a.chip.pdf{display:none}
+  section{padding-top:1.1rem}
+  h1{font-size:21pt} h2{font-size:14.5pt} h2, h3, .sec-head{break-after:avoid}
+  .tile, .lvl, .st, details.q, .tl li, tr, ol.steps li, ul.facts li{break-inside:avoid}
+  .tbl{overflow:visible}
+  .tbl, .def, .tile, .lvl, .st, .card{border-color:#ccc}
+  table{font-size:8.6pt} th,td{padding:.3rem .4rem}
+  .tiles{grid-template-columns:1fr 1fr}
+  .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0}
+  .flow{flex-direction:column} .arrow{transform:rotate(90deg)} .st{flex:0 0 auto}
+  .cols{grid-template-columns:1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Патофизиология · итоговое занятие № 1 · медфак ЧГУ</div>
+  <h1>I. Нозология</h1>
+  <p class="lead">Общее учение о болезни: что изучает патофизиология, что такое болезнь, патологический процесс и реакция, как болезнь возникает, течёт и чем кончается, что такое этиология и патогенез.</p>
+  <div class="chips">
+    <a class="chip pdf" href="nozologiya.pdf">скачать PDF для телефона</a>
+    <span class="chip">11 вопросов раздела</span>
+    <span class="chip">Адо, 2000, гл. 1</span>
+    <span class="chip">«Краткий курс лекций», лекции I–III</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Вопросы</div>
+    <ol>
+      <li><a href="#q1">Предмет, задачи, методы</a></li>
+      <li><a href="#q2">Разделы патофизиологии</a></li>
+      <li><a href="#q3">Типовые патогенные процессы</a></li>
+      <li><a href="#q4">Нозология</a></li>
+      <li><a href="#q5">Болезнь и её сущность</a></li>
+      <li><a href="#q6">Возникновение, развитие, исходы</a></li>
+      <li><a href="#q7">Стадии болезни</a></li>
+      <li><a href="#q8">Реакция, процесс, состояние</a></li>
+      <li><a href="#q9">Номенклатура и классификация</a></li>
+      <li><a href="#q10">Этиология</a></li>
+      <li><a href="#q11">Патогенез</a></li>
+    </ol>
+    <p style="margin:.6rem 0 0"><a href="#quiz">Самопроверка</a> · <a href="#slovar">Словарик</a> · <a href="#src">Источники</a> · <a href="index.html">Все разделы</a></p>
+  </nav>
+</header>
+
+<section id="top">
+  <div class="sec-head"><h2>Главное за пять минут</h2></div>
+  <div class="tiles">
+    <div class="tile"><b>Болезнь</b><span>сложная общая реакция на повреждение + качественно новый жизненный процесс → ↓ приспособляемости и трудоспособности (Адо, PDF 39)</span></div>
+    <div class="tile"><b>Повреждение первично</b><span>все защитные и компенсаторные процессы — вторичны (Адо, PDF 38)</span></div>
+    <div class="tile"><b>Причина</b><span>воздействие, без которого болезнь невозможна; условия — не обязательны (Адо, PDF 41, 43)</span></div>
+    <div class="tile"><b>Основное звено</b><span>изменение, от которого зависят остальные этапы болезни; его устранение может привести к выздоровлению (Адо, PDF 45)</span></div>
+    <div class="tile"><b>3 стадии</b><span>начало (латентный период) → собственно болезнь → исход (Адо, PDF 46)</span></div>
+    <div class="tile"><b>до 4 · 5–14 · 15–40 дней</b><span>острейшие · острые · подострые; дольше — хронические (Адо, PDF 46)</span></div>
+    <div class="tile"><b>3 исхода</b><span>выздоровление (полное, неполное), переход в хроническую форму, смерть (Адо, PDF 47)</span></div>
+    <div class="tile"><b>Процесс ≠ болезнь</b><span>процесс многопричинный, болезнь — одна главная причина (Адо, PDF 41)</span></div>
+  </div>
+  <p class="src">Номера страниц Адо — страницы PDF-файла учебника (печатная = PDF − 33 для глав; введение — римскими цифрами).</p>
+</section>
+
+<section id="q1">
+  <div class="sec-head"><span class="qn">I.1</span><h2>Предмет, задачи, методы патофизиологии.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · Адо, стр. PDF 17 (с. XVIII)</span>
+    <p><b>Патологическая физиология</b> — наука о жизнедеятельности больного организма человека и животного, т.е. физиология больного организма. Патологическая физиология представляет собой науку о природе и механизмах устойчивости (резистентности) к заболеваниям, предболезни, болезни и выздоровления. <b>Предметом</b> исследования патологической физиологии является изучение наиболее общих закономерностей нарушения функций клеток, органов и организма в целом при болезнях.</p>
+  </div>
+  <p><b>Задачи</b> — по «Краткому курсу лекций» (лекция I) их шесть:</p>
+  <ol class="steps">
+    <li>общее учение о болезни — <b>общая нозология</b>;</li>
+    <li>общее учение о причинах — <b>общая этиология</b>;</li>
+    <li>общие механизмы возникновения, развития и прекращения болезней — <b>общий патогенез</b> («главная задача»);</li>
+    <li><b>типовые патологические процессы</b> — «фундамент болезни»;</li>
+    <li>нарушения отдельных систем и органов — <b>частная патофизиология</b>;</li>
+    <li>обоснование <b>патогенетической терапии</b>.</li>
+  </ol>
+  <p><b>Методы</b>: главный — <b>эксперимент на животных</b> (моделирование болезни), острый (вивисекция) и хронический (фистулы, вживление электродов, трансплантация органов); исследование изолированных органов, культур тканей и клеток; <b>сравнительный и эволюционный</b> метод И.И. Мечникова; наблюдение больного человека безвредными методами — <b>клиническая патофизиология</b> (Адо, PDF 18–19). Лектор делит методы на моделирование (физическое — на животных и искусственных системах; формализованное — логическое, компьютерное), теоретический анализ, клинические исследования и методы других дисциплин (пересказ лекции 1).</p>
+  <p><b>Цель</b> в подготовке врача — познание общих патологических процессов, сущности болезни и законов её развития, формирование клинического мышления (Адо, PDF 17).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy">
+    <p>Нормальная физиология объясняет, как работает исправная машина. Патофизиология — почему и как она ломается: что сломалось первым, что от этого поломалось следом и какую деталь починить, чтобы остановить всю цепочку поломок.</p>
+    <p>Модель болезни на животном — это как краш-тест машины: настоящую аварию изучать поздно и опасно, поэтому её воспроизводят нарочно, заранее зная, «как было до удара», и смотрят, что происходит с первой же секунды.</p>
+  </div>
+  <h3>Механизм по шагам</h3>
+  <p>Как устроен патофизиологический эксперимент — три фазы («Краткий курс», лекция I):</p>
+  <div class="flow">
+    <div class="st"><span class="n">фаза 1</span><b>Исходный фон</b><span class="h">измеряют показатели здорового животного</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">фаза 2</span><b>Модель болезни</b><span class="h">воспроизводят болезнь и изучают её <em>патогенез</em> с самого начала</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">фаза 3</span><b>Патогенетическая терапия</b><span class="h">проверяют, какое вмешательство разрывает цепь патогенеза</span></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Эксперимент: преимущества</th><th>Трудности и недостатки</th></tr></thead>
+    <tbody>
+      <tr><td>известен исходный уровень показателей</td><td>выбор животного</td></tr>
+      <tr><td>жёсткая связь «причина → болезнь»: модель и есть изучение причины</td><td>не все болезни моделируются (психические, аллергические, болезни обмена — Адо, PDF 18)</td></tr>
+      <tr><td>видны самые ранние, пусковые фазы, скрытые от клинициста</td><td>трудно перенести данные в клинику</td></tr>
+      <tr><td>доступны любые приёмы изучения патогенеза</td><td>трудно создать модель</td></tr>
+      <tr><td>обоснование новых методов лечения</td><td>этические проблемы</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">«Краткий курс лекций», лекция I</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему нельзя полностью воспроизвести болезнь человека на животном?</summary><div class="a"><p>Организм человека на много порядков сложнее и опосредован социальными факторами. Моделируют отдельные звенья и синдромы: например, при моделировании гипертонической болезни получают стойкую гипертензию, но не гипертоническую болезнь человека во всём объёме (Адо, PDF 18).</p></div></details>
+  <details class="more"><summary>Чем патофизиология отличается от клинических дисциплин?</summary><div class="a"><p>Цель общая, а объект разный: клиника изучает конкретного больного с конкретными проявлениями, патофизиология — общие механизмы развития болезней, «программы», которые создаёт в организме болезнетворная причина (Адо, PDF 17).</p></div></details>
+  <details class="more"><summary>Кто основоположник патофизиологии в России?</summary><div class="a"><p>В.В. Пашутин, ученик И.М. Сеченова: с 1874 г. кафедра общей патологии в Казани, с 1878 г. — в Медико-хирургической академии Петербурга (в otvety — 1879); создал первую отечественную школу патофизиологов (Адо, PDF 21).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать, что патофизиология изучает «изменения органов при болезни». Её главное — <b>функции и механизмы</b>, хотя изучение функции невозможно в отрыве от структуры (Адо, PDF 17) — отсюда тесная связь с патанатомией. Главная задача курса, по Адо, — научить «применять естествознание у постели больного» (С.П. Боткин; Адо, PDF 17).</p></div>
+</section>
+
+<section id="q2">
+  <div class="sec-head"><span class="qn">I.2</span><h2>Разделы патофизиологии.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Структура предмета · Адо, оглавление (стр. PDF 8–14)</span>
+    <p>Учебник делится на три части: <b>общая нозология</b> (общее учение о болезни, местные и общие реакции на повреждение, реактивность, иммунитет, аллергия), <b>типовые патологические процессы</b>, <b>нарушение функций органов и систем</b> (частная патофизиология).</p>
+  </div>
+  <ul class="facts">
+    <li><b>Общая нозология</b> — учение о болезни вообще: здоровье и болезнь, этиология, патогенез, исходы, реактивность.</li>
+    <li><b>Типовые патологические процессы</b> — у Адо (ч. 2, гл. 6–11): нарушения периферического кровообращения и микроциркуляции, воспаление, лихорадка, нарушения обмена веществ, гипоксия, опухолевый рост. Лектор относит сюда также повреждение клетки и аллергию (пересказ лекции 1).</li>
+    <li><b>Частная патофизиология</b> — нервной системы, эндокринной, кровообращения, дыхания, крови, пищеварения, печени, почек.</li>
+  </ul>
+  <p>Первые два раздела вместе называют <b>общей патофизиологией</b>. Лектор курса выделяет и четвёртый — <b>клиническую патофизиологию</b> (изучение механизмов болезни прямо у больного), но в программу 3 курса она не входит (пересказ лекции 1, 10.09.2025).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Как в автошколе: сначала общие правила (общая нозология — что такое болезнь вообще), потом типовые неисправности, которые бывают у любой машины (воспаление, лихорадка, гипоксия — встречаются при сотне разных болезней), и только потом — устройство конкретных узлов (сердце, почки, кровь).</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Как разделы связаны в ответе на любой клинический вопрос:</p>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Нозология</b><span class="h">причина, условия, основное звено</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Типовые процессы</b><span class="h">из каких «кирпичиков» болезнь сложена</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Частная</b><span class="h">как страдает конкретный орган</span></div>
+  </div>
+  <p>Пример: пневмония = причина (пневмококк) + типовые процессы (воспаление, лихорадка, гипоксия) + частная патология (дыхательная недостаточность).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое типовая форма патологии органа?</summary><div class="a"><p>Совокупность патологических процессов, характерная для патологии отдельной ткани или органа: например, анемия — типовая форма патологии системы эритроцитов, у любой анемии общее — снижение гемоглобина в единице объёма крови (otvety/patfiz-otvety.txt, вопрос 2; так у Литвицкого — <span class="uncheck">⚠ не проверено по самому учебнику</span>).</p></div></details>
+  <details class="more"><summary>Когда сложилась такая структура предмета?</summary><div class="a"><p>Ко времени создания кафедр общей патологии (около 1869 г.): общее учение о болезни, учение о типовых патологических процессах и о типовых формах патологии органов (otvety/patfiz-otvety.txt, вопрос 1). Самостоятельные кафедры общей патологии в России созданы в 1868–1869 гг. (Адо, PDF 20).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> перечислять разделы как «этиология, патогенез, лечение». Это части учения о болезни внутри нозологии, а не разделы предмета.</p></div>
+</section>
+
+<section id="q3">
+  <div class="sec-head"><span class="qn">I.3</span><h2>Типовые патогенные процессы.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · Адо, стр. PDF 40–41</span>
+    <p>Нередко различные патологические процессы и отдельные патологические реакции клеток, тканей у человека и животных встречаются в виде постоянных сочетаний или комбинаций, сформировавшихся и закреплённых в процессе эволюции. Это <b>типовые патологические процессы</b>. К ним относятся воспаление, отёк, опухоль, лихорадка, дистрофия и др.</p>
+  </div>
+  <p>Главное: процесс <b>типовой</b>, потому что развивается по одним законам независимо от причины и места. Воспаление в лёгком, в пальце и в мозге идёт по одной схеме. По «Краткому курсу» таких процессов около 20, и из их комбинаций складывается любая болезнь.</p>
+  <p>Признаки типового процесса (otvety, вопрос 2, по Литвицкому): <b>полиэтиологичность</b> (много причин), <b>монопатогенетичность</b> (один стереотипный механизм), <b>комплексность</b> (всегда смесь повреждения и приспособления), <b>стандартность проявлений</b>.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Типовой процесс — как «программа на случай пожара» в здании: подожгли ли проводку, свечку или мусор — включается одна и та же сигнализация, вода, эвакуация. Причины разные, сценарий один. Воспаление и лихорадка — такие же заранее записанные эволюцией сценарии.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Типичный патологический процесс — закономерное сочетание элементов, которые включаются <b>всегда в одинаковом порядке</b>, независимо от места и вида («Краткий курс», лекция I). На примере воспаления:</p>
+  <div class="flow">
+    <div class="st zone"><span class="n">1</span><b>Альтерация</b><span class="h">повреждение — <em>повреждающее</em> звено</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Сосудистая реакция, экссудация, эмиграция</b><span class="h">отграничение очага — <em>защитное</em></span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Пролиферация</b><span class="h">восстановление — <em>приспособительное</em></span></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Группа</th><th>Типовые процессы (главы Адо)</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Клетка</td><td>повреждение клетки (гл. 2, ч. 1); жировая дистрофия (п. 9.2.3)</td></tr>
+      <tr><td class="lv">Микроциркуляция</td><td>артериальная гиперемия, ишемия, стаз, венозный застой (гл. 6)</td></tr>
+      <tr><td class="lv">Ответ на повреждение</td><td>воспаление (гл. 7), лихорадка (гл. 8); ответ острой фазы, стресс, шок — гл. 2 (ч. 1)</td></tr>
+      <tr><td class="lv">Обмен</td><td>нарушения обмена белков, жиров, углеводов, воды, электролитов, КОС (гл. 9)</td></tr>
+      <tr><td class="lv">Кислород</td><td>гипоксия (гл. 10)</td></tr>
+      <tr><td class="lv">Рост</td><td>опухолевый рост (гл. 11)</td></tr>
+      <tr><td class="lv">Иммунитет</td><td>аллергия, иммунодефициты (гл. 4–5, ч. 1)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, оглавление, стр. PDF 8–14: часть вторая «Типовые патологические процессы» — гл. 6–11; гл. 2, 4, 5 формально в части первой</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему в листе «патогенные», а у Адо «патологические»?</summary><div class="a"><p>Лектор курса предлагает вместо «патологический» говорить «патогенный» — для ясности (пересказ лекции 1). Содержание то же: на зачёте можно сказать «типовые патологические (патогенные) процессы».</p></div></details>
+  <details class="more"><summary>Чем типовой процесс отличается от болезни?</summary><div class="a"><p>Процесс вызывается многими причинами, болезнь — одной главной; один процесс даёт разные симптомы в зависимости от места; болезнь — часто комбинация нескольких процессов; процесс может не снижать приспособляемость и трудоспособность (Адо, PDF 41).</p></div></details>
+  <details class="more"><summary>Типовые процессы есть только у человека?</summary><div class="a"><p>Нет: воспаление, опухоли, отёк, дистрофии встречаются и у позвоночных, и у беспозвоночных, но у беспозвоночных существенно отличаются (Адо, PDF 41) — это основа сравнительной патологии Мечникова.</p></div></details>
+  <div class="note"><p><b>Связь с клиникой:</b> почти любой диагноз в терапии и хирургии раскладывается на типовые процессы — аппендицит (воспаление + лихорадка), инфаркт (ишемия + повреждение клетки + воспаление), шок (гипоксия + нарушение микроциркуляции). Это и есть главное преимущество патофизиолога на устном ответе.</p></div>
+</section>
+
+<section id="q4">
+  <div class="sec-head"><span class="qn">I.4</span><h2>Нозология.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · Адо, стр. PDF 17</span>
+    <p>Важной частью патофизиологии является <b>общее учение о болезни, или «общая нозология»</b> (от греч. nosos — болезнь).</p>
+  </div>
+  <p>Что входит в общую нозологию (структура главы 1 Адо и лекции I «Краткого курса»):</p>
+  <ul class="facts">
+    <li>учение о <b>норме и здоровье</b>;</li>
+    <li>учение о <b>болезни</b>: определение, сущность, критерии, классификация;</li>
+    <li><b>патологическая реакция, патологический процесс, патологическое состояние</b>;</li>
+    <li><b>общая этиология</b> — причины и условия;</li>
+    <li><b>общий патогенез</b> — механизмы развития;</li>
+    <li><b>исходы</b> и механизмы выздоровления.</li>
+  </ul>
+  <p>По «Краткому курсу» важнейшие элементы нозологии: повреждение, реакция, патологический процесс, патологическое состояние, болезнь.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Частная медицина отвечает «что такое пневмония». Нозология отвечает на вопрос уровнем выше: «что такое болезнь вообще», чем она отличается от здоровья, от чего начинается и как кончается. Это «грамматика» медицины — правила, по которым устроена любая болезнь.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Логика нозологии — от здоровья к исходу:</p>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Норма, здоровье</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Причина + условия</b><span class="h">этиология</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>Повреждение и реакция</b><span class="h">патогенез</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>Исход</b><span class="h">выздоровление, хроническая форма, смерть</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое норма?</summary><div class="a"><p>Под нормой, или здоровьем, понимают такую форму жизнедеятельности организма, которая обеспечивает ему наиболее совершенную оптимальную деятельность и адекватные условия существования в среде; популярно определение нормы как оптимального состояния жизнедеятельности организма в данной конкретной среде (Адо, PDF 35). Пример: на горных высотах нормой следует считать увеличение эритроцитов.</p></div></details>
+  <details class="more"><summary>Признаки здоровья и болезни?</summary><div class="a"><p>«Краткий курс» (лекция I): здоровье — структурная и функциональная полноценность, гомеостаз, равновесие с внешней средой; болезнь — патологические процессы с нарушением структуры и функции, нарушение гомеостаза, нарушение приспособления со снижением биологической и социальной активности. Осторожно: Адо считает представление о здоровье как «равновесии» организма и среды «неверным по существу» — живое поддерживает <b>неравновесное</b> состояние (PDF 36). Есть ещё «статистическая норма» — средняя величина у здоровых (PDF 34) и «практически здоров» — здоров сейчас, но не гарантирован от болезни (PDF 35).</p></div></details>
+  <details class="more"><summary>Определение здоровья ВОЗ?</summary><div class="a"><p>«Здоровье — это состояние полного физического, духовного и социального благополучия, и не только отсутствие болезней или физических дефектов» (Адо, PDF 36).</p></div></details>
+  <details class="more"><summary>Что такое нозологическая единица (форма)?</summary><div class="a"><p>Конкретная болезнь со своей причиной: каждая причина вызывает специфические первичные изменения и тем закладывает основу «определённой нозологической формы болезни» (Адо, PDF 43). Глубина познания специфичности определяет раскрытие сущности каждого вида болезни как нозологической единицы (Адо, PDF 18).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> путать «нозологию» и «нозологическую форму». Нозология — наука (учение о болезни), нозологическая форма — конкретная болезнь в классификации (например, «крупозная пневмония»).</p></div>
+</section>
+
+<section id="q5">
+  <div class="sec-head"><span class="qn">I.5</span><h2>Болезнь (определение). Сущность болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · Адо, стр. PDF 39</span>
+    <p><b>Болезнь</b> — это сложная общая реакция организма на повреждающее действие факторов внешней среды; это качественно новый жизненный процесс, сопровождающийся структурными, метаболическими и функциональными изменениями разрушительного и приспособительного характера в органах и тканях, приводящими к снижению приспособляемости организма к непрерывно меняющимся условиям окружающей среды и ограничению трудоспособности.</p>
+  </div>
+  <p><b>Сущность болезни</b> (Адо, PDF 38–39):</p>
+  <ul class="facts">
+    <li><b>первичным</b> и основным процессом в каждой болезни является <b>повреждение</b>, разрушение, дезорганизация структур и функций; все защитные, компенсаторные, приспособительные процессы — <b>вторичны</b>;</li>
+    <li>болезнь нельзя свести к приспособлению: при развитии болезни сами приспособительные процессы становятся вредными (Селье назвал стресс «болезнью адаптации»);</li>
+    <li>болезнь — <b>качественно новый</b> жизненный процесс: функции здорового организма сохраняются, но появляются новые изменения;</li>
+    <li>у человека болезнь <b>опосредована социальными факторами</b>.</li>
+  </ul>
+  <p>Термин «болезнь» имеет два значения: конкретное заболевание (нозологическая единица) и болезнь вообще как биологическое и социальное явление («Краткий курс», лекция I). Лектор подчёркивает: определение болезни на зачёте нужно знать дословно (пересказ лекции 1).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>В болезни всегда две стороны: <b>поломка</b> и <b>ремонт</b>. Сначала что-то ломается (микроб, ожог, яд), потом организм пытается это исправить — температура, воспаление, учащённое сердцебиение. Но ремонт бывает слишком сильным и сам начинает вредить: жар, отёк, гной. Поэтому болезнь — не просто «поломка» и не просто «защита», а новая жизнь организма с обоими процессами сразу, при которой он хуже приспособлен к миру и не может нормально работать.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Как разобрать определение по частям, чтобы его не зубрить:</p>
+  <ol class="steps">
+    <li><b>«Сложная общая реакция … на повреждающее действие»</b> — есть причина и есть ответ всего организма, а не одной клетки (спор с Вирховым).</li>
+    <li><b>«Качественно новый жизненный процесс»</b> — например, при опухоли появляется клон клеток с высоким потенциалом размножения, а нормальные клеточные системы при этом сохраняются (Адо, PDF 39).</li>
+    <li><b>«Изменения разрушительного и приспособительного характера»</b> — <span class="kv d">повреждение</span> и <span class="kv c">защита</span> всегда вместе.</li>
+    <li><b>«Снижение приспособляемости … и ограничение трудоспособности»</b> — главный критерий: новое качество на уровне целого организма.</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Учёный</th><th>Взгляд на сущность болезни</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Р. Вирхов</td><td>болезнь — повреждение клеток, местный процесс; недооценивал регуляцию и защитные процессы</td></tr>
+      <tr><td class="lv">И.М. Сеченов</td><td>болезни возникают от «разрушительных раздражений» среды</td></tr>
+      <tr><td class="lv">И.П. Павлов</td><td>«поломы» структуры, функции и регуляции; защитные процессы — «физиологическая мера» против болезни</td></tr>
+      <tr><td class="lv">Ю. Конгейм, В.В. Подвысоцкий</td><td>обязательное участие защитных процессов; «целительные силы» организма</td></tr>
+      <tr><td class="lv">И.В. Давыдовский</td><td>болезнь как приспособление — Адо считает это переоценкой</td></tr>
+      <tr><td class="lv">Г. Селье</td><td>стресс — «болезнь адаптации»: напряжение приспособительных систем само вредно</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 37–38</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Каковы критерии болезни?</summary><div class="a"><p>Жалобы (не всегда объективны — «болезнь третьего курса»); определяющий — результаты объективного обследования с лабораторно-инструментальными методами; важнейший — снижение приспособляемости и трудоспособности, которое выявляют функциональными пробами (функциональный резерв, сахарная нагрузка) (Адо, PDF 39–40).</p></div></details>
+  <details class="more"><summary>Почему болезнь нельзя определить как приспособление?</summary><div class="a"><p>Это определение по сходству, а не по различию: приспособление есть и у здорового; больные размножаются хуже здоровых; приспособительные процессы при болезни сами становятся вредными (Адо, PDF 37–38).</p></div></details>
+  <details class="more"><summary>Есть ли «больные молекулы»?</summary><div class="a"><p>Нет — это упрощение концепции Полинга. Есть болезни, при которых появляются молекулы необычных состава и свойств; в широком смысле все болезни молекулярные, но у человека молекулярные процессы опосредованы биологически и социально (Адо, PDF 38).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать защитные реакции первичными («болезнь — это борьба организма»). По Адо повреждение всегда первично, реакции вторичны. <b>Связь с клиникой:</b> лихорадку и воспаление не всегда нужно подавлять — это защитная сторона болезни (см. VII. Лихорадка).</p></div>
+</section>
+
+<section id="q6">
+  <div class="sec-head"><span class="qn">I.6</span><h2>Механизмы возникновения, развития и исходы болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Патогенез и исходы · Адо, стр. PDF 45, 47</span>
+    <p>Патогенез заболевания начинается с какого-либо <b>первичного повреждения</b> (Р. Вирхов) или «разрушительного процесса» (И.М. Сеченов), «полома» (И.П. Павлов) клеток (патогенетический фактор первого порядка). Продукты повреждения тканей становятся источниками нового повреждения в ходе развития болезни. Различают следующие <b>исходы болезни</b>: 1) выздоровление полное и неполное; 2) переход в хроническую форму; 3) смерть.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Возникновение</b>: причина действует на организм при определённых условиях → первичное повреждение.</li>
+    <li><b>Развитие</b>: продукты повреждения — новые патогенетические факторы (у Адо — «третьего и четвёртого порядка»); регуляция становится «аварийной» (Подвысоцкий, Аничков — Адо, PDF 45); включаются защитно-компенсаторные процессы (всегда вторично); выделяется основное звено; может замкнуться «порочный круг».</li>
+    <li><b>Исход</b> зависит от соотношения повреждения и приспособительных механизмов («Краткий курс», лекция III).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Болезнь похожа на костяшки домино: первая падает от удара (причина), и каждая следующая роняет соседнюю (продукты повреждения повреждают дальше). Организм подставляет руки — защитные реакции. Если руки успели — выздоровление; если поймали не все — неполное выздоровление или хроническая болезнь; если падение пошло по кругу и ускоряется — порочный круг, и без врача исход может быть смертельным.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Причина + условия</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">пусковое звено</span><b>Первичное повреждение</b><span class="h">фактор 1-го порядка</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">цепь</span><b>Вторичные повреждения</b><span class="h">продукты распада — факторы следующих порядков</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">ответ</span><b>Защитно-компенсаторные процессы</b><span class="h">воспаление, лихорадка, отёк</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">исход</span><b>Выздоровление, хроническая форма, смерть</b></div>
+  </div>
+  <p><b>Механизмы выздоровления</b> — три группы (Адо, PDF 47–48):</p>
+  <ol class="steps">
+    <li><b>Срочные</b> («аварийные») — первые секунды и минуты: защитные рефлексы (рвота, кашель, чиханье), выброс адреналина и глюкокортикоидов, поддержание АД и сахара крови.</li>
+    <li><b>Относительно устойчивые</b> (фаза адаптации по Селье) — всю болезнь: включение резервов органов, перестройка регуляции (высокий уровень теплорегуляции, рост числа эритроцитов), нейтрализация ядов, реакции активной соединительной ткани (А.А. Богомолец).</li>
+    <li><b>Устойчивые</b> — месяцы и годы: компенсаторная гипертрофия, репаративная регенерация, иммунитет.</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Резерв органа</th><th>В здоровом организме используется</th></tr></thead>
+    <tbody>
+      <tr><td>дыхательная поверхность лёгких</td><td>20–25 %</td></tr>
+      <tr><td>мощность сердечной мышцы</td><td>20 %</td></tr>
+      <tr><td>клубочковый аппарат почек</td><td>20–25 %</td></tr>
+      <tr><td>паренхима печени</td><td>12–15 %</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 48</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Чем полное выздоровление отличается от неполного?</summary><div class="a"><p>При полном в организме не остаётся следов болезни (restitutio ad integrum; Адо) — хотя otvety (вопрос 5) уточняют, что и полное выздоровление не означает возврата к состоянию до болезни; при неполном сохраняются в разной степени нарушения функций отдельных органов и их регуляции; выражение неполного выздоровления — рецидив и переход в хроническое состояние (Адо, PDF 47).</p></div></details>
+  <details class="more"><summary>Что такое рецидив, ремиссия, осложнение?</summary><div class="a"><p>Рецидив — повторное развитие или усиление симптомов после их устранения; ремиссия — временное уменьшение (неполная) или устранение (полная) проявлений; осложнение — процесс, развивающийся на фоне основной болезни, но не обязательный для неё (otvety, вопрос 5; по Литвицкому — <span class="uncheck">⚠ не проверено по учебнику</span>).</p></div></details>
+  <details class="more"><summary>Что такое смерть клиническая и биологическая?</summary><div class="a"><p>Клиническая — прекращение дыхания и кровообращения, когда клетки коры ещё могут восстановиться (обратима); биологическая — необратимые изменения прежде всего в ЦНС. У взрослых при нормальной температуре клиническая смерть длится около 3–5 мин <span class="uncheck">⚠ не проверено</span>: в Адо 2000 раздел о терминальных состояниях опущен (Адо, PDF 16), цифра — из учебных материалов по реаниматологии.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> относить реакции к повреждению или наоборот. Рвота при отравлении — <span class="kv c">защита</span>; неукротимая рвота с обезвоживанием — уже <span class="kv d">повреждение</span>. Одна и та же реакция меняет знак по мере развития болезни (Адо, PDF 38). <b>Связь с клиникой:</b> «реабилитация» — это и есть выздоровление с возвращением к труду или переквалификацией (Адо, PDF 47).</p></div>
+</section>
+
+<section id="q7">
+  <div class="sec-head"><span class="qn">I.7</span><h2>Стадии болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Стадии · Адо, стр. PDF 46–47</span>
+    <p>В развитии болезни можно различить следующие стадии: 1) <b>начало болезни</b> — иногда его называют латентным периодом развития болезни; некоторые авторы разделяют эту стадию на а) предболезнь и б) заболевание; 2) <b>стадия собственно болезни</b>; 3) <b>исход болезни</b>.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Начало, «предболезнь»</b> — первичное действие болезнетворных факторов и мобилизация защиты; защитные реакции во многих случаях могут не допустить клинических признаков.</li>
+    <li>Названия латентного периода: <b>инкубационный</b> — при инфекциях, <b>латентный</b> — при лучевой болезни и поражении ОВ, <b>предболезнь</b> (предрак) — при опухолях.</li>
+    <li><b>Собственно болезнь</b> — наиболее выраженные общие и местные проявления.</li>
+    <li><b>Исход</b> — выздоровление, хроническая форма, смерть.</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Как пожар: искра уже упала, но огня не видно — латентный период (инкубация при гриппе: вирус уже размножается, а человек чувствует себя здоровым). Потом дым и первые языки пламени — у Литвицкого это отдельная стадия предвестников (слабость, ломота). Затем открытый пожар — разгар. И чем кончилось: потушили, тлеет годами или сгорело.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Начало / латентный</b><span class="h">повреждение есть, симптомов нет; защита ещё справляется</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">2</span><b>Собственно болезнь</b><span class="h">защиты не хватает — выраженные проявления</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Исход</b><span class="h">определяется соотношением повреждения и защиты</span></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>По быстроте развития</th><th>Длительность</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Острейшие</td><td>до 4 дней</td></tr>
+      <tr><td class="lv">Острые</td><td>около 5–14 дней</td></tr>
+      <tr><td class="lv">Подострые</td><td>15–40 дней</td></tr>
+      <tr><td class="lv">Хронические</td><td>месяцы и годы</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 46: «разделение это несколько условно»</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Адо (3 стадии)</th><th>Литвицкий (4 стадии)</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="2">начало болезни (латентный период): предболезнь и заболевание</td><td>латентная (скрытая, инкубационная)</td></tr>
+      <tr><td>продромальная (предвестников)</td></tr>
+      <tr><td>собственно болезнь</td><td>выраженных проявлений (разгара)</td></tr>
+      <tr><td>исход</td><td>исходов</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Литвицкий — по otvety/patfiz-otvety.txt, вопрос 5 <span class="uncheck">⚠ не проверено по самому учебнику</span></p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Всегда ли латентный период длинный?</summary><div class="a"><p>Нет: при механической травме и остром отравлении он очень короткий, при болезнях обмена, опухолях, некоторых инфекциях — очень длинный; у большинства болезней начало и длительность предболезни определить трудно (Адо, PDF 47).</p></div></details>
+  <details class="more"><summary>Что характерно для продромальной стадии?</summary><div class="a"><p>Неспецифические признаки: недомогание, утомляемость, раздражительность, боли в мышцах, снижение аппетита, головная боль (otvety, вопрос 5). Это результат недостаточности приспособительных процессов.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> смешивать стадии болезни (начало — болезнь — исход) с формами по длительности (острая — хроническая). Это два разных деления. <b>Связь с клиникой:</b> на инфекционных болезнях инкубационный период определяет срок карантина.</p></div>
+</section>
+
+<section id="q8">
+  <div class="sec-head"><span class="qn">I.8</span><h2>Патологический процесс, патологическая реакция, патогенное состояние.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определения · Адо, стр. PDF 40–41</span>
+    <p><b>Патологическая реакция</b> — кратковременная необычная реакция организма на какое-либо воздействие.</p>
+    <p><b>Патологический процесс</b> — сочетание патологических и защитно-приспособительных реакций в повреждённых тканях, органах или организме, проявляющихся в виде морфологических, метаболических и функциональных нарушений.</p>
+    <p><b>Патологическое состояние</b> — это медленно (вяло) текущий патологический процесс, который может возникнуть в результате ранее перенесённого заболевания (например, рубцовое сужение пищевода после ожоговой травмы, ампутации конечностей и т.п.) или вследствие нарушения внутриутробного развития.</p>
+  </div>
+  <p>Патологический процесс лежит в основе болезни, но не является ею. Патологическое состояние в ряде случаев может снова перейти в болезнь (Адо, PDF 41). Лектор называет эти понятия «патогенная реакция, процесс, состояние» — отсюда «патогенное состояние» в листе вопросов (пересказ лекции 1).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy">
+    <p><b>Реакция</b> — вспышка: коротко и резко (чихнуть от пыли — норма; судорожный кашель до рвоты от запаха краски — уже необычно).</p>
+    <p><b>Процесс</b> — кино: повреждение и защита развиваются во времени (воспаление, лихорадка).</p>
+    <p><b>Состояние</b> — почти остановившееся кино: рубец, культя после ампутации, потерянные зубы. Жить можно, но организм уже другой. «Краткий курс» называет состояние «процессом без движения», Адо — «медленно (вяло) текущим» процессом: суть одна — изменения стойкие и почти не развиваются.</p>
+  </div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">кратковременно</span><b>Реакция</b><span class="h">необычная по силе или качеству</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">развивается во времени</span><b>Процесс</b><span class="h"><em>повреждение + защита</em>, динамичен, идёт фазами</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">стойко, вяло</span><b>Состояние</b><span class="h">итог процесса, стойко изменённая структура</span></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Чем патологический процесс отличается от болезни</th></tr></thead>
+    <tbody>
+      <tr><td>1. Болезнь всегда имеет одну главную причину; процесс вызывается многими причинами.</td></tr>
+      <tr><td>2. Один процесс даёт разные симптомы болезней в зависимости от локализации.</td></tr>
+      <tr><td>3. Болезнь — часто комбинация нескольких патологических процессов.</td></tr>
+      <tr><td>4. Процесс может не сопровождаться снижением приспособляемости и ограничением трудоспособности.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 41</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какие бывают реакции на повреждение?</summary><div class="a"><p>По «Краткому курсу» (лекция I): защитно-приспособительная; патологическая — по механизму тоже защитная, но из-за необычного количества или качества вызывает вторичное повреждение (лихорадка, гной); адаптивные — длительно действующие в изменившейся среде.</p></div></details>
+  <details class="more"><summary>Приведите пример перехода состояния в болезнь.</summary><div class="a"><p>Рубцовое сужение пищевода после ожога — состояние; если из-за него нарушается питание и развивается истощение, состояние снова переходит в болезнь (принцип — Адо, PDF 41; пример истощения — иллюстрация).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать воспаление болезнью. Воспаление — типовой патологический процесс; болезнь — например, крупозная пневмония (причина — пневмококк), в основе которой воспаление. <b>Связь с клиникой:</b> на хирургии культя и спаечная болезнь — пример «состояние → болезнь».</p></div>
+</section>
+
+<section id="q9">
+  <div class="sec-head"><span class="qn">I.9</span><h2>Номенклатура и классификация болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · Большая советская энциклопедия, ст. «Номенклатура болезней» (сверено по выдержке)</span>
+    <p><b>Номенклатура болезней</b> — перечень названий болезней и патологических состояний; <b>классификация</b> — группировка их по определённым признакам. Единая номенклатура нужна для единообразия и сопоставимости диагнозов и статистической обработки клинических данных.</p>
+  </div>
+  <p><b>Принципы классификации</b> (Адо, PDF 40): известно много классификаций, основанных на разных принципах:</p>
+  <ul class="facts">
+    <li>по <b>причине</b>: наследственные, инфекционные болезни, травмы, лучевая болезнь;</li>
+    <li>по <b>особенностям патогенеза</b>: болезни обмена веществ, аллергические болезни, шок;</li>
+    <li>по <b>возрасту</b>: болезни новорождённых, детские, болезни старческого возраста (гериатрия);</li>
+    <li>особый раздел — <b>женские болезни</b> (гинекология); лектор добавляет деление по полу (пересказ лекции 1).</li>
+  </ul>
+  <p>Кроме того — по органам и системам и по течению (острые, подострые, хронические — Адо, PDF 46). Международная основа номенклатуры — <b>МКБ</b> (Международная статистическая классификация болезней и проблем, связанных со здоровьем).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Номенклатура — это «словарь»: у каждой болезни одно правильное название, чтобы врач в Чебоксарах и врач в Лиссабоне говорили об одном и том же. Классификация — «полки в библиотеке»: куда эту книгу поставить — по автору (причине), по жанру (механизму), по возрасту читателя. Одну книгу можно расставить по-разному, поэтому классификаций много, а МКБ — общий каталог для статистики.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Как классификация следует за знанием о болезни (Адо, PDF 43): по мере накопления знаний о причинах «общие» болезни распадаются на самостоятельные формы.</p>
+  <div class="flow">
+    <div class="st"><span class="n">было</span><b>«Кровоточивость» (геморрагический диатез)</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">узнали причины</span><b>Изучение этиологии</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">стало</span><b>Цинга, гемофилия, геморрагическая пурпура…</b><span class="h">каждая — со своей причиной</span></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>МКБ</th><th>Даты</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">МКБ-10 в России</td><td>введена приказом Минздрава РФ от 27.05.1997 № 170, дата введения — 01.01.1999</td></tr>
+      <tr><td class="lv">МКБ-11</td><td>принята 72-й Всемирной ассамблеей здравоохранения 25.05.2019, действует с 01.01.2022</td></tr>
+      <tr><td class="lv">Россия и МКБ-11</td><td>план внедрения — распоряжение Правительства от 15.10.2021 № 2900-р; в феврале 2024 г. Минздрав сообщил о приостановке; действует МКБ-10 (по сообщениям СМИ)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">legalacts.ru — приказ № 170; who.int — резолюция WHA72; gxpnews.net, 02.2024 — о приостановке МКБ-11 (вне источников курса, сверено по выдержкам из поиска)</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>По каким критериям построена МКБ?</summary><div class="a"><p>По otvety (вопрос 5): причина (наследственные, инфекционные, постинтоксикационные), главное звено патогенеза (дистрофия, гипертензия, иммунопатология, эндокринопатия), основной принцип лечения (хирургические, терапевтические болезни) и др.</p></div></details>
+  <details class="more"><summary>Чем статистическая классификация (МКБ) отличается от клинической?</summary><div class="a"><p>МКБ создана для единообразного учёта заболеваемости и причин смерти; клинические классификации (стадии, степени, формы) строятся на патогенезе и нужны для лечения — они дополняют МКБ, а не заменяют её.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> ставить знак равенства между номенклатурой и классификацией. Номенклатура — <i>названия</i>, классификация — <i>группировка</i>. <b>Связь с клиникой:</b> код МКБ-10 ставят в каждой истории болезни и больничном листе.</p></div>
+</section>
+
+<section id="q10">
+  <div class="sec-head"><span class="qn">I.10</span><h2>Этиология. Учение об этиологии.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определения · Адо, стр. PDF 41</span>
+    <p>В современном понимании <b>этиология</b> — учение о причинах и условиях возникновения и развития болезней (от греч. aitia — причина, logos — учение).</p>
+    <p><b>Причиной болезни</b> называют тот фактор (главный этиологический, производящий, специфический), который вызывает заболевание и его специфические черты. Под причиной болезни нужно понимать такое воздействие, без которого развитие этого заболевания невозможно.</p>
+  </div>
+  <p><b>Условия</b> возникновения болезни — факторы, влияющие на возникновение и развитие болезней; в отличие от причины условия <b>не являются обязательными</b> (Адо, PDF 43). Пример Адо: крупозная пневмония — причина пневмококк; переохлаждение, утомление, недоедание — условия.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Причина — спичка, условия — сухая трава и ветер. Без спички пожара не будет, сколько бы ни было травы. А сухая трава без спички не загорится, но с ней огонь пойдёт быстрее. Так и пневмония: без пневмококка не будет, сколько ни мёрзни; а замёрзший и уставший человек заболеет от пневмококка легче.</p></div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li><b>Причина</b> имеет свою качественную характеристику и вызывает специфические <b>первичные изменения</b>: механические факторы — нарушение структуры, высокая температура — коагуляцию белков, цианиды блокируют цитохромоксидазу, свинец угнетает синтез гема (Адо, PDF 43).</li>
+    <li>Эти первичные изменения «закладывают основу» определённой <b>нозологической формы</b>.</li>
+    <li><b>Условия</b> облегчают или затрудняют действие причины, но специфики болезни не определяют.</li>
+    <li>Знание причины и условий нужно для <b>профилактики</b> (Адо, PDF 44) и этиотропной терапии.</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Причины болезней</th><th>Примеры (Адо, PDF 42)</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Механические</td><td>растяжение, разрыв, сдавление, удар</td></tr>
+      <tr><td class="lv">Физические</td><td>звук и шум, изменения барометрического давления, низкая и высокая температура, лучи солнечного спектра и лазеры, электрический ток, ионизирующие излучения, факторы космического полёта</td></tr>
+      <tr><td class="lv">Химические</td><td>алкоголь и курение, лекарства, тяжёлые металлы, дефицит или избыток витаминов и нутриентов, пестициды, пыли, кислоты и щёлочи, ароматические углеводороды</td></tr>
+      <tr><td class="lv">Биологические</td><td>микроорганизмы, гельминты и простейшие, членистоногие и насекомые, биопрепараты (сыворотки, вакцины, кровь)</td></tr>
+      <tr><td class="lv">Социальные</td><td>обычно — условия: общественный строй, содержание информации, ятрогения</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Условия</th><th>Способствующие</th><th>Препятствующие</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Внутренние</td><td>наследственное предрасположение, диатез, ранний детский и старческий возраст</td><td>наследственные, расовые, конституциональные факторы; видовой иммунитет (человек не болеет чумой собак); при серповидноклеточной анемии не болеют малярией</td></tr>
+      <tr><td class="lv">Внешние</td><td>нарушение питания, переутомление, неврозы, перенесённые болезни, плохой уход</td><td>рациональное питание, режим труда, физическая тренировка, уход за больным</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 43–44</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какие теории этиологии вы знаете?</summary><div class="a"><p>«Краткий курс» (лекция II): <b>монокаузализм</b> — болезнь определяется одним фактором, условия игнорируются (заслуга — открытие материального виновника болезни); <b>кондиционализм</b> — болезнь от совокупности равнозначных условий, главной причины нет; анализ <b>факторов риска</b>; <b>полиэтиологизм</b>; <b>диалектико-материалистический</b> подход — главная причина плюс условия. Лектор упоминал также <b>психосоматическое (фрейдистское)</b> направление и его критику.</p></div></details>
+  <details class="more"><summary>Обязательны ли условия? Источники спорят.</summary><div class="a"><p>Адо: условия <b>не являются обязательными</b> (PDF 43). «Краткий курс» (лекция II) выделяет «достаточные» условия — без которых этиологический фактор не вызовет патологии, — и «модифицирующие». На зачёте — по Адо, с оговоркой. Один и тот же фактор в одном случае может быть причиной, в другом — условием (otvety, вопрос 3): охлаждение — причина отморожения, но условие пневмонии. Богомолец: причина болезни — взаимодействие ослабленного организма с патогенным фактором (пересказ лекции 1).</p></div></details>
+  <details class="more"><summary>Согласен ли Адо с полиэтиологичностью болезней?</summary><div class="a"><p>Нет: «каждая болезнь имеет свою, только ей свойственную причину»; представление о полиэтиологичности возникло из недостатка знаний — с их накоплением болезни распадаются на подвиды со своими причинами (Адо, PDF 43).</p></div></details>
+  <details class="more"><summary>Что такое внешние и внутренние причины?</summary><div class="a"><p>Внешние — механические, физические, химические, биологические, социальные; внутренние — наследственность, конституция, возраст, пол. Название «внутренние» условно: оно означает, что болезнь развилась без видимого влияния среды (Адо, PDF 43).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> «болезнь полиэтиологична, типовой процесс — нет». Ровно наоборот: <b>процесс</b> вызывается многими причинами (Адо, PDF 41), а <b>болезнь</b> — одной главной. <b>Связь с клиникой:</b> ятрогения — психосоматические нарушения от слов и действий врача (Адо, PDF 42) — то, о чём лектор просит помнить на каждом обходе.</p></div>
+</section>
+
+<section id="q11">
+  <div class="sec-head"><span class="qn">I.11</span><h2>Патогенез. Учение о патогенезе.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определения · Адо, стр. PDF 44–45</span>
+    <p><b>Патогенез</b> (от греч. pathos — страдание, genesis — происхождение) — раздел патологической физиологии, изучающий механизмы развития болезней. Изучение наиболее общих закономерностей возникновения, развития, течения и исхода заболеваний составляет содержание <b>общего учения о патогенезе</b>.</p>
+    <p><b>Основное звено</b> — изменение (один из патогенетических факторов), определяющее развитие остальных этапов болезни. Устранение основного звена патогенеза может привести к выздоровлению организма.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Патогенетические факторы</b> — причинно-следственные отношения, которые возникают в ответ на причину и сами становятся факторами дальнейшего развития болезни (Адо, PDF 44).</li>
+    <li><b>Цепь патогенеза</b> — последовательное включение ведущих механизмов болезни, связанных причинно-следственными связями; ведущие факторы включаются по времени позднее главного звена («Краткий курс», лекция III).</li>
+    <li><b>Термины:</b> «Краткий курс» называет главное звено и <b>пусковым фактором</b> — «без него невозможно дальнейшее развитие патогенеза»; у Адо начало патогенеза — <b>первичное повреждение</b> (фактор первого порядка), а основное звено — то изменение, от которого зависят остальные. Чаще всего это одно и то же.</li>
+    <li><b>Порочный круг</b> — нарушение функции способствует прогрессированию повреждения (Адо, PDF 46).</li>
+    <li><b>Патогенетическая терапия</b> — комплекс мер, направленных на прерывание причинно-следственных отношений между нарушениями; без определения основного звена она невозможна (Адо, PDF 45).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Этиология отвечает «почему заболел?», патогенез — «как именно болезнь развивается?». Основное звено — та костяшка домино, от которой падают все остальные: убери её — остановится вся цепь. Порочный круг — когда последняя костяшка снова толкает первую, и падение ускоряется само.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Пример основного звена — <b>митральный стеноз</b> (Адо, PDF 45–46): стеноз левого атриовентрикулярного отверстия → расширение левого предсердия → застой в малом круге → нарушение функции правого желудочка → застой в большом круге → кислородное голодание. Митральная комиссуротомия на ранних стадиях устраняет все эти расстройства.</p>
+  <p>Пример порочного круга — <b>кровопотеря</b>. У Адо (рис. 1.1, PDF 46): ухудшение транспорта кислорода при кровопотере приводит к недостаточности сердца, что в свою очередь ухудшает транспорт кислорода. Что основное звено — уменьшение ОЦК, говорит «Краткий курс» (лекция III):</p>
+  <svg class="scheme" viewBox="0 0 360 250" role="img" aria-label="Порочный круг при кровопотере">
+    <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E2A2B"/></marker></defs>
+    <rect class="bad" x="105" y="8" width="150" height="44" rx="8"/>
+    <text x="180" y="27" text-anchor="middle" font-size="13" font-weight="600">Кровопотеря</text>
+    <text x="180" y="43" text-anchor="middle" font-size="11.5">↓ ОЦК — основное звено</text>
+    <rect class="box" x="225" y="98" width="130" height="50" rx="8"/>
+    <text x="290" y="118" text-anchor="middle" font-size="12">↓ транспорт O₂</text>
+    <text x="290" y="135" text-anchor="middle" font-size="12">гипоксия тканей</text>
+    <rect class="bad" x="105" y="196" width="150" height="46" rx="8"/>
+    <text x="180" y="215" text-anchor="middle" font-size="12">гипоксия миокарда</text>
+    <text x="180" y="232" text-anchor="middle" font-size="12">и ЦНС, ацидоз</text>
+    <rect class="box" x="5" y="98" width="130" height="50" rx="8"/>
+    <text x="70" y="118" text-anchor="middle" font-size="12">недостаточность</text>
+    <text x="70" y="135" text-anchor="middle" font-size="12">сердца, ↓ АД</text>
+    <path class="lnr" d="M255,40 Q300,55 295,96" marker-end="url(#ar1)"/>
+    <path class="lnr" d="M295,150 Q295,200 257,214" marker-end="url(#ar1)"/>
+    <path class="lnr" d="M103,214 Q65,200 68,150" marker-end="url(#ar1)"/>
+    <path class="lnr" d="M68,96 Q60,50 103,36" marker-end="url(#ar1)"/>
+    <text x="180" y="120" text-anchor="middle" font-size="12" font-weight="600" class="acc">порочный</text>
+    <text x="180" y="136" text-anchor="middle" font-size="12" font-weight="600" class="acc">круг</text>
+  </svg>
+  <p><b>Цепь патогенеза</b> при кровопотере («Краткий курс», лекция III): ↓ ОЦК → <span class="kv c">компенсация</span> — рефлекторное сужение сосудов, выброс крови и жидкости из депо, усиление дыхания; если её недостаточно — гипоксемия и гипоксия тканей → ацидоз → нарушение ЦНС (дыхательного и сосудодвигательного центров) → усугубление гипоксемии — <span class="kv d">повреждение</span>.</p>
+  <p><b>Как компенсация сама замыкает круг</b> (там же): патологическое депонирование крови и выход её жидкой части из сосудов увеличивают дефицит ОЦК → гипотензия → через барорецепторы активируется симпатоадреналовая система → <b>сильнее сужение сосудов</b>, централизация кровообращения → ещё больше патологического депонирования и гипоксии ЦНС. Сужение сосудов начиналось как <span class="kv c">компенсация</span> и стало звеном <span class="kv d">порочного круга</span> — именно об этом переходе любят спрашивать.</p>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Вид терапии</th><th>На что направлена</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Этиотропная</td><td>устранение причины; наиболее эффективна, но возможности ограничены — причина часто действует кратковременно</td></tr>
+      <tr><td class="lv">Патогенетическая</td><td>основное звено и ведущие факторы патогенеза, усиление компенсации — ведущий метод</td></tr>
+      <tr><td class="lv">Симптоматическая</td><td>устранение беспокоящих симптомов, на патогенез не влияет</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">«Краткий курс лекций», лекция III</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Каковы принципы патогенетической терапии?</summary><div class="a"><p>Она должна быть динамичной и соответствовать этапу болезни; наиболее эффективна против пускового звена и в ранние сроки; вмешательство обязательно при возможности уменьшить повреждение, при экстремальных факторах, при недостаточной защите, при порочном круге — его нужно немедленно разорвать; не следует усиливать реакции, когда они достаточны («Краткий курс», лекция III).</p></div></details>
+  <details class="more"><summary>Как связаны этиология и патогенез?</summary><div class="a"><p>Причина запускает патогенез и определяет его специфику; дальше болезнь может развиваться уже без причины — за счёт патогенетических факторов (ожог действует доли секунды, а ожоговая болезнь длится долго). В других случаях причина сохраняется долго — отравление свинцом, ртутью, хронические инфекции (Адо, PDF 45; «Краткий курс», лекция III).</p></div></details>
+  <details class="more"><summary>Как соотносятся местное и общее в патогенезе?</summary><div class="a"><p>Местное повреждение вызывает общие реакции через нервную и эндокринную системы: повреждение → раздражение рецепторов → нервные реакции (пусковые) → гормональные (поддерживающие) → регуляция кровообращения, обмена, функций («Краткий курс», лекция III). Пример — воспаление с лихорадкой и лейкоцитозом (см. V.1).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать основным звеном причину. Причина (кровопотеря) — этиология; основное звено — то, что она запускает и от чего зависит остальное (уменьшение ОЦК). <b>Связь с клиникой:</b> при геморрагическом шоке первым делом восполняют ОЦК — это и есть удар по основному звену и разрыв порочного круга (см. медкат, сортировка).</p></div>
+</section>
+
+<section id="quiz">
+  <div class="sec-head"><h2>Самопроверка: ответ одной фразой</h2></div>
+  <div class="quiz-bar"><p>Сначала ответьте вслух, потом откройте.</p><button type="button" id="toggle-all">Открыть все</button></div>
+  <details class="q"><summary>I.1. Что такое патофизиология и её главный метод?</summary><div class="a"><p>Наука о жизнедеятельности больного организма — физиология больного организма; главный метод — эксперимент на животных (моделирование), а также клиническая патофизиология.</p></div></details>
+  <details class="q"><summary>I.2. Назовите разделы патофизиологии.</summary><div class="a"><p>Общая нозология, типовые патологические процессы (вместе — общая патофизиология) и частная патофизиология органов и систем; лектор добавляет клиническую патофизиологию.</p></div></details>
+  <details class="q"><summary>I.3. Что такое типовой патологический процесс? Примеры.</summary><div class="a"><p>Закреплённое эволюцией постоянное сочетание патологических и защитных реакций, одинаковое при разных причинах: воспаление, отёк, опухоль, лихорадка, дистрофия, гипоксия.</p></div></details>
+  <details class="q"><summary>I.4. Что такое нозология?</summary><div class="a"><p>Общее учение о болезни (греч. nosos — болезнь): здоровье и болезнь, этиология, патогенез, исходы.</p></div></details>
+  <details class="q"><summary>I.5. Определение болезни по Адо.</summary><div class="a"><p>Сложная общая реакция организма на повреждающее действие факторов среды; качественно новый жизненный процесс с разрушительными и приспособительными изменениями, снижающий приспособляемость и трудоспособность.</p></div></details>
+  <details class="q"><summary>I.6. С чего начинается патогенез и каковы исходы болезни?</summary><div class="a"><p>С первичного повреждения; исходы — выздоровление полное и неполное, переход в хроническую форму, смерть.</p></div></details>
+  <details class="q"><summary>I.7. Стадии болезни?</summary><div class="a"><p>Начало (латентный период: предболезнь и заболевание), собственно болезнь, исход; у Литвицкого — латентная, продромальная, разгара, исходов.</p></div></details>
+  <details class="q"><summary>I.8. Реакция, процесс, состояние — в чём разница?</summary><div class="a"><p>Реакция — кратковременная необычная; процесс — сочетание патологических и защитных реакций; состояние — медленно текущий процесс, итог болезни (рубец, ампутация).</p></div></details>
+  <details class="q"><summary>I.9. Номенклатура и классификация — разница? Принципы классификации?</summary><div class="a"><p>Номенклатура — перечень названий, классификация — группировка; принципы — по причине, патогенезу, возрасту, полу, органам, течению; в России действует МКБ-10.</p></div></details>
+  <details class="q"><summary>I.10. Причина и условие болезни?</summary><div class="a"><p>Причина — воздействие, без которого болезнь невозможна, оно определяет её специфику; условия влияют на возникновение и развитие, но не обязательны.</p></div></details>
+  <details class="q"><summary>I.11. Что такое основное звено патогенеза и порочный круг?</summary><div class="a"><p>Основное звено — изменение, определяющее остальные этапы, его устранение может привести к выздоровлению; порочный круг — нарушение функции усиливает исходное повреждение (кровопотеря → ↓ транспорта O₂ → недостаточность сердца → ещё хуже транспорт O₂).</p></div></details>
+</section>
+
+<section id="slovar">
+  <div class="sec-head"><h2>Словарик для начинающих</h2></div>
+  <dl class="gloss">
+    <dt>Этиология</dt><dd>учение о причинах и условиях болезни — «почему».</dd>
+    <dt>Патогенез</dt><dd>механизмы развития болезни — «как».</dd>
+    <dt>Нозологическая форма</dt><dd>конкретная болезнь со своей причиной (например, крупозная пневмония).</dd>
+    <dt>Компенсаторный (приспособительный)</dt><dd>помогающий организму выдержать повреждение.</dd>
+    <dt>Латентный</dt><dd>скрытый: болезнь уже идёт, а симптомов нет.</dd>
+    <dt>Продромальный</dt><dd>период предвестников — неспецифические первые признаки.</dd>
+    <dt>Рецидив / ремиссия</dt><dd>возврат болезни / временное затихание.</dd>
+    <dt>Ятрогения</dt><dd>вред, причинённый словами или действиями врача.</dd>
+    <dt>Гомеостаз</dt><dd>постоянство внутренней среды организма.</dd>
+    <dt>МКБ</dt><dd>Международная статистическая классификация болезней.</dd>
+  </dl>
+</section>
+
+<section id="src">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ol class="links">
+    <li>Патологическая физиология: учебник для медицинских вузов / под ред. А.Д. Адо, М.А. Адо, В.И. Пыцкого, Г.В. Порядина, Ю.А. Владимирова. — М.: Триада-Х, 2000 — введение (стр. PDF 17–19), история (PDF 20–21), гл. 1 «Общее учение о болезни» (PDF 34–48). Файл: <code>source/uchebnik/ado-2000.txt</code>.</li>
+    <li>«Краткий курс лекций по патологической физиологии» (автор и вуз в файле не указаны) — лекции I–III. Файл: <code>source/uchebnik/kratkiy-kurs-lekcij.txt</code>.</li>
+    <li>Ответы на экзаменационные вопросы ЧГУ (студенческий конспект, автор неизвестен; по стилю следует учебнику П.Ф. Литвицкого) — вопросы 1, 2, 5. Используются только там, где помечено.</li>
+    <li>Пересказ лекции 1 курса патофизиологии, 10.09.2025 (t.me/lklechfac) — только акценты лектора.</li>
+    <li>Приказ Минздрава РФ от 27.05.1997 № 170 «О переходе … на МКБ X пересмотра» — <a href="https://legalacts.ru/doc/prikaz-minzdrava-rf-ot-27051997-n-170/">legalacts.ru</a>.</li>
+    <li>Резолюция WHA72 о принятии МКБ-11 — <a href="https://www.who.int/publications/m/item/eleventh-revision-of-the-international-classification-of-diseases-adoption-wha72">who.int</a>; о приостановке перехода в России — <a href="https://gxpnews.net/2024/02/v-minzdrave-obyasnili-otkaz-ot-vnedreniya-mkb-11/">GxP News, 02.2024</a>.</li>
+    <li>«Номенклатура болезней» — Большая советская энциклопедия (копия на booksite.ru; сайт недоступен из окружения, сверено по выдержке).</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Конспект к итоговому занятию № 1 по патофизиологии составил Евгений Якимов, группа М-03-24, медфак ЧГУ, октябрь 2026. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+  <p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('toggle-all'); if(!b) return;
+  b.addEventListener('click',function(){
+    var d=document.querySelectorAll('#quiz details.q');
+    var open=b.getAttribute('data-open')!=='1';
+    d.forEach(function(x){x.open=open;});
+    b.setAttribute('data-open',open?'1':'0');
+    b.textContent=open?'Свернуть все':'Открыть все';
+  });
+})();
+</script>
+</body>
+</html>

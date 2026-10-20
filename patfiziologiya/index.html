@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Патофизиология — зачёт</title>
+<meta name="description" content="Конспекты к итоговому занятию № 1 по патофизиологии: нозология, давление, электроток, кинетозы, воспаление, наследственность, лихорадка, реактивность, аллергия и иммунодефициты.">
+<style>
+:root{--bg:#faf8f4;--fg:#1d1b18;--mut:#6b655c;--line:#e4dfd6;--acc:#9E2A2B;--soft:#F6E4E2;--warn:#FDF1E3;--warnfg:#8A4B0B}
+@media (prefers-color-scheme:dark){:root{--bg:#161412;--fg:#ece7df;--mut:#a39c91;--line:#2e2a25;--acc:#F0928A;--soft:#3A1F1E;--warn:#33240F;--warnfg:#F0B46A}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:680px;margin:0 auto;padding:28px 16px 48px}
+.eyebrow{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
+h1{font-size:28px;line-height:1.2;margin:6px 0 12px}
+h2{font-size:21px;margin:8px 0}
+h3{font-size:17px;margin:16px 0 4px}
+.lead{color:var(--mut);margin:0 0 16px}
+button{font:600 15px/1 system-ui,sans-serif;padding:12px 16px;border-radius:10px;border:0;background:var(--acc);color:#fff;cursor:pointer}
+.howto{background:var(--soft);border-radius:12px;padding:12px 16px;margin:16px 0}
+.howto ol,.howto ul{padding-left:20px} .howto li{margin:4px 0}
+ol.list{list-style:none;margin:16px 0 0;padding:0}
+ol.list li{padding:16px 0;border-top:1px solid var(--line)}
+a{color:var(--acc)}
+.t{display:block;font-weight:600;font-size:19px;line-height:1.3;text-decoration:none;color:var(--fg)}
+.t.off{color:var(--mut)}
+.d{display:block;color:var(--mut);font-size:15px;margin-top:4px}
+.m{display:block;font-size:14px;margin-top:8px;color:var(--mut)}
+.warn{background:var(--warn);color:var(--warnfg);border-radius:10px;padding:10px 14px;font-size:15px}
+footer{margin-top:28px;font-size:14px;color:var(--mut)}
+footer p{margin:0 0 8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="eyebrow">Патофизиология · 3 курс · медфак ЧГУ</div>
+<h1>Итоговое занятие № 1 — конспекты к зачёту</h1>
+<p class="lead">9 разделов, 128 вопросов листа кафедры. Для каждого — ответ за минуту, объяснение простыми словами, механизм по шагам и самопроверка.</p>
+<button type="button" id="howto-btn" aria-expanded="false" aria-controls="howto">Как пользоваться</button>
+<div class="howto" id="howto" hidden>
+<h2>Как пользоваться</h2>
+<p>Зачёт — на неделе 26–31 октября. Каждая страница — один раздел листа с вопросами, каждый вопрос разобран одинаково:</p>
+<ol>
+<li><b>Ответ за минуту</b> — что сказать вслух. Определения — по методичке кафедры, где её нет — по учебнику Адо.</li>
+<li><b>Объясняю на пальцах</b> — если непонятно, что вообще происходит. Начните с этого, если тему не открывали.</li>
+<li><b>Механизм по шагам</b> — для развёрнутого ответа: причина → пусковое звено → цепь → проявления → исход и лечение.</li>
+<li><b>Что могут спросить дальше</b> — дополнительные вопросы преподавателя, ответ — по нажатию.</li>
+<li>Синий блок — частая ошибка и связь с клиникой.</li>
+</ol>
+<h3>План на неделю</h3>
+<ul class="plan">
+<li><b>Ср 21.10</b> — I. Нозология: определения болезни, патологического процесса, этиологии, патогенеза — дословно. II. Давление.</li>
+<li><b>Чт 22.10</b> — III. Электрический ток и IV. Кинетозы, повтор I–II по самопроверке.</li>
+<li><b>Пт 23.10</b> — V. Воспаление, вопросы 1–12.</li>
+<li><b>Сб 24.10</b> — V. Воспаление, вопросы 13–24, VI. Наследственность, вопросы 1–6.</li>
+<li><b>Вс 25.10</b> — VI. Наследственность, вопросы 7–13, VII. Лихорадка.</li>
+<li><b>Пн 26.10</b> — VIII. Реактивность, IX. Аллергия и иммунодефициты, вопросы 1–10.</li>
+<li><b>Вт 27.10</b> — IX. Аллергия, вопросы 11–20, повтор V–VIII по самопроверке. Если зачёт раньше — сожмите последние два дня в один.</li>
+<li><b>Вечер перед зачётом</b> — только самопроверка в конце каждой страницы и карточки Anki, без нового материала.</li>
+</ul>
+<h3>Как проверять себя</h3>
+<ul>
+<li>В конце страницы — самопроверка: прочитайте вопрос, ответьте вслух, потом откройте.</li>
+<li>Карточки для Anki (файлы <code>kartochki/*.tsv</code> в репозитории, 2–4 на вопрос): «Файл → Импорт», разделитель — табуляция.</li>
+<li>Ответьте другу на «Что могут спросить дальше» не подглядывая — так спрашивают на зачёте.</li>
+</ul>
+<p>Знак «⚠ не проверено» — цифра или формулировка, которую не удалось подтвердить источником: на зачёте лучше не опираться на неё как на точную.</p>
+</div>
+
+<ol class="list">
+<li><a class="t" href="nozologiya.html">I. Нозология</a><span class="d">Общее учение о болезни: что изучает патофизиология, что такое болезнь, патологический процесс и реакция, как болезнь возникает, течёт и чем кончается, что такое этиология и патогенез.</span><span class="m">11 вопросов · <a href="nozologiya.pdf">PDF для телефона</a></span></li>
+<li><a class="t" href="davlenie.html">II. Действие на организм повышенного и пониженного атмосферного давления. Высотная болезнь</a><span class="d">Что происходит с организмом в горах и под водой: две стадии высотной болезни и их высоты, механизмы одышки, тахикардии, алкалоза и эритроцитоза, патогенез кессонной болезни и её лечение.</span><span class="m">16 вопросов · <a href="davlenie.pdf">PDF для телефона</a></span></li>
+<li><a class="t" href="elektrotok.html">III. Патогенное действие электрического тока на организм</a><span class="d">От чего зависит опасность тока, как он повреждает ткани, что такое электролитическое действие, почему переменный ток 50–60 Гц опаснее постоянного, а ток высокой частоты лечит, и от чего умирают при электротравме.</span><span class="m">9 вопросов · <a href="elektrotok.pdf">PDF для телефона</a></span></li>
+<li><a class="t" href="kinetozy.html">IV. Кинетозы</a><span class="d">Почему укачивает: какие рецепторы воспринимают ускорение, как вестибулярный аппарат связан со спинным мозгом, глазами, мозжечком и вегетативными центрами, что такое нистагм и как исследуют вестибулярную функцию.</span><span class="m">10 вопросов · <a href="kinetozy.pdf">PDF для телефона</a></span></li>
+<li><a class="t" href="vospalenie.html">V. Воспаление</a><span class="d">Альтерация, нарушения микроциркуляции, экссудация, эмиграция, фагоцитоз, медиаторы и пролиферация — что происходит в очаге воспаления, почему он краснеет, отекает, болит и закисляется, и как действуют гормоны.</span><span class="m">24 вопроса · <a href="vospalenie.pdf">PDF для телефона</a></span></li>
+<li><span class="t off">VI. Наследственность</span><span class="m">13 вопросов · конспект готовится</span></li>
+<li><span class="t off">VII. Лихорадка</span><span class="m">13 вопросов · конспект готовится</span></li>
+<li><span class="t off">VIII. Реактивность и патогенный процесс</span><span class="m">12 вопросов · конспект готовится</span></li>
+<li><span class="t off">IX. Аллергия и иммунодефициты</span><span class="m">20 вопросов · конспект готовится</span></li>
+</ol>
+<footer>
+<p>Конспекты составил Евгений Якимов, группа М-03-24, медфак ЧГУ. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+<p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('howto-btn'), h=document.getElementById('howto');
+  b.addEventListener('click',function(){
+    var open=h.hidden; h.hidden=!open; b.setAttribute('aria-expanded',open?'true':'false');
+    b.textContent=open?'Скрыть':'Как пользоваться';
+  });
+  if(location.hash==='#howto'){h.hidden=false;b.setAttribute('aria-expanded','true');b.textContent='Скрыть';}
+})();
+</script>
+</body>
+</html>

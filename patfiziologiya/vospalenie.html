@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Патофизиология: воспаление</title>
+<meta name="description" content="Патофизиология, итоговое занятие № 1: воспаление, альтерация, экссудация, эмиграция, фагоцитоз, медиаторы, пролиферация.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#9E2A2B; --accent-soft:#F6E4E2;
+  --blue:#1C5A8C; --blue-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E3F1E7; --ok-fg:#1F6B3A;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#F0928A; --accent-soft:#3A1F1E;
+    --blue:#82B6E4; --blue-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#15301F; --ok-fg:#8FD6A6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#F0928A; --accent-soft:#3A1F1E;
+  --blue:#82B6E4; --blue-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#15301F; --ok-fg:#8FD6A6;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:780px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--blue); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2rem, 6vw, 2.8rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.5rem; font-weight:700}
+h3{font-size:1.1rem; font-weight:700; margin-top:1.5rem}
+p{margin:.6rem 0}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.05rem; color:var(--muted); max-width:64ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--blue-soft); color:var(--blue); text-decoration:none}
+a.chip.pdf{background:var(--accent); color:var(--surface)}
+nav.toc{margin:1.4rem 0 0; font-size:.93rem}
+nav.toc ol{padding-left:1.6rem; margin:.5rem 0 0; columns:2 250px; column-gap:1.8rem}
+nav.toc li{padding:.14rem 0; break-inside:avoid}
+nav.toc li::marker{font-family:var(--mono); color:var(--muted); font-size:.85em}
+section{padding-top:2.5rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .8rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.qn{font:500 .8rem/1 var(--mono); color:var(--surface); background:var(--accent); padding:.3rem .45rem; border-radius:5px; flex:none}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.32rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.4rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.def{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.75rem 1rem; margin:.9rem 0}
+.def .k{font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.25rem}
+.def p{margin:.2rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.3rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .7rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td.lv{font-weight:600; white-space:nowrap}
+.note{background:var(--blue-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.star{color:var(--accent); font-weight:600}
+.src{font:400 .78rem/1.4 var(--mono); color:var(--muted); margin-top:.4rem}
+/* лесенка уровней */
+.levels{display:grid; gap:8px; margin:1rem 0}
+.lvl{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem .9rem; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.65rem .85rem; border-left:5px solid var(--accent)}
+.lvl:nth-child(2){margin-left:4%} .lvl:nth-child(3){margin-left:8%} .lvl:nth-child(4){margin-left:12%} .lvl:nth-child(5){margin-left:16%}
+.lvl b{font-family:var(--serif); font-size:1rem}
+.lvl small{display:block; color:var(--muted); font-size:.78rem; line-height:1.3}
+.lvl .who{font-size:.9rem}
+@media (max-width:560px){ .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0} }
+/* цепочки этапов */
+.flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:1rem 0}
+.st{flex:1 1 130px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.6rem .7rem; position:relative; display:grid; gap:.25rem; align-content:start}
+.st .n{font:500 .74rem/1.2 var(--mono); color:var(--muted)}
+.st b{font-family:var(--serif); font-size:.98rem; line-height:1.25}
+.st .h{font-size:.82rem; color:var(--ink); line-height:1.35}
+.st .h em{font-style:normal; font-weight:600; color:var(--accent)}
+.st.zone{background:var(--accent-soft); border-color:transparent}
+.arrow{flex:0 0 auto; align-self:center; font:500 1.1rem/1 var(--mono); color:var(--muted)}
+@media (max-width:560px){ .flow{flex-direction:column} .arrow{transform:rotate(90deg); align-self:center} .st{flex-basis:auto} }
+/* хронология */
+.tl{list-style:none; padding:0; margin:1rem 0; border-left:2px solid var(--line)}
+.tl li{position:relative; padding:.1rem 0 .7rem 1.1rem}
+.tl li::before{content:""; position:absolute; left:-6px; top:.55rem; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+.tl .y{font:500 .85rem/1.3 var(--mono); color:var(--accent); display:block}
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin:.8rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .9rem}
+.card h4{margin:0 0 .35rem; font:600 .98rem/1.3 var(--sans)}
+.card ul{margin:.2rem 0; padding-left:1.05rem} .card li{margin:.22rem 0; font-size:.92rem}
+.card.a{border-top:4px solid var(--accent)} .card.b{border-top:4px solid var(--blue)}
+/* самопроверка */
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--blue); background:transparent; color:var(--blue); cursor:pointer}
+button:hover{background:var(--blue-soft)}
+details.q{border-bottom:1px solid var(--line)}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.7rem 2rem .7rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.58rem; font:500 1.2rem/1 var(--mono); color:var(--blue)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .85rem; font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.45rem; padding-left:1.1rem; font-size:.92rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.32rem} th,td{padding:.5rem .55rem} }
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+/* патофизиология: части ответа */
+section[id^="q"] > h3{font:600 .78rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin:1.4rem 0 .3rem}
+.easy{background:var(--ok-bg); border-radius:10px; padding:.75rem 1rem; margin:.5rem 0}
+.easy > :first-child{margin-top:0} .easy > :last-child{margin-bottom:0}
+.lead-link{font-weight:600; color:var(--accent)}
+.kv{display:inline-block; font:500 .72rem/1.2 var(--mono); padding:.18rem .4rem; border-radius:5px; vertical-align:.08em}
+.kv.c{background:var(--ok-bg); color:var(--ok-fg)} .kv.d{background:var(--accent-soft); color:var(--accent)}
+details.more{border:1px solid var(--line); border-radius:8px; background:var(--surface); margin:.45rem 0}
+details.more summary{cursor:pointer; padding:.6rem .8rem; font-weight:500; list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"? "; font-family:var(--mono); color:var(--blue)}
+details.more .a{padding:0 .8rem .7rem; font-size:.95rem}
+details.more .a p{margin:.3rem 0}
+.uncheck{color:var(--warn-fg); font-weight:600; white-space:nowrap}
+dl.gloss{margin:.6rem 0} dl.gloss dt{font-weight:600; margin-top:.6rem} dl.gloss dd{margin:.1rem 0 0 0; color:var(--ink)}
+svg.scheme{width:100%; height:auto; max-width:560px; display:block; margin:.8rem auto}
+svg.scheme text{font-family:var(--sans); fill:var(--ink)}
+svg.scheme .box{fill:var(--surface); stroke:var(--line)}
+svg.scheme .bad{fill:var(--accent-soft); stroke:var(--accent)}
+svg.scheme .good{fill:var(--ok-bg); stroke:var(--ok-fg)}
+svg.scheme .ln{stroke:var(--muted); fill:none; stroke-width:1.6}
+svg.scheme text.acc{fill:var(--accent)}
+svg.scheme .lnr{stroke:var(--accent); fill:none; stroke-width:1.8}
+@media print{ details.more{break-inside:avoid} details.more summary::before{content:none} .easy{border:1px solid #ccc} }
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.48}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar, a.chip.pdf{display:none}
+  section{padding-top:1.1rem}
+  h1{font-size:21pt} h2{font-size:14.5pt} h2, h3, .sec-head{break-after:avoid}
+  .tile, .lvl, .st, details.q, .tl li, tr, ol.steps li, ul.facts li{break-inside:avoid}
+  .tbl{overflow:visible}
+  .tbl, .def, .tile, .lvl, .st, .card{border-color:#ccc}
+  table{font-size:8.6pt} th,td{padding:.3rem .4rem}
+  .tiles{grid-template-columns:1fr 1fr}
+  .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0}
+  .flow{flex-direction:column} .arrow{transform:rotate(90deg)} .st{flex:0 0 auto}
+  .cols{grid-template-columns:1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Патофизиология · итоговое занятие № 1 · медфак ЧГУ</div>
+  <h1>V. Воспаление</h1>
+  <p class="lead">Альтерация, нарушения микроциркуляции, экссудация, эмиграция, фагоцитоз, медиаторы и пролиферация — что происходит в очаге воспаления, почему он краснеет, отекает, болит и закисляется, и как действуют гормоны.</p>
+  <div class="chips">
+    <a class="chip pdf" href="vospalenie.pdf">скачать PDF для телефона</a>
+    <span class="chip">24 вопроса раздела</span>
+    <span class="chip">методичка кафедры, 5 листов</span>
+    <span class="chip">Адо, 2000, гл. 7</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Вопросы</div>
+    <ol>
+      <li><a href="#q1">Определение, этиология, признаки</a></li>
+      <li><a href="#q2">Альтерация</a></li>
+      <li><a href="#q3">Микроциркуляция: стадии</a></li>
+      <li><a href="#q4">Механизмы образования экссудата</a></li>
+      <li><a href="#q5">Виды экссудатов</a></li>
+      <li><a href="#q6">Эмиграция лейкоцитов</a></li>
+      <li><a href="#q7">Медиаторы воспаления</a></li>
+      <li><a href="#q8">Фагоцитарное число и показатель</a></li>
+      <li><a href="#q9">Фагоцитоз: стадии, нарушения</a></li>
+      <li><a href="#q10">Гормоны и воспаление</a></li>
+      <li><a href="#q11">Боль при воспалении</a></li>
+      <li><a href="#q12">Механизмы экссудации</a></li>
+      <li><a href="#q13">Факторы отёка</a></li>
+      <li><a href="#q14">Транссудат и экссудат</a></li>
+      <li><a href="#q15">Физико-химические изменения</a></li>
+      <li><a href="#q16">Медиаторы проницаемости</a></li>
+      <li><a href="#q17">Клеточные и плазменные медиаторы</a></li>
+      <li><a href="#q18">Механизмы действия медиаторов</a></li>
+      <li><a href="#q19">Выход белков из сосудов</a></li>
+      <li><a href="#q20">Источники гистамина</a></li>
+      <li><a href="#q21">Действие глюкокортикоидов</a></li>
+      <li><a href="#q22">Осмотическое и онкотическое давление</a></li>
+      <li><a href="#q23">Ацидоз в очаге</a></li>
+      <li><a href="#q24">Пролиферация</a></li>
+    </ol>
+    <p style="margin:.6rem 0 0"><a href="#quiz">Самопроверка</a> · <a href="#slovar">Словарик</a> · <a href="#src">Источники</a> · <a href="index.html">Все разделы</a></p>
+  </nav>
+</header>
+
+<section id="top">
+  <div class="sec-head"><h2>Главное за пять минут</h2></div>
+  <div class="tiles">
+    <div class="tile"><b>5 компонентов</b><span>альтерация, нарушение микроциркуляции, экссудация, эмиграция, пролиферация (методичка)</span></div>
+    <div class="tile"><b>5 местных признаков</b><span>краснота, припухлость, жар, боль, нарушение функции (Цельс + Гален)</span></div>
+    <div class="tile"><b>4 стадии кровотока</b><span>спазм → артериальная гиперемия → венозная гиперемия → стаз (методичка)</span></div>
+    <div class="tile"><b>10–30 мин</b><span>длится артериальная гиперемия при воспалении (методичка, Адо)</span></div>
+    <div class="tile"><b>23–28 / 5–6</b><span>мм рт. ст. — онкотическое давление крови / интерстиция в норме (методичка)</span></div>
+    <div class="tile"><b>6 экссудатов</b><span>серозный, катаральный, фибринозный, гнойный, гнилостный, геморрагический (методичка)</span></div>
+    <div class="tile"><b>Ацидоз · гиперосмия · гиперонкия</b><span>физико-химические изменения в очаге (методичка)</span></div>
+    <div class="tile"><b>Нейтрофилы → моноциты</b><span>порядок эмиграции; моноциты позже — меньше хемотаксическая чувствительность (методичка)</span></div>
+  </div>
+</section>
+
+<section id="q1">
+  <div class="sec-head"><span class="qn">V.1</span><h2>Воспаление (определение). Этиология воспаления. Общие и местные признаки воспаления.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры</span>
+    <p><b>Воспаление</b> — местная реакция организма на повреждение, характеризующаяся <b>альтерацией, нарушением микроциркуляции, экссудацией, эмиграцией и пролиферацией</b>.</p>
+  </div>
+  <p><b>Причины</b> (методичка): <b>экзогенные</b> — инфекционные агенты (бактерии, вирусы, простейшие, грибы), химические (кислоты, щёлочи, соли тяжёлых металлов), физические (электрический ток, ионизирующая радиация, высокая и низкая температура), биологические процессы (рост опухолей, иммунные реакции); <b>эндогенные</b> — продукты тканевого распада, тромбы, жёлчные и мочевые камни, отложения солей.</p>
+  <p><b>Местные признаки</b>: краснота, припухлость, жар, боль и нарушение функции. <b>Общие признаки</b> (методичка): 1) при остром воспалении — нейтрофильный лейкоцитоз со сдвигом влево, при хроническом — моноцитоз и лимфоцитоз; 2) лихорадка от пирогенных факторов из очага; 3) увеличение СОЭ; 4) увеличение кортикостероидов и катехоламинов в крови; 5) изменение белков плазмы за счёт белков острой фазы; 6) увеличение комплементарной активности сыворотки.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Воспаление — «пожарная бригада» на месте аварии: сначала авария (повреждение), потом перекрывают движение и подгоняют технику (сосуды расширяются, кровь замедляется), привозят воду (жидкость выходит в ткань — отёк), приезжают пожарные (лейкоциты), а в конце строители заделывают дыру (пролиферация, рубец). Местный пожар, но вся «городская служба» знает о нём — отсюда температура и лейкоцитоз в анализе.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Флогоген</b><span class="h">экзо- или эндогенный</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">пусковое звено</span><b>Альтерация</b><span class="h">повреждение + выход медиаторов</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">цепь</span><b>Микроциркуляция → экссудация → эмиграция</b><span class="h"><em>защита</em>: отграничение</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">исход</span><b>Пролиферация</b><span class="h">восстановление или рубец</span></div>
+  </div>
+  <p>По Адо воспаление способствует ограничению повреждения, нейтрализации и уничтожению агента, лизису нежизнеспособных тканей; благополучное завершение воспаления — условие заживления (Адо, PDF 214).</p>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Местный признак</th><th>Латынь</th><th>Механизм (Адо, PDF 214–215, 218; боль — V.11)</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Краснота</td><td>rubor</td><td>артериальная гиперемия</td></tr>
+      <tr><td class="lv">Жар</td><td>calor</td><td>приток тёплой крови к коже (во внутренних органах не признак)</td></tr>
+      <tr><td class="lv">Припухлость</td><td>tumor</td><td>экссудация, воспалительный отёк</td></tr>
+      <tr><td class="lv">Боль</td><td>dolor</td><td>медиаторы, H⁺, K⁺, сдавление (V.11)</td></tr>
+      <tr><td class="lv">Нарушение функции</td><td>functio laesa</td><td>добавил Гален</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какие теории воспаления вы знаете?</summary><div class="a"><p>Мечникова (прежде всего реакция клеток, простейшая форма — фагоцитоз; сравнительно-эволюционный подход), Вирхова (аттракция клетками жидкостей — неверна), Конгейма (первичны расстройства кровообращения), Шаде (физико-химическая, гипериония) — otvety, вопрос 35.</p></div></details>
+  <details class="more"><summary>Чем острое воспаление отличается от хронического?</summary><div class="a"><p>Острое — несколько суток, выражена экссудация; хроническое — недели и годы, преобладает пролиферация фибробластов и эндотелия, скопление макрофагов, лимфоцитов, плазмоцитов (Адо, PDF 232).</p></div></details>
+  <div class="note"><p><b>Расхождение:</b> методичка называет воспаление «местной реакцией организма», Адо — «реактивным патологическим процессом» (PDF 214), «Краткий курс» — «местной защитно-приспособительной реакцией». На зачёте — по методичке. <b>Связь с клиникой:</b> общие признаки — это анализы: лейкоцитоз со сдвигом влево, СОЭ, С-реактивный белок.</p></div>
+</section>
+
+<section id="q2">
+  <div class="sec-head"><span class="qn">V.2</span><h2>Альтерация (первичная, вторичная).</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры</span>
+    <p><b>Альтерация</b> — повреждение ткани, нарушение в ней питания и обмена веществ, её структуры и функции. <b>Первичная альтерация</b> развивается в зоне непосредственного действия патогенного агента, характеризующегося повреждением клеточных элементов ткани с последующим освобождением и образованием медиаторов воспаления — гистамина, серотонина, лизосомальных гидролитических ферментов, простагландинов, лейкотриенов, а также активацией комплемента. Диффузия вышеуказанных субстанций за пределы зоны первичной альтерации сопровождается развитием <b>вторичной альтерации</b>. Она является реакцией организма на уже вызванное вредным началом повреждение. Это необходимый компонент воспаления как защитно-приспособительной реакции, направленный на отграничение флогогена и повреждённой под его воздействием ткани от остального организма. Вторичная альтерация охватывает клетки и межклеточное вещество.</p>
+  </div>
+  <p>«Краткий курс» (лекция IX): альтерация — <b>главное звено, пусковой механизм</b>; лизосомы — «стартовые площадки воспаления», с них начинается вторичная альтерация.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Первичная альтерация — то, что сломал сам «злоумышленник» (ожог, микроб). Вторичная — то, что организм «доломал сам», когда вокруг очага разлились ферменты из разрушенных клеток и лейкоцитов. Звучит странно, но это как противопожарная просека: вырубают немного леса, чтобы огонь не пошёл дальше.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st zone"><span class="n">первичная</span><b>Повреждение агентом</b><span class="h">мембраны, митохондрии, лизосомы</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">медиаторы</span><b>Гистамин, серотонин, ферменты лизосом, ПГ, ЛТ, комплемент</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">вторичная</span><b>Диффузия за пределы зоны</b><span class="h">ферменты лизосом и лейкоцитов, активные формы O₂</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">итог</span><b>Отграничение очага + физико-химические сдвиги</b><span class="h">ацидоз, гиперосмия, гиперонкия</span></div>
+  </div>
+  <p>Вторичная альтерация — пример реакции на границе <span class="kv c">защиты</span> и <span class="kv d">повреждения</span>: в известных пределах целесообразна, при дисбалансе «лизосомальные протеиназы — ингибиторы» даёт избыточный некроз (otvety, вопрос 39).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Чем отличается вторичная альтерация от первичной по зависимости от агента?</summary><div class="a"><p>Первичная зависит от свойств флогогена; вторичная от агента непосредственно не зависит, ей не нужно его дальнейшее присутствие (otvety, вопрос 39). При лейкопении у животных альтерация выражена слабо — её делают лейкоциты.</p></div></details>
+  <details class="more"><summary>Как меняется обмен веществ при альтерации?</summary><div class="a"><p>«Пожар обмена»: сначала усиливаются окисление и гликолиз, затем окисление падает, нарастает гликолиз; накапливаются молочная и трикарбоновые кислоты, жирные кислоты, кетоновые тела, полипептиды — отсюда ацидоз (otvety, вопрос 39; V.23).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> считать вторичную альтерацию просто «осложнением». По методичке это <b>необходимый компонент</b> воспаления. <b>Связь с хирургией:</b> некрэктомия и дренирование гнойника убирают источник вторичной альтерации — ферменты распадающихся лейкоцитов.</p></div>
+</section>
+
+<section id="q3">
+  <div class="sec-head"><span class="qn">V.3</span><h2>Нарушение микроциркуляции в очаге воспаления. Стадии.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Стадии · методичка кафедры</span>
+    <p>При воспалении различают 4 стадии изменений кровотока в микроциркуляторных руслах. 1. <b>Преходящий спазм</b> приносящих артериол отчётливо выражен при быстро равивающемся [развивающемся] повреждении, например при ожоге, и обычно продолжается несколько секунд. 2. <b>Артериальная гиперемия</b> начинается с артериол… сохраняется недолго — обычно от 10 до 30 минут. 3. <b>Венозная гиперемия</b> начинается с максимального расширения приносящих артериол и прекапиллярных сфинктеров. Скорость кровотока падает… цвет крови приобретает синюшный оттенок. 4. <b>Стаз</b>. Стазу предшествует предстатическое состояние, характеризующееся маятникообразным движением крови… Стаз может разрешиться, если проницаемость сосуда восстановится.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Как пробка на дороге после аварии: на секунду все тормозят (спазм), потом все рвутся объехать — поток быстрый и широкий (артериальная гиперемия, кровь алая). Потом из-за отёка дорога сужается, машины еле ползут (венозная гиперемия, кровь синюшная), начинают дёргаться вперёд-назад (маятникообразное движение) и встают совсем (стаз).</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">секунды</span><b>Спазм артериол</b><span class="h">прямое действие агента на гладкие мышцы, возможно — нейромедиаторы (Адо)</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">10–30 мин</span><b>Артериальная гиперемия</b><span class="h">гистамин, брадикинин → NO; аксон-рефлекс; краснота, жар; кровь ярко-красная</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">затем</span><b>Венозная гиперемия</b><span class="h">экссудация → ↑ вязкости, сдавление вен отёком; кровь синюшная</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">исход</span><b>Стаз</b><span class="h">маятникообразное движение → остановка</span></div>
+  </div>
+  <p class="src">методичка; механизмы — Адо, PDF 215–217</p>
+  <p>Главная причина смены артериальной гиперемии на венозную — <b>экссудация</b>: растёт вязкость крови, а отёк сдавливает вены (Адо, PDF 217).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое аксон-рефлекс?</summary><div class="a"><p>Местный сосудорасширяющий рефлекс без участия ЦНС: возбуждение одной веточки афферентного С-волокна распространяется на другие, оканчивающиеся на сосудах, оттуда выделяются вещество Р и другие пептиды; они расширяют сосуды и вызывают дегрануляцию тучных клеток. Расширяет зону гиперемии (Адо, PDF 216–217).</p></div></details>
+  <details class="more"><summary>Почему кровь из очага сначала алая, потом синюшная?</summary><div class="a"><p>В артериальную гиперемию кровоток быстрый, ткань не успевает забрать O₂ — мало восстановленного Hb; в венозную кровоток медленный — восстановленного Hb много (методичка).</p></div></details>
+  <details class="more"><summary>Что такое сладж?</summary><div class="a"><p>Сплошная масса эритроцитов («монетные столбики» с исчезающими границами) в просвете сосуда при стазе («Краткий курс», лекция IX).</p></div></details>
+  <div class="note"><p><b>Расхождение:</b> длительность спазма — несколько секунд (методичка; Адо: иногда при ожогах — минуты) или до 40 с («Краткий курс»); артериальная гиперемия — 10–30 мин (методичка, Адо) или 15 мин — 1 ч («Краткий курс»). На зачёте — по методичке. <b>Связь с клиникой:</b> пульсирующая боль при панариции — от толчкообразного и маятникообразного движения крови («Краткий курс»).</p></div>
+</section>
+
+<section id="q4">
+  <div class="sec-head"><span class="qn">V.4</span><h2>Механизмы образования экссудата.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Механизм образования экссудата · методичка кафедры</span>
+    <p><b>Экссудация</b> — выход белоксодержащей жидкой части крови через сосудистую стенку в воспалённую ткань. Выход жидкой части крови в воспалённую ткань определяется прежде всего <b>увеличением кровяного давления в венозной части капилляров</b> воспалённой ткани. Другим фактором, обуславливающим образование экссудата, является <b>повышение проницаемости капиллярной стенки</b>, вызываемого медиаторами воспаления (гистамин, серотонин, брадикинин, комплементов С 5а, С 3а, лейкотриенов С4 и Д4). Когда белки крови начинают просачиваться из сосудов во внесосудистое пространство, <b>онкотическое давление крови</b> (в N 23-28 мм рт.ст.) <b>падает</b>, а онкотическое давление интерстициальной жидкости <b>растёт</b> (в N 5–6 мм рт.ст.).</p>
+  </div>
+  <p>Добавляется рост <b>осмотического давления</b> интерстиция из-за накопления осмотически активных продуктов распада (ионов Na, K, Ca²⁺, Cl⁻) — методичка. Ведущий фактор по Адо — повышение проницаемости для белка из-за сокращения (ретракции) эндотелиальных клеток посткапиллярных венул под действием медиаторов (Адо, PDF 217).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Капилляр — шланг с мелкими дырочками. Воду из шланга выдавливает давление внутри, а белок в крови «удерживает» воду, как губка. При воспалении: давление в шланге растёт (кровь застаивается), дырочки расширяются (медиаторы раздвигают клетки стенки), белок выходит наружу — и «губка» теперь тянет воду уже из шланга в ткань. Ткань набухает.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st zone"><span class="n">ведущее звено по Адо</span><b>↑ проницаемости</b><span class="h">медиаторы → сокращение эндотелия → межэндотелиальные щели</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>↑ гидростатического давления</b><span class="h">в венозной части капилляров</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Белок выходит: онкотическое крови ↓, ткани ↑</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>Осмотическое давление ткани ↑</b><span class="h">продукты распада, ионы</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">итог</span><b>Экссудат, воспалительный отёк</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Две фазы повышения проницаемости?</summary><div class="a"><p>Немедленная — от медиаторов, максимум через несколько минут, завершается за 15–30 мин, связана с сокращением эндотелия венул; замедленная — максимум через 4–6 ч, до 100 ч, от повреждения стенки лизосомальными ферментами и активными формами O₂ лейкоцитов (otvety, вопрос 31). По Адо проницаемость растёт через 30–60 с — несколько минут, максимум за 20–30 мин, снижается через 1 ч и вновь нарастает на часы и сутки (PDF 216).</p></div></details>
+  <details class="more"><summary>Какое значение имеет воспалительный отёк?</summary><div class="a"><p><span class="kv c">компенсация</span> Защитное: белки отёчной жидкости связывают токсины, задерживают их всасывание и распространение (методичка). <span class="kv d">повреждение</span> Отрицательное: отёк гортани — удушье, отёк оболочек мозга — повышение внутричерепного давления (Адо, PDF 219).</p></div></details>
+  <div class="note"><p><b>Методичка и учебники расходятся.</b> Методичка: выход жидкой части крови «определяется <b>прежде всего</b> увеличением кровяного давления в венозной части капилляров». Адо (PDF 217), «Краткий курс» (лекция IX) и студенческие ответы (вопрос 31) ведущим называют <b>повышение проницаемости</b> для белка. На зачёте: сначала по методичке — давление, затем «по Адо ведущее звено — проницаемость». <b>Связь с терапией:</b> отёк Квинке и крапивница — та же гистаминовая проницаемость.</p></div>
+</section>
+
+<section id="q5">
+  <div class="sec-head"><span class="qn">V.5</span><h2>Виды экссудатов.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Виды экссудатов · методичка кафедры</span>
+    <p>1. <b>Серозный</b> — преимущественно вода и альбумины; на ранних стадиях воспаления кожи и серозных оболочек (ожог 2 степени, серозный плеврит, перикардит, артрит). 2. <b>Катаральный</b> — при воспалении оболочек носоглотки, бронхов и бронхиол, ЖКТ; содержит мукополисахариды, секреторный IgA, лизоцим. 3. <b>Фибринозный</b> — при тяжёлых повреждениях эндотелия со значительным выходом фибриногена; плёнка плотно спаяна — <b>дифтерическое</b> [дифтеритическое] воспаление (миндалины, полость рта, пищевод), рыхло, поверхностно — <b>крупозное</b>; при дифтерии, дизентерии, туберкулёзе. 4. <b>Гнойный</b> — кокковая инфекция, патогенные грибки, химические вещества; фурункулёз, гангрена, флегмона. 5. <b>Гнилостный</b> — при присоединении патогенных анаэробов (ботулизм, газовая гангрена). 6. <b>Геморрагический</b> — много эритроцитов; острая гриппозная пневмония, сибирская язва, отравление фосгеном.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Чем сильнее повреждены «стенки шланга», тем более крупное «вещество» выходит наружу: при лёгком — только вода и мелкий белок (серозный, как в пузыре от мозоли), сильнее — крупный фибриноген, который сворачивается в плёнку (фибринозный), ещё сильнее — эритроциты (геморрагический). Гной — это поле боя: много погибших лейкоцитов и переваренной ткани.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">лёгкое</span><b>Серозный</b><span class="h">вода, альбумин</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">слизистые</span><b>Катаральный</b><span class="h">+ слизь, IgA, лизоцим</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">тяжёлое</span><b>Фибринозный</b><span class="h">фибриноген → фибрин</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">кокки</span><b>Гнойный / гнилостный</b><span class="h">лейкоциты, некроз / анаэробы</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">разрушение сосудов</span><b>Геморрагический</b></div>
+  </div>
+  <p class="src">состав определяют характер агента, особенности ткани, реактивность организма — Адо, PDF 218</p>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Вид</th><th>Состав и свойства (otvety, вопрос 31)</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Серозный</td><td>белок 3–5 %, в основном альбумин; плотность 1015–1020; прозрачный; ближе всех к транссудату</td></tr>
+      <tr><td class="lv">Гнойный</td><td>много нейтрофилов, в основном погибших (гнойные тельца), ферменты, продукты аутолиза, нуклеиновые кислоты → вязкий, мутный, зеленоватый</td></tr>
+      <tr><td class="lv">Гнилостный (ихорозный)</td><td>продукты гнилостного распада, грязно-зелёный, дурной запах</td></tr>
+      <tr><td class="lv">Геморрагический</td><td>розовый или красный; любой вид воспаления может стать геморрагическим</td></tr>
+      <tr><td class="lv">Смешанные</td><td>серозно-фибринозный, серозно-гнойный, серозно-геморрагический, гнойно-фибринозный</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какие функции у экссудата?</summary><div class="a"><p>Разведение токсинов и их разрушение протеазами плазмы; доставка антител и комплемента; фибрин создаёт структуру для перехода лейкоцитов (Адо, PDF 219).</p></div></details>
+  <details class="more"><summary>Чем дифтеритическое воспаление отличается от крупозного?</summary><div class="a"><p>Дифтеритическое — плёнка плотно спаяна с тканью, удаление обнажает язву (многослойный эпителий: миндалины, рот, пищевод); крупозное — плёнка рыхлая, поверхностная (методичка; otvety: желудок, кишечник, трахея, бронхи).</p></div></details>
+  <div class="note"><p><b>Расхождение:</b> Адо называет 5 видов (без гнилостного), «Краткий курс» перечисляет 6 с ихорозным; методичка — 6. На зачёте — 6 по методичке. В методичке «ботулизм» в гнилостном — так в оригинале. <b>Связь с хирургией:</b> флегмона, абсцесс, эмпиема — формы гнойного воспаления.</p></div>
+</section>
+
+<section id="q6">
+  <div class="sec-head"><span class="qn">V.6</span><h2>Эмиграция лейкоцитов в очаг воспаления. Механизмы.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры</span>
+    <p><b>Эмиграция лейкоцитов</b> — выход лейкоцитов из сосудов в ткань. Лейкоциты, занявшие <b>краевое положение</b>, выпускают псевдоподии, которые проникают в межэндотелиальные щели и таким образом проходят через эндотелиальный слой. Он требует энергии и осуществляется с усиленным потреблением кислорода, участием ионов кальция, магния и АТФ. Оказавшись между эндотелиальным слоем и базальной мембраной, лейкоцит выделяет лизосомальные протеиназы (коллагеназа, эластаза), растворяющие её, и амебоидными движениями направляются к центру очага воспаления, что определяется <b>градиентом концентрации хемотаксических веществ</b> в очаге, таких как фрагменты комплемента, фибринопептиды, фрагменты коллагена, лимфокины, бактериальные пептиды, ионы H⁺.</p>
+  </div>
+  <p>Порядок: первоначально преобладают <b>нейтрофилы</b>, затем <b>моноциты — макрофаги и лимфоциты</b>; позднее проникновение моноцитов объясняется их меньшей хемотаксической чувствительностью. При гноеродных кокках — нейтрофилы; при аллергии и гельминтах — эозинофилы; при хроническом воспалении (туберкулёз, сифилис) — мононуклеары (методичка).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Лейкоцит в замедленном потоке крови «прибивается к обочине», цепляется за стенку сосуда, как скалолаз, протискивается в щель между клетками, «прогрызает» нижний слой (базальную мембрану) и ползёт на «запах» — по нарастанию концентрации сигнальных веществ к центру очага.</p></div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li><b>Краевое стояние</b>: при замедлении кровотока лейкоциты выходят из осевого тока к стенке (методичка; Адо, PDF 219).</li>
+    <li><b>Качение</b> («rolling») — слабая адгезия через <b>селектины</b> (P-селектин эндотелия из телец Вейбеля–Паладе под действием гистамина) (Адо, PDF 220–221).</li>
+    <li><b>Плотная адгезия</b> — <b>интегрины</b> лейкоцита с ICAM-1, ICAM-2, VCAM-1 эндотелия; через 2–4 ч стенка как «булыжная мостовая» (Адо, PDF 220–221).</li>
+    <li><b>Проход через эндотелий</b> — псевдоподии в межэндотелиальные щели; энергия, O₂, Ca²⁺, Mg²⁺, АТФ (методичка); 2–12 мин, в посткапиллярных венулах (Адо, PDF 220).</li>
+    <li><b>Растворение базальной мембраны</b> протеиназами (коллагеназа, эластаза) (методичка).</li>
+    <li><b>Хемотаксис</b> к центру очага по градиенту хемоаттрактантов (методичка). Сильнейшие хемоаттрактанты — ЛПС и бактериальные пептиды; сильные эндогенные — C5a, лейкотриен B4, ФАТ; ИЛ-8 избирательно привлекает нейтрофилы (Адо, PDF 222). Набор «ЛПС, LTB4, ИЛ-8, ФАТ» — хемоаттрактанты для нейтрофилов в тестах «Воспаление», в. 19.</li>
+  </ol>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Стадия клеточной реакции (закон эмиграции Мечникова)</th><th>Время</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Полинуклеарная (нейтрофилы, эозинофилы)</td><td>до 2 суток</td></tr>
+      <tr><td class="lv">Мононуклеарная (моноциты, лимфоциты)</td><td>до 5–6 дней</td></tr>
+      <tr><td class="lv">Фибробластическая (гистиоциты, фибробласты)</td><td>далее</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">«Краткий курс», лекция X; нейтрофилы — главные клетки экссудата первые 24 ч, затем их замещают моноциты (Адо, PDF 226)</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое синдром дефицита адгезии лейкоцитов?</summary><div class="a"><p>Врождённые дефекты интегринов (тип I) или лигандов селектинов (тип II): нарушено воспаление, частые инфекции при высоком лейкоцитозе в крови (Адо, PDF 221).</p></div></details>
+  <details class="more"><summary>Почему моноциты приходят позже?</summary><div class="a"><p>Меньшая хемотаксическая чувствительность (методичка); нейтрофилы живут вне сосуда не более 48 ч, а стимулы миграции моноцитов действуют дольше (Адо, PDF 226).</p></div></details>
+  <div class="note"><p><b>Связь с клиникой:</b> лейкоформула отражает очаг: нейтрофилёз со сдвигом влево — острое гнойное воспаление, эозинофилия — аллергия и гельминты, лимфомоноцитоз — хроническое (методичка, общие признаки V.1). Глюкокортикоиды тормозят эмиграцию (V.21).</p></div>
+</section>
+
+<section id="q7">
+  <div class="sec-head"><span class="qn">V.7</span><h2>Медиаторы воспаления.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры; Адо, стр. PDF 228</span>
+    <p>Методичка: в ходе первичной и вторичной альтерации высвобождаются большие количества разнообразных медиаторов воспаления. Медиаторы воспаления по происхождению делят на <b>гуморальные</b> (образующиеся в жидких средах — плазме крови и тканевой жидкости и <b>клеточные</b>) [так в оригинале]. Адо: весь ход воспалительного процесса регулируется в основном эндогенными химическими веществами, которые появляются в очаге повреждения и называются медиаторами воспаления.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Гуморальные</b> (методичка): кинины, калликреины, компоненты C3 и C5 комплемента, XII фактор Хагемана.</li>
+    <li><b>Клеточные</b>: биогенные амины (гистамин, серотонин), эйкозаноиды (простагландины, лейкотриены, тромбоксан, простациклин), лизосомальные ферменты, ФАТ, цитокины (ИЛ-1, ФНО-α), NO (методичка; Адо, PDF 228–232).</li>
+    <li>По времени: <b>преформированные</b> (гистамин) и <b>новообразующиеся</b> (простагландины) (Адо, PDF 228).</li>
+    <li>Противодействующие: адреналин и норадреналин тормозят рост проницаемости (методичка); липоксины — противовоспалительные (Адо, PDF 231).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Медиаторы — «рации» пожарной бригады. Одни лежат готовыми в карманах (гистамин в гранулах тучных клеток — выдаётся сразу), другие собирают на месте (простагландины — через минуты). Одни команды для сосудов («расширься, пропусти воду»), другие для лейкоцитов («сюда!»), третьи для нервов («больно!»).</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">0 мин</span><b>Гистамин, серотонин</b><span class="h">готовые, из тучных клеток и тромбоцитов — «запуск»</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2-й каскад</span><b>Кинины, комплемент</b><span class="h">из белков плазмы, фактор Хагемана → калликреин → брадикинин</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">минуты–часы</span><b>Эйкозаноиды, ФАТ</b><span class="h">из фосфолипидов мембран</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">часы</span><b>Цитокины ИЛ-1, ФНО-α</b><span class="h">адгезия лейкоцитов, лихорадка, острая фаза</span></div>
+  </div>
+  <p class="src">методичка; «включение кининов означает начало деятельности второго каскада медиаторов» — методичка; гистамин «запускает» воспалительный ответ — Адо, PDF 229</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как взаимодействуют медиаторы?</summary><div class="a"><p>Плазменные и клеточные медиаторы взаимосвязаны и действуют по принципу аутокаталитической реакции с обратной связью и взаимным усилением («Краткий курс», лекция IX): например, C3a и C5a вызывают дегрануляцию тучных клеток (методичка).</p></div></details>
+  <details class="more"><summary>Почему характер воспаления мало зависит от причины?</summary><div class="a"><p>Потому что ход процесса регулируется в основном эндогенными медиаторами, а не самим агентом (Адо, PDF 228).</p></div></details>
+  <div class="note"><p><b>Связь с фармакологией:</b> антигистаминные, НПВС (блок циклооксигеназы — простагландины), антилейкотриеновые, анти-ФНО препараты бьют по отдельным медиаторам. Подробно по группам — V.16–V.18, V.20.</p></div>
+</section>
+
+<section id="q8">
+  <div class="sec-head"><span class="qn">V.8</span><h2>Фагоцитарная активность лейкоцитов в очаге воспаления. Фагоцитарное число, фагоцитарный показатель.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Показатели · «Краткий курс», лекция X</span>
+    <p>Методы оценки функциональной активности фагоцитов: 1) <b>% фагоцитоза</b> — экстенсивный показатель: % фагоцитирующих клеток на 100 потенциальных фагоцитов; 2) <b>фагоцитарное число</b> — количество объектов фагоцитоза, захваченных этими 100 фагоцитами; 3) <b>фагоцитарный индекс</b> (интенсивность поглощения) — количество захваченных объектов, которое приходится на каждый фагоцитирующий лейкоцит; 4) суммарная интенсивность поглощения — объекты, захваченные фагоцитами в 1 мм³; 5) завершённость фагоцитоза.</p>
+  </div>
+  <p>Итак, по единственному источнику курса: <b>фагоцитарный показатель</b> — процент фагоцитирующих клеток из 100 («экстенсивный показатель», «% фагоцитоза»); <b>фагоцитарное число</b> — количество объектов, захваченных 100 фагоцитами; на одну клетку — это <b>фагоцитарный индекс</b>. В лабораториях «фагоцитарным числом» часто называют среднее число частиц в одном фагоците <span class="uncheck">⚠ не проверено</span> — см. «частая ошибка».</p>
+  <p>Фагоцитировать способны нейтрофилы, моноциты, макрофаги и эозинофилы — <b>профессиональные (облигатные) фагоциты</b> (Адо, PDF 223).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Возьмём 100 лейкоцитов и дадим им «съесть» микробы. <b>Показатель</b> — сколько из 100 вообще поели (сколько бойцов в строю). <b>Число</b> — сколько микробов съели все 100 вместе; поделите на число поевших — получится <b>индекс</b>, сколько съел каждый (насколько хорошо работает боец). Оба нужны: можно иметь много ленивых бойцов или мало, но прожорливых.</p></div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li>Кровь (лейкоциты) смешивают с тест-объектом (микробы, латекс) и инкубируют.</li>
+    <li>Делают мазок, считают 100 фагоцитов.</li>
+    <li>Сколько клеток содержат частицы → показатель (%).</li>
+    <li>Сколько всего частиц в 100 фагоцитах → фагоцитарное число; делённое на число фагоцитировавших клеток → фагоцитарный индекс («Краткий курс»); в лабораториях это часто называют фагоцитарным числом <span class="uncheck">⚠ не проверено</span>.</li>
+    <li>Сколько частиц переварено / поглощено → завершённость фагоцитоза.</li>
+  </ol>
+  <p class="src">последовательность — по смыслу «Краткого курса», лекция X; методика лаборатории <span class="uncheck">⚠ не проверено</span></p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое конгоротовый индекс?</summary><div class="a"><p>Скорость исчезновения из крови крупнодисперсной краски после внутривенного введения — по повторному исследованию венозной крови через 15–20 мин («Краткий курс», лекция X) — оценка фагоцитарной системы в целом.</p></div></details>
+  <details class="more"><summary>Как фагоцитарная активность меняется в очаге?</summary><div class="a"><p>В очаге нейтрофилы — главные клетки экссудата первые 24 ч, затем их замещают моноциты (Адо, PDF 226).</p></div></details>
+  <div class="note"><p><b>Частая ошибка — путаница терминов.</b> Отвечайте по «Краткому курсу»: «показатель — процент фагоцитирующих из 100 клеток, число — объекты, захваченные 100 фагоцитами, индекс — объекты на один фагоцит». Оговорите, что в лабораторных руководствах «фагоцитарным числом» часто называют среднее число частиц в одном фагоците <span class="uncheck">⚠ не проверено</span> — то есть то, что «Краткий курс» называет индексом. <b>Связь с иммунологией:</b> эти показатели — часть иммунограммы при подозрении на иммунодефицит.</p></div>
+</section>
+
+<section id="q9">
+  <div class="sec-head"><span class="qn">V.9</span><h2>Фагоцитоз, стадии. Нарушения фагоцитарной функции лейкоцитов.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Стадии · Адо, стр. PDF 223</span>
+    <p>Фагоцитоз — лейкоциты распознают, поглощают и разрушают микроорганизмы, чужеродные частицы и собственные нежизнеспособные клетки. В процессе фагоцитоза различают несколько стадий: 1) стадию <b>прилипания</b> (прикрепления) фагоцита к объекту, 2) стадию <b>поглощения</b> объекта и 3) стадию <b>внутриклеточного разрушения</b> поглощённого объекта.</p>
+  </div>
+  <p>«Краткий курс» (лекция X) выделяет 4 стадии, добавляя первой <b>приближение</b> (хемотаксис). Открыл фагоцитоз И.И. Мечников (Адо, PDF 223).</p>
+  <p><b>Нарушения</b>: незавершённый фагоцитоз (мембрано- и ферментопатии лизосом, устойчивость микробов, выход микробов из фагосомы — риккетсии, хламидии, недостаток гормонов-регуляторов — otvety, вопрос 33); дефект адгезии (V.6); хроническая гранулёматозная болезнь — дефект образования активных форм O₂ (Адо, PDF 234); механизмы воспаления в целом нарушаются при лучевой болезни, агаммаглобулинемии, сахарном диабете, уремии (Адо, PDF 234). Наследственные дефекты фагоцитов: хронический гранулематоз (фагоцитируют, но не убивают), синдром Чедиака–Хигаси (дефект лизосом), недостаточность миелопероксидазы, синдром «ленивых лейкоцитов» (нет реакции на хемотаксис) («Краткий курс», лекция VI). Причины нарушения внутриклеточного переваривания по тестам: недостаточность Г6ФДГ, ↓ активных форм кислорода, ↓ ферментов лизосом, нарушение образования фаголизосом («Воспаление», в. 2, ключ «1, 3, 4, 6»). Лектор делит недостаточность фагоцитоза на 4 типа: уменьшение числа фагоцитов, изменения гранулоцитов, нарушение распознавания объектов, регуляторные нарушения (пересказ лекции 4). <span class="kv d">повреждение</span> — незавершённый фагоцитоз: микроб живёт внутри фагоцита.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Фагоцит — «пылесос с мусоросжигателем»: подъехать к мусору (хемотаксис), прилипнуть (помогают опсонины — «клейкие метки» на микробе), втянуть в мешок (фагосома), сжечь (кислородные радикалы) и переварить (ферменты гранул). Сломалась любая часть — микробы выживают и даже живут внутри «пылесоса».</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">0</span><b>Приближение</b><span class="h">хемотаксис</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">1</span><b>Прилипание</b><span class="h">опсонины: IgG, C3b, СРБ, лизоцим</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Поглощение</b><span class="h">псевдоподии → фагосома</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>Разрушение</b><span class="h">O₂-зависимое: «респираторный взрыв», НАДФН-оксидаза, миелопероксидаза → гипохлорит; O₂-независимое: дегрануляция, pH 4–5</span></div>
+  </div>
+  <p class="src">Адо, PDF 223–225</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое респираторный взрыв?</summary><div class="a"><p>После контакта с опсонизированными бактериями фагоциты, обычно работающие на гликолизе, резко усиливают поглощение O₂: НАДФН-оксидаза восстанавливает O₂ до супероксида, далее H₂O₂ и гидроксильный радикал; в нейтрофилах миелопероксидаза даёт гипохлорит (Адо, PDF 224–225).</p></div></details>
+  <details class="more"><summary>Почему фагоцитоз может повреждать свои ткани?</summary><div class="a"><p>При незавершённом фагоцитозе (объект больше фагоцита, иммунные комплексы на эндотелии) содержимое гранул и радикалы выходят наружу и повреждают ткани хозяина (Адо, PDF 226) — механизм вторичной альтерации.</p></div></details>
+  <div class="note"><p><b>Расхождение:</b> 3 стадии у Адо, 4 в «Кратком курсе», 5 в otvety (адгезия, погружение и фагосома, приближение лизосом, слияние в фаголизосому, разрушение). Назовите 4; у Адо хемотаксис описан в разделе об эмиграции (PDF 221–222), а стадии фагоцитоза начинаются с прилипания. <b>Связь с клиникой:</b> туберкулёзная палочка выживает внутри фагоцитов и «отгорожена» от лекарств (Адо, PDF 226).</p></div>
+</section>
+
+<section id="q10">
+  <div class="sec-head"><span class="qn">V.10</span><h2>Какие гормоны являются противовоспалительными и провоспалительными?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Влияние на воспаление · «Краткий курс», лекция IV; Адо, стр. PDF 116</span>
+    <p>«Влияние на воспаление: <b>глюкокортикоиды</b> - противоспалительные, т.е. снижают воспаление; <b>минералокортикоиды</b> - провоспалительные - усиливают воспаление» («Краткий курс», лекция IV). Минералокортикоиды — ДОК (дезоксикортикостерон), альдостерон: «задерживают натрий, выводят калий, задерживают в организме воду» (там же). «Кортизол (глюкокортикоид) в больших дозах оказывает противовоспалительное действие, задерживает процессы пролиферации клеток соединительной ткани, подавляет выработку антител» (Адо, PDF 116).</p>
+    <p>По классической схеме Г. Селье к провоспалительным относят также <b>соматотропный гормон</b> (СТГ) <span class="uncheck">⚠ не проверено</span>, к противовоспалительным — <b>АКТГ</b> <span class="uncheck">⚠ не проверено</span>: в источниках курса этого нет, а «Краткий курс» пишет, что АКТГ «запускает выброс глюко- и минералокортикоидов» — то есть обоих.</p>
+  </div>
+  <p>Из методички: при воспалении растут <b>кортикостероиды и катехоламины</b> в крови (общий признак); <b>адреналин и норадреналин тормозят рост сосудистой проницаемости</b>, ацетилхолин расширяет сосуды.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Надпочечники держат две «педали»: глюкокортикоиды — тормоз воспаления (поэтому стероидными мазями гасят аллергию), минералокортикоиды — газ (удерживают натрий и воду; что именно так они усиливают отёк и экссудацию — вывод конспекта <span class="uncheck">⚠ не проверено</span>). При стрессе организм жмёт на тормоз — растёт кортизол.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="cols">
+    <div class="card b"><h4>Противовоспалительные</h4><ul>
+      <li>глюкокортикоиды: стабилизируют мембраны, ↓ проницаемости («Краткий курс», лекция IV), ↓ пролиферации и антител (Адо, PDF 116), ↓ провоспалительных цитокинов (Адо, PDF 403) — подробно V.21;</li>
+      <li>АКТГ — через выработку глюкокортикоидов <span class="uncheck">⚠ не проверено</span>;</li>
+      <li>катехоламины — ↓ проницаемости (методичка).</li></ul></div>
+    <div class="card a"><h4>Провоспалительные</h4><ul>
+      <li>минералокортикоиды — задержка Na⁺ и воды («Краткий курс», лекция IV); избыток — «активация воспаления (артриты, миокардиты, периартерииты…)» (там же); ↑ экссудации <span class="uncheck">⚠ не проверено</span>;</li>
+      <li>СТГ — стимулирует пролиферацию <span class="uncheck">⚠ не проверено</span>.</li></ul></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как гормональный фон меняет течение воспаления?</summary><div class="a"><p>Общая реакция на воспаление зависит в том числе от состояния желёз внутренней секреции («Краткий курс», лекция X); и недостаточность, и избыток глюкокортикоидов снижают резистентность — избыток проявляется «снижением резистентности к инфекции» («Краткий курс», лекция IV). Что при недостаточности надпочечников воспаление протекает бурнее, а при избытке — вяло, с риском генерализации, — <span class="uncheck">⚠ не проверено</span>.</p></div></details>
+  <details class="more"><summary>Какие ещё эндогенные вещества тормозят воспаление?</summary><div class="a"><p>Липоксины (Адо, PDF 231), противовоспалительные цитокины (ИЛ-4, ИЛ-10 и др. — Адо, PDF 92), гистаминаза, кининазы.</p></div></details>
+  <div class="note"><p><b>Источники:</b> в листах кафедры деления гормонов нет; глюкокортикоиды как противовоспалительные и минералокортикоиды как провоспалительные — «Краткий курс» (лекция IV) и Адо (PDF 116, 402–403). СТГ (про-) и АКТГ (противо-) — только по классической схеме Селье, в источниках курса этого нет. <b>Связь с фармакологией:</b> преднизолон, дексаметазон — препараты глюкокортикоидов.</p></div>
+</section>
+
+<section id="q11">
+  <div class="sec-head"><span class="qn">V.11</span><h2>Какие факторы обуславливают боль при воспалении?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · тесты по патофизиологии (otvety/testy, тема «Воспаление», в. 10); методичка; Адо</span>
+    <p>Боль при воспалении вызывают: <b>простагландины группы E</b>, <b>гистамин</b>, <b>H⁺-гипериония</b> (ацидоз), <b>K⁺-гипериония</b>, <b>кинины</b>, <b>механическое раздражение нервных окончаний</b> (сдавление экссудатом, отёком).</p>
+  </div>
+  <ul class="facts">
+    <li><b>Брадикинин</b> вызывает ощущение жгучей боли (методичка; Адо, PDF 229).</li>
+    <li><b>Pg E2</b> повышает чувствительность болевых окончаний к брадикинину и гистамину (методичка) — сам по себе «сенсибилизатор».</li>
+    <li><b>Гистамин</b> возбуждает окончания болевых нервов (Адо, PDF 229); <b>серотонин</b> вызывает боль (Адо, PDF 229).</li>
+    <li>Пульсирующая боль — от толчкообразного и маятникообразного движения крови («Краткий курс», лекция IX).</li>
+  </ul>
+  <p class="src">тест: в варианте ответа «повышение температуры ткани» в число 6 верных не входит (ключ теста «Воспаление», в. 10: «1, 2, 3, 4, 5, 7»)</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Болит по трём причинам: «химия» (кислота, калий из разрушенных клеток, брадикинин, гистамин — прямо раздражают окончания), «усилитель» (простагландины делают окончания чувствительнее — поэтому помогает ибупрофен) и «давление» (отёк в тесном месте давит на нервы — поэтому так больно при воспалении пульпы зуба или под ногтем).</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">химические</span><b>H⁺, K⁺, брадикинин, гистамин, серотонин</b><span class="h">возбуждают ноцицепторы</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">сенсибилизация</span><b>Pg E2</b><span class="h">↓ порога болевых окончаний</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">механические</span><b>Отёк, ↑ тканевого давления</b><span class="h">сдавление окончаний</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">итог</span><b>Боль (dolor)</b><span class="h">+ нарушение функции</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему НПВС снимают воспалительную боль?</summary><div class="a"><p>Блокируют циклооксигеназу — синтез простагландинов (Адо, PDF 230 — циклооксигеназный путь), а PgE2 усиливает действие алгезирующих агентов (Адо).</p></div></details>
+  <details class="more"><summary>Какую роль играет аксон-рефлекс?</summary><div class="a"><p>Из С-волокон выделяются вещество Р и другие пептиды — расширение сосудов и дегрануляция тучных клеток с выходом гистамина (Адо, PDF 217): боль и воспаление поддерживают друг друга.</p></div></details>
+  <div class="note"><p><b>Связь с клиникой:</b> «сильнее всего болит там, где тесно» — пульпит, панариций, гнойный отит: отёк не может растянуть ткань. <b>Частая ошибка:</b> назвать причиной боли «жар» — повышение температуры ткани к основным факторам боли не относят.</p></div>
+</section>
+
+<section id="q12">
+  <div class="sec-head"><span class="qn">V.12</span><h2>Какие механизмы экссудации являются при воспалении?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Механизмы экссудации · студенческие ответы, вопрос 31; методичка</span>
+    <p>Механизм экссудации включает 3 основных фактора: 1) <b>повышение проницаемости сосудов</b> (венул и капилляров) в результате воздействия медиаторов воспаления и в ряде случаев самого воспалительного агента; 2) <b>увеличение кровяного (фильтрационного) давления</b> в сосудах очага вследствие гиперемии; 3) <b>возрастание осмотического и онкотического давления</b> в воспалённой ткани в результате альтерации и начавшейся экссудации и, возможно, снижение онкотического давления крови из-за потери белков. Ведущим фактором экссудации является повышение проницаемости сосудов.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Три «насоса» качают жидкость из сосуда в ткань: дырявая стенка (проницаемость), сильный напор (давление), «магнит» снаружи (белок и соли в ткани тянут воду). Главный — дырявая стенка: без неё белок не вышел бы, и «магнит» не появился бы.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Фактор</th><th>Откуда</th><th>Источник</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">↑ проницаемости (ведущий)</td><td>медиаторы → ретракция эндотелия (немедленная фаза); повреждение стенки ферментами лейкоцитов (замедленная)</td><td>Адо, PDF 217; otvety, в. 31</td></tr>
+      <tr><td class="lv">↑ гидростатического давления</td><td>расширение приносящих артериол, затруднение оттока</td><td>методичка; Адо, PDF 217</td></tr>
+      <tr><td class="lv">↑ онкотического давления ткани / ↓ крови</td><td>выход белков; расщепление крупных молекул до мелких</td><td>методичка; otvety, в. 39</td></tr>
+      <tr><td class="lv">↑ осмотического давления ткани</td><td>ионы Na, K, Ca²⁺, Cl⁻ из распада тканей</td><td>методичка</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Где экссудация выражена сильнее всего?</summary><div class="a"><p>В посткапиллярных венулах, меньше — в капиллярах (Адо, PDF 216; «Краткий курс», лекция IX).</p></div></details>
+  <details class="more"><summary>Чем V.12 отличается от V.4?</summary><div class="a"><p>V.4 — как образуется экссудат по методичке (давление, проницаемость, онкотика); V.12 — перечень механизмов (три фактора) и указание ведущего. Отвечая на V.12, назовите три фактора и что ведущий — проницаемость.</p></div></details>
+  <div class="note"><p><b>Связь с клиникой:</b> выпот в плевральной полости при пневмонии — экссудат, при сердечной недостаточности — транссудат (механизм только гидростатический) — V.14.</p></div>
+</section>
+
+<section id="q13">
+  <div class="sec-head"><span class="qn">V.13</span><h2>Какие факторы способствуют развитию отека в очаге воспаления?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · тесты (тема «Воспаление», в. 8); методичка; Адо, стр. PDF 217–218</span>
+    <p>Развитию отёка в очаге воспаления способствуют: <b>повышение онкотического давления межклеточной жидкости</b>, <b>повышение проницаемости сосудистой стенки</b>, <b>повышение давления в венозном отделе капилляров и венул</b>, <b>повышение осмотического давления межклеточной жидкости</b>.</p>
+  </div>
+  <p>Плюс затруднение лимфооттока (рост внутритканевого давления особенно значителен при затруднении лимфооттока — Адо, PDF 219). Патогенетические факторы воспалительного отёка по тестам к следующему зачёту: <b>осмотический, мембраногенный, онкотический, гемодинамический</b> (четыре верных ответа) — фото <code>qMf3ZX-vZdE.jpg</code> из папки «2-zachet».</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Отёк — лишняя вода в ткани. Её загоняют туда «дырки» в сосудах (мембраногенный фактор), «напор» (гидродинамический), «соль» (осмотический) и «белок» (онкотический) снаружи. В очаге воспаления работают все четыре сразу — поэтому воспалительный отёк такой плотный и горячий.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st zone"><span class="n">мембраногенный</span><b>↑ проницаемости</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">гемодинамический</span><b>↑ давления в венозной части</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">онкотический</span><b>↑ белка в интерстиции</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">осмотический</span><b>↑ ионов в интерстиции</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">лимфатический</span><b>затруднение оттока</b></div>
+  </div>
+  <p>Значение отёка двойственно: <span class="kv c">компенсация</span> — белки отёчной жидкости связывают токсины и задерживают их распространение (методичка); <span class="kv d">повреждение</span> — сдавление тканей, отёк гортани, оболочек мозга (Адо, PDF 219).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какое значение имеет воспалительный отёк?</summary><div class="a"><p>Защитное — белки отёчной жидкости связывают токсины, задерживают их всасывание (методичка); вредное — сдавление сосудов и нервов, ишемия, удушье при отёке гортани (Адо, PDF 219).</p></div></details>
+  <details class="more"><summary>Какой фактор инициальный при сердечном отёке, а какой — при воспалительном?</summary><div class="a"><p>При сердечном — гемодинамический (по тесту «2-zachet»); при воспалительном — мембраногенный (повышение проницаемости), ведущий по Адо.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать «повышение онкотического давления <b>крови</b>» — это наоборот удерживает воду в сосудах. Растёт онкотическое давление <b>межклеточной жидкости</b>.</p></div>
+</section>
+
+<section id="q14">
+  <div class="sec-head"><span class="qn">V.14</span><h2>Отличительные признаки транссудата от экссудата при воспалении?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определения · Адо, стр. PDF 218; ответы ЧГУ (отёки)</span>
+    <p><b>Экссудат</b> — жидкость, накапливающаяся во внесосудистом пространстве при воспалении в результате повышения проницаемости микроциркуляторных сосудов; содержит, помимо воды и солей, все компоненты крови — белки, лейкоциты и даже эритроциты (Адо). <b>Транссудат</b> — бедная белком (менее 2 %) и клеточными элементами отёчная жидкость; образуется при невоспалительном отёке (otvety).</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Транссудат — «вода, просочившаяся через целую стенку» (из-за напора или нехватки белка в крови): прозрачная, почти без белка и клеток. Экссудат — «вода через дырявую стенку»: с белком, лейкоцитами, иногда гноем или кровью, мутная, сворачивается.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Признак</th><th>Экссудат</th><th>Транссудат</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Причина</td><td>воспаление, ↑ проницаемости</td><td>↑ гидростатического или ↓ онкотического давления крови</td></tr>
+      <tr><td class="lv">Белок</td><td>много (серозный 3–5 %; &gt; 30 г/л <span class="uncheck">⚠ не проверено</span>)</td><td>менее 2 %</td></tr>
+      <tr><td class="lv">Плотность</td><td>серозный 1015–1020 и выше</td><td>ниже 1015 <span class="uncheck">⚠ не проверено</span></td></tr>
+      <tr><td class="lv">Клетки</td><td>много лейкоцитов, могут быть эритроциты</td><td>мало</td></tr>
+      <tr><td class="lv">Вид</td><td>мутный (кроме серозного), может свёртываться (фибрин)</td><td>прозрачный, светло-жёлтый <span class="uncheck">⚠ не проверено</span></td></tr>
+      <tr><td class="lv">Проба Ривальта</td><td>положительная (белое облачко)</td><td>отрицательная <span class="uncheck">⚠ не проверено</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">белок и плотность серозного — otvety, вопрос 31; транссудат &lt; 2 % — otvety (отёки); &gt; 30 г/л, проба Ривальта, вид — учебные материалы по выдержкам из поиска, без точного источника; отличие гнойного экссудата от транссудата — тесты «Воспаление», в. 13 (ключ «1, 2, 4»); клинически — критерии Лайта (белок выпот/сыворотка &gt; 0,5, ЛДГ &gt; 0,6) — WikEM</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как выполняют пробу Ривальта?</summary><div class="a"><p>Воду в цилиндре подкисляют уксусной кислотой и добавляют каплю жидкости: за каплей экссудата тянется белое облачко, похожее на дым (учебное пособие по выдержке).</p></div></details>
+  <details class="more"><summary>Какой экссудат ближе всего к транссудату?</summary><div class="a"><p>Серозный (otvety, вопрос 31).</p></div></details>
+  <div class="note"><p><b>Связь с терапией и хирургией:</b> плевральная пункция — по анализу жидкости решают, воспаление это (пневмония, туберкулёз, опухоль) или застой (сердечная недостаточность, цирроз, нефротический синдром).</p></div>
+</section>
+
+<section id="q15">
+  <div class="sec-head"><span class="qn">V.15</span><h2>Какие физико-химические изменения характерны для участка острого воспаления?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Альтернативные [альтеративные] явления при воспалении включают тканевой распад и усиленный обмен веществ, приводящие к ряду физико-химических изменений в воспалённой ткани: <b>ацидоз, гиперосмия, гиперонкия</b>.</p>
+  </div>
+  <p>Кроме того — <b>гипериония</b> (↑ K⁺, Na⁺, Ca²⁺, Cl⁻) и <b>дизиония</b> — нарушение соотношения K⁺ и Ca²⁺ из-за опережающего роста внеклеточного калия (otvety, вопрос 39); повышение дисперсности коллоидов.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Из разрушенных клеток в ткань «высыпается» содержимое: кислоты (ацидоз), соли (гиперосмия — «пересоленная» ткань), обломки белков (гиперонкия — больше мелких белковых молекул). Ткань становится кислой, солёной и «тянет воду» — отсюда отёк и боль.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">причина</span><b>Распад ткани + «пожар обмена»</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">H⁺</span><b>Ацидоз</b><span class="h">лактат, кетоны, жирные кислоты (V.23)</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">ионы и молекулы</span><b>Гиперосмия</b><span class="h">K⁺, Na⁺, Ca²⁺, Cl⁻ + мелкие молекулы</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">белки</span><b>Гиперонкия</b><span class="h">расщепление белков, выход белков плазмы</span></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Показатель</th><th>Норма</th><th>Воспаление</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">pH ткани</td><td>7,34</td><td>до 5,6 и ниже; острое гнойное 6,5–5,39; хроническое 7,1–6,6</td></tr>
+      <tr><td class="lv">Депрессия межклеточной жидкости</td><td>−0,62° (8 атм)</td><td>гнойное: −0,80° (19 атм — <span class="uncheck">⚠ не проверено</span>, не согласуется с −0,80°, см. V.22)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">otvety, вопрос 39 <span class="uncheck">⚠ не проверено</span> по учебнику; в методичке и Адо этих чисел нет</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какая теория воспаления делает главными эти изменения?</summary><div class="a"><p>Физико-химическая теория Шаде: главное — накопление H⁺ и других ионов (гипериония) (otvety, вопрос 35).</p></div></details>
+  <details class="more"><summary>Как эти изменения связаны с признаками воспаления?</summary><div class="a"><p>Гиперосмия и гиперонкия — факторы экссудации и отёка (припухлость); H⁺ и K⁺ — боль (V.11, V.13).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать «алкалоз» или «гипоонкию» — в тестах это неверные варианты. В очаге — <b>ацидоз, гиперосмия, гиперонкия, ионный дисбаланс</b> (тесты, тема «Воспаление», в. 16). <b>Связь с фармакологией:</b> в кислой среде гнойного очага плохо работают местные анестетики <span class="uncheck">⚠ не проверено</span>.</p></div>
+</section>
+
+<section id="q16">
+  <div class="sec-head"><span class="qn">V.16</span><h2>Что является медиаторами воспаления, вызывающими увеличение проницаемости сосудов при воспалении?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Повышение проницаемости капиллярной стенки вызывают медиаторы воспаления: <b>гистамин, серотонин, брадикинин, компоненты комплемента C5a, C3a, лейкотриены C4 и D4</b>. Лейкотриены (LTC4, LTD4, LTE4) повышают проницаемость сосудов путём прямой контракции эндотелиальных клеток.</p>
+  </div>
+  <p>Также: <b>фактор активации тромбоцитов</b> (Адо, PDF 231), <b>C4a</b> (анафилатоксин — Адо, PDF 230). <b>Простагландины</b> сами не повышают проницаемость, но, будучи сильными вазодилататорами, усиливают экссудацию (методичка).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Эндотелиальные клетки сосуда — плитки, плотно прилегающие друг к другу. Медиаторы «проницаемости» заставляют каждую плитку сжаться и округлиться — между ними появляются щели, через которые выходит белок.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Медиатор → рецептор эндотелия</b><span class="h">например, H1-рецептор для гистамина</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Сокращение актина и миозина эндотелиоцита</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>Межэндотелиальные щели</b><span class="h">в посткапиллярных венулах</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>Выход белка → экссудат</b></div>
+  </div>
+  <p class="src">Адо, PDF 217, 229; otvety, вопрос 31</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что тормозит рост проницаемости?</summary><div class="a"><p>Норадреналин и адреналин (методичка); липоксины снижают вызываемое лейкотриенами увеличение проницаемости (Адо, PDF 231); глюкокортикоиды (V.21).</p></div></details>
+  <details class="more"><summary>Что вызывает стойкое (замедленное) повышение проницаемости?</summary><div class="a"><p>Повреждение стенки венул и капилляров лизосомальными ферментами и активными формами кислорода лейкоцитов (otvety, вопрос 31).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> включить простагландины в «медиаторы проницаемости». По методичке они <b>сами проницаемость не повышают</b>, а усиливают экссудацию через расширение сосудов.</p></div>
+</section>
+
+<section id="q17">
+  <div class="sec-head"><span class="qn">V.17</span><h2>Какие медиаторы воспаления являются клеточными и плазменными?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Классификация · методичка кафедры</span>
+    <p>Медиаторы воспаления по происхождению делят на <b>гуморальные</b> (образующиеся в жидких средах — плазме крови и тканевой жидкости и <b>клеточные</b>) [так в оригинале]. <i>Гуморальные медиаторы</i> (кинины, калликреины, компоненты C3 и C5 комплемента, XII фактор Хагемана) повышают проницаемость микроциркуляторного русла, активируют хемотаксис полиморфноядерных лейкоцитов, фагоцитоз и внутрисосудистую коагуляцию.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Клеточные</th><th>Клетка-источник</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Гистамин</td><td>тучные клетки, базофилы</td></tr>
+      <tr><td class="lv">Серотонин</td><td>тромбоциты (у человека)</td></tr>
+      <tr><td class="lv">Простагландины, тромбоксан, простациклин</td><td>моноциты, макрофаги; тромбоксан — тромбоциты; простациклин — эндотелий</td></tr>
+      <tr><td class="lv">Лейкотриены</td><td>мембраны тромбоцитов, базофилов, эндотелиоцитов (методичка); лейкоциты, тучные клетки (Адо)</td></tr>
+      <tr><td class="lv">Лизосомальные ферменты (эластаза, катепсин G, коллагеназы)</td><td>гранулы нейтрофилов</td></tr>
+      <tr><td class="lv">ФАТ</td><td>гранулоциты, моноциты, макрофаги, эндотелий</td></tr>
+      <tr><td class="lv">Цитокины ИЛ-1, ФНО-α, ИЛ-8</td><td>моноциты, макрофаги; ИЛ-8 — лейкоциты и эндотелий (Адо, PDF 232)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">методичка; Адо, PDF 228–231</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Плазменные медиаторы — «заготовки», которые всегда плавают в крови в неактивном виде (как огнетушители в коридоре) и включаются цепной реакцией. Клеточные — то, что выпускают сами клетки на месте (как сигнальные ракеты у пожарных).</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Плазменный каскад (методичка): <b>фактор Хагемана (XII)</b> активируется → активирует <b>калликреин</b> плазмы (I) и тканей (II) → калликреин расщепляет <b>кининоген</b> (α₂-глобулин) → <b>брадикинин</b>; калликреин, плазмин, тромбин, протеазы активируют <b>комплемент</b> → C3a, C5a (анафилатоксины).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какими путями активируется комплемент?</summary><div class="a"><p>Классическим (комплекс антиген–антитело), альтернативным (липополисахариды микробов) и через фактор Хагемана и плазмин («Краткий курс», лекция IX).</p></div></details>
+  <details class="more"><summary>Что такое С-реактивный белок с точки зрения медиаторов?</summary><div class="a"><p>Белок острой фазы: по методичке активирует цитолитическую активность Т-киллеров, замедляет агрегацию тромбоцитов; по Адо — опсонин (PDF 223).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> отнести гистамин к плазменным (он есть в крови — в базофилах, но это клеточный медиатор). Плазменные — те, что образуются из <b>белков плазмы</b>: кинины, комплемент, факторы свёртывания и фибринолиза.</p></div>
+</section>
+
+<section id="q18">
+  <div class="sec-head"><span class="qn">V.18</span><h2>Механизмы действия медиаторов воспаления.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Действие медиаторов · методичка кафедры, сокращённо</span>
+    <p><b>Брадикинин</b> расширяет сосуды, увеличивает сосудистую проницаемость, вызывает ощущение жгучей боли. <b>Калликреин</b> вызывает хемотаксис лейкоцитов, активирует фактор Хагемана. <b>C5a и C3a</b> — «являются медиаторами острого воспаления и анафилатоксинами» (повышают проницаемость, вызывают дегрануляцию тучных клеток). <b>Простагландины</b> сами не повышают проницаемость, но, будучи сильными вазодилататорами, усиливают экссудацию; <b>Pg E2</b> повышает чувствительность болевых окончаний к брадикинину и гистамину и «является сильным жаровоповышающим [= пирогенным] агентом. Pg E потенцирует развитие отека, а Pg F альфа 1 [по смыслу PgF2α] ослабляет». <b>Лейкотриены</b> — хемотаксис, сокращение гладкой мускулатуры, сосудосуживающее действие; LTC4, LTD4, LTE4 повышают проницаемость. <b>Простациклин</b> тормозит агрегацию тромбоцитов, расширяет сосуды; <b>тромбоксан</b> — агрегация и вазоконстрикция. <b>Лизосомальные ферменты</b> — противомикробная защита. <b>СРБ</b> активирует Т-киллеры, замедляет агрегацию тромбоцитов. <b>Ацетилхолин</b> расширяет сосуды; <b>норадреналин и адреналин</b> тормозят рост проницаемости.</p>
+  </div>
+  <p class="src">в методичке «Pg F альфа 1» и «жаровоповышающим» — так в оригинале</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>У каждого медиатора свой «набор команд», и почти все — комбинации пяти глаголов: <b>расширить</b> сосуды, <b>продырявить</b> их стенку, <b>позвать</b> лейкоциты, <b>сделать больно</b>, <b>поднять температуру</b>. Гистамин — «расширить и продырявить», брадикинин — «расширить, продырявить, больно», лейкотриен B4 — «позвать», PgE2 — «больнее и жарче».</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Медиатор</th><th>Сосуды</th><th>Проницаемость</th><th>Лейкоциты</th><th>Боль / температура</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Гистамин</td><td>расширение (H1)</td><td>↑</td><td>—</td><td>боль</td></tr>
+      <tr><td class="lv">Серотонин</td><td>сокращение вен</td><td>↑</td><td>—</td><td>боль</td></tr>
+      <tr><td class="lv">Брадикинин</td><td>расширение</td><td>↑</td><td>—</td><td>жгучая боль</td></tr>
+      <tr><td class="lv">C3a, C5a</td><td>—</td><td>↑, дегрануляция тучных клеток</td><td>C5a — хемоаттрактант</td><td>—</td></tr>
+      <tr><td class="lv">PgE2</td><td>расширение</td><td>не сама, ↑ экссудации</td><td>—</td><td>↑ боли, лихорадка</td></tr>
+      <tr><td class="lv">LTB4</td><td>—</td><td>—</td><td>мощный хемоаттрактант</td><td>—</td></tr>
+      <tr><td class="lv">LTC4, D4, E4</td><td>сужение, спазм гладких мышц</td><td>↑</td><td>—</td><td>—</td></tr>
+      <tr><td class="lv">ФАТ</td><td>—</td><td>↑</td><td>хемоаттрактант; агрегация тромбоцитов</td><td>—</td></tr>
+      <tr><td class="lv">ИЛ-1, ФНО-α</td><td>—</td><td>—</td><td>молекулы адгезии на эндотелии</td><td>лихорадка, острая фаза</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">методичка; Адо, PDF 229–232</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как гистамин действует на эндотелий?</summary><div class="a"><p>Через H1-рецепторы: расширение микрососудов и рост проницаемости (Адо, PDF 229); гистамин и брадикинин заставляют эндотелий выделять NO — артериальная гиперемия (Адо, PDF 216).</p></div></details>
+  <details class="more"><summary>Что такое МРС-А?</summary><div class="a"><p>Медленно реагирующая субстанция анафилаксии — лейкотриены C4, D4, E4: сильные спазмогены гладкой мускулатуры сосудов, бронхов, ЖКТ (Адо, PDF 231) — роль в бронхиальной астме.</p></div></details>
+  <div class="note"><p><b>Связь с фармакологией:</b> аспирин блокирует тромбоксан A2 (антиагрегант) и PgE2 (жаропонижающее, обезболивающее) — оба из циклооксигеназного пути; монтелукаст — блокатор рецепторов лейкотриенов при астме <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div>
+</section>
+
+<section id="q19">
+  <div class="sec-head"><span class="qn">V.19</span><h2>Какие факторы обуславливают выход плазменных белков из микроциркуляторных сосудов в очаг воспаления?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · Адо, стр. PDF 217</span>
+    <p>Собственно экссудация обусловлена прежде всего <b>увеличением проницаемости стенки микроциркуляторных сосудов для белка</b>, что происходит в результате существенных изменений сосудистого эндотелия. Уже в самом начале воспаления между эндотелиальными клетками посткапиллярных венул, а затем и других микроциркуляторных сосудов возникают <b>широкие щели</b>, легко пропускающие молекулы белка. Есть доказательства того, что образование таких щелей — результат <b>активного сокращения (ретракции) эндотелиальных клеток</b>, вызываемого медиаторами воспаления (гистамин, брадикинин и др.).</p>
+  </div>
+  <ul class="facts">
+    <li>Медиаторы проницаемости (V.16) — немедленная фаза.</li>
+    <li>Повреждение эндотелия и базальной мембраны лизосомальными ферментами и активными формами O₂ лейкоцитов — замедленная, стойкая фаза (otvety, вопрос 31); при гибели эндотелия и разрушении базальной мембраны выходят и эритроциты — геморрагический экссудат (Адо, PDF 219).</li>
+    <li>Повышение фильтрационного давления в сосудах очага вследствие гиперемии (студенческие ответы, вопрос 31; «Краткий курс», лекция IX); методичка говорит о выходе жидкой части крови.</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Белки — «крупные посылки», им нужны широкие «ворота». Эти ворота открывают медиаторы, заставляя клетки стенки сосуда сжаться. Чем сильнее повреждение, тем крупнее «посылки» проходят: сначала альбумин, потом фибриноген, потом эритроциты.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Медиаторы</b><span class="h">гистамин, брадикинин, C3a, C5a, лейкотриены, ФАТ</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">2</span><b>Ретракция эндотелия → щели</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Альбумин → глобулины → фибриноген</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">4</span><b>Повреждение стенки лейкоцитами</b><span class="h">стойкая проницаемость, эритроциты</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какой белок выходит первым?</summary><div class="a"><p>Прежде всего альбумины (Адо, PDF 217) — самые мелкие; фибриноген — при сильном повреждении эндотелия (фибринозный экссудат).</p></div></details>
+  <details class="more"><summary>Как выход белка меняет давление?</summary><div class="a"><p>Онкотическое давление крови падает (норма 23–28 мм рт. ст.), интерстиция растёт (норма 5–6) — снижается градиент, удерживающий воду в сосудах (методичка; Адо, PDF 217).</p></div></details>
+  <div class="note"><p><b>Связь с клиникой:</b> гипоальбуминемия при обширных ожогах — потеря белка с экссудатом.</p></div>
+</section>
+
+<section id="q20">
+  <div class="sec-head"><span class="qn">V.20</span><h2>Какие клетки являются главными источниками гистамина в очаге острого воспаления?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · Адо, стр. PDF 228–229</span>
+    <p>Главный источник гистамина при воспалении у человека — <b>тучные клетки тканей и базофилы крови</b>. … Значительная часть тучных клеток сосредоточена в коже, слизистых оболочках дыхательных путей, желудочно-кишечного тракта, мочеполовых органов, где они располагаются вокруг мелких кровеносных и лимфатических сосудов и в местах скопления нервных окончаний.</p>
+  </div>
+  <p>Гистамин — моноамин, продукт декарбоксилирования гистидина; <b>преформированный</b> медиатор, хранится в гранулах и выбрасывается при дегрануляции «по существу одновременно с возникновением повреждения» — гистамин «запускает» острый воспалительный ответ (Адо, PDF 228–229).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Тучные клетки — «сторожа с сигнальными шашками», дежурящие вдоль сосудов и нервов. Любой удар — и они разом высыпают гранулы гистамина: сосуды расширяются, кожа краснеет и зудит. Комариный укус — их работа.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">стимул</span><b>Повреждение, C3a/C5a, вещество Р, IgE + аллерген</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">дегрануляция</span><b>Тучная клетка / базофил</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">H1-рецепторы</span><b>Расширение сосудов, ↑ проницаемости, боль, зуд</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что вызывает дегрануляцию тучных клеток при воспалении?</summary><div class="a"><p>Повреждающие стимулы, анафилатоксины C3a, C5a (методичка), вазоактивные пептиды аксон-рефлекса (Адо, PDF 217).</p></div></details>
+  <details class="more"><summary>Как гистамин инактивируется?</summary><div class="a"><p>Гистаминазой (диаминооксидаза) — в тестах гистаминаза не относится к провоспалительным медиаторам (тесты, тема «Воспаление», в. 5).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать источником гистамина нейтрофилы или тромбоциты. Тромбоциты — источник <b>серотонина</b> (Адо, PDF 229). <b>Связь с аллергологией:</b> анафилаксия (тип I) — массивная дегрануляция тучных клеток через IgE.</p></div>
+</section>
+
+<section id="q21">
+  <div class="sec-head"><span class="qn">V.21</span><h2>Чем обусловлено противовоспалительное действие глюкокортикоидов?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Механизмы · Адо, стр. PDF 402–403</span>
+    <p>«Механизмы их антивоспалительного действия многообразны и реализуются через изменение регуляции активности многих генов, кодирующих образование провоспалительных цитокинов, ферментов и других продуктов, участвующих в развитии воспаления». Глюкокортикоиды: усиливают экспрессию генов ферментов, угнетающих воспаление (<b>липокортин I</b>, нейтральная эндопептидаза — разрушает тахикинины, лейкоцитарный ингибитор протеаз); угнетают гены провоспалительных <b>цитокинов</b> (интерлейкины 1—6, ГМ-КСФ, ФНО-α), ферментов (<b>синтетаза оксида азота, индуцибельная циклооксигеназа-2</b>), молекул адгезии (ICAM-1) и рецепторов для вещества Р.</p>
+    <p>Что липокортин ингибирует <b>фосфолипазу A₂</b> и так подавляет образование простагландинов и лейкотриенов, — по фармакологическим источникам (РЛС, «Глюкокортикоиды»); в Адо мишень липокортина не названа <span class="uncheck">⚠ не проверено</span>.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Стабилизация мембран лизосом</b> — меньше вторичной альтерации («Краткий курс», лекция XIV; Адо, PDF 319).</li>
+    <li>«стабилизируют мембраны - уменьшают их проницаемость» («Краткий курс», лекция IV) → ↓ экссудации и отёка.</li>
+    <li>↓ эмиграции и хемотаксиса лейкоцитов.</li>
+    <li>↓ ЦОГ-2 и NO-синтетазы (Адо, PDF 403); ↓ фосфолипазы A₂ → ↓ простагландинов, лейкотриенов, ФАТ <span class="uncheck">⚠ не проверено</span>.</li>
+    <li>↓ провоспалительных цитокинов (ИЛ-1—6, ФНО-α) и ICAM-1 → ↓ адгезии и эмиграции (Адо, PDF 403).</li>
+    <li>↓ пролиферации соединительной ткани и выработки антител (Адо, PDF 116).</li>
+    <li>в тестах глюкокортикоиды не входят в число стимуляторов пролиферации (тема «Воспаление», в. 18, ключ «2, 4, 6»).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Глюкокортикоиды «перекрывают кран в самом начале»: фосфолипаза A₂ — первый фермент, который режет мембрану на сырьё для простагландинов и лейкотриенов. Нет сырья — нет большинства медиаторов. Плюс они «запирают» лизосомы и «держат» лейкоциты в сосудах.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Глюкокортикоид → внутриклеточный рецептор → ядро</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>↑ липокортина I; ↓ генов цитокинов, ЦОГ-2, iNOS, ICAM-1</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>⊣ фосфолипаза A₂</b><span class="h">нет арахидоновой кислоты (фармакология)</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>↓ ПГ, ЛТ, ФАТ; ↓ цитокинов</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">итог</span><b>↓ экссудации, эмиграции, альтерации, пролиферации</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Чем глюкокортикоиды отличаются от НПВС по точке действия?</summary><div class="a"><p>НПВС блокируют циклооксигеназу — только простагландины и тромбоксан; глюкокортикоиды угнетают синтез индуцибельной ЦОГ-2 (Адо, PDF 403), а через липокортин — фосфолипазу A₂ выше по каскаду (фармакология), плюс цитокины, молекулы адгезии и лизосомы.</p></div></details>
+  <details class="more"><summary>Почему при длительном приёме глюкокортикоидов плохо заживают раны и легко генерализуется инфекция?</summary><div class="a"><p>Подавлены эмиграция, фагоцитоз, пролиферация фибробластов — а это защитные и восстановительные звенья воспаления (Адо, PDF 234: нарушение любого звена воспаления повышает риск генерализации инфекции).</p></div></details>
+  <div class="note"><p><b>Источники:</b> генный механизм (рецептор в цитоплазме → ядро → гены) и липокортин I — Адо, PDF 402–403; мишень липокортина (фосфолипаза A₂) — фармакология. <b>Связь с клиникой:</b> «стероидная язва», плохое заживление, обострение туберкулёза на фоне терапии.</p></div>
+</section>
+
+<section id="q22">
+  <div class="sec-head"><span class="qn">V.22</span><h2>Чем обусловлено повышение осмотического и онкотического давлений в воспаленной ткани?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Увеличение <b>осмотического давления</b> интерстициальной жидкости обусловлено накоплением в интерстиции осмотически активных продуктов распада тканей (ионов Na, K, Ca²⁺, Cl⁻ и т. др.). <b>Онкотическое давление</b> интерстициальной жидкости растёт (в N 5–6 мм рт. ст.), когда белки крови начинают просачиваться из сосудов во внесосудистое пространство.</p>
+  </div>
+  <ul class="facts">
+    <li>Гиперосмия: ионы из разрушенных клеток + усиленная диссоциация солей в кислой среде + расщепление крупных молекул на множество мелких (otvety, вопрос 39).</li>
+    <li>Гиперонкия: выход белков плазмы + расщепление белков ткани до полипептидов и аминокислот, рост дисперсности коллоидов и их способности задерживать воду (otvety, вопрос 39; «Краткий курс», лекция IX).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Осмотическое давление создают <b>мелкие частицы</b> (ионы, обломки молекул) — их стало много, потому что клетки разрушились, а крупные молекулы распались. Онкотическое — <b>белки</b>: они пришли из крови через расширенные щели и образовались из распада тканевых белков. И те и другие «притягивают» воду.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">альтерация</span><b>Распад клеток</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">осмотическое</span><b>Ионы K⁺, Na⁺, Ca²⁺, Cl⁻ + мелкие молекулы</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">экссудация</span><b>Выход белков плазмы</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">онкотическое</span><b>Белки и полипептиды в интерстиции</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">итог</span><b>Вода тянется в ткань — отёк</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Насколько растёт осмотическое давление при гнойном воспалении?</summary><div class="a"><p>С 8 до 19 атм (депрессия с −0,62° до −0,80°) — otvety, вопрос 39 <span class="uncheck">⚠ не проверено</span>. Эти числа не согласуются между собой: −0,80° соответствует примерно 11 атм, а 19 атм — около −1,4° (расчёт конспекта). На зачёте лучше не называть «19 атм».</p></div></details>
+  <details class="more"><summary>Онкотическое давление крови при воспалении — растёт или падает?</summary><div class="a"><p>Падает — белки уходят из сосудов (методичка).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> перепутать осмотическое (ионы, мелкие молекулы) и онкотическое (белки) давление. <b>Связь с хирургией:</b> гипертонические растворы в повязках «вытягивают» экссудат из раны по тому же закону осмоса.</p></div>
+</section>
+
+<section id="q23">
+  <div class="sec-head"><span class="qn">V.23</span><h2>Чем обусловлен ацидоз в очаге воспаления?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка; «Краткий курс», лекция IX; ответы ЧГУ, вопрос 39</span>
+    <p>Методичка: альтеративные явления — тканевой распад и усиленный обмен веществ — приводят к ацидозу. «Краткий курс»: усиливаются гликолиз, липолиз и протеолиз… нарушения углеводного обмена ведут к накоплению <b>молочной кислоты</b>; гипериония H⁺ — в связи с диссоциацией большого количества кислот; развивается <b>метаболический ацидоз</b>. otvety: в ткани накапливаются недоокисленные продукты углеводного обмена — <b>молочная и трикарбоновые кислоты</b>, а также <b>жирные кислоты, кетоновые тела, полипептиды, аминокислоты, нуклеотиды</b>.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>В очаге «тесно и душно»: кровь застаивается, кислорода мало, а лейкоциты и клетки работают на пределе — жгут глюкозу без кислорода и оставляют молочную кислоту. Плюс из разрушенных клеток вываливаются жирные кислоты и обломки белков. Буферы сначала справляются, но когда кровоток замедляется, кислоту некому уносить — ацидоз нарастает.</p></div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li>Сначала усиливаются и окисление, и гликолиз — растёт потребление O₂.</li>
+    <li>Лейкоциты расщепляют углеводы преимущественно анаэробно; митохондрии повреждены → окисление падает, гликолиз нарастает, дыхательный коэффициент снижается.</li>
+    <li>Накапливаются лактат, трикарбоновые кислоты, жирные кислоты, кетоны, аминокислоты.</li>
+    <li><span class="kv c">компенсация</span> Сначала ацидоз компенсирован тканевыми буферами и ускоренным крово- и лимфотоком; <span class="kv d">повреждение</span> при их истощении и замедлении кровотока — некомпенсированный.</li>
+  </ol>
+  <p class="src">otvety, вопрос 39</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какое значение имеет ацидоз?</summary><div class="a"><p>Способствует повышению проницаемости, создаёт условия для действия лизосомальных ферментов (гликозидаз) (otvety, вопрос 39); H⁺ — фактор боли (V.11) и хемотаксиса (методичка: ионы H⁺ среди хемотаксических веществ).</p></div></details>
+  <details class="more"><summary>Где ацидоз выражен сильнее — при остром или хроническом воспалении?</summary><div class="a"><p>При остром: острое гнойное pH 6,5–5,39, хроническое 7,1–6,6 (otvety, вопрос 39 <span class="uncheck">⚠ не проверено</span>).</p></div></details>
+  <div class="note"><p><b>Связь с II разделом:</b> тот же механизм накопления лактата при гипоксии (II.11) — в очаге воспаления это местная тканевая гипоксия. <b>Связь с медкатом:</b> лактат крови — маркёр тяжести при шоке.</p></div>
+</section>
+
+<section id="q24">
+  <div class="sec-head"><span class="qn">V.24</span><h2>Пролиферация. Механизмы пролиферации.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры</span>
+    <p>Под воспалительной <b>пролиферацией</b> понимают размножение местных клеточных элементов в очаге воспаления. Важнейшим условием пролиферации является эффективность очищения очага воспаления от микроорганизмов, продуктов альтерации тканей, погибших лейкоцитов. Ведущая роль в этом принадлежит <b>макрофагам</b>. Пролиферация происходит главным образом за счёт мезенхимальных элементов стромы, а также элементов паренхимы органов. В ней участвуют адвентициальные, эндотелиальные клетки, фибробласты, фиброциты. Основными клеточными элементами, ответственными за репаративные процессы в очаге воспаления, являются <b>фибробласты</b>. Они продуцируют основное межклеточное вещество — гликозаминогликаны, а также синтезируют и секретируют волокнистые структуры — коллаген, эластин, ретикулин. Коллаген является главным компонентом рубцовой ткани. Пролиферация сменяется <b>регенерацией</b>, она состоит в разрастании соединительной ткани, новообразовании кровеносных сосудов и в размножении специфических элементов ткани.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>После того как пожар потушен и мусор вывезен (макрофаги «убрали» очаг), приходят строители — фибробласты. Они «замешивают раствор» (межклеточное вещество) и «армируют» его волокнами коллагена. Новые капилляры подводят «воду и электричество». Если ткань умеет восстанавливаться (кожа, печень) — всё как было, если нет — остаётся рубец.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">условие</span><b>Очищение очага</b><span class="h">макрофаги</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">сигнал</span><b>Факторы роста от макрофагов</b><span class="h">для фибробластов, ангиогенез</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">клетки</span><b>Фибробласты, эндотелий, адвентициальные клетки</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">продукт</span><b>ГАГ + коллаген, эластин, ретикулин</b><span class="h">грануляционная ткань</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">исход</span><b>Регенерация или рубец</b></div>
+  </div>
+  <p>Пролиферация — <span class="kv c">компенсация</span>: восстанавливает дефект ткани; избыточное разрастание соединительной ткани с рубцом на месте паренхимы — уже <span class="kv d">повреждение</span> (вывод конспекта).</p>
+  <p class="src">методичка; факторы роста и ангиогенез — Адо, PDF 227; у животных без мононуклеарных фагоцитов раны не заживают</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что стимулирует и что тормозит пролиферацию?</summary><div class="a"><p>Стимулируют факторы роста макрофагов (Адо, PDF 227), а по тестам — ингибиторы кейлонов, цГМФ, ИЛ-2 («Воспаление», в. 18, ключ «2, 4, 6»); кейлоны, цАМФ и глюкокортикоиды в число стимуляторов не входят (тест говорит «не стимулируют», а не «тормозят»).</p></div></details>
+  <details class="more"><summary>Когда воспаление разрешается полностью, а когда — рубцом?</summary><div class="a"><p>Полностью — при небольших очагах в тканях с высокой регенерацией (кожа, слизистые, паренхима печени, крупозная пневмония); при неполном разрешении — рубец (Адо, PDF 233).</p></div></details>
+  <div class="note"><p><b>Связь с хирургией:</b> заживление раны первичным и вторичным натяжением — та же пролиферация; избыток фибрина в очаге способствует избыточному разрастанию соединительной ткани (Адо, PDF 219) — спаечная болезнь, келоид.</p></div>
+</section>
+
+<section id="quiz">
+  <div class="sec-head"><h2>Самопроверка: ответ одной фразой</h2></div>
+  <div class="quiz-bar"><p>Сначала ответьте вслух, потом откройте.</p><button type="button" id="toggle-all">Открыть все</button></div>
+  <details class="q"><summary>V.1. Определение воспаления по методичке, общие и местные признаки?</summary><div class="a"><p>Местная реакция организма на повреждение с альтерацией, нарушением микроциркуляции, экссудацией, эмиграцией и пролиферацией; местные — краснота, припухлость, жар, боль, нарушение функции; общие — лейкоцитоз, лихорадка, ↑ СОЭ, ↑ кортикостероидов и катехоламинов, белки острой фазы, ↑ комплемента.</p></div></details>
+  <details class="q"><summary>V.2. Первичная и вторичная альтерация?</summary><div class="a"><p>Первичная — в зоне действия агента с выходом медиаторов; вторичная — от диффузии медиаторов и ферментов за её пределы, необходимый компонент для отграничения флогогена.</p></div></details>
+  <details class="q"><summary>V.3. Стадии нарушения микроциркуляции?</summary><div class="a"><p>Преходящий спазм (секунды), артериальная гиперемия (10–30 мин), венозная гиперемия, стаз (с предстатическим маятникообразным движением).</p></div></details>
+  <details class="q"><summary>V.4. Механизм образования экссудата?</summary><div class="a"><p>↑ давления в венозной части капилляров, ↑ проницаемости от медиаторов, выход белка: онкотическое крови падает, интерстиция растёт; ↑ осмотического давления ткани.</p></div></details>
+  <details class="q"><summary>V.5. Виды экссудатов?</summary><div class="a"><p>Серозный, катаральный, фибринозный (дифтеритический и крупозный), гнойный, гнилостный, геморрагический.</p></div></details>
+  <details class="q"><summary>V.6. Механизм эмиграции?</summary><div class="a"><p>Краевое стояние, адгезия (селектины, интегрины), псевдоподии в межэндотелиальные щели, растворение базальной мембраны протеиназами, хемотаксис по градиенту; сначала нейтрофилы, потом моноциты и лимфоциты.</p></div></details>
+  <details class="q"><summary>V.7. Медиаторы воспаления и их деление?</summary><div class="a"><p>Эндогенные вещества, регулирующие ход воспаления; гуморальные (кинины, калликреины, комплемент, фактор Хагемана) и клеточные (гистамин, серотонин, эйкозаноиды, ферменты лизосом, ФАТ, цитокины); преформированные и новообразующиеся.</p></div></details>
+  <details class="q"><summary>V.8. Фагоцитарный показатель и фагоцитарное число?</summary><div class="a"><p>По «Краткому курсу»: показатель — процент фагоцитирующих из 100 клеток; число — объекты, захваченные 100 фагоцитами; индекс — объекты на один фагоцит (в лабораториях его часто зовут фагоцитарным числом).</p></div></details>
+  <details class="q"><summary>V.9. Стадии фагоцитоза и его нарушения?</summary><div class="a"><p>Приближение, прилипание (опсонины), поглощение (фагосома), разрушение (кислородзависимое и независимое); нарушения — незавершённый фагоцитоз, дефекты адгезии, хроническая гранулёматозная болезнь.</p></div></details>
+  <details class="q"><summary>V.10. Про- и противовоспалительные гормоны?</summary><div class="a"><p>Противовоспалительные — глюкокортикоиды, провоспалительные — минералокортикоиды («Краткий курс», лекция IV); по схеме Селье ещё АКТГ (противо-) и СТГ (про-).</p></div></details>
+  <details class="q"><summary>V.11. Факторы боли при воспалении?</summary><div class="a"><p>PgE, гистамин, H⁺- и K⁺-гипериония, кинины, механическое сдавление нервных окончаний.</p></div></details>
+  <details class="q"><summary>V.12. Механизмы экссудации?</summary><div class="a"><p>↑ проницаемости (ведущий), ↑ фильтрационного давления, ↑ осмотического и онкотического давления ткани.</p></div></details>
+  <details class="q"><summary>V.13. Факторы отёка в очаге?</summary><div class="a"><p>↑ проницаемости, ↑ давления в венозной части капилляров и венул, ↑ онкотического и осмотического давления межклеточной жидкости, затруднение лимфооттока.</p></div></details>
+  <details class="q"><summary>V.14. Транссудат и экссудат — отличия?</summary><div class="a"><p>Экссудат — воспалительный, белка больше (серозный 3–5 %), много клеток, мутный, Ривальта +; транссудат — невоспалительный, белка менее 2 %, мало клеток, прозрачный.</p></div></details>
+  <details class="q"><summary>V.15. Физико-химические изменения?</summary><div class="a"><p>Ацидоз, гиперосмия, гиперонкия, гипериония и дизиония.</p></div></details>
+  <details class="q"><summary>V.16. Медиаторы проницаемости?</summary><div class="a"><p>Гистамин, серотонин, брадикинин, C5a, C3a, лейкотриены C4 и D4 (и E4), ФАТ.</p></div></details>
+  <details class="q"><summary>V.17. Клеточные и плазменные медиаторы?</summary><div class="a"><p>Плазменные — кинины, калликреины, комплемент, фактор Хагемана; клеточные — гистамин, серотонин, эйкозаноиды, лизосомальные ферменты, ФАТ, цитокины.</p></div></details>
+  <details class="q"><summary>V.18. Механизмы действия медиаторов?</summary><div class="a"><p>Расширение сосудов, ↑ проницаемости, хемотаксис, боль, лихорадка: например, брадикинин — расширение, проницаемость, жгучая боль; PgE2 — экссудация, ↑ боли, жар; LTB4 — хемотаксис.</p></div></details>
+  <details class="q"><summary>V.19. Что обуславливает выход белков?</summary><div class="a"><p>↑ проницаемости для белка: ретракция эндотелия посткапиллярных венул под действием медиаторов → щели; затем повреждение стенки ферментами лейкоцитов.</p></div></details>
+  <details class="q"><summary>V.20. Главные источники гистамина?</summary><div class="a"><p>Тучные клетки тканей и базофилы крови.</p></div></details>
+  <details class="q"><summary>V.21. Чем обусловлено противовоспалительное действие глюкокортикоидов?</summary><div class="a"><p>Через гены (Адо): ↑ липокортина I, ↓ провоспалительных цитокинов, ЦОГ-2, NO-синтетазы, ICAM-1; стабилизация мембран и лизосом, ↓ проницаемости, экссудации, эмиграции, пролиферации.</p></div></details>
+  <details class="q"><summary>V.22. Почему растут осмотическое и онкотическое давление?</summary><div class="a"><p>Осмотическое — ионы и мелкие продукты распада тканей; онкотическое — выход белков плазмы и расщепление тканевых белков.</p></div></details>
+  <details class="q"><summary>V.23. Чем обусловлен ацидоз?</summary><div class="a"><p>Усиленный гликолиз при недостатке окисления → лактат и трикарбоновые кислоты, плюс жирные кислоты, кетоны, аминокислоты; истощение буферов и замедление кровотока.</p></div></details>
+  <details class="q"><summary>V.24. Пролиферация?</summary><div class="a"><p>Размножение местных клеток (фибробластов, эндотелия, адвентициальных) после очищения очага макрофагами; фибробласты образуют ГАГ и коллаген — рубец или регенерация.</p></div></details>
+</section>
+
+<section id="slovar">
+  <div class="sec-head"><h2>Словарик для начинающих</h2></div>
+  <dl class="gloss">
+    <dt>Флогоген</dt><dd>то, что вызывает воспаление.</dd>
+    <dt>Альтерация</dt><dd>повреждение ткани.</dd>
+    <dt>Экссудация / экссудат</dt><dd>выход жидкости с белком из сосудов в ткань / сама эта жидкость.</dd>
+    <dt>Транссудат</dt><dd>невоспалительная отёчная жидкость, бедная белком.</dd>
+    <dt>Эмиграция</dt><dd>выход лейкоцитов из сосуда в ткань.</dd>
+    <dt>Хемотаксис</dt><dd>движение клетки на «запах» химического вещества.</dd>
+    <dt>Опсонины</dt><dd>«метки» на микробе (антитела, C3b), облегчающие фагоцитоз.</dd>
+    <dt>Медиатор</dt><dd>вещество-посредник, передающее команду клеткам и сосудам.</dd>
+    <dt>Стаз</dt><dd>остановка кровотока в микрососуде.</dd>
+    <dt>Гиперосмия / гиперонкия</dt><dd>повышенное осмотическое (ионы) / онкотическое (белки) давление.</dd>
+    <dt>Пролиферация</dt><dd>размножение клеток, восстановление ткани.</dd>
+    <dt>Фибробласт</dt><dd>клетка, производящая коллаген и межклеточное вещество.</dd>
+  </dl>
+</section>
+
+<section id="src">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ol class="links">
+    <li>Методичка кафедры «Воспаление», листы 1–5 — <code>source/metodichki/vospalenie.md</code>.</li>
+    <li>Патологическая физиология / под ред. А.Д. Адо и др. — М.: Триада-Х, 2000 — гл. 7 «Воспаление», стр. PDF 214–234; глюкокортикоиды — PDF 116, 319, 402–403; противовоспалительные цитокины — PDF 92.</li>
+    <li>«Краткий курс лекций по патологической физиологии» — лекции IV (гормоны и воспаление), VI (нарушения фагоцитоза), IX, X (воспаление), XIV (гипоксии).</li>
+    <li>Студенческие ответы на экзаменационный перечень ЧГУ, вопросы 31, 33, 35, 39 и раздел об отёках (<code>source/otvety/patfiz-otvety.txt</code>).</li>
+    <li>Тесты по патофизиологии, тема «Воспаление», вопросы 2, 5, 8, 10, 13, 16, 18, 19 и ключ к ним (<code>source/otvety/testy-i-otvety.txt</code>).</li>
+    <li>Пересказ лекции 4 курса патофизиологии, 22.10.2025 — только акценты лектора (типы недостаточности фагоцитоза).</li>
+    <li>Тест к следующему зачёту о факторах отёка — фото <code>_inbox/patfiziologiya/metodichki-foto/2-zachet/qMf3ZX-vZdE.jpg</code>.</li>
+    <li>Глюкокортикоиды — <a href="https://www.rlsnet.ru/library/articles/dermatologiya/glyukokortikoidy-42">РЛС, «Глюкокортикоиды»</a>; методички по гормональным препаратам (USMF); транссудат и экссудат — учебные материалы и <a href="https://www.wikem.org/wiki/Pleural_effusion/ru">WikEM</a> — сверено по выдержкам из поиска.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Конспект к итоговому занятию № 1 по патофизиологии составил Евгений Якимов, группа М-03-24, медфак ЧГУ, октябрь 2026. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+  <p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('toggle-all'); if(!b) return;
+  b.addEventListener('click',function(){
+    var d=document.querySelectorAll('#quiz details.q');
+    var open=b.getAttribute('data-open')!=='1';
+    d.forEach(function(x){x.open=open;});
+    b.setAttribute('data-open',open?'1':'0');
+    b.textContent=open?'Свернуть все':'Открыть все';
+  });
+})();
+</script>
+</body>
+</html>

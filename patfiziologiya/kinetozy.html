@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Патофизиология: кинетозы</title>
+<meta name="description" content="Патофизиология, итоговое занятие № 1: кинетозы — этиология, вегетативные и соматические симптомы, связи вестибулярного аппарата, нистагм, функциональные пробы.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#9E2A2B; --accent-soft:#F6E4E2;
+  --blue:#1C5A8C; --blue-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E3F1E7; --ok-fg:#1F6B3A;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#F0928A; --accent-soft:#3A1F1E;
+    --blue:#82B6E4; --blue-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#15301F; --ok-fg:#8FD6A6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#F0928A; --accent-soft:#3A1F1E;
+  --blue:#82B6E4; --blue-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#15301F; --ok-fg:#8FD6A6;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:780px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--blue); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2rem, 6vw, 2.8rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.5rem; font-weight:700}
+h3{font-size:1.1rem; font-weight:700; margin-top:1.5rem}
+p{margin:.6rem 0}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.05rem; color:var(--muted); max-width:64ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--blue-soft); color:var(--blue); text-decoration:none}
+a.chip.pdf{background:var(--accent); color:var(--surface)}
+nav.toc{margin:1.4rem 0 0; font-size:.93rem}
+nav.toc ol{padding-left:1.6rem; margin:.5rem 0 0; columns:2 250px; column-gap:1.8rem}
+nav.toc li{padding:.14rem 0; break-inside:avoid}
+nav.toc li::marker{font-family:var(--mono); color:var(--muted); font-size:.85em}
+section{padding-top:2.5rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .8rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.qn{font:500 .8rem/1 var(--mono); color:var(--surface); background:var(--accent); padding:.3rem .45rem; border-radius:5px; flex:none}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.32rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.4rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.def{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.75rem 1rem; margin:.9rem 0}
+.def .k{font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.25rem}
+.def p{margin:.2rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.3rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .7rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td.lv{font-weight:600; white-space:nowrap}
+.note{background:var(--blue-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.star{color:var(--accent); font-weight:600}
+.src{font:400 .78rem/1.4 var(--mono); color:var(--muted); margin-top:.4rem}
+/* лесенка уровней */
+.levels{display:grid; gap:8px; margin:1rem 0}
+.lvl{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem .9rem; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.65rem .85rem; border-left:5px solid var(--accent)}
+.lvl:nth-child(2){margin-left:4%} .lvl:nth-child(3){margin-left:8%} .lvl:nth-child(4){margin-left:12%} .lvl:nth-child(5){margin-left:16%}
+.lvl b{font-family:var(--serif); font-size:1rem}
+.lvl small{display:block; color:var(--muted); font-size:.78rem; line-height:1.3}
+.lvl .who{font-size:.9rem}
+@media (max-width:560px){ .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0} }
+/* цепочки этапов */
+.flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:1rem 0}
+.st{flex:1 1 130px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.6rem .7rem; position:relative; display:grid; gap:.25rem; align-content:start}
+.st .n{font:500 .74rem/1.2 var(--mono); color:var(--muted)}
+.st b{font-family:var(--serif); font-size:.98rem; line-height:1.25}
+.st .h{font-size:.82rem; color:var(--ink); line-height:1.35}
+.st .h em{font-style:normal; font-weight:600; color:var(--accent)}
+.st.zone{background:var(--accent-soft); border-color:transparent}
+.arrow{flex:0 0 auto; align-self:center; font:500 1.1rem/1 var(--mono); color:var(--muted)}
+@media (max-width:560px){ .flow{flex-direction:column} .arrow{transform:rotate(90deg); align-self:center} .st{flex-basis:auto} }
+/* хронология */
+.tl{list-style:none; padding:0; margin:1rem 0; border-left:2px solid var(--line)}
+.tl li{position:relative; padding:.1rem 0 .7rem 1.1rem}
+.tl li::before{content:""; position:absolute; left:-6px; top:.55rem; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+.tl .y{font:500 .85rem/1.3 var(--mono); color:var(--accent); display:block}
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin:.8rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .9rem}
+.card h4{margin:0 0 .35rem; font:600 .98rem/1.3 var(--sans)}
+.card ul{margin:.2rem 0; padding-left:1.05rem} .card li{margin:.22rem 0; font-size:.92rem}
+.card.a{border-top:4px solid var(--accent)} .card.b{border-top:4px solid var(--blue)}
+/* самопроверка */
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--blue); background:transparent; color:var(--blue); cursor:pointer}
+button:hover{background:var(--blue-soft)}
+details.q{border-bottom:1px solid var(--line)}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.7rem 2rem .7rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.58rem; font:500 1.2rem/1 var(--mono); color:var(--blue)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .85rem; font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.45rem; padding-left:1.1rem; font-size:.92rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.32rem} th,td{padding:.5rem .55rem} }
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+/* патофизиология: части ответа */
+section[id^="q"] > h3{font:600 .78rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin:1.4rem 0 .3rem}
+.easy{background:var(--ok-bg); border-radius:10px; padding:.75rem 1rem; margin:.5rem 0}
+.easy > :first-child{margin-top:0} .easy > :last-child{margin-bottom:0}
+.lead-link{font-weight:600; color:var(--accent)}
+.kv{display:inline-block; font:500 .72rem/1.2 var(--mono); padding:.18rem .4rem; border-radius:5px; vertical-align:.08em}
+.kv.c{background:var(--ok-bg); color:var(--ok-fg)} .kv.d{background:var(--accent-soft); color:var(--accent)}
+details.more{border:1px solid var(--line); border-radius:8px; background:var(--surface); margin:.45rem 0}
+details.more summary{cursor:pointer; padding:.6rem .8rem; font-weight:500; list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"? "; font-family:var(--mono); color:var(--blue)}
+details.more .a{padding:0 .8rem .7rem; font-size:.95rem}
+details.more .a p{margin:.3rem 0}
+.uncheck{color:var(--warn-fg); font-weight:600; white-space:nowrap}
+dl.gloss{margin:.6rem 0} dl.gloss dt{font-weight:600; margin-top:.6rem} dl.gloss dd{margin:.1rem 0 0 0; color:var(--ink)}
+svg.scheme{width:100%; height:auto; max-width:560px; display:block; margin:.8rem auto}
+svg.scheme text{font-family:var(--sans); fill:var(--ink)}
+svg.scheme .box{fill:var(--surface); stroke:var(--line)}
+svg.scheme .bad{fill:var(--accent-soft); stroke:var(--accent)}
+svg.scheme .good{fill:var(--ok-bg); stroke:var(--ok-fg)}
+svg.scheme .ln{stroke:var(--muted); fill:none; stroke-width:1.6}
+svg.scheme text.acc{fill:var(--accent)}
+svg.scheme .lnr{stroke:var(--accent); fill:none; stroke-width:1.8}
+@media print{ details.more{break-inside:avoid} details.more summary::before{content:none} .easy{border:1px solid #ccc} }
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.48}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar, a.chip.pdf{display:none}
+  section{padding-top:1.1rem}
+  h1{font-size:21pt} h2{font-size:14.5pt} h2, h3, .sec-head{break-after:avoid}
+  .tile, .lvl, .st, details.q, .tl li, tr, ol.steps li, ul.facts li{break-inside:avoid}
+  .tbl{overflow:visible}
+  .tbl, .def, .tile, .lvl, .st, .card{border-color:#ccc}
+  table{font-size:8.6pt} th,td{padding:.3rem .4rem}
+  .tiles{grid-template-columns:1fr 1fr}
+  .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0}
+  .flow{flex-direction:column} .arrow{transform:rotate(90deg)} .st{flex:0 0 auto}
+  .cols{grid-template-columns:1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Патофизиология · итоговое занятие № 1 · медфак ЧГУ</div>
+  <h1>IV. Кинетозы</h1>
+  <p class="lead">Почему укачивает: какие рецепторы воспринимают ускорение, как вестибулярный аппарат связан со спинным мозгом, глазами, мозжечком и вегетативными центрами, что такое нистагм и как исследуют вестибулярную функцию.</p>
+  <div class="chips">
+    <a class="chip pdf" href="kinetozy.pdf">скачать PDF для телефона</a>
+    <span class="chip">10 вопросов раздела</span>
+    <span class="chip">методичка кафедры</span>
+    <span class="chip">ответы ЧГУ, вопросы 28–29</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Вопросы</div>
+    <ol>
+      <li><a href="#q1">Этиология и симптомы</a></li>
+      <li><a href="#q2">Вегетативные симптомы</a></li>
+      <li><a href="#q3">Соматические симптомы</a></li>
+      <li><a href="#q4">Связи со спинным мозгом</a></li>
+      <li><a href="#q5">Связи с глазодвигательными ядрами</a></li>
+      <li><a href="#q6">Нистагм</a></li>
+      <li><a href="#q7">Связь с мозжечком</a></li>
+      <li><a href="#q8">Связь с вегетативными центрами</a></li>
+      <li><a href="#q9">Рецепторы ускорения</a></li>
+      <li><a href="#q10">Функциональные пробы</a></li>
+    </ol>
+    <p style="margin:.6rem 0 0"><a href="#quiz">Самопроверка</a> · <a href="#slovar">Словарик</a> · <a href="#src">Источники</a> · <a href="index.html">Все разделы</a></p>
+  </nav>
+</header>
+
+<section id="top">
+  <div class="sec-head"><h2>Главное за пять минут</h2></div>
+  <div class="tiles">
+    <div class="tile"><b>1–2 g</b><span>ускорения, при которых возникают кинетозы (методичка: «1-2q»)</span></div>
+    <div class="tile"><b>4 группы рецепторов</b><span>вестибулярные, проприо- и механорецепторы, зрительные, рецепторы брюшины (методичка)</span></div>
+    <div class="tile"><b>Отолиты</b><span>прямолинейные ускорения; полукружные каналы — угловые (методичка)</span></div>
+    <div class="tile"><b>Основное звено</b><span>раздражение ядер блуждающего нерва и вестибулярных ядер Дейтерса и Бехтерева (методичка)</span></div>
+    <div class="tile"><b>Вагус</b><span>брадикардия, ↓ АД, тошнота, рвота (методичка)</span></div>
+    <div class="tile"><b>Добавочный нерв</b><span>асимметрия тонуса мышц шеи и спины (методичка)</span></div>
+    <div class="tile"><b>III, IV, VI</b><span>глазодвигательный, блоковый, отводящий нервы — нистагм (методичка)</span></div>
+    <div class="tile"><b>Мозжечок</b><span>нарушение координации движений (методичка)</span></div>
+  </div>
+</section>
+
+<section id="q1">
+  <div class="sec-head"><span class="qn">IV.1</span><h2>Какова этиология кинетозов. Основные клинические симптомы кинетозов.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры</span>
+    <p><b>Кинетозы</b> возникают при качке судна на море (морская болезнь), при полёте самолёта, при вращении на карусулях, качелях, у особо чувствительных лиц при езде на автомобиле, в поезде. В этих условиях обычно на организм действуют <b>ускорения порядка 1-2q</b> [g], оказывающее болезнетворное действие, в основном <b>рефлекторно</b>. … Для кинетозов характерны <b>нарушения координации движений, головокружение, тошнота, рвота, бледность, холодный пот, снижение артериального давления, брадикардия, непроизвольное подёргивание глазных яблок — нистагм</b>.</p>
+  </div>
+  <p>Кинетоз — «болезнь передвижения» (от греч. kinesis — движение; в otvety «kynesis»), возникает при действии на организм более или менее продолжительных и <b>изменяющихся</b> ускорений; другие названия — укачивание, морская болезнь; при полёте — воздушная болезнь (otvety, вопрос 29). Болезнетворное влияние ускорений определяется их величиной, длительностью и направлением действия, а также чувствительностью организма (otvety, вопрос 29). В тяжёлых случаях — депрессивное состояние, астения, нарушения сознания (otvety, вопрос 28).</p>
+  <p><b>Условие</b>: проявления более выражены у лиц с повышенной возбудимостью симпатического или парасимпатического отделов или вестибулярного анализатора (otvety, вопрос 28).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Укачивание удобно объяснять как «конфликт датчиков» (пояснение конспекта). Внутреннее ухо чувствует, что вас качает, глаза в каюте видят неподвижную стену, мышцы и суставы сообщают третье. Мозг не может сложить картинку, и «тревожный сигнал» уходит на соседние центры — рвотный, сердечный, сосудистый. Отсюда тошнота, бледность, пот.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Изменяющиеся ускорения 1–2 g</b><span class="h">качка, полёт, вращение</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">пусковое звено</span><b>Раздражение рецепторов</b><span class="h">вестибулярных, проприо-, зрительных, брюшины</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">основное звено</span><b>Раздражение ядер вагуса и вестибулярных ядер</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">проявления</span><b>Вегетативные + соматические симптомы</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">исход</span><b>Прекращение качки / адаптация</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему равномерное движение не укачивает?</summary><div class="a"><p>Равномерное движение даже с большой скоростью не ощущается; болезнетворно изменение скорости — ускорение (otvety, вопрос 29).</p></div></details>
+  <details class="more"><summary>Что такое космическая форма укачивания?</summary><div class="a"><p>При невесомости изменяется афферентация с проприоцептивных, вестибулярных, кожных рецепторов, ослабляются влияния отолитов на полукружные каналы; добавляется ускорение Кориолиса. Адаптация у здорового человека наступает относительно быстро, большую роль играет зрение (otvety, вопрос 29).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать причиной «скорость». Причина — <b>ускорение</b> (изменение скорости, качка, повороты). <b>Связь с клиникой:</b> противорвотные средства от укачивания действуют на эти рефлекторные пути (холиноблокаторы, антигистаминные) <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div>
+</section>
+
+<section id="q2">
+  <div class="sec-head"><span class="qn">IV.2</span><h2>Опишите основные вегетативные симптомы кинетозов.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Основным звеном в патогенезе кинетозов является <b>раздражение двигательных ядер блуждающего нерва</b> (отсюда все вегетативные симптомы — <b>брадикардия, снижение артериального давления, тошнота, рвота</b> и т.д.).</p>
+  </div>
+  <p>Вегетативные симптомы: тошнота, рвота, бледность, холодный пот, брадикардия, снижение АД (методичка). По otvety (вопрос 28) из вестибулярных ядер импульсы идут на чувствительные и двигательные ядра вагуса — снижение АД, брадикардия, тошнота, рвота, потоотделение; раздражение интерорецепторов (особенно желудка) возбуждает <b>симпатический</b> отдел — от него атония, угнетение перистальтики кишечника, побледнение.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Вестибулярные ядра в стволе мозга — соседи ядер блуждающего нерва. Когда «соседей» трясёт сильным сигналом, возбуждение перетекает на вагус: а вагус — это «тормоз» сердца (пульс реже, давление ниже) и «двигатель» желудка (тошнота, рвота). Бледность и вялый кишечник — уже симпатическая тревога (так в otvety; потоотделение курс относит к вагусу).</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Вестибулярные ядра</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">2</span><b>Ядра блуждающего нерва</b><span class="h">парасимпатика</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Брадикардия, ↓ АД, тошнота, рвота, потоотделение</b></div>
+  </div>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Интерорецепторы желудка, брюшины</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">2</span><b>Симпатический отдел</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Атония, ↓ перистальтики, побледнение</b></div>
+  </div>
+  <p class="src">otvety, вопрос 28</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему при кинетозе брадикардия, а не тахикардия?</summary><div class="a"><p>Потому что основное звено — раздражение ядер блуждающего нерва (методичка): вагус замедляет сердце и снижает АД.</p></div></details>
+  <details class="more"><summary>Рвота при кинетозе — защита или повреждение?</summary><div class="a"><p>По смыслу источников курса — вагусный рефлекс, вредный для больного (при длительной качке — обезвоживание и потеря электролитов). Есть и гипотеза, что это древняя защитная реакция на «конфликт датчиков», похожий на отравление нейротоксином <span class="uncheck">⚠ не проверено</span>.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> объяснять все симптомы симпатикой. По методичке основа — <b>парасимпатика</b> (вагус); симпатическая часть (бледность, атония кишечника) — по otvety. Физиологически потоотделение — симпатическое (холинергическое), но в источниках курса оно отнесено к вагусу. <b>Связь с неврологией:</b> «вестибулярное головокружение» с тошнотой и рвотой при болезни Меньера — те же связи.</p></div>
+</section>
+
+<section id="q3">
+  <div class="sec-head"><span class="qn">IV.3</span><h2>Опишите основные соматические симптомы кинетозов.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Раздражение <b>вестибулярных ядер Дейтерса и Бехтерева</b>, обусловливающих <b>асимметрию тонуса мышц шеи (добавочный нерв) и спины</b>, <b>нарушение координации движений (мозжечок)</b> и <b>нистагм</b> (глазодвигательный, блоковый и отводящие нервы).</p>
+  </div>
+  <p>Соматические симптомы: головокружение, нарушение координации движений, асимметрия мышечного тонуса шеи, спины, конечностей, нистагм (методичка; otvety, вопрос 28).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Вестибулярный аппарат — «уровень», по которому мозг выравнивает тело. Когда уровень сходит с ума, мозг напрягает то одни, то другие мышцы, чтобы «поймать равновесие», — человека шатает, голову тянет набок, глаза дёргаются, пытаясь удержать картинку.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Симптом</th><th>Путь</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Асимметрия тонуса шеи</td><td>вестибулярные ядра → ядро добавочного нерва</td></tr>
+      <tr><td class="lv">Асимметрия тонуса спины, конечностей</td><td>ядро Дейтерса → спинной мозг (IV.4)</td></tr>
+      <tr><td class="lv">Нарушение координации</td><td>вестибулярные ядра ↔ мозжечок (IV.7)</td></tr>
+      <tr><td class="lv">Нистагм</td><td>вестибулярные ядра → ядра III, IV, VI (IV.5, IV.6)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">методичка; связи — IV.4–IV.7</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Откуда асимметрия тонуса?</summary><div class="a"><p>При укачивании попеременно раздражаются разные рецепторы вестибулярного аппарата, мозжечок получает импульсы, меняющие тонус разных групп мышц шеи, спины, конечностей (otvety, вопрос 28).</p></div></details>
+  <details class="more"><summary>Как называются вестибулярные ядра?</summary><div class="a"><p>Латеральное (Дейтерса), верхнее (Бехтерева), медиальное (Швальбе), нижнее (Роллера) — пособие ВолгГМУ «Анатомия вестибулярного анализатора» (латеральное, медиальное, нижнее — сверено по выдержке; верхнее ядро Бехтерева — по анатомии).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> относить нистагм к вегетативным симптомам. Нистагм — <b>соматический</b> (двигательный) симптом: мышцы глаза поперечнополосатые.</p></div>
+</section>
+
+<section id="q4">
+  <div class="sec-head"><span class="qn">IV.4</span><h2>Назовите пути связи вестибулярного нерва со спинным мозгом?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · пособие «Анатомия вестибулярного анализатора», ВолгГМУ (по выдержке)</span>
+    <p>От <b>ядер Дейтерса</b> (латеральное вестибулярное ядро) волокна идут к ретикулярной формации и вниз к <b>передним рогам спинного мозга</b>; связь осуществляется через <b>латеральный и медиальный вестибулоспинальные тракты</b>.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Латеральный вестибулоспинальный тракт</b> — от латерального ядра (Дейтерса), неперекрещённый, на всём протяжении спинного мозга, к мотонейронам <b>разгибателей</b>.</li>
+    <li><b>Медиальный вестибулоспинальный тракт</b> — от медиального ядра, перекрещённые и неперекрещённые волокна, в основном к шейным сегментам — мышцы шеи.</li>
+    <li>Опосредованно — через <b>ретикулоспинальные</b> пути.</li>
+  </ul>
+  <p class="src">латеральный и медиальный тракты — справочник ditki (Vestibulospinal Pathways), сверено по выдержке</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Вестибулоспинальный путь — «прямая линия» от датчика равновесия к мышцам-разгибателям, которые держат нас прямо. Оступились — и раньше, чем вы подумали, нога выпрямилась, спина напряглась. Шея получает свою отдельную линию, чтобы держать голову ровно.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Рецепторы преддверия и каналов</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Вестибулярная часть VIII нерва</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>Ядро Дейтерса / медиальное ядро</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>Вестибулоспинальные тракты → передние рога</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">5</span><b>Тонус разгибателей, мышц шеи</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какое значение это имеет при кинетозе?</summary><div class="a"><p>Раздражение ядер Дейтерса даёт асимметрию тонуса мышц спины и конечностей, нарушение координации (методичка).</p></div></details>
+  <details class="more"><summary>Что такое децеребрационная ригидность?</summary><div class="a"><p>После перерезки ствола выше вестибулярных ядер ядро Дейтерса растормаживается и резко повышает тонус разгибателей <span class="uncheck">⚠ не проверено</span> (из нормальной физиологии, не из источников курса).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать, что вестибулярный нерв идёт прямо в спинной мозг. Он заканчивается в <b>вестибулярных ядрах</b> ствола, в спинной мозг идут уже их отростки (вестибулоспинальные тракты). <b>Связь с нормальной физиологией:</b> статические и статокинетические рефлексы Магнуса — та же система.</p></div>
+</section>
+
+<section id="q5">
+  <div class="sec-head"><span class="qn">IV.5</span><h2>Назовите пути связи вестибулярного аппарата с глазодвигательными ядрами?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры; medbiol.ru «Центральные вестибулярные пути»</span>
+    <p>Методичка: нистагм — через <b>глазодвигательный, блоковый и отводящий нервы</b>. Путь: верхнее и медиальное вестибулярные ядра посылают волокна через <b>медиальный продольный пучок</b> к ядрам III, IV и VI пар черепных нервов — это основа <b>вестибулоокулярного рефлекса</b>.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Когда вы идёте и читаете вывеску, голова качается, а буквы не прыгают. Это потому, что вестибулярный аппарат по «кабелю» (медиальному продольному пучку) мгновенно двигает глаза в обратную сторону, удерживая картинку. Если сигнал ложный (качка), глаза начинают дёргаться без нужды — нистагм.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Полукружные каналы</b><span class="h">угловое ускорение головы</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Верхнее и медиальное вестибулярные ядра</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>Медиальный продольный пучок</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>Ядра III, IV, VI</b><span class="h">глазодвигательный, блоковый, отводящий</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">5</span><b>Движения глаз — нистагм</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что будет при поражении медиального продольного пучка?</summary><div class="a"><p>Нарушение этой системы почти всегда сопровождается нистагмом (medbiol.ru); межъядерная офтальмоплегия <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div></details>
+  <details class="more"><summary>Какие мышцы глаза иннервируют III, IV, VI нервы?</summary><div class="a"><p>IV — верхнюю косую, VI — латеральную прямую, III — остальные наружные мышцы глаза <span class="uncheck">⚠ не проверено</span> (анатомия, не из источников курса).</p></div></details>
+  <div class="note"><p><b>Связь с неврологией:</b> по нистагму невролог отличает периферическое поражение лабиринта от центрального (ствол, мозжечок); при рассеянном склерозе часто страдает медиальный продольный пучок <span class="uncheck">⚠ не проверено</span>.</p></div>
+</section>
+
+<section id="q6">
+  <div class="sec-head"><span class="qn">IV.6</span><h2>Что такое нистагм, когда он наблюдается. В какую сторону будет направлен нистагм при раздражении правого вестибулярного аппарата.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры; справочник MSD</span>
+    <p><b>Нистагм</b> — непроизвольное подёргивание глазных яблок (методичка). Вестибулярный нистагм состоит из <b>медленной фазы</b>, вызванной вестибулярным импульсом, и <b>быстрой корректирующей</b> фазы в противоположном направлении; <b>направление нистагма определяется по быстрому компоненту</b> (MSD, «Нистагм»).</p>
+  </div>
+  <ul class="facts">
+    <li><b>Когда наблюдается</b>: при кинетозах (методичка); при вращении и после него, при калорической пробе (физиологический); при поражении лабиринта, ствола, мозжечка (патологический).</li>
+    <li><b>При раздражении правого вестибулярного аппарата</b> нистагм направлен <b>вправо</b> — в сторону раздражаемого уха: так при тёплой калорической пробе (раздражение) нистагм бьёт в сторону орошаемого уха, при холодной (угнетение) — в противоположную (БМЭ, «Калорическая проба», через academic.ru; сверено по выдержке).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Правый лабиринт «кричит» сильнее левого — мозгу кажется, что голова поворачивается. Глаза медленно уплывают в одну сторону (будто компенсируя поворот), а потом рывком возвращаются — рывок направлен к раздражённому уху. По рывку и называют нистагм: «правосторонний».</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Раздражение правого лабиринта</b><span class="h">↑ импульсации справа</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Асимметрия вестибулярных ядер</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Медленный компонент — влево</b><span class="h">вестибулярный</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">4</span><b>Быстрый компонент — вправо</b><span class="h">центральный, корректирующий → нистагм вправо</span></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Ситуация</th><th>Направление нистагма (быстрый компонент)</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Раздражение правого лабиринта (тёплая вода справа)</td><td>вправо</td></tr>
+      <tr><td class="lv">Угнетение правого (холодная вода справа)</td><td>влево</td></tr>
+      <tr><td class="lv">Вращение вправо</td><td>вправо <span class="uncheck">⚠ не проверено</span></td></tr>
+      <tr><td class="lv">После остановки вращения вправо</td><td>влево <span class="uncheck">⚠ не проверено</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">калорика — БМЭ, «Калорическая проба» и медицинские материалы по калорической пробе (по выдержкам); вращение — общие сведения из поиска, учебником не подтверждено</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Куда отклоняется туловище в позе Ромберга при раздражении лабиринта?</summary><div class="a"><p>В сторону <b>медленного</b> компонента нистагма (эталон теста ВолгГМУ, по выдержке из поиска).</p></div></details>
+  <details class="more"><summary>Какой компонент нистагма — вестибулярный, а какой — центральный?</summary><div class="a"><p>Медленный — вестибулярного происхождения, быстрый — корректирующий, центральный (MSD).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать направление по медленному компоненту. Нистагм всегда называют по <b>быстрому</b>. <b>Связь с ЛОР:</b> при остром гнойном лабиринтите сначала ирритативный нистагм в больную сторону, затем — при гибели лабиринта — в здоровую <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div>
+</section>
+
+<section id="q7">
+  <div class="sec-head"><span class="qn">IV.7</span><h2>Какая имеется связь вестибулярного аппарата с мозжечком?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · ответы ЧГУ, вопрос 28; методичка</span>
+    <p>Сильное раздражение рецепторного аппарата вестибулярного нерва по чувствительным путям направляется в ретикулярную формацию и вестибулярные ядра в ромбовидной ямке. Отсюда <b>через веревчатое тело</b> [нижнюю мозжечковую ножку] импульсы поступают в <b>мозжечок</b>. … Мозжечок получает импульсы, вызывающие изменения тонуса различных групп мышц шеи, спины, конечностей — отсюда асимметрия тонуса мышц, <b>нарушения координации движений</b>.</p>
+  </div>
+  <ul class="facts">
+    <li>Часть волокон вестибулярного нерва минует ядра и прямо идёт в мозжечок через нижние ножки (spbvet.info, по выдержке).</li>
+    <li>Мишень — древняя часть мозжечка, <b>клочково-узелковая доля</b> (вестибулоцеребеллум) (там же).</li>
+    <li>Обратная связь: ядро Дейтерса получает аксоны клеток Пуркинье червя мозжечка (Cerebellum, Springer, по выдержке).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Мозжечок — «тренер по равновесию»: получает от вестибулярного аппарата отчёт о положении головы и тут же подправляет мышцы. Если отчёты противоречат друг другу (качка), тренер раздаёт неверные команды — походка шаткая, движения неточные.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Вестибулярный нерв</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Вестибулярные ядра (и прямые волокна)</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>Верёвчатое тело (нижняя ножка)</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>Клочково-узелковая доля</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">5</span><b>Обратно — ядро Дейтерса → тонус мышц</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какие симптомы при кинетозе связаны с мозжечком?</summary><div class="a"><p>Нарушение координации движений (методичка), асимметрия тонуса мышц шеи, спины, конечностей (otvety, вопрос 28).</p></div></details>
+  <details class="more"><summary>Как проверить мозжечок и вестибулярную систему у постели?</summary><div class="a"><p>Поза Ромберга, пальценосовая и пяточно-коленная пробы, походка (IV.10).</p></div></details>
+  <div class="note"><p><b>Связь с неврологией:</b> мозжечковая атаксия и вестибулярная атаксия выглядят похоже; вестибулярная усиливается при закрытых глазах и сопровождается головокружением и нистагмом <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div>
+</section>
+
+<section id="q8">
+  <div class="sec-head"><span class="qn">IV.8</span><h2>Какая имеется связь вестибулярного аппарата с вегетативными центрами?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · ответы ЧГУ, вопрос 28; методичка</span>
+    <p>Вегетативные расстройства при кинетозах зависят от возбуждения ядер вегетативных нервов. Из вестибулярных ядер импульсы передаются на <b>чувствительные и двигательные ядра блуждающего нерва</b>, что вызывает снижение артериального давления, брадикардию, тошноту и рвоту, потоотделение.</p>
+  </div>
+  <ul class="facts">
+    <li>По otvety (вопрос 28) афферентные импульсы идут «в ретикулярную формацию и вестибулярные ядра», а из вестибулярных ядер — на ядра блуждающего нерва; участие ретикулярной формации как посредника — дополнение по физиологии <span class="uncheck">⚠ не проверено</span>.</li>
+    <li>Методичка называет это <b>основным звеном</b> патогенеза: раздражение двигательных ядер блуждающего нерва.</li>
+    <li>Вторично возбуждается <b>симпатический</b> отдел (атония, ↓ перистальтики, побледнение — otvety).</li>
+    <li>Вестибулоталамические связи → кора височной доли — осознание головокружения (пособие ВолгГМУ, по выдержке).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>В стволе мозга вестибулярные ядра и ядра блуждающего нерва лежат рядом. Сильный вестибулярный сигнал «пробивает» на вагус — и вместо равновесия человек получает тошноту и слабый пульс.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Вестибулярные ядра</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3 — основное звено</span><b>Ядра блуждающего нерва</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>Сердце, сосуды, желудок, потовые железы</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какую роль играют рецепторы брюшины?</summary><div class="a"><p>Раздражаются при натяжении брюшины и смещении органов (методичка) и поддерживают вегетативные рефлексы, особенно со стороны желудка (otvety).</p></div></details>
+  <details class="more"><summary>Почему у людей с «лабильной» вегетатикой укачивание сильнее?</summary><div class="a"><p>Проявления кинетозов более выражены при повышенной возбудимости симпатического или парасимпатического отделов или вестибулярного анализатора (otvety, вопрос 28) — роль реактивности.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать вегетативным центром гипоталамус и забыть вагус. На зачёте главное — <b>ядра блуждающего нерва</b> (методичка). Роль гипоталамуса в источниках курса не описана.</p></div>
+</section>
+
+<section id="q9">
+  <div class="sec-head"><span class="qn">IV.9</span><h2>С каких рецепторов воспринимается действие ускорения на организм?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Болезнетворное действие — в основном рефлекторно, через следующие рецепторы: а) <b>вестибулярный анализатор</b> (механорецепторы <b>отолитового аппарата</b> воспринимают преимущественно <b>прямолинейные ускорения</b>, рецепторы <b>полукружных каналов — угловые ускорения</b>); б) <b>проприорецепторы</b> мышечных веретён, связок, сухожилий, суставов и <b>механорецепторы</b> (тактильные и давления); в) <b>зрительные рецепторы</b> воспринимают смещающиеся пространственные ориентиры — горизонт; г) <b>рецепторы слизистых и серозных оболочек органов брюшной полости</b> раздражаются при натяжении брюшины, смещении внутренних органов.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Четыре «свидетеля» движения: внутреннее ухо (главный — чувствует разгон и повороты), мышцы и суставы (чувствуют, как нас прижимает), глаза (видят, как уходит горизонт) и живот (органы «подпрыгивают» на волне). Укачивает, когда их показания расходятся.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="cols">
+    <div class="card a"><h4>Отолитовый аппарат (мешочек и маточка)</h4><ul><li>прямолинейные ускорения;</li><li>положение головы относительно гравитации.</li></ul></div>
+    <div class="card a"><h4>Полукружные каналы</h4><ul><li>угловые ускорения — повороты головы.</li></ul></div>
+    <div class="card b"><h4>Проприо- и механорецепторы</h4><ul><li>мышечные веретёна, связки, сухожилия, суставы, кожа.</li></ul></div>
+    <div class="card b"><h4>Зрение и брюшина</h4><ul><li>смещение горизонта;</li><li>натяжение брюшины, смещение органов.</li></ul></div>
+  </div>
+  <p class="src">методичка (в цитатах опечатки оригинала сохранены, пояснения — в квадратных скобках); «мешочек и маточка», «положение головы» — анатомия, <span class="uncheck">⚠ не проверено</span> по источникам курса</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какие рецепторы главные?</summary><div class="a"><p>Решающее значение имеет влияние ускорений на вестибулярный и зрительный анализаторы (otvety, вопрос 28).</p></div></details>
+  <details class="more"><summary>Почему при чтении в машине укачивает сильнее?</summary><div class="a"><p>Глаза видят неподвижную книгу, а вестибулярный аппарат — ускорения: расхождение зрительной и вестибулярной информации; взгляд на горизонт уменьшает его (методичка относит горизонт к ориентирам зрительных рецепторов).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> перепутать: отолиты — <b>прямолинейные</b>, каналы — <b>угловые</b> ускорения (методичка). <b>Связь с авиамедициной:</b> пространственная дезориентация пилотов — ложные ощущения от отолитов при длительных ускорениях.</p></div>
+</section>
+
+<section id="q10">
+  <div class="sec-head"><span class="qn">IV.10</span><h2>Перечислить функциональные пробы по изучению функции вестибулярного аппарата?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Перечень · БМЭ (academic.ru), справочник MSD, учебные материалы по ЛОР (по выдержкам)</span>
+    <p>Пробы, вызывающие вестибулярную реакцию: <b>вращательная проба</b> (Барани — кресло Барани, оценивают послевращательный нистагм), <b>калорическая проба</b> (тёплая или холодная вода в наружный слуховой проход), <b>прессорная (фистульная)</b>, <b>гальваническая</b>, <b>отолитовая реакция</b> (двойной опыт Воячека). Пробы на статику и координацию: <b>поза Ромберга</b>, <b>указательная</b> и <b>пальценосовая</b> пробы, исследование <b>походки</b>, <b>спонтанного нистагма</b>.</p>
+  </div>
+  <p>В источниках курса (методичка, Адо, «Краткий курс») пробы не перечислены — перечень дан по справочным материалам; Воячек, гальваническая и прессорная пробы <span class="uncheck">⚠ не проверено</span> по выдержкам.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Лабиринт проверяют двумя способами: «раскачать» его (покрутить в кресле, налить в ухо тёплой или холодной воды — жидкость в каналах сдвинется, будто голова повернулась) и посмотреть, как отвечают глаза (нистагм), тело (отклонение в позе Ромберга) и желудок (тошнота). И второй способ — «как человек держит равновесие сам».</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Проба</th><th>Что делают</th><th>Что оценивают</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Вращательная (Барани)</td><td>вращение в кресле, резкая остановка</td><td>длительность послевращательного нистагма — состояние полукружных каналов</td></tr>
+      <tr><td class="lv">Калорическая</td><td>тёплая или холодная вода в слуховой проход (шприц Жанне)</td><td>латентный период и длительность нистагма, сравнение двух ушей</td></tr>
+      <tr><td class="lv">Поза Ромберга</td><td>стоять, стопы вместе, глаза закрыты</td><td>отклонение туловища — в сторону медленного компонента</td></tr>
+      <tr><td class="lv">Пальценосовая, указательная</td><td>попасть в нос / в палец врача</td><td>промахивание, координация</td></tr>
+      <tr><td class="lv">Походка, спонтанный нистагм</td><td>ходьба по прямой; взгляд в стороны</td><td>отклонение, нистагм без провокации</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">вращательная и калорическая — учебные материалы ВолгГМУ и РостГМУ по выдержкам; Ромберг — тест ВолгГМУ; калорика — БМЭ «Калорическая проба»</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Нормальные значения калорической пробы?</summary><div class="a"><p>Латентный период около 25–30 с, длительность нистагма 50–70 с (учебный материал по выдержке из поиска <span class="uncheck">⚠ не проверено</span>).</p></div></details>
+  <details class="more"><summary>Как отбирают людей, устойчивых к укачиванию?</summary><div class="a"><p>Вестибулярными нагрузками (вращение, качели) с оценкой вегетативных и соматических реакций <span class="uncheck">⚠ не проверено</span> по источникам курса — это пример функциональной пробы для выявления скрытого снижения приспособляемости (Адо, PDF 40).</p></div></details>
+  <div class="note"><p><b>Связь с нозологией:</b> функциональная проба — способ выявить снижение приспособительных возможностей, «функциональный резерв» (Адо, PDF 40; раздел I.5). <b>Связь с ЛОР</b>: калорическую пробу нельзя делать при перфорации барабанной перепонки водой <span class="uncheck">⚠ не проверено</span>.</p></div>
+</section>
+
+<section id="quiz">
+  <div class="sec-head"><h2>Самопроверка: ответ одной фразой</h2></div>
+  <div class="quiz-bar"><p>Сначала ответьте вслух, потом откройте.</p><button type="button" id="toggle-all">Открыть все</button></div>
+  <details class="q"><summary>IV.1. Этиология и симптомы кинетозов?</summary><div class="a"><p>Изменяющиеся ускорения 1–2 g (качка, полёт, карусели, транспорт); нарушение координации, головокружение, тошнота, рвота, бледность, холодный пот, ↓ АД, брадикардия, нистагм.</p></div></details>
+  <details class="q"><summary>IV.2. Вегетативные симптомы?</summary><div class="a"><p>Брадикардия, ↓ АД, тошнота, рвота, потоотделение — от раздражения ядер блуждающего нерва; бледность и атония кишечника — от симпатики.</p></div></details>
+  <details class="q"><summary>IV.3. Соматические симптомы?</summary><div class="a"><p>Асимметрия тонуса мышц шеи (добавочный нерв) и спины, нарушение координации (мозжечок), нистагм (III, IV, VI нервы).</p></div></details>
+  <details class="q"><summary>IV.4. Связь со спинным мозгом?</summary><div class="a"><p>Латеральный (от ядра Дейтерса) и медиальный вестибулоспинальные тракты к передним рогам; опосредованно — ретикулоспинальные.</p></div></details>
+  <details class="q"><summary>IV.5. Связь с глазодвигательными ядрами?</summary><div class="a"><p>Через медиальный продольный пучок к ядрам III, IV, VI пар — вестибулоокулярный рефлекс.</p></div></details>
+  <details class="q"><summary>IV.6. Нистагм при раздражении правого лабиринта?</summary><div class="a"><p>Непроизвольные ритмичные движения глаз с медленным и быстрым компонентом; при раздражении правого — вправо (по быстрому компоненту).</p></div></details>
+  <details class="q"><summary>IV.7. Связь с мозжечком?</summary><div class="a"><p>Через вестибулярные ядра и верёвчатое тело (нижнюю ножку) к клочково-узелковой доле; нарушение координации и тонуса.</p></div></details>
+  <details class="q"><summary>IV.8. Связь с вегетативными центрами?</summary><div class="a"><p>Из вестибулярных ядер на чувствительные и двигательные ядра блуждающего нерва — основное звено вегетативных симптомов.</p></div></details>
+  <details class="q"><summary>IV.9. Какие рецепторы воспринимают ускорение?</summary><div class="a"><p>Вестибулярные (отолиты — прямолинейные, каналы — угловые), проприо- и механорецепторы, зрительные, рецепторы брюшины.</p></div></details>
+  <details class="q"><summary>IV.10. Функциональные пробы?</summary><div class="a"><p>Вращательная (Барани), калорическая, прессорная, гальваническая, отолитовая (Воячек); поза Ромберга, пальценосовая, указательная, походка, спонтанный нистагм.</p></div></details>
+</section>
+
+<section id="slovar">
+  <div class="sec-head"><h2>Словарик для начинающих</h2></div>
+  <dl class="gloss">
+    <dt>Кинетоз</dt><dd>болезнь движения, укачивание.</dd>
+    <dt>Ускорение, g</dt><dd>изменение скорости; 1 g — ускорение свободного падения.</dd>
+    <dt>Вестибулярный аппарат</dt><dd>орган равновесия во внутреннем ухе: преддверие с отолитами и полукружные каналы.</dd>
+    <dt>Отолиты</dt><dd>кристаллы на рецепторах преддверия, чувствуют прямолинейное ускорение.</dd>
+    <dt>Нистагм</dt><dd>непроизвольное ритмичное подёргивание глаз; называют по быстрому компоненту.</dd>
+    <dt>Ядро Дейтерса</dt><dd>латеральное вестибулярное ядро ствола мозга, управляет тонусом разгибателей.</dd>
+    <dt>Медиальный продольный пучок</dt><dd>«кабель» в стволе, связывающий вестибулярные ядра с ядрами нервов глаз.</dd>
+    <dt>Проприорецепторы</dt><dd>датчики положения в мышцах, сухожилиях, суставах.</dd>
+    <dt>Вегетативный</dt><dd>относящийся к работе внутренних органов (сердце, сосуды, желудок, потовые железы).</dd>
+  </dl>
+</section>
+
+<section id="src">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ol class="links">
+    <li>Методичка кафедры «Кинетозы» — <code>source/metodichki/kinetozy.md</code> (фото <code>e4ScvSRsha8.jpg</code>).</li>
+    <li>Студенческие ответы на экзаменационный перечень ЧГУ, вопросы 28 и 29 (<code>source/otvety/patfiz-otvety.txt</code>).</li>
+    <li>Адо, 2000 — функциональные пробы как критерий болезни (PDF 40); раздел о факторах среды опущен (PDF 16).</li>
+    <li>Справочник MSD: <a href="https://www.msdmanuals.com/ru-ru/professional/заболевания-уха-горла-и-носа/заболевания-внутреннего-уха/нистагм">«Нистагм»</a>.</li>
+    <li>Большая медицинская энциклопедия: <a href="https://dic.academic.ru/dic.nsf/enc_medicine/13626/">«Калорическая проба»</a>.</li>
+    <li>«Центральные вестибулярные пути» — <a href="http://medbiol.ru/medbiol/phus_ner/000b7e3b.htm">medbiol.ru</a>; пособие ВолгГМУ «Анатомия вестибулярного анализатора»; Vestibulospinal Pathways — ditki; spbvet.info; Cerebellum (Springer), 2015 — сверено по выдержкам из поиска, сайты вузов из окружения недоступны.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Конспект к итоговому занятию № 1 по патофизиологии составил Евгений Якимов, группа М-03-24, медфак ЧГУ, октябрь 2026. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+  <p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('toggle-all'); if(!b) return;
+  b.addEventListener('click',function(){
+    var d=document.querySelectorAll('#quiz details.q');
+    var open=b.getAttribute('data-open')!=='1';
+    d.forEach(function(x){x.open=open;});
+    b.setAttribute('data-open',open?'1':'0');
+    b.textContent=open?'Свернуть все':'Открыть все';
+  });
+})();
+</script>
+</body>
+</html>

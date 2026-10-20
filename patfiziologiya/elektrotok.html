@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Патофизиология: электроток</title>
+<meta name="description" content="Патофизиология, итоговое занятие № 1: патогенное действие электрического тока — сила, напряжение, частота, путь, сопротивление тканей, электролиз, остановка дыхания и сердца.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#9E2A2B; --accent-soft:#F6E4E2;
+  --blue:#1C5A8C; --blue-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E3F1E7; --ok-fg:#1F6B3A;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#F0928A; --accent-soft:#3A1F1E;
+    --blue:#82B6E4; --blue-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#15301F; --ok-fg:#8FD6A6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#F0928A; --accent-soft:#3A1F1E;
+  --blue:#82B6E4; --blue-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#15301F; --ok-fg:#8FD6A6;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:780px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--blue); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2rem, 6vw, 2.8rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.5rem; font-weight:700}
+h3{font-size:1.1rem; font-weight:700; margin-top:1.5rem}
+p{margin:.6rem 0}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.05rem; color:var(--muted); max-width:64ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--blue-soft); color:var(--blue); text-decoration:none}
+a.chip.pdf{background:var(--accent); color:var(--surface)}
+nav.toc{margin:1.4rem 0 0; font-size:.93rem}
+nav.toc ol{padding-left:1.6rem; margin:.5rem 0 0; columns:2 250px; column-gap:1.8rem}
+nav.toc li{padding:.14rem 0; break-inside:avoid}
+nav.toc li::marker{font-family:var(--mono); color:var(--muted); font-size:.85em}
+section{padding-top:2.5rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .8rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.qn{font:500 .8rem/1 var(--mono); color:var(--surface); background:var(--accent); padding:.3rem .45rem; border-radius:5px; flex:none}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.32rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.4rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.def{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.75rem 1rem; margin:.9rem 0}
+.def .k{font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.25rem}
+.def p{margin:.2rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.3rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .7rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td.lv{font-weight:600; white-space:nowrap}
+.note{background:var(--blue-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.star{color:var(--accent); font-weight:600}
+.src{font:400 .78rem/1.4 var(--mono); color:var(--muted); margin-top:.4rem}
+/* лесенка уровней */
+.levels{display:grid; gap:8px; margin:1rem 0}
+.lvl{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem .9rem; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.65rem .85rem; border-left:5px solid var(--accent)}
+.lvl:nth-child(2){margin-left:4%} .lvl:nth-child(3){margin-left:8%} .lvl:nth-child(4){margin-left:12%} .lvl:nth-child(5){margin-left:16%}
+.lvl b{font-family:var(--serif); font-size:1rem}
+.lvl small{display:block; color:var(--muted); font-size:.78rem; line-height:1.3}
+.lvl .who{font-size:.9rem}
+@media (max-width:560px){ .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0} }
+/* цепочки этапов */
+.flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:1rem 0}
+.st{flex:1 1 130px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.6rem .7rem; position:relative; display:grid; gap:.25rem; align-content:start}
+.st .n{font:500 .74rem/1.2 var(--mono); color:var(--muted)}
+.st b{font-family:var(--serif); font-size:.98rem; line-height:1.25}
+.st .h{font-size:.82rem; color:var(--ink); line-height:1.35}
+.st .h em{font-style:normal; font-weight:600; color:var(--accent)}
+.st.zone{background:var(--accent-soft); border-color:transparent}
+.arrow{flex:0 0 auto; align-self:center; font:500 1.1rem/1 var(--mono); color:var(--muted)}
+@media (max-width:560px){ .flow{flex-direction:column} .arrow{transform:rotate(90deg); align-self:center} .st{flex-basis:auto} }
+/* хронология */
+.tl{list-style:none; padding:0; margin:1rem 0; border-left:2px solid var(--line)}
+.tl li{position:relative; padding:.1rem 0 .7rem 1.1rem}
+.tl li::before{content:""; position:absolute; left:-6px; top:.55rem; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+.tl .y{font:500 .85rem/1.3 var(--mono); color:var(--accent); display:block}
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin:.8rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .9rem}
+.card h4{margin:0 0 .35rem; font:600 .98rem/1.3 var(--sans)}
+.card ul{margin:.2rem 0; padding-left:1.05rem} .card li{margin:.22rem 0; font-size:.92rem}
+.card.a{border-top:4px solid var(--accent)} .card.b{border-top:4px solid var(--blue)}
+/* самопроверка */
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--blue); background:transparent; color:var(--blue); cursor:pointer}
+button:hover{background:var(--blue-soft)}
+details.q{border-bottom:1px solid var(--line)}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.7rem 2rem .7rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.58rem; font:500 1.2rem/1 var(--mono); color:var(--blue)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .85rem; font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.45rem; padding-left:1.1rem; font-size:.92rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.32rem} th,td{padding:.5rem .55rem} }
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+/* патофизиология: части ответа */
+section[id^="q"] > h3{font:600 .78rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin:1.4rem 0 .3rem}
+.easy{background:var(--ok-bg); border-radius:10px; padding:.75rem 1rem; margin:.5rem 0}
+.easy > :first-child{margin-top:0} .easy > :last-child{margin-bottom:0}
+.lead-link{font-weight:600; color:var(--accent)}
+.kv{display:inline-block; font:500 .72rem/1.2 var(--mono); padding:.18rem .4rem; border-radius:5px; vertical-align:.08em}
+.kv.c{background:var(--ok-bg); color:var(--ok-fg)} .kv.d{background:var(--accent-soft); color:var(--accent)}
+details.more{border:1px solid var(--line); border-radius:8px; background:var(--surface); margin:.45rem 0}
+details.more summary{cursor:pointer; padding:.6rem .8rem; font-weight:500; list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"? "; font-family:var(--mono); color:var(--blue)}
+details.more .a{padding:0 .8rem .7rem; font-size:.95rem}
+details.more .a p{margin:.3rem 0}
+.uncheck{color:var(--warn-fg); font-weight:600; white-space:nowrap}
+dl.gloss{margin:.6rem 0} dl.gloss dt{font-weight:600; margin-top:.6rem} dl.gloss dd{margin:.1rem 0 0 0; color:var(--ink)}
+svg.scheme{width:100%; height:auto; max-width:560px; display:block; margin:.8rem auto}
+svg.scheme text{font-family:var(--sans); fill:var(--ink)}
+svg.scheme .box{fill:var(--surface); stroke:var(--line)}
+svg.scheme .bad{fill:var(--accent-soft); stroke:var(--accent)}
+svg.scheme .good{fill:var(--ok-bg); stroke:var(--ok-fg)}
+svg.scheme .ln{stroke:var(--muted); fill:none; stroke-width:1.6}
+svg.scheme text.acc{fill:var(--accent)}
+svg.scheme .lnr{stroke:var(--accent); fill:none; stroke-width:1.8}
+@media print{ details.more{break-inside:avoid} details.more summary::before{content:none} .easy{border:1px solid #ccc} }
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.48}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar, a.chip.pdf{display:none}
+  section{padding-top:1.1rem}
+  h1{font-size:21pt} h2{font-size:14.5pt} h2, h3, .sec-head{break-after:avoid}
+  .tile, .lvl, .st, details.q, .tl li, tr, ol.steps li, ul.facts li{break-inside:avoid}
+  .tbl{overflow:visible}
+  .tbl, .def, .tile, .lvl, .st, .card{border-color:#ccc}
+  table{font-size:8.6pt} th,td{padding:.3rem .4rem}
+  .tiles{grid-template-columns:1fr 1fr}
+  .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0}
+  .flow{flex-direction:column} .arrow{transform:rotate(90deg)} .st{flex:0 0 auto}
+  .cols{grid-template-columns:1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Патофизиология · итоговое занятие № 1 · медфак ЧГУ</div>
+  <h1>III. Электрический ток</h1>
+  <p class="lead">От чего зависит опасность тока, как он повреждает ткани, что такое электролитическое действие, почему переменный ток 50–60 Гц опаснее постоянного, а ток высокой частоты лечит, и от чего умирают при электротравме.</p>
+  <div class="chips">
+    <a class="chip pdf" href="elektrotok.pdf">скачать PDF для телефона</a>
+    <span class="chip">9 вопросов раздела</span>
+    <span class="chip">методичка кафедры</span>
+    <span class="chip">ответы ЧГУ, вопрос 30</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Вопросы</div>
+    <ol>
+      <li><a href="#q1">От каких свойств тока зависит действие</a></li>
+      <li><a href="#q2">Механизмы патогенного действия</a></li>
+      <li><a href="#q3">Электролитическое действие</a></li>
+      <li><a href="#q4">Когда действие сильнее</a></li>
+      <li><a href="#q5">Ток высокой частоты в медицине</a></li>
+      <li><a href="#q6">Переменный и постоянный ток</a></li>
+      <li><a href="#q7">Сердце и дыхание при электротравме</a></li>
+      <li><a href="#q8">Сопротивление тканей</a></li>
+      <li><a href="#q9">Направление тока в организме</a></li>
+    </ol>
+    <p style="margin:.6rem 0 0"><a href="#quiz">Самопроверка</a> · <a href="#slovar">Словарик</a> · <a href="#src">Источники</a> · <a href="index.html">Все разделы</a></p>
+  </nav>
+</header>
+
+<section id="top">
+  <div class="sec-head"><h2>Главное за пять минут</h2></div>
+  <div class="tiles">
+    <div class="tile"><b>&lt; 40 В</b><span>переменный ток 40–60 Гц считают безвредным; 200–500 В — условно смертельный; &gt; 500 В — безусловно смертельный (методичка)</span></div>
+    <div class="tile"><b>20–25 мА</b><span>«неотпускающий» переменный ток: руки парализуются немедленно (методичка)</span></div>
+    <div class="tile"><b>90–100 мА</b><span>паралич дыхания; дольше 3 с — паралич сердца и трепетание желудочков (методичка)</span></div>
+    <div class="tile"><b>40–60 Гц</b><span>частота, вызывающая фибрилляцию желудочков (методичка)</span></div>
+    <div class="tile"><b>≥ 1 000 000 Гц</b><span>не патогенны, дают тепло — токи Тесла, д’Арсонваля, лечение (методичка)</span></div>
+    <div class="tile"><b>100 000 Ом</b><span>среднее сопротивление тела; лучший проводник — ликвор (методичка)</span></div>
+    <div class="tile"><b>0,02 с</b><span>при таком времени ток 1000 В не оказывает резкого действия (методичка)</span></div>
+    <div class="tile"><b>Анод / катод</b><span>кислая реакция — коагуляционный некроз / щелочная — колликвационный (методичка)</span></div>
+  </div>
+</section>
+
+<section id="q1">
+  <div class="sec-head"><span class="qn">III.1</span><h2>Перечислить, от каких свойств электрического тока зависит его патогенное действие?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры; ответы ЧГУ, вопрос 30</span>
+    <p>Патогенное действие зависит от: <b>силы тока</b>, <b>напряжения</b>, <b>вида тока</b> (переменный или постоянный) и <b>частоты</b> переменного тока, <b>направления (пути)</b> и <b>времени прохождения</b> тока через тело, а также от <b>сопротивления тканей</b> и <b>состояния реактивности организма</b>.</p>
+  </div>
+  <p>Последние два свойства — уже не тока, а организма: методичка разбирает их в том же перечне. По otvety (вопрос 30): <b>электрический ток</b> — упорядоченное движение заряженных частиц; <b>электротравма</b> — повреждение, вызванное воздействием электрического тока или электрической дуги; она в зависимости от этих факторов проявляется «от незначительных болевых ощущений до обугливания тканей и смерти».</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Опасность тока — как опасность воды из шланга. <b>Напряжение</b> — напор, <b>сила тока</b> — сколько воды реально прошло через тело (главное!), <b>сопротивление</b> — насколько плотно закрыт кран (сухая кожа — плотно, мокрая — открыт). <b>Путь</b> — через какой «этаж» прошла вода: если через сердце — беда. <b>Время</b> — сколько секунд лило.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Связь величин — закон Ома: сила тока = напряжение / сопротивление. Повреждает именно <b>ток через ткани</b>; напряжение важно, потому что пробивает сопротивление кожи.</p>
+  <div class="flow">
+    <div class="st"><span class="n">источник</span><b>Напряжение, вид, частота</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">организм</span><b>Сопротивление (кожа!) и путь</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">ведущее</span><b>Сила тока через ткани × время</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">исход</span><b>От ощущения до остановки сердца</b></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Напряжение переменного тока 40–60 Гц</th><th>Оценка</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">ниже 40 В</td><td>безвредно</td></tr>
+      <tr><td class="lv">до 100 В</td><td>условно патогенно (для больных с тяжёлыми заболеваниями сердца, органов дыхания и т.д.)</td></tr>
+      <tr><td class="lv">200–500 В</td><td>условно смертельно</td></tr>
+      <tr><td class="lv">выше 500 В</td><td>безусловно смертельно</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">методичка, лист «7»</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какая сила тока смертельно опасна?</summary><div class="a"><p>Ток силой 100 мА является смертельно опасным (otvety, вопрос 30); по таблице методички 90–100 мА переменного тока — паралич дыхания, при длительности более 3 с — паралич сердца и устойчивое трепетание желудочков.</p></div></details>
+  <details class="more"><summary>Какое напряжение какую летальность даёт?</summary><div class="a"><p>До 40 В смертельных поражений не вызывает, при 1000 В летальность достигает 50 %, при 30 000 В — 100 % (otvety, вопрос 30; в Адо 2000 раздела нет — <span class="uncheck">⚠ не проверено</span>).</p></div></details>
+  <div class="note"><p><b>Как говорить:</b> методичка начинает с напряжения — «патогенное действие тем сильнее, чем выше напряжение». Добавьте физику (закон Ома): через ткани идёт ток, его сила зависит от напряжения и сопротивления, поэтому высокое напряжение и опасно. <b>Связь с медкатом:</b> первое правило первой помощи — прекратить действие тока, не касаясь пострадавшего голыми руками.</p></div>
+</section>
+
+<section id="q2">
+  <div class="sec-head"><span class="qn">III.2</span><h2>Механизмы патогенного действия электрического тока.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Механизм повреждений в организме при электротравме · методичка кафедры</span>
+    <p><b>Местные изменения</b> — ожоги, электрические знаки, электролиз. <b>Общие реакции организма</b>: при прохождении через тело электрический ток вызывает возбуждение нервных рецепторов и проводников, скелетной и гладкой мускулатуры, железистых тканей. Это приводит к возникновению <b>тонических судорог</b> скелетных и гладких мышц, что может сопровождаться вывихом конечностей, спазмом голосовых связок, остановкой дыхания, повышением кровяного давления, непроизвольным мочеиспусканием и дефекацией.</p>
+  </div>
+  <p>Принятая группировка действия тока (по материалам по электробезопасности; в методичке так не сгруппировано): <b>тепловое (термическое)</b> — ожоги; <b>электролитическое</b> — разложение жидкостей и поляризация мембран; <b>механическое</b> — расслоение и разрывы тканей; <b>биологическое</b> — возбуждение тканей, судороги, нарушение ритма сердца.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Ток через тело делает четыре вещи сразу: <b>греет</b> (как спираль чайника — ожоги), <b>разлагает</b> жидкости на кислоту и щёлочь (как в школьном опыте с электролизом воды), <b>рвёт</b> ткани паром и ударом и <b>командует</b> мышцами и сердцем вместо нервов — мышцы сводит судорогой, сердце сбивается с ритма.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">вход тока</span><b>Ток проходит по тканям</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">местно</span><b>Ожог, знак тока, электролиз</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">общее</span><b>Возбуждение нервов и мышц → тонические судороги</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">ведущее</span><b>Остановка дыхания и сердца</b><span class="h">непосредственная причина смерти</span></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Местное изменение</th><th>Описание (методичка)</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Знаки тока</td><td>на месте прохождения; небольшие участки кожи круглой или овальной формы, твёрдой консистенции, окаймлённые волнообразным возвышением; по окружности — ветвистый рисунок красного цвета</td></tr>
+      <tr><td class="lv">Ожоги</td><td>на месте контакта тока с телом; при прохождении через кости — «костные бусы» из фосфорнокислой извести</td></tr>
+      <tr><td class="lv">Электролиз</td><td>у анода — кислая реакция и коагуляционный некроз, у катода — щелочная и колликвационный (III.3)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Чем отличается поражение молнией?</summary><div class="a"><p>Кратковременное (доли секунды, секунды) прохождение тока огромного напряжения (до миллионов вольт); смерть — от паралича сердца и (или) дыхания; на теле ожоги, кровоизлияния в виде ветвистых «фигур», возможен отрыв тканей (otvety, вопрос 30).</p></div></details>
+  <details class="more"><summary>Почему при электротравме бывают вывихи?</summary><div class="a"><p>Ток возбуждает мышцы напрямую — возникают тонические судороги такой силы, что вывихиваются конечности (методичка).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> описывать только ожоги. На зачёте важнее <b>общее</b> действие — возбуждение тканей и остановка дыхания и сердца. <b>Связь с хирургией:</b> маленький знак тока на коже не отражает тяжести: ток может разрушить глубокие ткани по ходу <span class="uncheck">⚠ не проверено</span>.</p></div>
+</section>
+
+<section id="q3">
+  <div class="sec-head"><span class="qn">III.3</span><h2>Что следует понимать под электролитическим действием электрического тока?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры</span>
+    <p>Электрический ток вызывает нарушение равновесия в клетках различных тканей, изменяет их биологический потенциал, приводит к <b>поляризации клеточных мембран</b>: у <b>анода</b> скапливаются положительно заряженные ионы (возникает <b>кислая реакция с коагуляцией белков — коагуляционный некроз</b>), у <b>катода</b> скапливаются отрицательно заряженные ионы (возникает <b>щелочная реакция — колликвационный некроз</b>).</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Ткани — солёный раствор. Ток растаскивает ионы к двум полюсам: у одного полюса копится кислота, у другого щёлочь. Кислота «сворачивает» белок, как лимонный сок молоко, — ткань становится плотной и сухой (коагуляционный некроз). Щёлочь, наоборот, «растворяет» ткань, она становится мягкой, разжиженной (колликвационный некроз).</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Ток через ткани-электролиты</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Перемещение ионов, поляризация мембран</b><span class="h">нарушение биопотенциала клеток</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">анод</span><b>+ ионы → кислая среда → коагуляционный некроз</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">катод</span><b>− ионы → щелочная среда → колликвационный некроз</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как выглядит коагуляционный и колликвационный некроз?</summary><div class="a"><p>Коагуляционный — сухой, плотный (белки свёрнуты); колликвационный — влажный, с размягчением и разжижением ткани (патанатомия, тема «некроз»; см. конспект патанатомии на сайте).</p></div></details>
+  <details class="more"><summary>Электролитическое действие сильнее у постоянного или у переменного тока?</summary><div class="a"><p>У постоянного: ионы непрерывно движутся в одну сторону, а у переменного направление меняется много раз в секунду <span class="uncheck">⚠ не проверено</span> (вывод из физики электролиза, в методичке прямо не сказано).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> перепутать полюса. <b>Анод — кислота — коагуляция</b>, <b>катод — щёлочь — колликвация</b> (методичка). <b>Связь с физиотерапией:</b> на этом же разделении ионов основан лекарственный электрофорез.</p></div>
+</section>
+
+<section id="q4">
+  <div class="sec-head"><span class="qn">III.4</span><h2>При каких условиях патогенное действие электрического тока проявляется сильнее?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Патогенное действие электрического тока тем сильнее, чем <b>выше его напряжение</b>. … <b>Повышение обмена веществ</b> (тиреотоксикоз, перегревание), <b>кровопотеря</b>, <b>алкогольное опьянение</b> повышают чувствительность организма к поражающему действию электрического тока.</p>
+  </div>
+  <ul class="facts">
+    <li>больше сила и напряжение тока; переменный ток 40–60 Гц;</li>
+    <li>дольше время действия (при 0,02 с ток 1000 В не оказывает резкого действия — методичка; при 1 с — смертелен — otvety, вопрос 30);</li>
+    <li>путь через сердце или голову (III.9);</li>
+    <li>низкое сопротивление кожи — влажная, повреждённая кожа (MSD);</li>
+    <li>сниженная резистентность: тиреотоксикоз, перегревание, кровопотеря, алкогольное опьянение (методичка); утомление, ослабление внимания, гипоксия, сердечно-сосудистая недостаточность (otvety, вопрос 30).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Сильнее бьёт током того, кто мокрый, уставший, выпивший, с больным сердцем, — и того, кто не ожидал удара. Тот, кто готов к удару (напряжён) или под глубоким наркозом, переносит его легче — нервная система по-разному «пропускает» команду тока.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">физика</span><b>↑ U, ↓ R кожи → ↑ I</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">путь и время</span><b>Через сердце, дольше 3 с</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">реактивность</span><b>↑ обмена, кровопотеря, алкоголь</b><span class="h">↑ чувствительности тканей</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">итог</span><b>Тяжелее поражение</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Когда тяжесть поражения ниже?</summary><div class="a"><p>При эмоциональном напряжении от ожидания удара, в состоянии наркоза и глубокого опьянения (otvety, вопрос 30). Обратите внимание: лёгкое и умеренное опьянение, наоборот, снижает резистентность.</p></div></details>
+  <details class="more"><summary>Как это связано с реактивностью?</summary><div class="a"><p>Вывод конспекта: это пример индивидуальной реактивности — воздействие фактора на группу людей не вызывает у всех одинаковых изменений (методичка «Реактивность», лист «6»; там пример — грипп).</p></div></details>
+  <div class="note"><p><b>Расхождение:</b> методичка называет алкогольное опьянение фактором, повышающим чувствительность; otvety уточняют — лёгкое и умеренное повышает, глубокое снижает. На зачёте отвечать по методичке, уточнение — как дополнение.</p></div>
+</section>
+
+<section id="q5">
+  <div class="sec-head"><span class="qn">III.5</span><h2>В чем принцип применения переменного тока высокой частоты в медицине?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Переменные токи частотой <b>1 000 000 Гц и выше не являются патогенными</b>, зато при высоком напряжении (токи <b>Тесла, д’Арсонваля</b>) оказывают <b>тепловое действие</b> и применяются с лечебной целью.</p>
+  </div>
+  <p>Принцип: при очень высокой частоте направление тока меняется так быстро, что мембраны нервов и мышц <b>не успевают возбудиться</b> (не успевают деполяризоваться) — биологического, раздражающего действия нет; остаётся <b>прогревание</b> тканей <span class="uncheck">⚠ не проверено</span> (объяснение — из физиологии возбудимых тканей, в методичке не приведено).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Чтобы нерв «щёлкнул», его надо толкнуть в одну сторону хотя бы на мгновение. Ток высокой частоты дёргает туда-сюда миллион раз в секунду — нерв просто не успевает среагировать, как маятник, который трясут слишком быстро. А трение ионов при этом даёт тепло — его и используют, чтобы прогреть ткани.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Частота ≥ 10⁶ Гц</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Полупериод короче времени возбуждения</b><span class="h">нет судорог и фибрилляции</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">3</span><b>Колебания ионов → тепло</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">применение</span><b>Прогревание, физиотерапия</b><span class="h">дарсонвализация, диатермия</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какая частота наиболее опасна и почему?</summary><div class="a"><p>40–60 Гц — именно она вызывает фибрилляцию желудочков (методичка). Объяснение — частота близка к той, с которой сердечная мышца способна возбуждаться, — <span class="uncheck">⚠ не проверено</span>.</p></div></details>
+  <details class="more"><summary>Где ещё в медицине используют ток?</summary><div class="a"><p>Дефибрилляция, электрокардиостимуляция (Адо, PDF 19); электрокоагуляция в хирургии — тепловое действие высокочастотного тока <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div></details>
+  <div class="note"><p><b>Связь с клиникой:</b> электронож в операционной — тот же принцип: высокочастотный ток режет и коагулирует ткани теплом, не вызывая судорог и остановки сердца.</p></div>
+</section>
+
+<section id="q6">
+  <div class="sec-head"><span class="qn">III.6</span><h2>Дайте краткую характеристику патогенности переменного и постоянного электрического тока?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>При одной и той же силе <b>переменный ток более опасен, чем постоянный</b>. Возникновение фибрилляции желудочков обладает переменный ток частотой <b>40-60 Гц</b>.</p>
+  </div>
+  <p>Переменный ток низкой частоты действует <b>раздражающе</b>: судороги, «неотпускающий» ток, паралич дыхания, фибрилляция. Постоянный ток при той же силе ощущается в основном как <b>нагрев</b> (таблица методички); опасен при больших значениях; сильнее даёт электролиз <span class="uncheck">⚠ не проверено</span>.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Постоянный ток толкает ионы в одну сторону — мышца вздрагивает в основном при включении и выключении (физиология возбудимых тканей). Переменный 50 Гц дёргает её 50 раз в секунду — получается сплошная судорога: рука сжимает провод и не может его отпустить.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Почему переменный опаснее (объяснение конспекта <span class="uncheck">⚠ не проверено</span>): каждый период — новое раздражение мышц и нервов → тетаническое сокращение (рука «прилипает»), а частота попадает в уязвимый период сердечного цикла. Сам факт: переменный ток 40–60 Гц вызывает фибрилляцию желудочков (методичка). Опасность переменного тока при 42,5 В равна опасности постоянного при 120 В (otvety, вопрос 30).</p>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Сила, мА</th><th>Переменный ток (60 Гц)</th><th>Постоянный ток</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">0,6–1,5</td><td>начало ощущения, лёгкое дрожание пальцев</td><td>не ощущается</td></tr>
+      <tr><td class="lv">12–15</td><td>руки трудно оторвать от электродов, сильные боли; терпимо 5–10 с</td><td>усиление нагрева</td></tr>
+      <tr><td class="lv">20–25</td><td>руки парализуются немедленно, «неотпускающий» ток, затрудняется дыхание</td><td>незначительное сокращение мышц рук</td></tr>
+      <tr><td class="lv">50–80</td><td>паралич дыхания, трепетание желудочков</td><td>сильный нагрев, сокращение мышц рук, судороги, затруднение дыхания</td></tr>
+      <tr><td class="lv">90–100</td><td>паралич дыхания; дольше 3 с — паралич сердца и устойчивое трепетание желудочков</td><td>паралич дыхания</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">методичка, листы «7» и следующий. В otvety (вопрос 30) таблица полнее: 2–3 мА — сильное дрожание пальцев / не ощущается; 5–10 мА — судороги в руках / зуд, ощущение нагрева; 20–25 мА — ещё «очень сильные боли, терпимо не более 5 с» / «ещё более значительное усиление нагрева»; 3000 мА и более — см. ниже.</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему «неотпускающий» ток так опасен?</summary><div class="a"><p>Основная опасность — «приковывание» поражённого к токоведущему предмету (otvety, вопрос 30): время действия растёт, а с ним — до паралича дыхания и сердца.</p></div></details>
+  <details class="more"><summary>Что происходит при 3000 мА и более?</summary><div class="a"><p>Паралич дыхания и сердца при действии более 0,1 с, разрушение тканей джоулевым теплом (otvety, вопрос 30).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать, что постоянный ток вообще безопасен. Он опасен при большой силе (паралич дыхания при 90–100 мА — методичка). <b>Связь с бытом:</b> бытовая сеть — переменный ток 50 Гц, как раз опасного диапазона.</p></div>
+</section>
+
+<section id="q7">
+  <div class="sec-head"><span class="qn">III.7</span><h2>Как изменяется сердечная деятельность и дыхание при электротравмах?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p><b>Непосредственной причиной смерти</b> при электротравме являются <b>остановка дыхания и остановка сердца</b>. <i>Остановка дыхания может быть обусловлена:</i> 1) поражением дыхательного центра; 2) спазмом позвоночных артерий, снабжающих кровью дыхательный центр; 3) спазмом дыхательной мускулатуры; 4) нарушением проходимости дыхательных путей вследствие ларингоспазма. <i>Остановка сердца может возникнуть вследствие:</i> 1) фибрилляции желудочков; 2) спазма коронарных сосудов; 3) поражения сосудодвигательного центра; 4) повышения тонуса блуждающего нерва.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Дыхание может остановиться «сверху» (ток ударил по центру в мозге или сжал артерии, которые его кормят) и «снизу» (судорога свела дыхательные мышцы или гортань). Сердце останавливается чаще всего потому, что ток сбивает его ритм на «мерцание» — фибрилляцию: желудочки дрожат, но не качают кровь.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="cols">
+    <div class="card a"><h4>Дыхание</h4><ul>
+      <li>центр: прямое поражение дыхательного центра;</li>
+      <li>сосуды: спазм позвоночных артерий → ишемия центра;</li>
+      <li>мышцы: тонический спазм дыхательной мускулатуры;</li>
+      <li>гортань: ларингоспазм.</li></ul></div>
+    <div class="card b"><h4>Сердце</h4><ul>
+      <li>фибрилляция желудочков (ток 40–60 Гц);</li>
+      <li>спазм коронарных сосудов → ишемия миокарда;</li>
+      <li>поражение сосудодвигательного центра;</li>
+      <li>↑ тонуса блуждающего нерва (→ брадикардия, асистолия — пояснение конспекта).</li></ul></div>
+  </div>
+  <p class="src">методичка</p>
+  <p>Ход событий: сначала <b>повышение АД</b> и тонические судороги (общая реакция — методичка), затем при достаточной силе тока — паралич дыхания (50–100 мА) и фибрилляция желудочков (таблица, III.6).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что такое «мнимая смерть» при электротравме?</summary><div class="a"><p>Состояние, при котором дыхание и сердцебиение почти неуловимы, но человек жив: при немедленной реанимации его можно спасти <span class="uncheck">⚠ не проверено</span> (термин из учебников по судебной медицине, в источниках курса нет).</p></div></details>
+  <details class="more"><summary>Как помочь при остановке сердца от тока?</summary><div class="a"><p>Прекратить действие тока, начать сердечно-лёгочную реанимацию; при фибрилляции — дефибрилляция (Адо называет дефибрилляцию среди методов, требующих знания патофизиологии кровообращения, PDF 19).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> называть только фибрилляцию. В методичке по <b>четыре</b> причины остановки дыхания и сердца — их и спрашивают. <b>Связь с кардиологией:</b> парадокс — ток вызывает фибрилляцию, и ток же (разряд дефибриллятора) её прекращает.</p></div>
+</section>
+
+<section id="q8">
+  <div class="sec-head"><span class="qn">III.8</span><h2>Как отмечается сопротивление отдельных тканей к электротоку?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Сопротивление и электропроводимость · методичка кафедры</span>
+    <p>Ткани организма состоят из плотных веществ, плохо проводящих электрический ток, и из жидкостей, являющихся хорошими проводниками. Наилучшей электропроводностью обладает <b>спинномозговая жидкость (ликвор)</b>. По степени сопротивления ткани организма распределяются следующим образом: <b>кожа, сухожилия, кости, нервы, мышцы, кровь</b>. Сопротивление тела человека в среднем составляет <b>100 000 Ом</b>.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Чем больше в ткани воды с солями, тем лучше она проводит ток. Сухая роговая кожа — «изолятор», кровь и ликвор — почти «провод». Поэтому главная защита — кожа: если она сухая и целая, ток маленький; мокрые руки снимают эту защиту.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">больше всего</span><b>Кожа</b></div><div class="arrow">→</div>
+    <div class="st"><b>Сухожилия</b></div><div class="arrow">→</div>
+    <div class="st"><b>Кости</b></div><div class="arrow">→</div>
+    <div class="st"><b>Нервы</b></div><div class="arrow">→</div>
+    <div class="st"><b>Мышцы</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">меньше всего</span><b>Кровь; лучший проводник — ликвор</b></div>
+  </div>
+  <p>Ток, пройдя кожу, идёт по пути наименьшего сопротивления — по сосудам и нервам; повреждение глубоких тканей бывает больше, чем видно на коже (MSD, «Повреждения электрическим током»).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>От чего зависит сопротивление кожи?</summary><div class="a"><p>От влажности, толщины рогового слоя, целости кожи и площади контакта: влажная и повреждённая кожа резко снижает сопротивление (MSD; числа сопротивления сухой и влажной кожи <span class="uncheck">⚠ не проверены</span>).</p></div></details>
+  <details class="more"><summary>Почему кости при этом страдают?</summary><div class="a"><p>При прохождении тока через кости образуются «костные бусы» из фосфорнокислой извести (методичка); связь с высоким сопротивлением и нагревом — объяснение конспекта.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> считать, что лучший проводник — кровь. По методичке — <b>ликвор</b>; кровь стоит последней в ряду сопротивления, т.е. тоже хорошо проводит. <b>Связь с хирургией:</b> глубокие электроожоги мышц дают миоглобинурию и острую почечную недостаточность <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div>
+</section>
+
+<section id="q9">
+  <div class="sec-head"><span class="qn">III.9</span><h2>Как зависит патогенное действие электрического тока от его направления в организме?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Направление и время прохождения тока · методичка кафедры</span>
+    <p>В эксперименте пропускание тока через <b>задние конечности</b> животного вызывает болевой эффект и судороги мышц, пропускание тока через <b>голову</b> — судороги всего тела, паралич дыхания, электрошок. Пропускание тока через <b>сердце</b> вызывает его фибрилляцию и аритмию.</p>
+  </div>
+  <p>Пути тока через тело называют <b>петлями тока</b>: рука–рука, рука–нога, нога–нога, голова–рука, голова–нога. Самые опасные — те, что проходят через <b>сердце</b> (рука–рука, рука–нога) и <b>голову</b> (MSD; учебные материалы по электробезопасности). Нога–нога («шаговое напряжение») обычно легче.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Важно, что окажется «на пути» тока. Прошёл по ногам — больно и сведёт мышцы. Прошёл через грудь — может сбить сердце. Прошёл через голову — выключит дыхательный центр и вызовет судороги всего тела.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">конечности</span><b>Нога–нога</b><span class="h">боль, местные судороги</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">через сердце</span><b>Рука–рука, рука–нога</b><span class="h">фибрилляция, аритмия</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">через голову</span><b>Голова–рука, голова–нога</b><span class="h">судороги, паралич дыхания, электрошок</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как время прохождения меняет действие?</summary><div class="a"><p>Если время действия не превышает 0,02 с, ток 1000 В не оказывает резкого патогенного действия (методичка); при экспозиции 1 с — смертельный исход (otvety, вопрос 30).</p></div></details>
+  <details class="more"><summary>Что такое шаговое напряжение?</summary><div class="a"><p>Разность потенциалов между ногами человека возле упавшего на землю провода — петля нога–нога; выходить из зоны нужно мелкими шагами, не отрывая ступни <span class="uncheck">⚠ не проверено</span> (из материалов по электробезопасности, не из источников курса).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать «опаснее всего ток через голову» и забыть про сердце. По методичке через голову — паралич дыхания и электрошок, через сердце — фибрилляция; обе петли смертельно опасны. <b>Связь с психиатрией:</b> электросудорожная терапия — контролируемое пропускание тока через голову.</p></div>
+</section>
+
+<section id="quiz">
+  <div class="sec-head"><h2>Самопроверка: ответ одной фразой</h2></div>
+  <div class="quiz-bar"><p>Сначала ответьте вслух, потом откройте.</p><button type="button" id="toggle-all">Открыть все</button></div>
+  <details class="q"><summary>III.1. От чего зависит патогенное действие тока?</summary><div class="a"><p>Сила, напряжение, вид и частота тока, путь и время прохождения, сопротивление тканей, реактивность организма.</p></div></details>
+  <details class="q"><summary>III.2. Механизмы действия тока?</summary><div class="a"><p>Местно — ожоги, знаки тока, электролиз; общее — возбуждение нервов, мышц, желёз → тонические судороги, остановка дыхания и сердца.</p></div></details>
+  <details class="q"><summary>III.3. Электролитическое действие?</summary><div class="a"><p>Поляризация мембран: у анода кислая реакция и коагуляционный некроз, у катода щелочная и колликвационный некроз.</p></div></details>
+  <details class="q"><summary>III.4. Когда действие сильнее?</summary><div class="a"><p>Выше напряжение, дольше время, путь через сердце или голову, влажная кожа; тиреотоксикоз, перегревание, кровопотеря, алкогольное опьянение.</p></div></details>
+  <details class="q"><summary>III.5. Принцип тока высокой частоты?</summary><div class="a"><p>Токи от 1 000 000 Гц не возбуждают ткани, но дают тепло — токи Тесла и д’Арсонваля применяют для лечения.</p></div></details>
+  <details class="q"><summary>III.6. Переменный или постоянный опаснее?</summary><div class="a"><p>При той же силе переменный; 40–60 Гц вызывает фибрилляцию желудочков, 20–25 мА — «неотпускающий» ток.</p></div></details>
+  <details class="q"><summary>III.7. Причины остановки дыхания и сердца?</summary><div class="a"><p>Дыхание: поражение центра, спазм позвоночных артерий, спазм дыхательных мышц, ларингоспазм. Сердце: фибрилляция, спазм коронаров, поражение сосудодвигательного центра, ↑ тонуса вагуса.</p></div></details>
+  <details class="q"><summary>III.8. Сопротивление тканей?</summary><div class="a"><p>По убыванию: кожа, сухожилия, кости, нервы, мышцы, кровь; лучший проводник — ликвор; тело в среднем 100 000 Ом.</p></div></details>
+  <details class="q"><summary>III.9. Зависимость от направления?</summary><div class="a"><p>Через конечности — боль и судороги; через голову — судороги всего тела, паралич дыхания, электрошок; через сердце — фибрилляция и аритмия.</p></div></details>
+</section>
+
+<section id="slovar">
+  <div class="sec-head"><h2>Словарик для начинающих</h2></div>
+  <dl class="gloss">
+    <dt>Сила тока (мА)</dt><dd>сколько электричества прошло через тело — главный повреждающий показатель.</dd>
+    <dt>Напряжение (В)</dt><dd>«напор» тока, способность пробить сопротивление.</dd>
+    <dt>Сопротивление (Ом)</dt><dd>насколько ткань мешает прохождению тока.</dd>
+    <dt>Анод / катод</dt><dd>положительный / отрицательный полюс.</dd>
+    <dt>Коагуляционный некроз</dt><dd>сухая гибель ткани со свёртыванием белков.</dd>
+    <dt>Колликвационный некроз</dt><dd>влажная гибель ткани с разжижением.</dd>
+    <dt>Фибрилляция желудочков</dt><dd>хаотичное подёргивание волокон сердца без выброса крови — остановка кровообращения.</dd>
+    <dt>Ларингоспазм</dt><dd>судорожное смыкание голосовой щели.</dd>
+    <dt>«Неотпускающий» ток</dt><dd>ток, при котором человек не может разжать руку и отпустить провод.</dd>
+    <dt>Знак тока</dt><dd>плотный круглый или овальный участок кожи на месте прохождения тока.</dd>
+  </dl>
+</section>
+
+<section id="src">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ol class="links">
+    <li>Методичка кафедры «Патогенное действие электрического тока» — <code>source/metodichki/elektrotok.md</code> (фото <code>xvkFd-cduTM.jpg</code>, <code>cMfup3m5RWE.jpg</code>).</li>
+    <li>Студенческие ответы на экзаменационный перечень ЧГУ, вопрос 30 (<code>source/otvety/patfiz-otvety.txt</code>) — помеченные места.</li>
+    <li>Адо, 2000 — раздел о болезнетворных факторах среды опущен (PDF 16); упоминание дефибрилляции — PDF 19.</li>
+    <li>Справочник MSD: <a href="https://www.msdmanuals.com/ru-ru/professional/травмы-отравления/повреждения-электрическим-током-и-молнией/повреждения-электрическим-током">«Повреждения электрическим током»</a> — пути тока и сопротивление кожи (сверено по выдержкам).</li>
+    <li>Учебные материалы по электробезопасности (виды действия тока, петли тока) — например, <a href="https://work.zabgu.ru/Faculties/EF/ID_17/%d0%91%d0%96%d0%94/27.10.20%20%d0%91%d0%96%d0%94%20%d0%98%d0%94-17%20%d0%9e%d1%81%d0%bd%d0%be%d0%b2%d1%8b%20%d1%8d%d0%bb%d0%b5%d0%ba%d1%82%d1%80%d0%be%d0%b1%d0%b5%d0%b7%d0%be%d0%bf%d0%b0%d1%81%d0%bd%d0%be%d1%81%d1%82%d0%b8.docx">ЗабГУ, «Основы электробезопасности»</a> (сверено по выдержкам).</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Конспект к итоговому занятию № 1 по патофизиологии составил Евгений Якимов, группа М-03-24, медфак ЧГУ, октябрь 2026. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+  <p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('toggle-all'); if(!b) return;
+  b.addEventListener('click',function(){
+    var d=document.querySelectorAll('#quiz details.q');
+    var open=b.getAttribute('data-open')!=='1';
+    d.forEach(function(x){x.open=open;});
+    b.setAttribute('data-open',open?'1':'0');
+    b.textContent=open?'Свернуть все':'Открыть все';
+  });
+})();
+</script>
+</body>
+</html>

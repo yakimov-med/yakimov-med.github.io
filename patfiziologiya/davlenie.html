@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Патофизиология: давление</title>
+<meta name="description" content="Патофизиология, итоговое занятие № 1: высотная (горная) болезнь — стадии, высоты, механизмы; кессонная болезнь — этиология, патогенез, профилактика и лечение.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#9E2A2B; --accent-soft:#F6E4E2;
+  --blue:#1C5A8C; --blue-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E3F1E7; --ok-fg:#1F6B3A;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#F0928A; --accent-soft:#3A1F1E;
+    --blue:#82B6E4; --blue-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#15301F; --ok-fg:#8FD6A6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#F0928A; --accent-soft:#3A1F1E;
+  --blue:#82B6E4; --blue-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#15301F; --ok-fg:#8FD6A6;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:780px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--blue); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2rem, 6vw, 2.8rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.5rem; font-weight:700}
+h3{font-size:1.1rem; font-weight:700; margin-top:1.5rem}
+p{margin:.6rem 0}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.05rem; color:var(--muted); max-width:64ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--blue-soft); color:var(--blue); text-decoration:none}
+a.chip.pdf{background:var(--accent); color:var(--surface)}
+nav.toc{margin:1.4rem 0 0; font-size:.93rem}
+nav.toc ol{padding-left:1.6rem; margin:.5rem 0 0; columns:2 250px; column-gap:1.8rem}
+nav.toc li{padding:.14rem 0; break-inside:avoid}
+nav.toc li::marker{font-family:var(--mono); color:var(--muted); font-size:.85em}
+section{padding-top:2.5rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .8rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.qn{font:500 .8rem/1 var(--mono); color:var(--surface); background:var(--accent); padding:.3rem .45rem; border-radius:5px; flex:none}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.32rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.4rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.def{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.75rem 1rem; margin:.9rem 0}
+.def .k{font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.25rem}
+.def p{margin:.2rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.3rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .7rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td.lv{font-weight:600; white-space:nowrap}
+.note{background:var(--blue-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.star{color:var(--accent); font-weight:600}
+.src{font:400 .78rem/1.4 var(--mono); color:var(--muted); margin-top:.4rem}
+/* лесенка уровней */
+.levels{display:grid; gap:8px; margin:1rem 0}
+.lvl{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem .9rem; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.65rem .85rem; border-left:5px solid var(--accent)}
+.lvl:nth-child(2){margin-left:4%} .lvl:nth-child(3){margin-left:8%} .lvl:nth-child(4){margin-left:12%} .lvl:nth-child(5){margin-left:16%}
+.lvl b{font-family:var(--serif); font-size:1rem}
+.lvl small{display:block; color:var(--muted); font-size:.78rem; line-height:1.3}
+.lvl .who{font-size:.9rem}
+@media (max-width:560px){ .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0} }
+/* цепочки этапов */
+.flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:1rem 0}
+.st{flex:1 1 130px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.6rem .7rem; position:relative; display:grid; gap:.25rem; align-content:start}
+.st .n{font:500 .74rem/1.2 var(--mono); color:var(--muted)}
+.st b{font-family:var(--serif); font-size:.98rem; line-height:1.25}
+.st .h{font-size:.82rem; color:var(--ink); line-height:1.35}
+.st .h em{font-style:normal; font-weight:600; color:var(--accent)}
+.st.zone{background:var(--accent-soft); border-color:transparent}
+.arrow{flex:0 0 auto; align-self:center; font:500 1.1rem/1 var(--mono); color:var(--muted)}
+@media (max-width:560px){ .flow{flex-direction:column} .arrow{transform:rotate(90deg); align-self:center} .st{flex-basis:auto} }
+/* хронология */
+.tl{list-style:none; padding:0; margin:1rem 0; border-left:2px solid var(--line)}
+.tl li{position:relative; padding:.1rem 0 .7rem 1.1rem}
+.tl li::before{content:""; position:absolute; left:-6px; top:.55rem; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+.tl .y{font:500 .85rem/1.3 var(--mono); color:var(--accent); display:block}
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin:.8rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .9rem}
+.card h4{margin:0 0 .35rem; font:600 .98rem/1.3 var(--sans)}
+.card ul{margin:.2rem 0; padding-left:1.05rem} .card li{margin:.22rem 0; font-size:.92rem}
+.card.a{border-top:4px solid var(--accent)} .card.b{border-top:4px solid var(--blue)}
+/* самопроверка */
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--blue); background:transparent; color:var(--blue); cursor:pointer}
+button:hover{background:var(--blue-soft)}
+details.q{border-bottom:1px solid var(--line)}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.7rem 2rem .7rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.58rem; font:500 1.2rem/1 var(--mono); color:var(--blue)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .85rem; font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.45rem; padding-left:1.1rem; font-size:.92rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.32rem} th,td{padding:.5rem .55rem} }
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+/* патофизиология: части ответа */
+section[id^="q"] > h3{font:600 .78rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin:1.4rem 0 .3rem}
+.easy{background:var(--ok-bg); border-radius:10px; padding:.75rem 1rem; margin:.5rem 0}
+.easy > :first-child{margin-top:0} .easy > :last-child{margin-bottom:0}
+.lead-link{font-weight:600; color:var(--accent)}
+.kv{display:inline-block; font:500 .72rem/1.2 var(--mono); padding:.18rem .4rem; border-radius:5px; vertical-align:.08em}
+.kv.c{background:var(--ok-bg); color:var(--ok-fg)} .kv.d{background:var(--accent-soft); color:var(--accent)}
+details.more{border:1px solid var(--line); border-radius:8px; background:var(--surface); margin:.45rem 0}
+details.more summary{cursor:pointer; padding:.6rem .8rem; font-weight:500; list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"? "; font-family:var(--mono); color:var(--blue)}
+details.more .a{padding:0 .8rem .7rem; font-size:.95rem}
+details.more .a p{margin:.3rem 0}
+.uncheck{color:var(--warn-fg); font-weight:600; white-space:nowrap}
+dl.gloss{margin:.6rem 0} dl.gloss dt{font-weight:600; margin-top:.6rem} dl.gloss dd{margin:.1rem 0 0 0; color:var(--ink)}
+svg.scheme{width:100%; height:auto; max-width:560px; display:block; margin:.8rem auto}
+svg.scheme text{font-family:var(--sans); fill:var(--ink)}
+svg.scheme .box{fill:var(--surface); stroke:var(--line)}
+svg.scheme .bad{fill:var(--accent-soft); stroke:var(--accent)}
+svg.scheme .good{fill:var(--ok-bg); stroke:var(--ok-fg)}
+svg.scheme .ln{stroke:var(--muted); fill:none; stroke-width:1.6}
+svg.scheme text.acc{fill:var(--accent)}
+svg.scheme .lnr{stroke:var(--accent); fill:none; stroke-width:1.8}
+@media print{ details.more{break-inside:avoid} details.more summary::before{content:none} .easy{border:1px solid #ccc} }
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.48}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar, a.chip.pdf{display:none}
+  section{padding-top:1.1rem}
+  h1{font-size:21pt} h2{font-size:14.5pt} h2, h3, .sec-head{break-after:avoid}
+  .tile, .lvl, .st, details.q, .tl li, tr, ol.steps li, ul.facts li{break-inside:avoid}
+  .tbl{overflow:visible}
+  .tbl, .def, .tile, .lvl, .st, .card{border-color:#ccc}
+  table{font-size:8.6pt} th,td{padding:.3rem .4rem}
+  .tiles{grid-template-columns:1fr 1fr}
+  .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0}
+  .flow{flex-direction:column} .arrow{transform:rotate(90deg)} .st{flex:0 0 auto}
+  .cols{grid-template-columns:1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Патофизиология · итоговое занятие № 1 · медфак ЧГУ</div>
+  <h1>II. Давление: высотная и кессонная болезнь</h1>
+  <p class="lead">Что происходит с организмом в горах и под водой: две стадии высотной болезни и их высоты, механизмы одышки, тахикардии, алкалоза и эритроцитоза, патогенез кессонной болезни и её лечение.</p>
+  <div class="chips">
+    <a class="chip pdf" href="davlenie.pdf">скачать PDF для телефона</a>
+    <span class="chip">16 вопросов раздела</span>
+    <span class="chip">методичка кафедры</span>
+    <span class="chip">Адо, 2000, гл. 10 «Гипоксия»</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Вопросы</div>
+    <ol>
+      <li><a href="#q1">Этиология высотной болезни</a></li>
+      <li><a href="#q2">Стадии высотной болезни</a></li>
+      <li><a href="#q3">Высоты стадий</a></li>
+      <li><a href="#q4">ВНД в первой стадии</a></li>
+      <li><a href="#q5">Дыхание и сердце в первой стадии</a></li>
+      <li><a href="#q6">КЩР в первой стадии</a></li>
+      <li><a href="#q7">Эритроциты в первой стадии</a></li>
+      <li><a href="#q8">ЦНС во второй стадии</a></li>
+      <li><a href="#q9">Дыхание и ССС во второй стадии</a></li>
+      <li><a href="#q10">КЩР во второй стадии</a></li>
+      <li><a href="#q11">Обмен веществ во второй стадии</a></li>
+      <li><a href="#q12">Патогенетическая терапия</a></li>
+      <li><a href="#q13">Этиология кессонной болезни</a></li>
+      <li><a href="#q14">Патогенез кессонной болезни</a></li>
+      <li><a href="#q15">Профилактика и лечение кессонной</a></li>
+      <li><a href="#q16">Признаки действия повышенного давления</a></li>
+    </ol>
+    <p style="margin:.6rem 0 0"><a href="#quiz">Самопроверка</a> · <a href="#slovar">Словарик</a> · <a href="#src">Источники</a> · <a href="index.html">Все разделы</a></p>
+  </nav>
+</header>
+
+<section id="top">
+  <div class="sec-head"><h2>Главное за пять минут</h2></div>
+  <div class="tiles">
+    <div class="tile"><b>Гипоксия + гипоксемия</b><span>основной этиологический фактор высотной болезни (методичка)</span></div>
+    <div class="tile"><b>1000–4000 м</b><span>стадия приспособления: одышка, тахикардия, ↑ АД, относительный эритроцитоз (методичка)</span></div>
+    <div class="tile"><b>4000–5000 м</b><span>растормаживание коры: раздражительность, «скрытые черты характера» (методичка)</span></div>
+    <div class="tile"><b>≥ 5000 м</b><span>стадия декомпенсации: газовый алкалоз, гипокапния, угнетение ЦНС (методичка)</span></div>
+    <div class="tile"><b>pCO₂ 36–44</b><span>мм рт. ст. — норма; при гипервентиляции падает (методичка)</span></div>
+    <div class="tile"><b>10,3 м = 1 атм</b><span>под водой давление растёт на 1 атм (760 мм рт. ст.) каждые 10,3 м (методичка)</span></div>
+    <div class="tile"><b>× 5</b><span>жировая ткань растворяет в 5 раз больше азота, чем кровь (методичка)</span></div>
+    <div class="tile"><b>&gt; 8 мкм</b><span>пузырёк шире капилляра → газовая эмболия (методичка)</span></div>
+  </div>
+</section>
+
+<section id="q1">
+  <div class="sec-head"><span class="qn">II.1</span><h2>Этиология высотной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры</span>
+    <p>Человек испытывает действие пониженного барометрического давления (<b>гипобарии</b>) при восхождении на горы, при подъёме на высоту в летательных аппаратах. Возникающие при этом патологические изменения обусловлены двумя факторами — <b>снижением атмосферного давления (декомпрессией)</b> и <b>уменьшением парциального давления кислорода</b> во вдыхаемом воздухе. Основным этиологическим фактором её является <b>недостаток кислорода (гипоксия) и гипоксемия</b> (снижение содержания кислорода в крови).</p>
+  </div>
+  <p>По Адо это <b>экзогенная гипобарическая гипоксия</b>: ведущий патогенетический фактор — гипоксемия, дополнительный отрицательный — <b>гипокапния</b> (Адо, PDF 312).</p>
+  <p><b>Условия</b>, от которых зависит, заболеет ли человек (Адо, PDF 313): климат высокогорья (влажность, перепад дневных и ночных температур, снежный покров), <b>скорость восхождения</b>, индивидуальная устойчивость к недостатку кислорода. Ухудшают — физическая нагрузка, переохлаждение, ожирение (otvety, вопрос 24). Там же: гипобария бывает и в негерметичных летательных аппаратах и барокамерах; термин «высотная болезнь» описывает в основном церебральные и лёгочные синдромы у неакклиматизированных людей.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Воздух в горах такой же по составу — в нём те же 21 % кислорода, — но он «жиже»: давление ниже, и в каждом вдохе молекул кислорода меньше. Кровь не может набрать столько кислорода, сколько на равнине. Это как пытаться наполнить ведро из шланга со слабым напором: шланг тот же, а воды приходит меньше.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>↓ барометрического давления</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">физика</span><b>↓ pO₂ во вдыхаемом и альвеолярном воздухе</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">ведущее звено</span><b>Гипоксемия → гипоксия тканей</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">ответ</span><b>Компенсация → при ≥ 5000 м декомпенсация</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Что, кроме гипоксии, действует при подъёме на высоту?</summary><div class="a"><p>Декомпрессия: при 530–460 мм рт. ст. (3000–4000 м) газы в замкнутых полостях (пазухи, среднее ухо, кишечник) расширяются и вызывают боль; на высоте около 9000 м в негерметичной кабине азот может выходить из тканей пузырьками — высотная декомпрессионная болезнь; около 19 000 м (47 мм рт. ст.) жидкости тела «закипают» при температуре тела — высотная тканевая эмфизема (otvety, вопрос 24 <span class="uncheck">⚠ не проверено</span> по учебнику).</p></div></details>
+  <details class="more"><summary>Чем гипобарическая гипоксия отличается от нормобарической?</summary><div class="a"><p>Нормобарическая — при нормальном давлении, но малом O₂ во вдыхаемом воздухе (колодцы, шахты), часто с гиперкапнией; гипобарическая — при снижении атмосферного давления, с гипокапнией из-за компенсаторной гипервентиляции (Адо, PDF 312).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать «в горах меньше процент кислорода». Процент тот же, снижается <b>парциальное давление</b> кислорода. <b>Связь с клиникой:</b> та же гипоксическая гипоксия — у пассажиров самолёта (давление в кабине ниже, чем на земле <span class="uncheck">⚠ не проверено</span>) и у больных ХОБЛ при перелётах.</p></div>
+</section>
+
+<section id="q2">
+  <div class="sec-head"><span class="qn">II.2</span><h2>Стадии высотной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Стадии · методичка кафедры</span>
+    <p>В патогенезе высотной болезни можно выделить две стадии: <b>стадию приспособления</b> и <b>стадию декомпенсации</b>.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Стадия приспособления</b> (1000–4000 м; здесь и ниже — пересказ методички): рефлекторная стимуляция дыхательного и сосудодвигательного центров с хеморецепторов → одышка, тахикардия, ↑ АД, относительный эритроцитоз; на 4000–5000 м — растормаживание и возбуждение коры.</li>
+    <li><b>Стадия декомпенсации</b> (5000 м и более): гипоксемия, замедление окисления в тканях, газовый алкалоз с гипокапнией, угнетение дыхательного центра и высших отделов ЦНС; рост эритропоэтина → абсолютный эритроцитоз; смерть — от паралича дыхательного центра.</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Сначала организм «поддаёт газу»: чаще дышит, быстрее гонит кровь, выбрасывает запасные эритроциты из кладовых — и справляется. Это первая стадия. Выше 5000 м газ уже в полу: кислорода всё равно не хватает, а от частого дыхания организм ещё и «выдыхает» углекислоту, которая нужна дыхательному центру как сигнал. Центр затихает — это вторая стадия, срыв.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">1000–4000 м</span><b>Приспособление</b><span class="h"><em>компенсация</em>: дыхание, кровообращение, депо крови</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">4000–5000 м</span><b>Растормаживание коры</b><span class="h">раздражительность, скрытые черты характера</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">≥ 5000 м</span><b>Декомпенсация</b><span class="h"><em>повреждение</em>: алкалоз, угнетение центров</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">исход</span><b>Паралич дыхательного центра</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как называют острые формы горной болезни и её опасные осложнения?</summary><div class="a"><p>Острая горная болезнь — головная боль, одышка при нагрузке, бледность с цианозом губ, нарушение сна, тошнота, рвота, потеря аппетита, характерно изменение почерка; угрожающие жизни осложнения — <b>отёк мозга</b> и <b>высотный отёк лёгких</b> (Адо, PDF 314).</p></div></details>
+  <details class="more"><summary>Почему высотный отёк лёгких — гидростатический?</summary><div class="a"><p>Дефицит кислорода суживает лёгочные сосуды → гипертензия малого круга → растёт гидростатическое давление в капиллярах и фильтрация жидкости в интерстиций (Адо, PDF 314).</p></div></details>
+  <div class="note"><p><b>Расхождение источников:</b> методичка делит болезнь на две стадии по высоте. Адо стадий не выделяет, а пишет, что у малотренированных людей признаки могут появиться уже около 2000 м, а выше 4500 м горная болезнь развивается у подавляющего большинства (Адо, PDF 313). На зачёте отвечать по методичке.</p></div>
+</section>
+
+<section id="q3">
+  <div class="sec-head"><span class="qn">II.3</span><h2>На каких высотах развиваются приспособительная и патогенная стадия высотной болезни?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Высоты · методичка кафедры</span>
+    <p><i>Стадия приспособления.</i> На высоте <b>1000 – 4000 м</b> … На высоте 4000 – 5000 м наблюдаются признаки растормаживания и возбуждения корковых клеток. <i>Стадия декомпенсации.</i> Эта стадия развивается на высоте <b>5000 м и более</b>.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Запомнить просто: <b>до четырёх километров</b> — организм справляется, <b>четыре–пять</b> — «пьянеет» кора, <b>от пяти</b> — срыв. Для масштаба: Эльбрус — 5642 м, то есть его вершина уже в зоне декомпенсации <span class="uncheck">⚠ не проверено</span> (высота горы — общеизвестная справочная цифра, не из источников курса).</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Почему граница около 4500–5000 м, а не ниже: кривая насыщения гемоглобина кислородом S-образная. Снижение альвеолярного pO₂ со 100 мм рт. ст. (уровень моря) до 75 мм рт. ст. (2000 м) снижает насыщение гемоглобина всего на 4 %; только выше 4500–5500 м гипоксемия становится угрожающей, декомпенсированной (Адо, PDF 313–314).</p>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Высота</th><th>Что происходит</th><th>Источник</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">2000 м</td><td>насыщение Hb кислородом 92 %; у малотренированных астеников — первые признаки</td><td>Адо, PDF 313</td></tr>
+      <tr><td class="lv">1000–4000 м</td><td>стадия приспособления</td><td>методичка</td></tr>
+      <tr><td class="lv">2000–4000 м</td><td>у здоровых недостаток O₂ компенсируется без видимых нарушений</td><td>otvety, вопрос 27</td></tr>
+      <tr><td class="lv">4000–5000 м</td><td>растормаживание и возбуждение коры</td><td>методичка</td></tr>
+      <tr><td class="lv">&gt; 4500 м</td><td>горная болезнь у подавляющего большинства</td><td>Адо, PDF 313</td></tr>
+      <tr><td class="lv">4500–5500 м</td><td>насыщение Hb падает до 70–75 %</td><td>Адо, PDF 313</td></tr>
+      <tr><td class="lv">≥ 5000 м</td><td>стадия декомпенсации</td><td>методичка</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>От чего зависит, на какой высоте начнутся симптомы у конкретного человека?</summary><div class="a"><p>От скорости подъёма, тренированности и индивидуальной устойчивости к гипоксии, климата высокогорья (Адо, PDF 313); от реактивности: у астеников признаки появляются раньше.</p></div></details>
+  <details class="more"><summary>Почему жители высокогорья живут на 4000 м без болезни?</summary><div class="a"><p>У них сформирована долговременная адаптация: абсолютный эритроцитоз (5,5×10¹²/л), гемоглобин 170 г/л, гематокрит 55 % (методичка), больше капилляров и митохондрий, гипертрофия миокарда («Краткий курс», лекция XIV), больше миоглобина (otvety, вопрос 27). По Адо для них это норма (Адо, PDF 35).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> перепутать границы: «приспособление до 5000». В методичке — до 4000 м приспособление, 4000–5000 м — возбуждение коры (ещё первая стадия), с 5000 м — декомпенсация.</p></div>
+</section>
+
+<section id="q4">
+  <div class="sec-head"><span class="qn">II.4</span><h2>Какие нарушения высшей нервной деятельности наблюдаются в первой стадии высотной болезни?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>На высоте 4000 – 5000 м наблюдаются признаки <b>растормаживания и возбуждения корковых клеток</b>: люди становятся <b>раздражительными</b>, обнаруживаются <b>скрытые черты характера</b>.</p>
+  </div>
+  <p>То есть в первой стадии нарушения ВНД — это <b>возбуждение</b> (а не угнетение): ослабляется внутреннее торможение коры. Сюда же относят эйфорию, болтливость, некритичность к себе <span class="uncheck">⚠ не проверено</span> (в методичке и Адо этих слов нет; так описывают в других учебниках).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Кора мозга — самая «прожорливая» по кислороду часть нервной системы, и первым у неё страдает торможение — «тормоза» поведения. Человек ведёт себя как слегка выпивший: раздражается по мелочам, показывает то, что обычно держит при себе. Поэтому в горах ссорятся и принимают рискованные решения.</p></div>
+  <h3>Механизм по шагам</h3>
+  <ol class="steps">
+    <li>Гипоксемия → кислородное голодание наиболее чувствительных нейронов коры.</li>
+    <li>Первыми страдают тормозные процессы → <b>растормаживание</b> — <span class="kv d">повреждение</span>.</li>
+    <li>Одновременно рефлекторная активация с хеморецепторов (ретикулярная формация, симпатическая система) усиливает возбуждение.</li>
+    <li>При дальнейшем подъёме возбуждение сменяется <b>угнетением</b> (вторая стадия, см. II.8) — как фазы запредельного торможения в «Кратком курсе» (лекция III).</li>
+  </ol>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему кора страдает раньше продолговатого мозга?</summary><div class="a"><p>Кора — наиболее чувствительный к гипоксии отдел <span class="uncheck">⚠ не проверено</span> по источникам курса; в «Кратком курсе» (лекция III) о запредельном торможении: оно начинается с коры и спускается на более низкие, но более устойчивые этажи.</p></div></details>
+  <details class="more"><summary>Какой признак нарушения тонкой моторики считается характерным?</summary><div class="a"><p>Изменение почерка — свидетельство нарушения тонкой двигательной дифференцировки (Адо, PDF 314). Адо описывает его для острой горной болезни в целом, без деления на стадии.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать возбуждение коры «компенсаторной реакцией». Это <b>повреждающее</b> проявление гипоксии; компенсаторные в первой стадии — одышка, тахикардия, выброс крови из депо. <b>Связь с авиацией:</b> из-за некритичности к себе пилот может не заметить гипоксии <span class="uncheck">⚠ не проверено</span> — отсюда кислородные маски с определённой высоты.</p></div>
+</section>
+
+<section id="q5">
+  <div class="sec-head"><span class="qn">II.5</span><h2>Механизмы изменения дыхания и сердечной деятельности в первую стадию высотной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Механизм · методичка кафедры</span>
+    <p>В результате раздражения гипоксемической кровью <b>хеморецепторов сосудов каротидного синуса и дуги аорты</b> происходит рефлекторная стимуляция <b>дыхательного и сосудодвигательного центров</b>, других вегетативных систем. Возникают <b>одышка, тахикардия, повышается артериальное давление</b>.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Дыхание</b>: углубление и учащение дыхания, мобилизация резервных альвеол, усиление лёгочного кровотока («Краткий курс», лекция XIV).</li>
+    <li><b>Сердце и сосуды</b>: тахикардия, ↑ ударного и минутного объёма, опорожнение кровяных депо, ↑ скорости кровотока, перераспределение крови в пользу мозга и сердца («Краткий курс», лекция XIV).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>В сонных артериях и в дуге аорты стоят «датчики кислорода» (хеморецепторы). Когда в крови кислорода мало, они шлют сигнал в продолговатый мозг: «Дыши чаще! Качай быстрее!». Человек начинает задыхаться на подъёме, сердце колотится, — это не поломка, а организм сам включает форсаж.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">стимул</span><b>↓ pO₂ артериальной крови</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">рецептор</span><b>Хеморецепторы каротидного синуса и дуги аорты</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">центры</span><b>Дыхательный и сосудодвигательный центры</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">эффект — <em>компенсация</em></span><b>Одышка (гипервентиляция), тахикардия, ↑ АД, ↑ МОК</b></div>
+  </div>
+  <p>Побочный эффект гипервентиляции — вымывание CO₂ (гипокапния); пока она умеренная, гипоксемия резко повышает чувствительность дыхательного центра к pCO₂, и гипервентиляция сохраняется (Адо, PDF 312) — см. II.6.</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему стимул идёт с периферических, а не с центральных хеморецепторов?</summary><div class="a"><p>Центральные хеморецепторы продолговатого мозга реагируют на H⁺ в ликворе, т.е. на CO₂; падение pO₂ воспринимают периферические — каротидные и аортальные (Адо, PDF 312; методичка).</p></div></details>
+  <details class="more"><summary>Что даёт гипервентиляция и что она отнимает?</summary><div class="a"><p>Даёт: ↑ альвеолярного pO₂ и насыщения Hb. Отнимает: CO₂ — гипокапния ухудшает кровоснабжение мозга и сердца, вызывает алкалоз, нарушает электролиты, повышает потребление O₂ тканями («Краткий курс», лекция XIV).</p></div></details>
+  <div class="note"><p><b>Связь с клиникой:</b> тот же хеморефлекс поддерживает дыхание у больных с хронической гиперкапнией (ХОБЛ): высокий поток кислорода может «выключить» гипоксический стимул и угнетить дыхание — гипероксическое угнетение описано в «Кратком курсе» (лекция XIV, гипербарическая гипоксия).</p></div>
+</section>
+
+<section id="q6">
+  <div class="sec-head"><span class="qn">II.6</span><h2>Механизмы изменения кислотно-щелочного равновесия в первую стадию высотной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Механизм · Адо, стр. PDF 312</span>
+    <p>Гипокапния и газовый алкалоз формируются за счёт <b>хеморефлекторной, компенсаторной гипервентиляции лёгких</b>, избыточного выведения углекислого газа.</p>
+  </div>
+  <p>В первой стадии это <b>компенсированный газовый (респираторный) алкалоз</b>: pCO₂ снижается ниже нормы (36–44 мм рт. ст. — методичка), а pH удерживается за счёт компенсации — обмена ионов между плазмой и эритроцитами и <b>усиленного выведения бикарбонатов и основных фосфатов с мочой</b> («Краткий курс», лекция XIV). В методичке газовый алкалоз с гипокапнией прямо назван только в описании второй стадии (см. II.10); деление «в первой стадии компенсирован, во второй — нет» — <b>вывод конспекта</b> из механизма.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>CO₂ в крови — это «кислота» (из него получается угольная кислота). Когда человек часто дышит, он выдыхает слишком много CO₂, и кровь становится чуть более щелочной. Почки это замечают и начинают выводить с мочой щелочь (бикарбонат), чтобы вернуть равновесие. Пока почки успевают — pH почти нормальный: алкалоз компенсирован.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">причина</span><b>Гипервентиляция (II.5)</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">сдвиг</span><b>↓ pCO₂ — гипокапния</b><span class="h">→ ↓ H₂CO₃ → тенденция pH вверх</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n"><em>компенсация</em></span><b>Почки выводят HCO₃⁻ и основные фосфаты; ионный обмен с эритроцитами</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">итог</span><b>Компенсированный газовый алкалоз</b></div>
+  </div>
+  <p>Две стороны алкалоза (Адо, PDF 312): по эффекту Бора гипокапния и ↑ pH повышают сродство Hb к O₂ — кривая диссоциации сдвигается влево: <span class="kv c">лучше</span> насыщение Hb в лёгких, но <span class="kv d">хуже</span> отдача O₂ тканям. Сдвигу влево противостоит рост 2,3-дифосфоглицерата в эритроцитах (Адо, PDF 313).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему алкалоз «газовый»?</summary><div class="a"><p>Первичен сдвиг дыхательного компонента — потеря CO₂ с выдыхаемым воздухом, а не накопление оснований (это было бы негазовым, метаболическим алкалозом). Газовый алкалоз при высотной болезни — пример из «Краткого курса» (лекция XIII).</p></div></details>
+  <details class="more"><summary>Что такое эффект Холдейна при подъёме в горы?</summary><div class="a"><p>Снижение pO₂ в альвеолах уменьшает выведение CO₂ — это частично препятствует гипокапнии (Адо, PDF 312).</p></div></details>
+  <div class="note"><p><b>Расхождение источников:</b> методичка говорит о газовом алкалозе только в описании стадии декомпенсации. Адо и «Краткий курс» связывают гипокапнию с самой компенсаторной гипервентиляцией, т.е. она начинается уже в первой стадии. Отвечая, скажите: «в первой стадии гипокапния компенсирована почками, во второй — некомпенсированный газовый алкалоз».</p></div>
+</section>
+
+<section id="q7">
+  <div class="sec-head"><span class="qn">II.7</span><h2>Как изменяется количество эритроцитов в первую стадию высотной болезни?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Увеличивается количество эритроцитов в периферической крови вследствие <b>рефлекторного выхода их из селезёнки, костного мозга и других органов депо</b> (<b>относительный эритроцитоз</b>).</p>
+  </div>
+  <p>Относительный — потому что новых эритроцитов организм <b>не произвёл</b>: их общее количество прежнее, они лишь перешли из депо в циркуляцию. Абсолютный эритроцитоз (за счёт эритропоэтина и костного мозга) — во второй стадии и у жителей высокогорья.</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Селезёнка — склад запасных эритроцитов. При тревоге склад открывают и выпускают всех на улицу: в каждом миллилитре крови их становится больше, хотя в городе (организме) жителей не прибавилось. Это быстро — минуты. А строить новых жителей (эритропоэз) — недели.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">стимул</span><b>Гипоксемия → хеморецепторы</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">путь</span><b>Рефлекторный выход из депо</b><span class="h">селезёнка, костный мозг, другие органы (механизм — симпатическая активация <span class="uncheck">⚠ не проверено</span>)</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n"><em>компенсация</em></span><b>↑ эритроцитов в 1 л крови → ↑ кислородной ёмкости</b></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Относительный (1-я стадия)</th><th>Абсолютный (2-я стадия, горцы)</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Механизм</td><td>выброс из депо</td><td>↑ эритропоэтина в почках → пролиферация предшественников в костном мозге</td></tr>
+      <tr><td class="lv">Скорость</td><td>быстро, рефлекторно</td><td>медленно</td></tr>
+      <tr><td class="lv">Ретикулоциты</td><td>в методичке не указано</td><td>растут (методичка)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">методичка</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Какие показатели крови у жителей высокогорья?</summary><div class="a"><p>Эритроциты 5,5×10¹²/л, гемоглобин 170 г/л, СОЭ 1 мм/ч, гематокрит 55 %, вязкость крови 5,5 ед. (методичка).</p></div></details>
+  <details class="more"><summary>Чем вреден слишком высокий эритроцитоз?</summary><div class="a"><p>Растут гематокрит и вязкость крови (методичка: 5,5 ед. у горцев) → ухудшается микроциркуляция; повышение вязкости крови как фактор циркуляторной гипоксии — «Краткий курс», лекция XIV; нарушение реологии и агрегации — Адо, PDF 316.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать, что в первой стадии «усиливается эритропоэз». По методичке рост эритропоэтина и ретикулоцитов — признак <b>второй</b> стадии. <b>Связь с клиникой:</b> относительный эритроцитоз бывает и при сгущении крови (обезвоживание) — на гематологии его отличают от истинной полицитемии.</p></div>
+</section>
+
+<section id="q8">
+  <div class="sec-head"><span class="qn">II.8</span><h2>Какие нарушения наблюдаются со стороны ЦНС во второй стадии высотной болезни?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Гипокапния и алкалоз являются факторами, <b>снижающими возбудимость дыхательного центра</b>, угнетаются функции <b>центров продолговатого мозга и высших отделов центральной нервной системы</b>. … Прогрессирующие гипокапния и алкалоз могут вызвать смерть от <b>паралича дыхательного центра</b>.</p>
+  </div>
+  <p>Адо (PDF 314) описывает острую горную болезнь без деления на стадии: головная боль сосудистого генеза, расстройство сна, тошнота, рвота, изменение почерка; осложнение — <b>отёк мозга</b>. Возбуждение первой стадии сменяется <b>торможением</b>: сонливость, апатия, вплоть до потери сознания <span class="uncheck">⚠ не проверено</span> (последнее — по общей логике гипоксии, в методичке не перечислено).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Мозгу плохо сразу с двух сторон: мало кислорода и мало CO₂. А CO₂ для мозга — ещё и сигнал «расширь сосуды». Без него сосуды мозга сужаются, крови приходит ещё меньше. Мозг «садится, как батарейка»: сначала тупеет и хочет спать, потом выключает центры, которые заставляют дышать.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st zone"><span class="n">1</span><b>Тяжёлая гипоксемия</b><span class="h">↓ окисления в нейронах</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">2</span><b>Гипокапния</b><span class="h">↓ возбудимости дыхательного центра; ухудшение кровоснабжения мозга</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>Угнетение продолговатого мозга и высших отделов</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">исход</span><b>Паралич дыхательного центра</b></div>
+  </div>
+  <p>Источник звеньев: методичка; ухудшение кровоснабжения мозга при гипокапнии — «Краткий курс», лекция XIV; ослабление дыхательной функции при алкалозе — там же, лекция XIII.</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему гипокапния угнетает дыхательный центр?</summary><div class="a"><p>CO₂ проходит через гематоэнцефалический барьер, в ликворе образует H⁺, которые возбуждают хеморецепторы продолговатого мозга; при гипокапнии протонов меньше — дыхание угнетается (Адо, PDF 312).</p></div></details>
+  <details class="more"><summary>Что такое высотный отёк мозга по механизму?</summary><div class="a"><p>Угрожающее жизни осложнение горной болезни (Адо, PDF 314); проявляется атаксией, спутанностью, изменением сознания (обзор рекомендаций WMS 2020).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> описать во второй стадии «возбуждение». Возбуждение — первая стадия (4000–5000 м), во второй — угнетение. <b>Связь с неврологией:</b> гипервентиляция снижает внутричерепное давление именно через сужение сосудов мозга при гипокапнии.</p></div>
+</section>
+
+<section id="q9">
+  <div class="sec-head"><span class="qn">II.9</span><h2>Механизмы изменения дыхания и сердечно-сосудистой системы во второй стадии высотной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Механизм · методичка кафедры</span>
+    <p>Развивается гипоксемия, замедление окислительных процессов в тканях, возникает газовый алкалоз с гипокапнией. Гипокапния и алкалоз являются факторами, <b>снижающими возбудимость дыхательного центра</b>, угнетаются функции центров продолговатого мозга.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Дыхание</b>: компенсаторная одышка сменяется угнетением — дыхание становится поверхностным, неритмичным <span class="uncheck">⚠ не проверено</span> (периодическое дыхание в методичке не описано); исход — паралич дыхательного центра (методичка).</li>
+    <li><b>Сердце и сосуды</b>: угнетаются центры продолговатого мозга, в том числе сосудодвигательный (методичка) → вывод конспекта: падение АД после первоначального повышения, гипоксия миокарда <span class="uncheck">⚠ не проверено</span>; <b>гипертензия малого круга</b> из-за гипоксического сужения лёгочных сосудов → <b>высотный отёк лёгких</b> (Адо, PDF 314 — для горной болезни без указания стадии).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>В первой стадии датчики кричали «дыши!», и центр слушался. Во второй центр сам голодает и вдобавок не получает своего обычного сигнала — CO₂. Он начинает «пропускать команды»: дыхание слабеет. Сердцу тоже не хватает кислорода, а сосуды лёгких от нехватки кислорода сжимаются — давление в них растёт, жидкость «выдавливается» в лёгкие.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st zone"><span class="n">дыхание</span><b>Гипокапния + гипоксия центра</b><span class="h">↓ возбудимости → гиповентиляция → ещё глубже гипоксемия — <em>порочный круг</em></span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">ССС</span><b>Гипоксия миокарда и сосудодвигательного центра</b><span class="h">↓ АД, нарушение ритма</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">малый круг</span><b>Спазм лёгочных сосудов → ↑ гидростатического давления</b><span class="h">отёк лёгких</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Как проявляется высотный отёк лёгких?</summary><div class="a"><p>Снижение переносимости нагрузки, одышка при нагрузке и кашель, затем одышка в покое, цианоз, кашель с розовой пенистой мокротой (обзор рекомендаций WMS 2020, AAFP).</p></div></details>
+  <details class="more"><summary>Какая гипоксия присоединяется к экзогенной во второй стадии?</summary><div class="a"><p>Циркуляторная (падение АД, гипоксия миокарда) и тканевая (замедление окисления) — любая тяжёлая гипоксия носит смешанный характер (Адо, PDF 318).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать, что во второй стадии одышка «ещё сильнее». Компенсаторная гипервентиляция кончается — центр угнетён. <b>Связь с терапией:</b> отёк лёгких при митральном стенозе — тоже гидростатический, механизм тот же (↑ давления в капиллярах малого круга).</p></div>
+</section>
+
+<section id="q10">
+  <div class="sec-head"><span class="qn">II.10</span><h2>Механизмы изменения кислотно-щелочного равновесия во второй стадии высотной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>Возникает <b>газовый алкалоз с гипокапнией</b> (в норме pCO₂ 36-44 мм рт ст.). … Прогрессирующие гипокапния и алкалоз могут вызвать смерть от паралича дыхательного центра.</p>
+  </div>
+  <p>Вывод конспекта: во второй стадии почечная компенсация не успевает — алкалоз становится <b>некомпенсированным</b>. При тяжёлой гипоксии накапливаются молочная и пировиноградная кислоты → <b>метаболический ацидоз</b> («Краткий курс», лекция XIV, для гипоксии вообще). Сочетание газового алкалоза и метаболического ацидоза — смешанное нарушение КЩР («Краткий курс», лекция XIII, смешанные формы). Почему гипервентиляция не прекращается: на равнине снижение pCO₂ на 4–5 мм рт. ст. резко уменьшает вентиляцию, а при гипоксемии чувствительность центра к pCO₂ растёт, и гипервентиляция сохраняется (Адо, PDF 312).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Получается «качели с двух сторон»: дыхание выдуло кислоту-CO₂ (сдвиг в щелочь), а голодающие клетки начали делать молочную кислоту (сдвиг в кислоту). В крови — путаница, а дыхательный центр, лишённый сигнала CO₂, отключается.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st zone"><span class="n">1</span><b>Продолжающаяся гипервентиляция</b><span class="h">pCO₂ ниже 36 мм рт. ст.</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">2</span><b>Истощение буферной и почечной компенсации</b><span class="h">pH растёт — некомпенсированный газовый алкалоз</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>Гликолиз в тканях → лактат</b><span class="h">метаболический ацидоз</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">4</span><b>Угнетение дыхательного центра</b><span class="h">смерть от паралича</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Чем газовый алкалоз отличается от негазового?</summary><div class="a"><p>Газовый — от потери CO₂ при гипервентиляции (высотная болезнь, истерия, поражения мозга, гипертермия); негазовый — от накопления оснований или потери кислот (рвота, избыток щелочей) («Краткий курс», лекция XIII).</p></div></details>
+  <details class="more"><summary>Как алкалоз влияет на кальций и мышцы?</summary><div class="a"><p>Симптомы алкалоза — ослабление дыхательной функции, повышение нервно-мышечной возбудимости, тетания, связанная со снижением Ca²⁺ («Краткий курс», лекция XIII).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать «при высотной болезни ацидоз». Ведущее нарушение по методичке — <b>газовый алкалоз</b>; метаболический ацидоз от лактата присоединяется в декомпенсации. <b>Связь с клиникой:</b> гипервентиляционный синдром при панической атаке — тот же газовый алкалоз (онемение, покалывание пальцев).</p></div>
+</section>
+
+<section id="q11">
+  <div class="sec-head"><span class="qn">II.11</span><h2>Механизмы изменения обмена веществ во второй стадии высотной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры + «Краткий курс», лекция XIV</span>
+    <p>Методичка: развивается гипоксемия, <b>замедление окислительных процессов в тканях</b>. «Краткий курс»: изменения обмена веществ раньше всего возникает со стороны углеводного и энергетического обмена. Во всех случаях гипоксии первичным сдвигом является <b>дефицит макроэргов</b>. Усиливается гликолиз, это приводит к падению содержания гликогена, нарастанию пирувата и лактата … метаболического ацидоза. Возникает отрицательный азотистый баланс … развивается гиперкетонемия.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Энергетический</b>: ↓ окислительного фосфорилирования → дефицит АТФ — ведущее звено повреждения клетки.</li>
+    <li><b>Углеводный</b>: ↑ анаэробного гликолиза, ↓ гликогена, ↑ пирувата и лактата.</li>
+    <li><b>Белковый</b>: отрицательный азотистый баланс.</li>
+    <li><b>Жировой</b>: гиперкетонемия.</li>
+    <li><b>Электролитный</b>: нарушение активного транспорта ионов, ↑ внеклеточного калия.</li>
+  </ul>
+  <p class="src">«Краткий курс лекций», лекция XIV</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Клетка — печка, которая жжёт глюкозу кислородом и получает много энергии (АТФ). Без кислорода она переходит на «аварийный костёр» — гликолиз: энергии в разы меньше, а отходом идёт молочная кислота. Запасы гликогена сгорают быстро, белки и жиры тоже идут в топку — и в крови копятся кислоты и кетоновые тела.</p></div>
+  <h3>Механизм по шагам</h3>
+  <p>Последовательность изменений в клетке («Краткий курс», лекция XIV):</p>
+  <ol class="steps">
+    <li>↑ проницаемости мембраны → нарушение ионного равновесия;</li>
+    <li>набухание митохондрий → стимуляция гликолиза → ↓ гликогена;</li>
+    <li>подавление синтеза и усиление распада белков;</li>
+    <li>деструкция митохондрий, эндоплазматической сети;</li>
+    <li>жировая декомпозиция, разрушение мембран лизосом → выход гидролаз → аутолиз.</li>
+  </ol>
+  <p><span class="kv c">компенсация</span> на тканевом уровне: ограничение работы органов, не участвующих в транспорте O₂; ↑ сопряжённости окисления и фосфорилирования; ↑ гликолиза; глюкокортикоиды стабилизируют мембраны лизосом; ↑ числа митохондрий («Краткий курс», лекция XIV).</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему гликолиз — и компенсация, и повреждение?</summary><div class="a"><p>Даёт АТФ без кислорода — <span class="kv c">компенсация</span>; но энергии мало, а лактат и пируват создают метаболический ацидоз — <span class="kv d">повреждение</span> («Краткий курс», лекция XIV).</p></div></details>
+  <details class="more"><summary>Как меняется основной обмен?</summary><div class="a"><p>Гипокапния повышает потребление тканями O₂ («Краткий курс», лекция XIV), а при декомпенсации окислительные процессы замедляются (методичка) — в итоге энергетический дефицит.</p></div></details>
+  <div class="note"><p><b>Связь с клиникой:</b> лактат крови — маркёр тканевой гипоксии при шоке и сепсисе; дефицит АТФ и выход калия из клеток — общий путь повреждения клетки при любой гипоксии (инфаркт, инсульт).</p></div>
+</section>
+
+<section id="q12">
+  <div class="sec-head"><span class="qn">II.12</span><h2>В чем заключается основная патогенетическая терапия при высотной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Вывод из принципа · «Краткий курс», лекции III и XIV</span>
+    <p>В методичке терапии нет; ответ выведен из принципа: патогенетическая терапия направлена на основное звено и ведущие факторы патогенеза («Краткий курс», лекция III). Основное звено высотной болезни — <b>гипоксемия</b>, во второй стадии ещё и <b>гипокапния с газовым алкалозом</b> (методичка). Отсюда основа — <b>вдыхание кислорода</b>. Против гипокапнии — добавка CO₂: в разделе «Терапия гипоксий» «Краткий курс» пишет, что при гипербарической оксигенации «в ряде случаев бывает необходимо добавить 3-7 % CO2 для стимуляции ДЦ, расширения сосудов мозга и сердца, предотвращения гипокапнии».</p>
+  </div>
+  <ul class="facts">
+    <li><b>Спуск</b> на меньшую высоту — устраняет причину (этиотропная мера, самая надёжная) — рекомендации WMS 2020.</li>
+    <li><b>Кислород</b> — устраняет гипоксемию; <b>CO₂ 3–7 % в смеси</b> — устраняет гипокапнию («Краткий курс», лекция XIV).</li>
+    <li>При осложнениях (по рекомендациям WMS 2020): отёк мозга — дексаметазон; отёк лёгких — спуск и кислород, нифедипин — с осторожностью; профилактика — ацетазоламид.</li>
+    <li><b>Профилактика</b>: медленный подъём (акклиматизация) — скорость восхождения названа Адо среди условий болезни (PDF 313).</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Лечить надо то, с чего всё началось: не хватает кислорода — дать кислород; «выдохнули» углекислоту — вернуть немного CO₂ в дыхательную смесь, чтобы дыхательный центр снова получил свой сигнал. А лучшее лекарство — просто спуститься вниз.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиотропно</span><b>Спуск</b><span class="h">↑ pO₂ вдыхаемого воздуха</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">основное звено</span><b>O₂ — против гипоксемии</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">2-я стадия</span><b>O₂ + CO₂ — против гипокапнии</b><span class="h">возвращает возбудимость дыхательного центра</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">осложнения</span><b>Отёк мозга, отёк лёгких — по рекомендациям</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Зачем ацетазоламид при профилактике горной болезни?</summary><div class="a"><p>Это ингибитор карбоангидразы: усиливает выведение бикарбоната почками и тем самым компенсирует газовый алкалоз, позволяя дыханию оставаться усиленным (механизм <span class="uncheck">⚠ не проверено</span> по источникам курса; препарат назван в рекомендациях WMS 2020).</p></div></details>
+  <details class="more"><summary>Почему чистый кислород под большим давлением опасен?</summary><div class="a"><p>Гипероксия: лёгочная форма (токсическое действие на эндотелий, вымывание сурфактанта, ателектаз, отёк лёгких) и судорожная (возбуждение ЦНС) («Краткий курс», лекция XIV).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> назвать «основной патогенетической терапией» спуск. Спуск устраняет причину (этиотропно), патогенетическая — кислород против гипоксемии и CO₂ против гипокапнии. <b>Оговорка:</b> добавка 3–7 % CO₂ в «Кратком курсе» дана для гипербарической оксигенации при гипоксиях вообще, не специально для горной болезни; в современных рекомендациях по горной болезни (WMS 2020) её нет — на зачёте называйте её как патогенетический принцип (устранение гипокапнии).</p></div>
+</section>
+
+<section id="q13">
+  <div class="sec-head"><span class="qn">II.13</span><h2>Этиология кессонной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры</span>
+    <p>Болезнетворному действию повышенного атмосферного давления (<b>гипербария</b>) подвергаются при погружении под воду при водолазных и кессонных работах. … При переходе из области повышенного барометрического давления в область нормального атмосферного давления (<b>декомпрессия</b>) развиваются основные симптомы кессонной (декомпрессионной) болезни, обусловленные <b>снижением растворимости газов (десатурацией)</b>.</p>
+  </div>
+  <p><b>Причина</b> — слишком быстрая декомпрессия после пребывания под повышенным давлением (водолазы, кессонщики — рабочие в кессонах при строительстве мостов и туннелей, дайверы). <b>Условия</b>: глубина и длительность пребывания (сколько азота растворилось), скорость подъёма, большое количество жировой ткани (растворяет в 5 раз больше азота, чем кровь — методичка).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Азот при глубине растворяется в крови, как газ в бутылке газировки под крышкой. Быстрый подъём — открыли крышку: газ выходит пузырями прямо в сосудах. Если открывать медленно, газ выходит понемногу через лёгкие и пены не будет.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">компрессия</span><b>Каждые 10,3 м — +1 атм</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">сатурация</span><b>В крови и тканях растворяется больше азота</b><span class="h">особенно в жировой и нервной ткани</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">причина</span><b>Быстрая декомпрессия</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">десатурация</span><b>Азот выходит пузырьками</b><span class="h">→ газовая эмболия (II.14)</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему именно азот, а не кислород?</summary><div class="a"><p>Кислород потребляется тканями, а азот инертен — он не расходуется и должен выйти из тканей только через кровь и лёгкие; при быстрой декомпрессии он не успевает диффундировать наружу (методичка).</p></div></details>
+  <details class="more"><summary>Что такое кессон?</summary><div class="a"><p>Камера, в которой под повышенным давлением воздуха работают люди ниже уровня воды (опоры мостов) — отсюда название болезни; при выходе из неё — декомпрессия.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> сказать, что кессонная болезнь — «от повышенного давления». Болезнь возникает при <b>переходе</b> от повышенного давления к нормальному (декомпрессии); при самом погружении — другие эффекты (II.16). <b>Связь с медкатом:</b> декомпрессия возможна и в авиации при разгерметизации кабины на высоте около 9000 м (otvety, вопрос 24).</p></div>
+</section>
+
+<section id="q14">
+  <div class="sec-head"><span class="qn">II.14</span><h2>Патогенез кессонной болезни.</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Механизм · методичка кафедры</span>
+    <p>Высвобождающийся в избытке из тканей азот <b>не успевает диффундировать из крови через лёгкие</b> наружу и образует <b>газовые пузырьки</b>. Если диаметр пузырьков превышает просвет капилляров (<b>свыше 8 мкм</b>), возникает <b>газовая эмболия</b>, обусловливающая основные проявления декомпрессионной болезни — мышечно-суставные и загрудинные боли, нарушение зрения, кожный зуд, вегетососудистые и мозговые нарушения, поражения периферических нервов.</p>
+  </div>
+  <p><b>Ведущее звено</b> — газовая (азотная) эмболия → <b>ишемия</b> тканей. Особенно опасна эмболия коронарных сосудов и сосудов головного мозга (otvety, вопрос 24 — сказано о высотной декомпрессии, механизм тот же).</p>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Пузырёк азота шире капилляра застревает в нём, как пробка в трубе. За пробкой ткань остаётся без крови — болит сустав, мышца, чешется кожа. Если пробка в мозге или сердце — инсульт или инфаркт.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">этиология</span><b>Быстрая декомпрессия</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">пусковое звено</span><b>Десатурация: азот → пузырьки</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">ведущее звено</span><b>Газовая эмболия (&gt; 8 мкм)</b></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">цепь</span><b>Ишемия тканей, раздражение нервов</b></div><div class="arrow">→</div>
+    <div class="st"><span class="n">проявления</span><b>Боли в суставах и мышцах, за грудиной; зуд; зрение; мозг; нервы</b></div>
+  </div>
+  <h3>Цифры и перечни</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Проявление</th><th>Механизм</th></tr></thead>
+    <tbody>
+      <tr><td>мышечно-суставные боли</td><td>эмболия сосудов и пузырьки в тканях суставов и мышц</td></tr>
+      <tr><td>загрудинные боли</td><td>эмболия коронарных сосудов и сосудов лёгких</td></tr>
+      <tr><td>кожный зуд</td><td>пузырьки в сосудах кожи</td></tr>
+      <tr><td>нарушение зрения, мозговые нарушения</td><td>эмболия сосудов мозга и сетчатки</td></tr>
+      <tr><td>поражения периферических нервов</td><td>ишемия нервов, богатых липидами</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">проявления — методичка; механизмы — по смыслу методички (газовая эмболия)</p>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему нервная система страдает особенно сильно?</summary><div class="a"><p>Она богата липидами, а жиры растворяют азота в 5 раз больше, чем кровь (методичка). Методичка связывает это с поражением ЦНС при компрессии; что при декомпрессии в ней больше пузырьков — вывод <span class="uncheck">⚠ не проверено</span>.</p></div></details>
+  <details class="more"><summary>Что, кроме закупорки, делают пузырьки?</summary><div class="a"><p>Нарушают кровообращение и повреждают клетки и ткани (БМЭ, ст. «Декомпрессионная болезнь», через academic.ru). Подробнее о реакции крови на пузырьки (активация тромбоцитов) <span class="uncheck">⚠ не проверено</span> по источникам курса.</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> путать газовую эмболию кессонной болезни с <b>воздушной</b> эмболией при разрыве альвеол во время быстрого погружения (II.16): разный газ и разный момент. <b>Связь с хирургией:</b> воздушная эмболия при ранении вен шеи и катетеризации подключичной вены — тот же механизм закупорки сосуда газом.</p></div>
+</section>
+
+<section id="q15">
+  <div class="sec-head"><span class="qn">II.15</span><h2>Каковы основные меры профилактики и лечения кессонной болезни?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Принцип · БМЭ, ст. «Декомпрессионная болезнь»; методичка</span>
+    <p><b>Профилактика</b> — медленная, ступенчатая декомпрессия по режимам, чтобы азот успевал выйти через лёгкие. <b>Лечение</b> — <b>лечебная рекомпрессия</b> в барокамере: давление снова повышают (пузырьки растворяются), затем медленно снижают.</p>
+  </div>
+  <ul class="facts">
+    <li>Рекомпрессия — радикальный метод и первоочередное лечебное мероприятие; режим: повышение давления, выдержка, медленная декомпрессия (обзор российских нормативов водолазной медицины, mchsros.elpub.ru).</li>
+    <li>Предварительное вдыхание чистого кислорода (вымывание азота) резко снижает частоту декомпрессионных расстройств (тот же обзор).</li>
+    <li>Отбор людей: ожирение — неблагоприятное условие (больше азота в жире — методичка).</li>
+    <li><b>Кислородно-гелиевые смеси</b> методичка называет профилактикой нарушений ЦНС при <b>компрессии</b> (азотного наркоза, II.16): гелий хуже, чем азот, растворяется в нервной ткани. Что они уменьшают и декомпрессионную болезнь — <span class="uncheck">⚠ не проверено</span> по источникам курса.</li>
+  </ul>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Вернёмся к газировке: если бутылка уже вспенилась, её снова закрывают и поднимают давление — пузыри растворяются; потом крышку отвинчивают очень медленно. Барокамера делает то же с человеком. А чтобы не вспенилось вовсе — подниматься медленно, с остановками.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">профилактика</span><b>Медленная ступенчатая декомпрессия</b><span class="h">азот уходит через лёгкие</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">патогенетически</span><b>Рекомпрессия</b><span class="h">↑ давления → пузырьки растворяются → ↓ эмболии</span></div><div class="arrow">→</div>
+    <div class="st"><span class="n">затем</span><b>Медленная декомпрессия + O₂</b></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему рекомпрессия — именно патогенетическая терапия?</summary><div class="a"><p>Она устраняет ведущее звено — газовые пузырьки (эмболию): при повышении давления газ снова растворяется (сатурация — по методичке растворимость газов растёт с давлением), кровоток восстанавливается.</p></div></details>
+  <details class="more"><summary>Зачем гелий вместо азота?</summary><div class="a"><p>Гелий хуже, чем азот, растворяется в нервной ткани (методичка) — меньше азотного наркоза при компрессии; влияние на пузырьки при декомпрессии <span class="uncheck">⚠ не проверено</span>.</p></div></details>
+  <div class="note"><p><b>Чего нет в методичке:</b> лечения кессонной болезни в листах кафедры нет, в Адо 2000 раздел о факторах внешней среды опущен — лечение дано по БМЭ и обзору нормативов водолазной медицины; конкретные давления рекомпрессии (0,6–1,1 МПа) для зачёта не нужны. <b>Связь с медкатом:</b> барокамеры есть в центрах гипербарической оксигенации — их используют и при отравлении угарным газом.</p></div>
+</section>
+
+<section id="q16">
+  <div class="sec-head"><span class="qn">II.16</span><h2>Каковы признаки болезнетворного действия повышенного атмосферного давления на организм?</h2></div>
+  <h3>Ответ за минуту</h3>
+  <div class="def"><span class="k">Ответ · методичка кафедры</span>
+    <p>При быстром переходе из среды с нормальным атмосферным давлением в среду повышенным давлением (<b>компрессии</b>) может возникнуть <b>вдавление барабанной перепонки, сжатие кишечных газов, повышенное кровенаполнение внутренних органов</b>. При быстром погружении на большую глубину может произойти <b>разрыв кровеносных сосудов и лёгочных альвеол с развитием воздушной эмболии</b>. Основной же болезнетворный эффект гипербарии в период компрессии связан с повышенным растворением газов в жидких средах организма (<b>сатурацией</b>). … В первую очередь поражается нервная система: лёгкое возбуждение сменяется <b>наркотическим</b>, а затем и <b>токсическим</b> эффектом — ослаблением концентрации внимания, головными болями, головокружением, нарушением нервно-мышечной координации, возможной потерей сознания.</p>
+  </div>
+  <h3>Объясняю на пальцах</h3>
+  <div class="easy"><p>Под водой давление снаружи сжимает всё, где есть воздух: давит на барабанную перепонку (боль в ушах), сжимает газы в кишечнике. А азот, растворяясь в мозге под давлением, действует как наркоз — водолаз становится «пьяным» на глубине: весёлым, потом рассеянным, потом может потерять сознание. Это ещё не кессонная болезнь — она будет при подъёме.</p></div>
+  <h3>Механизм по шагам</h3>
+  <div class="flow">
+    <div class="st"><span class="n">механически</span><b>Сжатие газов в полостях</b><span class="h">ухо, кишечник; кровенаполнение органов</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">при резком погружении</span><b>Разрыв сосудов и альвеол</b><span class="h">воздушная эмболия</span></div><div class="arrow">→</div>
+    <div class="st zone"><span class="n">главное</span><b>Сатурация азотом нервной ткани</b><span class="h">возбуждение → наркоз → токсический эффект</span></div>
+  </div>
+  <h3>Что могут спросить дальше</h3>
+  <details class="more"><summary>Почему болит ухо при погружении?</summary><div class="a"><p>Вдавление барабанной перепонки; при непроходимости евстахиевой трубы давление в среднем ухе не выравнивается — резкая боль (otvety, вопрос 24).</p></div></details>
+  <details class="more"><summary>Как называют лёгкое возбуждение на глубине?</summary><div class="a"><p>«Глубинный восторг» — быстро сменяется наркотическим, затем токсическим эффектом (otvety, вопрос 24).</p></div></details>
+  <details class="more"><summary>Как предупредить азотный наркоз?</summary><div class="a"><p>Использовать кислородно-гелиевые смеси: гелий хуже, чем азот, растворяется в нервной ткани (методичка).</p></div></details>
+  <div class="note"><p><b>Частая ошибка:</b> смешать фазы. <b>Компрессия</b> (погружение): механическое сжатие, сатурация, азотный наркоз. <b>Декомпрессия</b> (подъём): десатурация, пузырьки, кессонная болезнь. <b>Связь с ЛОР</b>: баротравма уха — у дайверов и пассажиров самолёта при насморке.</p></div>
+</section>
+
+<section id="quiz">
+  <div class="sec-head"><h2>Самопроверка: ответ одной фразой</h2></div>
+  <div class="quiz-bar"><p>Сначала ответьте вслух, потом откройте.</p><button type="button" id="toggle-all">Открыть все</button></div>
+  <details class="q"><summary>II.1. Этиология высотной болезни?</summary><div class="a"><p>Гипобария: снижение атмосферного давления и парциального давления O₂; основной этиологический фактор — гипоксия и гипоксемия.</p></div></details>
+  <details class="q"><summary>II.2. Стадии высотной болезни?</summary><div class="a"><p>Стадия приспособления и стадия декомпенсации.</p></div></details>
+  <details class="q"><summary>II.3. Высоты стадий?</summary><div class="a"><p>Приспособление — 1000–4000 м (на 4000–5000 м — возбуждение коры), декомпенсация — от 5000 м.</p></div></details>
+  <details class="q"><summary>II.4. Нарушения ВНД в первой стадии?</summary><div class="a"><p>Растормаживание и возбуждение коры: раздражительность, проявляются скрытые черты характера.</p></div></details>
+  <details class="q"><summary>II.5. Механизм одышки и тахикардии в первой стадии?</summary><div class="a"><p>Гипоксемическая кровь раздражает хеморецепторы каротидного синуса и дуги аорты → рефлекторная стимуляция дыхательного и сосудодвигательного центров.</p></div></details>
+  <details class="q"><summary>II.6. КЩР в первой стадии?</summary><div class="a"><p>Гипервентиляция → гипокапния → газовый алкалоз, компенсированный выведением бикарбонатов почками.</p></div></details>
+  <details class="q"><summary>II.7. Эритроциты в первой стадии?</summary><div class="a"><p>Относительный эритроцитоз — рефлекторный выход эритроцитов из селезёнки, костного мозга и других депо.</p></div></details>
+  <details class="q"><summary>II.8. ЦНС во второй стадии?</summary><div class="a"><p>Гипокапния и алкалоз снижают возбудимость дыхательного центра, угнетаются центры продолговатого мозга и высшие отделы ЦНС; смерть — от паралича дыхательного центра.</p></div></details>
+  <details class="q"><summary>II.9. Дыхание и ССС во второй стадии?</summary><div class="a"><p>Угнетение дыхательного и сосудодвигательного центров, гипоксия миокарда, гипертензия малого круга → высотный отёк лёгких.</p></div></details>
+  <details class="q"><summary>II.10. КЩР во второй стадии?</summary><div class="a"><p>Некомпенсированный газовый алкалоз с гипокапнией, к которому присоединяется метаболический ацидоз от лактата.</p></div></details>
+  <details class="q"><summary>II.11. Обмен веществ во второй стадии?</summary><div class="a"><p>Замедление окисления, дефицит АТФ, ↑ гликолиза с накоплением лактата и пирувата, отрицательный азотистый баланс, гиперкетонемия.</p></div></details>
+  <details class="q"><summary>II.12. Основная патогенетическая терапия?</summary><div class="a"><p>Кислород против гипоксемии и добавление 3–7 % CO₂ против гипокапнии; этиотропно — спуск.</p></div></details>
+  <details class="q"><summary>II.13. Этиология кессонной болезни?</summary><div class="a"><p>Быстрый переход от повышенного давления к нормальному (декомпрессия) после сатурации тканей азотом.</p></div></details>
+  <details class="q"><summary>II.14. Патогенез кессонной болезни?</summary><div class="a"><p>Азот не успевает выйти через лёгкие и образует пузырьки; пузырьки больше 8 мкм дают газовую эмболию и ишемию тканей.</p></div></details>
+  <details class="q"><summary>II.15. Профилактика и лечение кессонной?</summary><div class="a"><p>Медленная ступенчатая декомпрессия, кислородно-гелиевые смеси; лечение — лечебная рекомпрессия в барокамере.</p></div></details>
+  <details class="q"><summary>II.16. Признаки действия повышенного давления?</summary><div class="a"><p>Вдавление барабанной перепонки, сжатие кишечных газов, полнокровие органов, разрывы сосудов и альвеол; азотный наркоз — возбуждение, затем наркотический и токсический эффект.</p></div></details>
+</section>
+
+<section id="slovar">
+  <div class="sec-head"><h2>Словарик для начинающих</h2></div>
+  <dl class="gloss">
+    <dt>Гипобария / гипербария</dt><dd>пониженное / повышенное атмосферное давление.</dd>
+    <dt>Гипоксемия</dt><dd>мало кислорода в крови; гипоксия — мало кислорода в тканях.</dd>
+    <dt>Гипокапния</dt><dd>мало CO₂ в крови (pCO₂ ниже 36 мм рт. ст.).</dd>
+    <dt>Газовый алкалоз</dt><dd>сдвиг pH в щелочную сторону из-за потери CO₂ при частом дыхании.</dd>
+    <dt>Хеморецепторы</dt><dd>«датчики» состава крови в каротидном синусе и дуге аорты.</dd>
+    <dt>Эритроцитоз относительный / абсолютный</dt><dd>больше эритроцитов в литре крови за счёт выброса из депо / за счёт усиленного образования.</dd>
+    <dt>Эритропоэтин</dt><dd>гормон почек, который заставляет костный мозг делать эритроциты.</dd>
+    <dt>Сатурация / десатурация</dt><dd>насыщение тканей газом / выход газа из тканей.</dd>
+    <dt>Компрессия / декомпрессия</dt><dd>повышение / снижение окружающего давления.</dd>
+    <dt>Газовая эмболия</dt><dd>закупорка сосуда пузырьком газа.</dd>
+    <dt>Рекомпрессия</dt><dd>повторное повышение давления в барокамере для лечения.</dd>
+  </dl>
+</section>
+
+<section id="src">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ol class="links">
+    <li>Методичка кафедры «Действие барометрического давления. Горная высотная болезнь» и «Действие повышенного барометрического давления. Кессонная болезнь» — текст с фото в <code>source/metodichki/davlenie.md</code> (фото <code>hhOldYNay9U.jpg</code>, <code>9VpkUwaCQPk.jpg</code>).</li>
+    <li>Патологическая физиология / под ред. А.Д. Адо и др. — М.: Триада-Х, 2000 — гл. 10 «Гипоксия», стр. PDF 311–318; норма — PDF 35. Раздел «Болезнетворные факторы внешней среды» в этом издании опущен (PDF 16).</li>
+    <li>«Краткий курс лекций по патологической физиологии» — лекции III, XIII (КЩР), XIV (гипоксии).</li>
+    <li>Студенческие ответы на экзаменационный перечень ЧГУ (<code>source/otvety/patfiz-otvety.txt</code>, вопросы 24 и 27) — только помеченные места.</li>
+    <li>Luks A.M. et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Acute Altitude Illness: 2019 Update — обзор: <a href="https://www.aafp.org/afp/2020/0415/p505.html">AAFP, 2020</a>; <a href="https://mdedge.com/familymedicine/article/52372/prevention-and-treatment-high-altitude-sickness">MDedge</a>.</li>
+    <li>«Декомпрессионная болезнь» — Большая медицинская энциклопедия, <a href="https://dic.academic.ru/dic.nsf/enc_medicine/10226/">dic.academic.ru</a>; обзор нормативов лечебной рекомпрессии — <a href="https://mchsros.elpub.ru/jour/article/download/248/250">журнал «Медико-биологические и социально-психологические проблемы безопасности в ЧС»</a> (сверено по выдержкам из поиска).</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Конспект к итоговому занятию № 1 по патофизиологии составил Евгений Якимов, группа М-03-24, медфак ЧГУ, октябрь 2026. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+  <p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('toggle-all'); if(!b) return;
+  b.addEventListener('click',function(){
+    var d=document.querySelectorAll('#quiz details.q');
+    var open=b.getAttribute('data-open')!=='1';
+    d.forEach(function(x){x.open=open;});
+    b.setAttribute('data-open',open?'1':'0');
+    b.textContent=open?'Свернуть все':'Открыть все';
+  });
+})();
+</script>
+</body>
+</html>
