@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Евгений Якимов">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Патофизиология: зачёт за 2 часа</title>
+<meta name="description" content="Патофизиология, итоговое занятие № 1: 5 тем, которые были на зачёте, — Клайнфельтер и Тернер, доминантные и рецессивные болезни, кровообращение и эмиграция лейкоцитов при воспалении, аллергия III типа.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,700&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --ink:#17212B; --muted:#56626F; --line:#D6DCE2;
+  --accent:#9E2A2B; --accent-soft:#F6E4E2;
+  --blue:#1C5A8C; --blue-soft:#E1ECF6;
+  --warn-bg:#FDF1E3; --warn-fg:#8A4B0B;
+  --ok-bg:#E3F1E7; --ok-fg:#1F6B3A;
+  --serif:"Literata", "PT Serif", Georgia, serif;
+  --sans:"Golos Text", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", Consolas, monospace;
+}
+@media screen and (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+    --accent:#F0928A; --accent-soft:#3A1F1E;
+    --blue:#82B6E4; --blue-soft:#18293A;
+    --warn-bg:#33240F; --warn-fg:#F0B46A;
+    --ok-bg:#15301F; --ok-fg:#8FD6A6;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1318; --surface:#151C23; --ink:#E4E9EE; --muted:#98A4B0; --line:#29323C;
+  --accent:#F0928A; --accent-soft:#3A1F1E;
+  --blue:#82B6E4; --blue-soft:#18293A;
+  --warn-bg:#33240F; --warn-fg:#F0B46A;
+  --ok-bg:#15301F; --ok-fg:#8FD6A6;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font:16px/1.6 var(--sans); margin:0}
+.wrap{max-width:780px; margin:0 auto; padding-inline:16px; padding-block:32px 72px}
+a{color:var(--blue); text-underline-offset:2px}
+a:focus-visible, summary:focus-visible, button:focus-visible{outline:2px solid var(--blue); outline-offset:2px; border-radius:4px}
+h1,h2,h3{font-family:var(--serif); text-wrap:balance; line-height:1.2; margin:0}
+h1{font-size:clamp(2rem, 6vw, 2.8rem); font-weight:700; letter-spacing:-.01em}
+h2{font-size:1.5rem; font-weight:700}
+h3{font-size:1.1rem; font-weight:700; margin-top:1.5rem}
+p{margin:.6rem 0}
+.eyebrow{font:500 .74rem/1.4 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--muted)}
+header{display:grid; gap:.7rem; padding-bottom:1.4rem; border-bottom:1px solid var(--line)}
+.lead{font-size:1.05rem; color:var(--muted); max-width:64ch; margin:0}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:500 .76rem/1 var(--mono); padding:.42rem .6rem; border-radius:999px; background:var(--blue-soft); color:var(--blue); text-decoration:none}
+a.chip.pdf{background:var(--accent); color:var(--surface)}
+nav.toc{margin:1.4rem 0 0; font-size:.93rem}
+nav.toc ol{padding-left:1.6rem; margin:.5rem 0 0; columns:2 250px; column-gap:1.8rem}
+nav.toc li{padding:.14rem 0; break-inside:avoid}
+nav.toc li::marker{font-family:var(--mono); color:var(--muted); font-size:.85em}
+section{padding-top:2.5rem}
+.sec-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:.3rem .8rem; padding-bottom:.5rem; border-bottom:2px solid var(--ink); margin-bottom:.9rem}
+.qn{font:500 .8rem/1 var(--mono); color:var(--surface); background:var(--accent); padding:.3rem .45rem; border-radius:5px; flex:none}
+ul.facts{padding-left:1.1rem; margin:.4rem 0} ul.facts li{margin:.32rem 0}
+ol.steps{padding-left:1.35rem; margin:.5rem 0} ol.steps li{margin:.4rem 0; padding-left:.2rem}
+ol.steps li::marker{font-family:var(--mono); color:var(--accent); font-weight:500}
+.def{background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:8px; padding:.75rem 1rem; margin:.9rem 0}
+.def .k{font:500 .7rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.25rem}
+.def p{margin:.2rem 0}
+.tiles{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin:1.1rem 0 .4rem}
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .85rem; display:grid; gap:.2rem; align-content:start}
+.tile b{font:500 1.3rem/1.15 var(--mono); color:var(--accent); letter-spacing:-.01em}
+.tile span{font-size:.84rem; color:var(--muted); line-height:1.35}
+.tbl{overflow-x:auto; margin:.8rem 0; border:1px solid var(--line); border-radius:10px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem; font-variant-numeric:tabular-nums}
+th,td{text-align:left; vertical-align:top; padding:.55rem .7rem; border-bottom:1px solid var(--line)}
+th{font:500 .7rem/1.3 var(--mono); letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td b{font-weight:600}
+td.lv{font-weight:600; white-space:nowrap}
+.note{background:var(--blue-soft); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.note > :first-child{margin-top:0} .note > :last-child{margin-bottom:0}
+.warn{background:var(--warn-bg); border-radius:10px; padding:.8rem 1rem; margin:1rem 0; font-size:.95rem}
+.warn strong.t{color:var(--warn-fg)}
+.warn > :first-child{margin-top:0} .warn > :last-child{margin-bottom:0}
+.warn ul{margin:.4rem 0 0; padding-left:1.1rem}
+.star{color:var(--accent); font-weight:600}
+.src{font:400 .78rem/1.4 var(--mono); color:var(--muted); margin-top:.4rem}
+/* лесенка уровней */
+.levels{display:grid; gap:8px; margin:1rem 0}
+.lvl{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem .9rem; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.65rem .85rem; border-left:5px solid var(--accent)}
+.lvl:nth-child(2){margin-left:4%} .lvl:nth-child(3){margin-left:8%} .lvl:nth-child(4){margin-left:12%} .lvl:nth-child(5){margin-left:16%}
+.lvl b{font-family:var(--serif); font-size:1rem}
+.lvl small{display:block; color:var(--muted); font-size:.78rem; line-height:1.3}
+.lvl .who{font-size:.9rem}
+@media (max-width:560px){ .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0} }
+/* цепочки этапов */
+.flow{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px; margin:1rem 0}
+.st{flex:1 1 130px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.6rem .7rem; position:relative; display:grid; gap:.25rem; align-content:start}
+.st .n{font:500 .74rem/1.2 var(--mono); color:var(--muted)}
+.st b{font-family:var(--serif); font-size:.98rem; line-height:1.25}
+.st .h{font-size:.82rem; color:var(--ink); line-height:1.35}
+.st .h em{font-style:normal; font-weight:600; color:var(--accent)}
+.st.zone{background:var(--accent-soft); border-color:transparent}
+.arrow{flex:0 0 auto; align-self:center; font:500 1.1rem/1 var(--mono); color:var(--muted)}
+@media (max-width:560px){ .flow{flex-direction:column} .arrow{transform:rotate(90deg); align-self:center} .st{flex-basis:auto} }
+/* хронология */
+.tl{list-style:none; padding:0; margin:1rem 0; border-left:2px solid var(--line)}
+.tl li{position:relative; padding:.1rem 0 .7rem 1.1rem}
+.tl li::before{content:""; position:absolute; left:-6px; top:.55rem; width:10px; height:10px; border-radius:50%; background:var(--accent)}
+.tl .y{font:500 .85rem/1.3 var(--mono); color:var(--accent); display:block}
+.cols{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:10px; margin:.8rem 0}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:.75rem .9rem}
+.card h4{margin:0 0 .35rem; font:600 .98rem/1.3 var(--sans)}
+.card ul{margin:.2rem 0; padding-left:1.05rem} .card li{margin:.22rem 0; font-size:.92rem}
+.card.a{border-top:4px solid var(--accent)} .card.b{border-top:4px solid var(--blue)}
+/* самопроверка */
+.quiz-bar{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; justify-content:space-between; margin:.4rem 0 .8rem}
+.quiz-bar p{margin:0; color:var(--muted); font-size:.92rem}
+button{font:500 .88rem/1 var(--sans); padding:.6rem .9rem; border-radius:8px; border:1px solid var(--blue); background:transparent; color:var(--blue); cursor:pointer}
+button:hover{background:var(--blue-soft)}
+details.q{border-bottom:1px solid var(--line)}
+details.q:first-of-type{border-top:1px solid var(--line)}
+details.q summary{cursor:pointer; list-style:none; padding:.7rem 2rem .7rem 0; position:relative; font-weight:500}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+"; position:absolute; right:.3rem; top:.58rem; font:500 1.2rem/1 var(--mono); color:var(--blue)}
+details.q[open] summary::after{content:"−"}
+details.q .a{padding:0 0 .85rem; font-size:.95rem}
+details.q .a p{margin:.3rem 0}
+.links{display:grid; gap:.45rem; padding-left:1.1rem; font-size:.92rem}
+footer{margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted)}
+@media (max-width:480px){ body{font-size:15.5px} h2{font-size:1.32rem} th,td{padding:.5rem .55rem} }
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+/* патофизиология: части ответа */
+section[id^="q"] > h3{font:600 .78rem/1.3 var(--mono); letter-spacing:.07em; text-transform:uppercase; color:var(--accent); margin:1.4rem 0 .3rem}
+.easy{background:var(--ok-bg); border-radius:10px; padding:.75rem 1rem; margin:.5rem 0}
+.easy > :first-child{margin-top:0} .easy > :last-child{margin-bottom:0}
+.lead-link{font-weight:600; color:var(--accent)}
+.kv{display:inline-block; font:500 .72rem/1.2 var(--mono); padding:.18rem .4rem; border-radius:5px; vertical-align:.08em}
+.kv.c{background:var(--ok-bg); color:var(--ok-fg)} .kv.d{background:var(--accent-soft); color:var(--accent)}
+details.more{border:1px solid var(--line); border-radius:8px; background:var(--surface); margin:.45rem 0}
+details.more summary{cursor:pointer; padding:.6rem .8rem; font-weight:500; list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"? "; font-family:var(--mono); color:var(--blue)}
+details.more .a{padding:0 .8rem .7rem; font-size:.95rem}
+details.more .a p{margin:.3rem 0}
+.uncheck{color:var(--warn-fg); font-weight:600; white-space:nowrap}
+dl.gloss{margin:.6rem 0} dl.gloss dt{font-weight:600; margin-top:.6rem} dl.gloss dd{margin:.1rem 0 0 0; color:var(--ink)}
+svg.scheme{width:100%; height:auto; max-width:560px; display:block; margin:.8rem auto}
+svg.scheme text{font-family:var(--sans); fill:var(--ink)}
+svg.scheme .box{fill:var(--surface); stroke:var(--line)}
+svg.scheme .bad{fill:var(--accent-soft); stroke:var(--accent)}
+svg.scheme .good{fill:var(--ok-bg); stroke:var(--ok-fg)}
+svg.scheme .ln{stroke:var(--muted); fill:none; stroke-width:1.6}
+svg.scheme text.acc{fill:var(--accent)}
+svg.scheme .lnr{stroke:var(--accent); fill:none; stroke-width:1.8}
+@media print{ details.more{break-inside:avoid} details.more summary::before{content:none} .easy{border:1px solid #ccc} }
+@page{size:132mm 205mm; margin:12mm 10mm}
+@media print{
+  body{background:#fff; font-size:10.4pt; line-height:1.48}
+  .wrap{max-width:none; padding:0}
+  nav.toc, .quiz-bar, a.chip.pdf{display:none}
+  section{padding-top:1.1rem}
+  h1{font-size:21pt} h2{font-size:14.5pt} h2, h3, .sec-head{break-after:avoid}
+  .tile, .lvl, .st, details.q, .tl li, tr, ol.steps li, ul.facts li{break-inside:avoid}
+  .tbl{overflow:visible}
+  .tbl, .def, .tile, .lvl, .st, .card{border-color:#ccc}
+  table{font-size:8.6pt} th,td{padding:.3rem .4rem}
+  .tiles{grid-template-columns:1fr 1fr}
+  .lvl{grid-template-columns:1fr} .lvl:nth-child(n){margin-left:0}
+  .flow{flex-direction:column} .arrow{transform:rotate(90deg)} .st{flex:0 0 auto}
+  .cols{grid-template-columns:1fr}
+  details.q summary::after{content:none}
+  details.q summary{padding-right:0}
+  a{color:inherit; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Патофизиология · итоговое занятие № 1 · медфак ЧГУ</div>
+  <h1>Зачёт: 5 тем за 2 часа</h1>
+  <p class="lead">По рассказам других групп на зачёте даётся 3 вопроса письменно, у всех одинаковые, после того как их зачитают — около 10 минут на подготовку. Спрашивали генетику, воспаление и аллергию. Здесь пять тем, которые уже попадались, и к каждой — готовый план письменного ответа.</p>
+  <div class="chips">
+    <a class="chip pdf" href="zachet.pdf">скачать PDF для телефона</a>
+    <span class="chip">5 тем</span>
+    <span class="chip">методички кафедры</span>
+    <span class="chip">Адо, 2000</span>
+  </div>
+  <nav class="toc" aria-label="Содержание">
+    <div class="eyebrow">Темы</div>
+    <ol>
+      <li><a href="#t1">Клайнфельтер и Шерешевский–Тернер</a></li>
+      <li><a href="#t2">Аутосомно-доминантные и рецессивные болезни</a></li>
+      <li><a href="#t3">Нарушение кровообращения при воспалении</a></li>
+      <li><a href="#t4">Механизм эмиграции лейкоцитов</a></li>
+      <li><a href="#t5">Аллергические реакции III типа</a></li>
+    </ol>
+    <p style="margin:.6rem 0 0"><a href="#quiz">Самопроверка</a> · <a href="index.html">Все разделы</a></p>
+  </nav>
+</header>
+
+<section id="plan">
+  <div class="sec-head"><h2>План на 2 часа</h2></div>
+  <ol class="steps">
+    <li><b>0:00–0:20</b> — тема 5, аллергия III типа: её нет в других конспектах, начните с неё.</li>
+    <li><b>0:20–0:40</b> — тема 1, Клайнфельтер и Тернер: выучить таблицу сравнения.</li>
+    <li><b>0:40–1:00</b> — тема 2: по 5–6 болезней каждого типа и определения типов.</li>
+    <li><b>1:00–1:20</b> — темы 3 и 4: 4 стадии кровотока и 6 этапов эмиграции.</li>
+    <li><b>1:20–2:00</b> — <b>написать от руки</b> по памяти каждый «план письменного ответа», потом сверить. Последние 10 минут — самопроверка внизу страницы.</li>
+  </ol>
+  <div class="note"><p><b>Как писать на зачёте:</b> определение → классификация или стадии по порядку → механизм цепочкой со стрелками → проявления → примеры болезней. Нумеруйте пункты: так видно, что ответ полный. Определения ниже взяты из методички кафедры, а по ней и спрашивают.</p></div>
+</section>
+
+<section id="t1">
+  <div class="sec-head"><span class="qn">1</span><h2>Синдромы Клайнфельтера и Шерешевского–Тернера</h2></div>
+  <h3>План письменного ответа</h3>
+  <div class="def"><span class="k">Определение · Адо, стр. PDF 127–128</span>
+    <p>Хромосомные болезни возникают из-за грубых изменений генетического материала — нарушения числа или структуры хромосом. Оба синдрома — <b>анеуплоидии по половым хромосомам</b>: результат <b>нерасхождения половых хромосом</b> при образовании гамет.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>Клайнфельтер</th><th>Шерешевский–Тернер</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Кариотип</td><td><b>47,XXY</b>; реже 48,XXXY, 49,XXXXY</td><td><b>45,X</b> (44 аутосомы + X0) — моносомия X</td></tr>
+      <tr><td class="lv">Пол</td><td>мужской</td><td>женский</td></tr>
+      <tr><td class="lv">Тельца Барра</td><td>есть — столько, сколько лишних X</td><td>нет</td></tr>
+      <tr><td class="lv">Когда видно</td><td>в период полового созревания</td><td>с рождения: короткая шея с крыловидными складками, лимфатический отёк кистей и стоп</td></tr>
+      <tr><td class="lv">Рост, телосложение</td><td>высокий рост, длинные конечности, узкие плечи, широкий таз (евнухоидное)</td><td>низкий рост, бочкообразная грудная клетка</td></tr>
+      <tr><td class="lv">Половая система</td><td>недоразвитие яичек (атрофия), гинекомастия, слабое оволосение, бесплодие</td><td>гипоплазия яичников и матки, первичная аменорея, недоразвитие молочных желёз, бесплодие</td></tr>
+      <tr><td class="lv">Интеллект</td><td>часто снижен, тем сильнее, чем больше лишних X; депрессии, агрессия</td><td>у большинства практически сохранён</td></tr>
+      <tr><td class="lv">Пороки</td><td>часто остеопороз</td><td>пороки сердца у 20% (коарктация аорты), почек у 40% (подковообразная почка); остеопороз</td></tr>
+      <tr><td class="lv">Ведущее звено</td><td>гипогонадизм: ↓ тестостерона, ↑ женских половых гормонов</td><td>дисгенезия гонад: недостаточность эстрогенов</td></tr>
+      <tr><td class="lv">Лечение</td><td>мужские половые гормоны (бесплодие остаётся)</td><td>раннее лечение женскими половыми гормонами</td></tr>
+      <tr><td class="lv">Частота</td><td>1,3 на 1000 мальчиков (методичка)</td><td>1:3000 девочек (студенческие ответы)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры «Наследственная патология», листы 1, 5–6; Адо, стр. PDF 128; «Краткий курс», лекция XVI; гипогонадизм и лечение — студенческие ответы, вопрос 46</p>
+  <p><b>Патогенез — писать цепочкой:</b></p>
+  <div class="flow">
+    <div class="st"><span class="n">1</span><b>Нерасхождение половых хромосом</b><span class="h">у одного из родителей</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">2</span><b>Гамета XX/XY или «0»</b><span class="h">без половой хромосомы</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">3</span><b>XXY или X0</b><span class="h">во всех клетках или мозаицизм</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">4</span><b>Недоразвитие гонад</b><span class="h">дефицит половых гормонов, бесплодие</span></div>
+  </div>
+  <p><b>Диагностика:</b> половой хроматин (тельца Барра) и исследование кариотипа (методичка, лист 6; Адо, PDF 131).</p>
+  <div class="note"><p><b>Не ошибитесь в записи:</b> в методичке кафедры стоит «44ХХУ» и «44 ХО» — это опечатка, 44 — число одних аутосом. Пишите <b>47,XXY</b> и <b>45,X</b>. <b>Как запомнить:</b> Клайнфельтер — «лишняя X у мужчины»: высокий, с грудью, с тельцем Барра. Тернер — «недостаёт X у женщины»: низкая, со складками на шее, без тельца Барра. Синдром Y0 нежизнеспособен (Адо, PDF 128).</p></div>
+  <p><a class="lead-link" href="nasledstvennost.html#q8">Подробно: VI.8 Тернер</a> · <a class="lead-link" href="nasledstvennost.html#q10">VI.10 Клайнфельтер</a></p>
+</section>
+
+<section id="t2">
+  <div class="sec-head"><span class="qn">2</span><h2>Аутосомно-доминантные и аутосомно-рецессивные заболевания</h2></div>
+  <h3>План письменного ответа</h3>
+  <div class="def"><span class="k">Определения · методичка кафедры, лист 3</span>
+    <p><b>Аутосомно-доминантный тип:</b> патологический ген, находящийся в одной из аутосом, доминирует над нормальным геном – аллелем и проявляет себя в гетерозиготном состоянии Аа, при этом пенетрантность гена приближается к 100%.</p>
+    <p><b>Аутосомно-рецессивный тип:</b> передаются большинство наследственных болезней, которые развиваются у гомозиготных детей (аа), оба родителя которых являются гетерозиготными носителями патологического признака и фенотипически здоровы.</p>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Признак</th><th>Доминантный</th><th>Рецессивный</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">Кто болен</td><td>гетерозигота Аа</td><td>гомозигота аа; Аа — здоровый носитель</td></tr>
+      <tr><td class="lv">Родословная</td><td>больные в каждом поколении, «по вертикали»</td><td>не в каждом поколении, родители здоровы</td></tr>
+      <tr><td class="lv">Риск для ребёнка</td><td>50% от больного родителя (вывод по законам Менделя)</td><td>25% у двух носителей</td></tr>
+      <tr><td class="lv">Пол</td><td>болеют оба пола</td><td>болеют оба пола; чаще при кровнородственных браках</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка, лист 3; Адо, стр. PDF 126–127; риск 25% — тесты, задача о фенилкетонурии</p>
+  <div class="cols">
+    <div class="card a"><h4>Доминантные (методичка, лист 3)</h4><ul>
+      <li><b>ахондроплазия</b> — укорочение конечностей, туловище нормальное;</li>
+      <li><b>поли-, син-, брахидактилия</b> — 6+ пальцев, сращение, укорочение;</li>
+      <li><b>нейрофиброматоз</b> (Реклингхаузена) — узлы по ходу нервов;</li>
+      <li><b>хорея Гентингтона</b> — с 35–40 лет, непроизвольные движения;</li>
+      <li><b>болезнь Виллебранда</b> (сосудистая гемофилия);</li>
+      <li>поликистоз почек, полипоз толстой кишки, семейная гиперхолестеринемия;</li>
+      <li>болезнь Альцгеймера (так в методичке и у Адо).</li></ul></div>
+    <div class="card b"><h4>Рецессивные (методичка, листы 3–4)</h4><ul>
+      <li><b>фенилкетонурия</b> — нет фенилаланингидроксилазы → фенилаланин и фенилпируват отравляют ЦНС;</li>
+      <li><b>альбинизм</b> — нет тирозиназы, нет меланина;</li>
+      <li><b>алкаптонурия</b> — нет оксидазы гомогентизиновой кислоты, охроноз;</li>
+      <li><b>галактоземия</b> — катаракта, увеличение печени, отставание в развитии;</li>
+      <li><b>гликогеноз</b> — гликоген копится в органах;</li>
+      <li>талассемия, микроцефалия, ихтиоз, заячья губа, волчья пасть.</li></ul></div>
+  </div>
+  <p><b>Механизм на примере фенилкетонурии</b> (рецессивная, Адо, PDF 125): мутация гена → нет фенилаланин-4-гидроксилазы → блок фенилаланин → тирозин → <b>ведущее звено — накопление фенилаланина и фенилпировиноградной кислоты</b> → поражение ЦНС (олигофрения, судороги, микроцефалия) + мало тирозина и меланина (светлые кожа и волосы). Лечение — диета без фенилаланина, скрининг новорождённых.</p>
+  <p><b>Механизм доминантной болезни на примере Альцгеймера</b> (Адо, PDF 126): ген предшественника β-амилоида (21-я хромосома) → удлинённый β-амилоид → сенильные бляшки → гибель нейронов → ↓ ацетилхолина → слабоумие.</p>
+  <div class="note"><p><b>Где ошибаются:</b> в методичке галактоземия объяснена «дефектом лактазы» — по Адо это дефицит <b>галактозо-1-фосфат-уридилтрансферазы</b> (PDF 125). Если пишете механизм, пишите по Адо. <b>Как запомнить:</b> доминантные — в основном «кости и пальцы» (ахондроплазия, -дактилии) и «поздние нервные» (Гентингтон); рецессивные — в основном «ферменты» (энзимопатии: ФКУ, альбинизм, алкаптонурия, галактоземия, гликогенозы).</p></div>
+  <p><a class="lead-link" href="nasledstvennost.html#q4">Подробно: VI.4</a> · <a class="lead-link" href="nasledstvennost.html#q5">VI.5</a> · <a class="lead-link" href="nasledstvennost.html#q11">VI.11 фенилкетонурия</a></p>
+</section>
+
+<section id="t3">
+  <div class="sec-head"><span class="qn">3</span><h2>Нарушение кровообращения (микроциркуляции) при воспалении</h2></div>
+  <h3>План письменного ответа</h3>
+  <div class="def"><span class="k">Стадии · методичка кафедры «Воспаление», лист 3</span>
+    <p>При воспалении различают <b>4 стадии</b> изменений кровотока в микроциркуляторных руслах.</p>
+  </div>
+  <ol class="steps">
+    <li><b>Преходящий спазм</b> приносящих артериол — выражен при быстро развивающемся повреждении (ожог), длится <b>несколько секунд</b>.</li>
+    <li><b>Артериальная гиперемия</b> — начинается с артериол, увеличивается кровенаполнение; оттекающая кровь содержит много кислорода и мало восстановленного гемоглобина — <b>ярко-красная</b>; длится <b>10–30 минут</b>. Даёт покраснение и жар.</li>
+    <li><b>Венозная гиперемия</b> — максимальное расширение приносящих артериол и прекапиллярных сфинктеров; скорость кровотока падает, растёт восстановленный гемоглобин — кровь <b>синюшная</b>.</li>
+    <li><b>Стаз</b> — ему предшествует <b>предстатическое состояние</b> с <b>маятникообразным движением крови</b> (в систолу от артерий к венам, в диастолу — обратно). Стаз может разрешиться, если проницаемость сосуда восстановится.</li>
+  </ol>
+  <p class="src">Методичка «Воспаление», лист 3 — текст стадий почти дословно</p>
+  <div class="flow">
+    <div class="st"><span class="n">секунды</span><b>Спазм артериол</b></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">10–30 мин</span><b>Артериальная гиперемия</b><span class="h">кровь алая</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">затем</span><b>Венозная гиперемия</b><span class="h">кровь синюшная</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">исход</span><b>Престаз → стаз</b><span class="h">маятникообразное движение</span></div>
+  </div>
+  <p><b>Механизмы — добавить, если хватит времени</b> (Адо, PDF 215–217):</p>
+  <ul class="facts">
+    <li>артериальная гиперемия — расширение сосудов под действием медиаторов (гистамин, брадикинин) и аксон-рефлекса;</li>
+    <li><b>переход в венозную</b> — главная причина <b>экссудация</b>: кровь сгущается (↑ вязкость), отёк сдавливает вены (Адо, PDF 217);</li>
+    <li>одновременно растёт проницаемость: медиаторы (гистамин, серотонин, брадикинин, C5a, C3a, лейкотриены C4, D4) → экссудат и отёк (методичка);</li>
+    <li>замедление кровотока → лейкоциты выходят к стенке сосуда (краевое стояние) → эмиграция (тема 4).</li>
+  </ul>
+  <div class="note"><p><b>Как запомнить:</b> «пробка после аварии» — все на секунду тормозят (спазм), потом рвутся вперёд (артериальная гиперемия, алая кровь), дорогу сужает отёк, машины ползут (венозная гиперемия, синюшная), дёргаются вперёд-назад (маятник) и встают (стаз). <b>Связь с признаками воспаления:</b> артериальная гиперемия — rubor и calor, экссудация — tumor.</p></div>
+  <p><a class="lead-link" href="vospalenie.html#q3">Подробно: V.3</a> · <a class="lead-link" href="vospalenie.html#q4">V.4 экссудация</a></p>
+</section>
+
+<section id="t4">
+  <div class="sec-head"><span class="qn">4</span><h2>Механизм эмиграции лейкоцитов в очаг воспаления</h2></div>
+  <h3>План письменного ответа</h3>
+  <div class="def"><span class="k">Определение · методичка кафедры «Воспаление»</span>
+    <p><b>Эмиграция лейкоцитов</b> – выход лейкоцитов из сосудов в ткань. Лейкоциты, занявшие краевое положение, выпускают псевдоподии, которые проникают в межэндотелиальные щели и таким образом проходят через эндотелиальный слой. Он требует энергии и осуществляется с усиленным потреблением кислорода, участием ионов кальция, магния и АТФ.</p>
+  </div>
+  <p><b>Этапы — писать по порядку:</b></p>
+  <ol class="steps">
+    <li><b>Краевое стояние</b> — при замедлении кровотока (венозная гиперемия) лейкоциты выходят из осевого тока к стенке сосуда (методичка; Адо, PDF 219).</li>
+    <li><b>Качение (роллинг)</b> — слабое прилипание через <b>селектины</b> (P-селектин эндотелия выходит на поверхность под действием гистамина) (Адо, PDF 220–221).</li>
+    <li><b>Плотная адгезия</b> — <b>интегрины</b> лейкоцита связываются с <b>ICAM-1, ICAM-2, VCAM-1</b> эндотелия (Адо, PDF 220–221).</li>
+    <li><b>Проход через эндотелий</b> — псевдоподии в межэндотелиальные щели; нужны энергия, O₂, Ca²⁺, Mg²⁺, АТФ (методичка); идёт в посткапиллярных венулах, 2–12 мин (Адо, PDF 220).</li>
+    <li><b>Проход через базальную мембрану</b> — лейкоцит выделяет лизосомальные протеиназы (<b>коллагеназа, эластаза</b>), растворяющие её (методичка).</li>
+    <li><b>Хемотаксис</b> — амебоидное движение к центру очага по градиенту хемотаксических веществ: фрагменты комплемента, фибринопептиды, фрагменты коллагена, лимфокины, бактериальные пептиды, ионы H⁺ (методичка).</li>
+  </ol>
+  <p><b>Последовательность клеток:</b> сначала <b>нейтрофилы</b>, затем <b>моноциты — макрофаги и лимфоциты</b>. Моноциты приходят позже из-за меньшей хемотаксической чувствительности (методичка). Закон эмиграции И.И. Мечникова: полинуклеарная стадия — до 2 суток, мононуклеарная — до 5–6 дней, затем фибробластическая («Краткий курс», лекция X).</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Причина воспаления</th><th>Преобладают в экссудате</th></tr></thead>
+    <tbody>
+      <tr><td>гноеродные кокки (стафило-, стрептококки)</td><td>нейтрофилы</td></tr>
+      <tr><td>аллергия, гельминты</td><td>эозинофилы</td></tr>
+      <tr><td>хроническое воспаление (туберкулёз, сифилис)</td><td>мононуклеары — лимфоциты, макрофаги</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Методичка кафедры «Воспаление»</p>
+  <div class="note"><p><b>Как запомнить:</b> «прибился к обочине (краевое стояние) → покатился (селектины) → зацепился (интегрины–ICAM) → протиснулся в щель (эндотелий) → прогрыз дно (базальная мембрана) → пополз на запах (хемотаксис)». <b>Значение:</b> лейкоциты в очаге фагоцитируют микробы и продукты распада — защитная роль эмиграции.</p></div>
+  <p><a class="lead-link" href="vospalenie.html#q6">Подробно: V.6</a> · <a class="lead-link" href="vospalenie.html#q9">V.9 фагоцитоз</a></p>
+</section>
+
+<section id="t5">
+  <div class="sec-head"><span class="qn">5</span><h2>Аллергические реакции III типа (иммунокомплексные)</h2></div>
+  <h3>План письменного ответа</h3>
+  <div class="def"><span class="k">Определения · методичка кафедры «Аллергия», листы 1, 3–4</span>
+    <p><b>Аллергия</b> – это повышенная чувствительность организма к какому-либо веществу, чаще с антигенными свойствами.</p>
+    <p><b>Аллергические реакции III типа:</b> повреждение при данном типе аллергической реакции вызывают <b>иммунные комплексы АГ – АТ</b> (IgM, IgG1, IgG3).</p>
+  </div>
+  <p>Синонимы: <b>иммунокомплексный тип, реакция типа Артюса</b>. Это один из 4 типов по классификации <b>Джелла и Кумбса</b> (1968) (методичка, лист 2; Адо, стр. PDF 170).</p>
+  <p><b>1. Аллергены и условия.</b> Аллергены — бактериальные, вирусные, грибковые, лекарственные, пищевые вещества — находятся в <b>растворимой форме и в большом количестве</b>. В норме комплексы фагоцитируются, и организм очищается от антигена. Повреждают ткани при условиях (Адо, PDF 170):</p>
+  <ul class="facts">
+    <li>комплекс образовался в <b>небольшом избытке антигена</b>;</li>
+    <li>в какой-либо сосудистой области <b>повышена проницаемость</b> сосудистых стенок;</li>
+    <li>комплексы <b>долго циркулируют</b> — фагоциты плохо их поглощают или антиген поступает постоянно.</li>
+  </ul>
+  <p><b>Какие комплексы опасны</b> (методичка, листы 3–4): крупные быстро удаляются ретикулоэндотелиальной системой; нерастворимые, образованные в эквивалентном соотношении, легко удаляются фагоцитозом (вредны, только если их много или они образуются в фильтрующих мембранах — клубочках почек, синовиальной оболочке суставов); мелкие (большой избыток антигена) циркулируют долго, но слабо повреждают. <b>Повреждают растворимые комплексы, образованные в небольшом избытке антигена, массой 900 000 – 1 000 000 Da</b>: они плохо фагоцитируются и долго находятся в организме.</p>
+  <p><b>2. Стадии</b> (методичка, листы 3–4):</p>
+  <div class="flow">
+    <div class="st"><span class="n">I. иммунная</span><b>Образование комплексов АГ–АТ</b><span class="h">IgG, IgM; отложение в стенке сосудов, клубочках, синовии</span></div>
+    <div class="arrow">→</div>
+    <div class="st zone"><span class="n">II. патохимическая</span><b>Комплемент и медиаторы</b><span class="h">C3b, C3a, C4a, лизосомальные ферменты, гистамин, серотонин, O₂⁻, брадикинин</span></div>
+    <div class="arrow">→</div>
+    <div class="st"><span class="n">III. патофизиологическая</span><b>Воспаление, васкулит</b><span class="h">альтерация, экссудация, пролиферация</span></div>
+  </div>
+  <p><b>Медиаторы патохимической стадии</b> (методичка, лист 4):</p>
+  <ul class="facts">
+    <li><b>C3b</b> усиливает иммунную адгезию иммунокомплексов к фагоцитам;</li>
+    <li><b>C3a и C4a</b> — анафилатоксины;</li>
+    <li><b>лизосомальные ферменты</b> усиливают повреждение базальных мембран и соединительной ткани;</li>
+    <li>гистамин, серотонин; супероксидный анион-радикал; брадикинин.</li>
+  </ul>
+  <p><b>Цепь по Адо</b> (стр. PDF 170–171): комплексы откладываются в тканях → активируют <b>комплемент</b> → его фрагменты привлекают и активируют <b>нейтрофилы</b> и повышают проницаемость → нейтрофилы фагоцитируют комплексы и <b>выделяют лизосомальные ферменты</b> → протеолиз, активация калликреин-кининовой системы; базофилы выделяют гистамин и тромбоцитактивирующий фактор → агрегация тромбоцитов, выход серотонина → <b>повреждение тканей и воспаление</b>.</p>
+  <p><b>3. Проявления и болезни.</b> Развивается воспаление с альтерацией, экссудацией и пролиферацией; <b>васкулиты</b> → узловатая эритема, узелковый периартериит, <b>гломерулонефрит</b>. III тип — ведущий в развитии <b>сывороточной болезни, экзогенных аллергических альвеолитов, ревматоидного артрита</b> (методичка, лист 4); Адо добавляет системную волчанку, некоторые случаи лекарственной и пищевой аллергии (PDF 171).</p>
+  <p><b>4. Феномен Артюса</b> — классическая модель у кролика (методичка, лист 4; Адо, PDF 171): после повторной инъекции антигена (обычно после 3–5 инъекций) через несколько минут — <b>гиперемия</b>, через 1–2 ч — <b>отёк и воспалительная эритема</b>, затем <b>кровоизлияния</b>, через 24–72 ч — <b>некроз</b>.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Тип</th><th>Название</th><th>Чем повреждает</th></tr></thead>
+    <tbody>
+      <tr><td class="lv">I</td><td>анафилактический</td><td>IgE, реже IgG4 — на тучных клетках</td></tr>
+      <tr><td class="lv">II</td><td>цитотоксический</td><td>IgG, IgM против изменённых клеток</td></tr>
+      <tr><td class="lv">III</td><td>иммунокомплексный (Артюса)</td><td>комплексы АГ–АТ с IgG, IgM</td></tr>
+      <tr><td class="lv">IV</td><td>замедленная гиперчувствительность</td><td>сенсибилизированные Т-лимфоциты</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Адо, стр. PDF 170 (таблица типов); методичка «Аллергия», листы 2–4</p>
+  <div class="note"><p><b>Чем III тип отличается от II:</b> при II типе антитела садятся на антиген, который <b>сидит на клетке</b> (лекарственная гемолитическая анемия, тромбоцитопения), а при III — антиген <b>растворим</b>, комплекс образуется в крови и оседает в стенке сосудов и в клубочках. <b>Как запомнить:</b> «III — три буквы К: <b>К</b>омплекс, <b>К</b>омплемент, <b>К</b>лубочки (гломерулонефрит)». <b>В методичке</b> обе последние стадии пронумерованы «2.» — это опечатка, пишите 1, 2, 3.</p></div>
+</section>
+
+<section id="quiz">
+  <div class="sec-head"><h2>Самопроверка: ответ одной фразой</h2></div>
+  <div class="quiz-bar"><p>Сначала ответьте вслух, потом откройте.</p><button type="button" id="toggle-all">Открыть все</button></div>
+  <details class="q"><summary>Кариотипы Клайнфельтера и Тернера, тельца Барра?</summary><div class="a"><p>47,XXY — тельца Барра есть (по числу лишних X); 45,X — телец Барра нет.</p></div></details>
+  <details class="q"><summary>Главное у Клайнфельтера?</summary><div class="a"><p>Мужчина, в пубертате: высокий, евнухоидный, гинекомастия, атрофия яичек, бесплодие, часто снижен интеллект.</p></div></details>
+  <details class="q"><summary>Главное у Тернера?</summary><div class="a"><p>Женщина низкого роста, крыловидные складки шеи, лимфатические отёки у новорождённых, гипоплазия яичников, первичная аменорея, пороки сердца (коарктация) и почек, интеллект сохранён.</p></div></details>
+  <details class="q"><summary>Доминантный и рецессивный тип — кто болеет?</summary><div class="a"><p>Доминантный — гетерозигота Аа, больные в каждом поколении; рецессивный — гомозигота аа, родители — здоровые носители, риск 25%.</p></div></details>
+  <details class="q"><summary>Пять доминантных болезней?</summary><div class="a"><p>Ахондроплазия, полидактилия, нейрофиброматоз, хорея Гентингтона, болезнь Виллебранда.</p></div></details>
+  <details class="q"><summary>Пять рецессивных болезней?</summary><div class="a"><p>Фенилкетонурия, альбинизм, алкаптонурия, галактоземия, талассемия.</p></div></details>
+  <details class="q"><summary>Четыре стадии нарушения кровотока при воспалении?</summary><div class="a"><p>Преходящий спазм артериол (секунды) → артериальная гиперемия (10–30 мин, кровь алая) → венозная гиперемия (кровь синюшная) → престаз с маятникообразным движением → стаз.</p></div></details>
+  <details class="q"><summary>Почему артериальная гиперемия сменяется венозной?</summary><div class="a"><p>Из-за экссудации: кровь сгущается, отёк сдавливает вены (Адо).</p></div></details>
+  <details class="q"><summary>Этапы эмиграции лейкоцитов?</summary><div class="a"><p>Краевое стояние → качение (селектины) → адгезия (интегрины–ICAM) → проход через эндотелий → растворение базальной мембраны (коллагеназа, эластаза) → хемотаксис.</p></div></details>
+  <details class="q"><summary>В каком порядке приходят лейкоциты?</summary><div class="a"><p>Нейтрофилы → моноциты-макрофаги и лимфоциты.</p></div></details>
+  <details class="q"><summary>Что повреждает при III типе аллергии и какие комплексы опасны?</summary><div class="a"><p>Иммунные комплексы АГ–АТ (IgG, IgM); опасны растворимые, образованные в небольшом избытке антигена, 900 000–1 000 000 Da.</p></div></details>
+  <details class="q"><summary>Медиаторы III типа?</summary><div class="a"><p>C3b (адгезия к фагоцитам), C3a и C4a (анафилатоксины), лизосомальные ферменты, гистамин, серотонин, супероксид-радикал, брадикинин.</p></div></details>
+  <details class="q"><summary>Болезни III типа и феномен Артюса?</summary><div class="a"><p>Сывороточная болезнь, экзогенные аллергические альвеолиты, ревматоидный артрит, гломерулонефрит, васкулиты; Артюс: гиперемия → через 1–2 ч отёк и эритема → кровоизлияния → через 24–72 ч некроз.</p></div></details>
+</section>
+
+<section id="src">
+  <div class="sec-head"><h2>Источники</h2></div>
+  <ol class="links">
+    <li>Методички кафедры: «Наследственная патология» (листы 1–6), «Воспаление» (листы 3–5), «Аллергия» (листы 1–4) — тексты в <code>source/metodichki/</code>.</li>
+    <li>Патологическая физиология / под ред. А.Д. Адо и др. — М.: Триада-Х, 2000: наследственность — стр. PDF 125–131; воспаление — PDF 215–221; аллергия III типа — PDF 170–171.</li>
+    <li>«Краткий курс лекций по патологической физиологии» — лекции X, XVI.</li>
+    <li>Студенческие ответы на экзаменационный перечень ЧГУ, вопрос 46; тесты по патофизиологии — задача о фенилкетонурии.</li>
+    <li>Каким бывает зачёт — со слов студентов других групп (переписка, 21.10).</li>
+  </ol>
+</section>
+
+<footer>
+  <p>Конспект к итоговому занятию № 1 по патофизиологии составил Евгений Якимов, группа М-03-24, медфак ЧГУ, октябрь 2026. Нашли ошибку — напишите в Telegram <a href="https://t.me/Thesameboss">@Thesameboss</a>.</p>
+  <p id="offer">Нужен такой же конспект или тренажёр к своему зачёту или экзамену? Соберу по вашим материалам — списку вопросов, сборнику тестов, методичке. Пишите в личку в Telegram, условия обсудим.</p>
+</footer>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('toggle-all'); if(!b) return;
+  b.addEventListener('click',function(){
+    var d=document.querySelectorAll('#quiz details.q');
+    var open=b.getAttribute('data-open')!=='1';
+    d.forEach(function(x){x.open=open;});
+    b.setAttribute('data-open',open?'1':'0');
+    b.textContent=open?'Свернуть все':'Открыть все';
+  });
+})();
+</script>
+</body>
+</html>
