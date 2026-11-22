@@ -112,6 +112,14 @@ a.btn{text-decoration:none}
 .opt.open .let{display:none}
 .opt.open .txt{white-space:pre-line}
 .opt.open.veil{display:none}
+/* поле для ответа на «впишите»: шрифт не меньше 16px — иначе телефон увеличивает страницу */
+.typein{margin-top:16px}
+.typein input{display:block;width:100%;min-height:52px;padding:13px 15px;border:1px solid var(--line-strong);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;font-size:17.5px;line-height:1.42}
+.typein input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.typein input::placeholder{color:var(--faint)}
+.typein input[readonly]{background:var(--surface)}
+.typein.ok input{border-color:var(--ok-line);background:var(--ok-bg)}
+.typein.no input{border-color:var(--no-line);background:var(--no-bg)}
 .browse-item li{white-space:pre-line}
 .note,.wrongitem .x,.browse-item .x{white-space:pre-line}
 .freebox{margin-top:12px;padding:12px 14px;border-radius:var(--radius);background:var(--accent-soft);color:var(--ink);font-size:14.5px;line-height:1.5}
@@ -237,6 +245,8 @@ kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid
 .bb .btn{flex:1 1 0;padding-left:10px;padding-right:10px;white-space:nowrap;min-width:0}
 .bb .btn.primary{flex:1.6 1 0}
 .bb .ib{border:1px solid var(--line-strong);background:var(--card)}
+/* «Я ответил верно» длиннее «Дальше»: поровну места, на узком экране — в две строки */
+.bb #btn-typed-ok,.bb #btn-typed-next{flex:1 1 0;white-space:normal;line-height:1.2}
 @media (min-width:900px){
   .bb{position:static;margin-top:0;border-top:0;background:none;padding-top:0}
 }
@@ -486,7 +496,6 @@ html:not(.ready) *{transition:none !important}
         <button class="mode" data-mode="test"><span class="mi"><svg class="ico s"><use href="#i-test"/></svg></span><span class="mt"><b>Тест</b><span>по порядку, итог и разбор в конце</span></span><span class="radio"></span></button>
         <button class="mode" data-mode="learn"><span class="mi"><svg class="ico s"><use href="#i-repeat"/></svg></span><span class="mt"><b>Учить с повторами</b><span>ошибки возвращаются, пока не выучишь</span></span><span class="radio"></span></button>
         <button class="mode" data-mode="cards"><span class="mi"><svg class="ico s"><use href="#i-cards"/></svg></span><span class="mt"><b>Карточки</b><span>вспомни сам, потом проверь</span></span><span class="radio"></span></button>
-        <button class="mode" data-mode="exam"><span class="mi"><svg class="ico s"><use href="#i-clock"/></svg></span><span class="mt"><b>Экзамен</b><span id="mode-exam-sub">20 вопросов за 12 минут</span></span><span class="radio"></span></button>
       </div>
       <details class="more"><summary><svg class="ico s"><use href="#i-info"/></svg>Как устроен этот режим<svg class="ico s turn" style="margin-left:auto"><use href="#i-down"/></svg></summary><p id="mode-hint"></p></details>
       <div class="startfoot">
@@ -538,9 +547,11 @@ html:not(.ready) *{transition:none !important}
           <b>Строгий режим:</b> в тестах всегда чекбоксы, даже если верный ответ один, — как на тесте,
           где не сказано, сколько ответов верных. Без него чекбоксы появляются только там, где верных
           ответов правда несколько.<br>
-          <b>Вопросы «впишите ответ»</b> идут как карточки: вспомни, что стоит на месте «…», открой ответ
-          и честно отметь «знал» или «не знал». В пробный экзамен они не попадают.<br>
-          <b>Сразу к следующему:</b> после верного ответа вопрос сам листается дальше (в экзамене — после любого).
+          <b>Вопросы «впишите ответ»:</b> впиши, что стоит на месте «…», и нажми «Проверить» (или <kbd>Enter</kbd>).
+          Регистр, буква ё, окончания и порядок слов не важны; где пропусков несколько — впиши все, через запятую.
+          Не совпало — сверь с ответом сам: по смыслу то же — «Я ответил верно», нет — «Дальше» (это ошибка).
+          В режиме «Карточки» они без ввода: вспомни, открой ответ и честно отметь «знал» или «не знал».<br>
+          <b>Сразу к следующему:</b> после верного ответа вопрос сам листается дальше.
         </p>
         <p>Клавиши: <kbd>1</kbd>…<kbd>9</kbd> — выбрать вариант, <kbd>Enter</kbd> — ответить или дальше,
           <kbd>←</kbd> — назад, <kbd>Esc</kbd> — меню.</p>
@@ -590,6 +601,7 @@ html:not(.ready) *{transition:none !important}
       <div class="qmeta" id="q-meta"></div>
       <h2 class="qtext" id="q-text" tabindex="-1"></h2>
       <p class="hint hidden" id="q-hint"></p>
+      <div class="typein hidden" id="q-type"><input id="q-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" aria-label="Ваш ответ" placeholder="Ваш ответ"></div>
       <div class="opts" id="q-opts" role="group" aria-labelledby="q-text"></div>
       <div id="q-feedback" aria-live="polite"></div>
     </article>
@@ -869,7 +881,9 @@ var settings = LS.get(K_SET, null) || {
   shuffleQ:true, balance:true, shuffleO:false, strict:false, instant:false, len:0, mode:"learn", brief:false
 };
 settings = obj(settings);
-if(["test", "learn", "cards", "exam"].indexOf(settings.mode) < 0) settings.mode = "learn";
+// режим «Экзамен» убран 22.11.2026 (формат экзамена кафедры неизвестен) — сохранённый выбор становится «Тестом»
+if(settings.mode === "exam") settings.mode = "test";
+if(["test", "learn", "cards"].indexOf(settings.mode) < 0) settings.mode = "learn";
 if(settings.balance === undefined) settings.balance = true;
 if(!Array.isArray(settings.sections)) settings.sections = SEC.map(function(_, i){ return i; });
 // номера разделов — только существующие и без повторов
@@ -909,8 +923,78 @@ function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random
 function pad3(n){ return ("00"+n).slice(-3); }
 /* номер из исходника: подвариант одного вопроса — «054.2» */
 function qlab(q){ return q.lab ? pad3(Math.floor(q.lab)) + (String(q.lab).indexOf(".") > 0 ? "." + String(q.lab).split(".")[1] : "") : pad3(q.n); }
-/* открытый вопрос (без вариантов) всегда идёт как карточка */
-function isCard(q){ return S.mode === "cards" || !!(q && q.open); }
+/* В «Карточках» любой вопрос — карточка (вспомни → открой → знал/не знал). В остальных режимах
+   открытый вопрос («впишите», q.open) — поле для ответа с мягкой проверкой (typedOk). */
+function isCard(q){ return S.mode === "cards"; }
+function isTyped(q){ return !!(q && q.open) && S.mode !== "cards"; }
+
+/* ---------- проверка вписанного ответа ---------- */
+/* Мягкая: регистр, ё/е, знаки препинания, окончания и порядок слов не важны.
+   «A; B» — несколько пропусков, нужны все части. «оттиск (слепок)» — в скобках другой верный ответ
+   на месте предыдущего слова, «(бронза или латунь)» — любой из них; засчитывается любой вариант.
+   Слова, которых нет в ответе (кроме «и», «или»…), — не засчитываем, иначе можно вписать подряд
+   все варианты. Основа слова — без окончания, а не первые 5 букв: у «термопластическими»,
+   «термореактивные» и «термостойкие» первые пять букв одинаковы. В длинной основе (от 6 букв)
+   прощается одна опечатка. Не совпало — студент сам решает: «Я ответил верно» или «Дальше». */
+var TYPE_STOP = {"и": 1, "или": 1, "а": 1, "это": 1, "в": 1, "во": 1, "на": 1, "с": 1, "со": 1, "по": 1, "из": 1, "к": 1};
+var TYPE_ENDS = ["иями", "ями", "ами", "ыми", "ими", "его", "ого", "ему", "ому",
+  "ых", "их", "ым", "им", "ая", "яя", "ое", "ее", "ые", "ие", "ый", "ий", "ой", "ей", "ую", "юю",
+  "ом", "ем", "ам", "ям", "ах", "ях", "ов", "ев", "ию", "ия", "ья", "ье", "ью", "ьи"];
+function typeWords(s){
+  return String(s).toLowerCase().replace(/ё/g, "е")
+    .replace(/(\d)\s*-?\s*[а-я]{1,3}(?![а-я])/g, "$1")  // «900-й», «900-ой», «900 й» → «900»
+    .split(/[^0-9a-zа-я]+/).filter(function(w){ return w && !TYPE_STOP[w]; });
+}
+function typeStem(w){
+  if(w.length <= 3 || /^\d+$/.test(w)) return w;
+  for(var i = 0; i < TYPE_ENDS.length; i++){
+    var e = TYPE_ENDS[i];
+    if(w.length - e.length >= 3 && w.slice(-e.length) === e){ w = w.slice(0, -e.length); break; }
+  }
+  while(w.length > 3 && /[аеиоуыэюяьй]$/.test(w)) w = w.slice(0, -1);
+  return w;
+}
+/* основы совпадают или (обе от 6 букв) отличаются одной заменой, вставкой или пропуском буквы в середине:
+   первые две и последняя буквы — те же, иначе «пластичность» сошла бы за «эластичность», «оттискной» — за «оттиск» */
+function typeNear(a, b){
+  if(a === b) return true;
+  if(a.length < 6 || b.length < 6 || Math.abs(a.length - b.length) > 1) return false;
+  if(a.slice(0, 2) !== b.slice(0, 2) || a.slice(-1) !== b.slice(-1)) return false;
+  var i = 0, j = 0, diff = 0;
+  while(i < a.length && j < b.length){
+    if(a[i] === b[j]){ i++; j++; continue; }
+    if(++diff > 1) return false;
+    if(a.length > b.length) i++; else if(a.length < b.length) j++; else { i++; j++; }
+  }
+  return diff + (a.length - i) + (b.length - j) <= 1;
+}
+/* ответ → части (через «;») → места-слова → варианты на месте (каждый — список основ) */
+function typeSpec(ans){
+  return String(ans).split(";").map(function(part){
+    var slots = [], m, re = /\(([^)]*)\)|[^()]+/g;
+    while((m = re.exec(part))){
+      if(m[1] !== undefined){
+        if(!slots.length) slots.push([]);
+        m[1].split(/\s+или\s+/).forEach(function(alt){
+          var ph = typeWords(alt).map(typeStem);
+          if(ph.length) slots[slots.length - 1].push(ph);
+        });
+      } else typeWords(m[0]).forEach(function(w){ slots.push([[typeStem(w)]]); });
+    }
+    return slots;
+  }).filter(function(slots){ return slots.length; });
+}
+function typedOk(text, ans){
+  var got = typeWords(text).map(typeStem), spec = typeSpec(ans), known = [];
+  if(!got.length || !spec.length) return false;
+  function has(w){ return got.some(function(g){ return typeNear(g, w); }); }
+  var all = spec.every(function(slots){
+    return slots.every(function(alts){ return alts.some(function(ph){ return ph.every(has); }); });
+  });
+  if(!all) return false;
+  spec.forEach(function(slots){ slots.forEach(function(alts){ alts.forEach(function(ph){ known = known.concat(ph); }); }); });
+  return got.every(function(g){ return known.some(function(w){ return typeNear(g, w); }); });
+}
 function secLabel(si){ return "Р" + ("0"+SEC[si].num).slice(-2); }
 /* короткие названия разделов для карточек, карты итогов и шапки вопроса; полное — SEC[si].title */
 var SHORT = {};  // короткие названия не нужны: названия разделов и так короткие
@@ -976,12 +1060,13 @@ LENS.forEach(function(l){
 /* Вопросы с пометкой extra взяты из source/dopolnenie.md: в сборнике кафедры их нет. */
 var EXTRA_NOTE = "Вопрос из второй редакции тестов.";
 
-/* ---------- экзамен ---------- */
-/* Экзамен, со слов преподавателя: 20 вопросов за 12 минут, зачёт — 11 верных (51 %; 10 из 20 —
-   это 50 %, мало). Вопросы с несколькими верными ответами — из пищеварения. Изменится — поменять здесь. */
+/* ---------- экзамен (выключен) ---------- */
+/* Режим «Экзамен» убран из меню 22.11.2026: формат экзамена кафедры (число вопросов, время, порог)
+   неизвестен, а 20 вопросов / 15 минут / 70 % были допущением. Движок (EXAM, examList, часы, итоги с
+   зачётом) оставлен выключенным. Вернуть, когда формат станет известен: числа здесь, кнопка
+   кнопка режима exam в меню, "exam" в проверке settings.mode и в unpackProgress, ветки экзамена в paintMenu
+   и у #btn-start (образец — этот файл в git до 22.11.2026), проверка в final_audit.py. */
 var EXAM = {
-  // формат теста кафедры неизвестен: 20 вопросов за 15 минут, порог 70 % — обычный для компьютерного теста.
-  // Узнаем настоящий — поменять здесь. Вопросы «впишите» (open) в экзамен не берутся.
   n: 20, pass: 70, min: 15, pd: [], dig: []
 };
 function lin(mode){ return mode === "test" || mode === "exam"; }  // вопросы по порядку, без круга
@@ -1037,21 +1122,15 @@ function paintMenu(){
     var on = settings.len===+b.dataset.len;
     b.classList.toggle("on", on); b.setAttribute("aria-pressed", on);
   });
-  var exam = settings.mode === "exam";
-  var n = startList().length, take = exam ? Math.min(EXAM.n, n + 2) : settings.len ? Math.min(settings.len,n) : n;
-  var startWord = settings.mode === "learn" ? "Начать учить" : settings.mode === "cards" ? "Открыть карточки"
-    : exam ? "Начать экзамен" : "Начать тест";
-  var startTail = exam ? " за " + EXAM.min + "\u00a0" + plural(EXAM.min, "минуту", "минуты", "минут") : "";
-  $("len-h").classList.toggle("hidden", exam);
-  lenBox.classList.toggle("hidden", exam);
-  $("btn-start").textContent = n ? startWord + " — " + take + " " + plural(take,"вопрос","вопроса","вопросов") + startTail : "Выберите хотя бы один раздел";
+  var n = startList().length, take = settings.len ? Math.min(settings.len,n) : n;
+  var startWord = settings.mode === "learn" ? "Начать учить" : settings.mode === "cards" ? "Открыть карточки" : "Начать тест";
+  $("btn-start").textContent = n ? startWord + " — " + take + " " + plural(take,"вопрос","вопроса","вопросов") : "Выберите хотя бы один раздел";
   $("btn-start").disabled = !n;
   var ns = settings.sections.length;
   $("start-sum").textContent = (ns === SEC.length ? "все разделы" : ns + " " + plural(ns, "раздел", "раздела", "разделов")) + " · " +
-    (exam ? EXAM.n + " вопросов, " + EXAM.min + " минут" : (settings.len ? take + " " + plural(take, "вопрос", "вопроса", "вопросов") : "все вопросы")) +
+    (settings.len ? take + " " + plural(take, "вопрос", "вопроса", "вопросов") : "все вопросы") +
     (settings.mode === "test" ? (settings.shuffleQ ? " · вперемешку" : " · по порядку") : "");
-  $("set-sum").textContent = (exam ? "" : (settings.len ? settings.len + " вопросов" : "все вопросы") + (optOn.length ? " · " : "")) + optOn.join(" · ");
-  $("mode-exam-sub").textContent = EXAM.n + " вопросов за " + EXAM.min + "\u00a0" + plural(EXAM.min, "минуту", "минуты", "минут");
+  $("set-sum").textContent = (settings.len ? settings.len + " вопросов" : "все вопросы") + (optOn.length ? " · " : "") + optOn.join(" · ");
   var w = wrongIds().length;
   $("wrong-n").textContent = w;
   $("btn-wrong").disabled = !w;
@@ -1061,12 +1140,7 @@ function paintMenu(){
   var MODE_HINT = {
     test: "Обычный тест: вопрос за вопросом, в конце — результат и разбор ошибок. Сначала попадаются вопросы, которых ещё не было, — повторы начнутся, только когда пройдёшь все вопросы выбранных разделов.",
     learn: "Ответил верно — вопрос уходит из круга. Ошибся — вопрос вернётся через пару заданий и уйдёт, когда ответишь верно два раза подряд. Сначала идут вопросы, которых ещё не было; выученные в круг не попадают.",
-    cards: "Карточки: сначала вспоминаешь ответ сам (вопросы «впишите ответ» во всех режимах идут так же), потом открываешь и честно отмечаешь «знал» или «не знал». «Не знал» — карточка вернётся через пару заданий. Быстрый способ повторять уже знакомое.",
-    exam: "Пробный экзамен: " + EXAM.n + " вопросов за " + EXAM.min + "\u00a0" + plural(EXAM.min, "минуту", "минуты", "минут") +
-      ", зачёт — " + Math.ceil(EXAM.n * EXAM.pass / 100) + " верных из " + EXAM.n + " (" + EXAM.pass + "\u00a0%). Правильные ответы и счёт — только в конце. " +
-      "Время идёт, пока экзамен открыт на экране: вышел в меню — пауза. Кончилось время — экзамен завершается, " +
-      "вопросы без ответа не засчитываются. Берутся только тесты с вариантами из выбранных разделов; " +
-      "формат и порог настоящего теста кафедры пока неизвестны."
+    cards: "Карточки: сначала вспоминаешь ответ сам, потом открываешь и честно отмечаешь «знал» или «не знал». «Не знал» — карточка вернётся через пару заданий. Вопросы «впишите ответ» здесь тоже карточки, без ввода. Быстрый способ повторять уже знакомое."
   };
   Array.prototype.forEach.call(document.querySelectorAll("#mode-list [data-mode]"), function(b){
     b.classList.toggle("on", settings.mode === b.dataset.mode); b.setAttribute("aria-pressed", settings.mode === b.dataset.mode);
@@ -1126,6 +1200,9 @@ var curDone = false;
 var revealed = false;
 var curQi = null;      // вопрос на экране; в «Учить» очередь сдвигается сразу после ответа
 var autoTimer = null;  // «Сразу к следующему»
+var curTyped = "";     // вписанный ответ, который проверили
+var typedMiss = null;  // вписанный ответ не совпал: показан верный, ждём «Я ответил верно» или «Дальше»
+var FINE_POINTER = !!(window.matchMedia && window.matchMedia("(pointer: fine)").matches);
 var PAUSE = 5 * 60000; // паузы длиннее этого во время не входят
 
 function cancelAuto(){ if(autoTimer){ clearTimeout(autoTimer); autoTimer = null; } }
@@ -1305,7 +1382,8 @@ function packProgress(s){
 }
 function unpackProgress(p){
   if(!p || typeof p !== "object" || !DATA_VER || p.v !== DATA_VER) return null;
-  if(["test", "exam", "learn", "cards"].indexOf(p.mode) < 0 || !Array.isArray(p.order) || !Array.isArray(p.queue)) return null;
+  // незаконченная попытка экзамена (режим убран 22.11.2026) не продолжается
+  if(["test", "learn", "cards"].indexOf(p.mode) < 0 || !Array.isArray(p.order) || !Array.isArray(p.queue)) return null;
   function qiOf(id){ if(!hasId(id)) throw new Error("нет вопроса " + id); return BY_ID[id]; }
   function byQi(o, check){ var r = {}; for(var id in (o || {})){ var qi = qiOf(id); check(QS[qi], o[id]); r[qi] = o[id]; } return r; }
   function checkAns(q, a){ if(!a || !Array.isArray(a.given) || a.given.some(function(x){ return !(x >= 0 && x < q.o.length); })) throw new Error("ответ"); }
@@ -1353,7 +1431,8 @@ function renderQ(){
   curDone = !!prev;
   revealed = curDone;
   var multi = q.c.length > 1 || (S.strict && SEC[q.s].multi);
-  var cards = isCard(q);
+  var cards = isCard(q), typed = isTyped(q);
+  typedMiss = null; curTyped = "";
   // вопрос, на который начали отвечать до перезагрузки: отмеченные варианты и открытая карточка остаются
   var cur = !curDone && S.cur && S.cur.id === q.id ? S.cur : null;
   if(cur && !cards) curSel = cur.sel.slice();
@@ -1377,17 +1456,31 @@ function renderQ(){
 
   var hint = $("q-hint");
   if(cards && !revealed){ hint.innerHTML = ic("info", "s") + (q.open ? "Впишите ответ: вспомни, что стоит на месте «…», потом открой" : "Вспомни ответ, потом открой"); hint.classList.remove("hidden"); }
-  else if(multi){ hint.innerHTML = ic("info", "s") + "Отметь все верные варианты и нажми «Ответить»"; hint.classList.remove("hidden"); }
+  else if(typed && !curDone){
+    var parts = q.o[0].split(";").length;
+    hint.innerHTML = ic("info", "s") + (parts > 1
+      ? "Впиши " + parts + " " + plural(parts, "ответ", "ответа", "ответов") + " — на каждое «…», через запятую, и нажми «Проверить»"
+      : "Впиши, что стоит на месте «…», и нажми «Проверить»");
+    hint.classList.remove("hidden");
+  }
+  else if(multi && !typed){ hint.innerHTML = ic("info", "s") + "Отметь все верные варианты и нажми «Ответить»"; hint.classList.remove("hidden"); }
   else hint.classList.add("hidden");
+
+  // поле для ответа: у отвеченного (в «Тесте» можно вернуться назад) — вписанный текст, без правки
+  var tbox = $("q-type"), inp = $("q-input");
+  tbox.classList.toggle("hidden", !typed);
+  tbox.classList.remove("ok", "no");
+  inp.value = typed && prev ? (prev.typed || "") : "";
+  inp.readOnly = !!curDone;
 
   var box = $("q-opts"); box.innerHTML = "";
   box.className = "opts " + (multi ? "multi" : "single");
   perm.forEach(function(oi, idx){
     var b = document.createElement("button");
-    b.className = "opt" + (cards && !revealed ? " done" : "") + (q.open ? " open" + (revealed ? "" : " veil") : "");
+    b.className = "opt" + ((cards && !revealed) || typed ? " done" : "") + (q.open ? " open" + (revealed ? "" : " veil") : "");
     b.dataset.oi = oi; b.setAttribute("aria-pressed", "false");
     b.innerHTML = '<span class="let">' + LETTERS[idx] + '</span><span class="txt">' + esc(q.o[oi]) + '</span><span class="mark"></span>';
-    if(!cards) b.onclick = function(){ pick(oi, multi); };
+    if(!cards && !typed) b.onclick = function(){ pick(oi, multi); };
     box.appendChild(b);
   });
 
@@ -1399,6 +1492,8 @@ function renderQ(){
   // новый вопрос — с его начала, даже если предыдущий был длинным
   window.scrollTo(0, 0);
   lockTaps();
+  // с клавиатурой — сразу в поле; на телефоне не открываем клавиатуру сами: она закрыла бы полэкрана
+  if(typed && !curDone && FINE_POINTER) inp.focus({preventScroll: true});
 }
 
 /* нижняя панель: назад, избранное, второстепенное действие, главное — справа, под большим пальцем */
@@ -1414,8 +1509,15 @@ function renderActions(multi, marked){
   if(lin(S.mode) && S.pos > 0) add(ic("back"), "ib", function(){ goBack(); }, "btn-back", "Назад");
   // звёздочка не листает вопросы — защита от двойного нажатия ей не нужна, иначе сразу после ответа она глохнет
   add(ic("star"), "ib", function(){ toggleMark(); }, "q-fav", marked ? "В избранном" : "В избранное", true).setAttribute("aria-pressed", marked);
-  var cards = isCard(QS[curQi]);
-  if(cards && !revealed){
+  var cards = isCard(QS[curQi]), typed = isTyped(QS[curQi]);
+  if(typed && !curDone && typedMiss !== null){
+    add("Я ответил верно", "btn", function(){ typedGrade(true); }, "btn-typed-ok");
+    var lastQ = lin(S.mode) && S.pos + 1 >= S.order.length;
+    add((lastQ ? "Результат" : "Дальше") + ic("chev", "s"), "btn primary", function(){ typedGrade(false); }, "btn-typed-next");
+  } else if(typed && !curDone){
+    add("Не знаю", "btn", function(){ giveUp(); });
+    add("Проверить", "btn primary", function(){ checkTyped(); }, "btn-check");
+  } else if(cards && !revealed){
     add("Показать ответ", "btn primary", function(){ reveal(); }, "btn-reveal");
   } else if(cards && revealed && !curDone){
     add("Не знал", "btn", function(){ selfGrade(false); });
@@ -1474,6 +1576,43 @@ function selfGrade(knew){
   commit(!knew, true);
 }
 
+/* «впишите»: совпало — как верный ответ теста; нет — показать верный и дать решить самому */
+function checkTyped(){
+  if(!S || curDone || typedMiss !== null || tapLocked()) return;
+  var q = QS[curQi], inp = $("q-input"), text = inp.value.replace(/\s+/g, " ").trim();
+  if(!text){ inp.focus(); return; }
+  curTyped = text;
+  if(typedOk(text, q.o[0])){ curSel = [0]; commit(); return; }
+  typedMiss = text;
+  inp.readOnly = true; inp.blur();
+  tick(); lockTaps();
+  paintTypedMiss();
+}
+function paintTypedMiss(){
+  var q = QS[curQi];
+  $("q-type").classList.add("no");
+  $("q-hint").classList.add("hidden");
+  Array.prototype.forEach.call($("q-opts").children, function(b){
+    b.classList.remove("veil"); b.classList.add("ok");
+    b.querySelector(".mark").innerHTML = ic("check", "xs") + "ответ";
+  });
+  var fb = $("q-feedback"); fb.innerHTML = "";
+  var v = document.createElement("div");
+  v.className = "verdict wait";
+  v.innerHTML = ic("info") + "<div><b>Не совпало с ответом</b>Сверь сам: если по смыслу то же самое — нажми «Я ответил верно», если нет — «Дальше».</div>";
+  fb.appendChild(v);
+  notes(fb, q, q.extra);
+  renderActions(false, stats.marked.indexOf(q.id) >= 0);
+  var nb = $("btn-typed-next"); if(nb) nb.focus({preventScroll: true});
+}
+/* после «Не совпало»: засчитать самому или признать ошибку — и сразу к следующему вопросу */
+function typedGrade(right){
+  if(!S || curDone || typedMiss === null) return;
+  curSel = right ? [0] : [];
+  commit(false, true);
+  next();
+}
+
 function commit(surrender, selfGraded){
   var qi = curQi, q = QS[qi];
   var multi = q.c.length > 1 || (S.strict && SEC[q.s].multi);
@@ -1482,9 +1621,12 @@ function commit(surrender, selfGraded){
   // попавшимся вопрос считается один раз за подход, сколько бы раз его ни спросили
   if(!prev) stats.seen[q.id] = seenOf(q.id) + 1;
   // lvl0 — уровень вопроса до подхода: по нему видно, что вопрос выучен именно сейчас
-  S.answers[qi] = {given: curSel.slice(), ok: ok, gaveUp: !!surrender, lvl0: prev ? prev.lvl0 : levelOf(q.id)};
+  var ans = {given: curSel.slice(), ok: ok, gaveUp: !!surrender, lvl0: prev ? prev.lvl0 : levelOf(q.id)};
+  // «впишите»: что вписал (для разбора) и засчитал ли сам после «Не совпало»
+  if(isTyped(q)){ ans.typed = surrender ? "" : curTyped; if(ok && selfGraded) ans.self = true; }
+  S.answers[qi] = ans;
   // в «Учить» и «Карточках» вопрос отвечают, пока не выучат; для итогов важна первая ошибка
-  if(!ok && !S.missed[qi]) S.missed[qi] = {given: curSel.slice(), ok: false, gaveUp: !!surrender};
+  if(!ok && !S.missed[qi]) S.missed[qi] = {given: curSel.slice(), ok: false, gaveUp: !!surrender, typed: ans.typed};
   tick();
   if(ok){ S.ok++; S.streak = (S.streak || 0) + 1; } else { S.bad++; S.streak = 0; }
   if(S.mode !== "exam") record(q.id, ok);
@@ -1575,12 +1717,22 @@ function paintAnswer(q, multi, replay){
     else if(chosen){ b.classList.add("no"); mk.innerHTML = ic("x", "xs") + (multi ? "лишний" : "неверно"); extra++; }
     else { b.classList.add("dim"); mk.textContent = ""; }
   });
+  var typed = isTyped(q);
+  if(typed){
+    var tb = $("q-type"), inp = $("q-input");
+    inp.readOnly = true; inp.value = ans.typed || "";
+    tb.classList.remove("ok", "no"); tb.classList.add(ans.ok ? "ok" : "no");
+    tb.classList.toggle("hidden", !ans.typed);  // «Не знаю» без текста — пустое поле не показываем
+    $("q-hint").classList.add("hidden");
+  }
   var fb = $("q-feedback"); fb.innerHTML = "";
   var v = document.createElement("div");
   v.className = "verdict " + (ans.ok ? "ok" : "no");
-  var vt = q.open ? (ans.ok ? "Знал" : "Не знал — сверь с ответом") : ans.ok ? "Верно" + (q.c.length > 1 ? " — все " + q.c.length + " " + plural(q.c.length, "вариант", "варианта", "вариантов") : "")
+  var vt = typed ? (ans.ok ? (ans.self ? "Засчитано" : "Верно") : ans.gaveUp ? "Ответ показан" : "Неверно")
+    : q.open ? (ans.ok ? "Знал" : "Не знал — сверь с ответом") : ans.ok ? "Верно" + (q.c.length > 1 ? " — все " + q.c.length + " " + plural(q.c.length, "вариант", "варианта", "вариантов") : "")
     : ans.gaveUp ? "Ответ показан" : "Неверно. Ответ: " + correctLetters(q);
-  var vd = q.open || ans.ok ? "" : ans.gaveUp ? "Верно: " + correctLetters(q) + "."
+  var vd = typed ? (ans.ok && ans.self ? "Не совпало дословно — засчитал сам." : "")
+    : q.open || ans.ok ? "" : ans.gaveUp ? "Верно: " + correctLetters(q) + "."
     : multi ? "Отмечено верных " + hit + " из " + q.c.length + (extra ? ", лишних " + extra : "") + "." : "";
   v.innerHTML = ic(ans.ok ? "check" : "x") + "<div><b>" + esc(vt) + "</b>" + esc(vd) + "</div>";
   fb.appendChild(v);
@@ -1715,7 +1867,8 @@ function finish(){
     det.innerHTML = '<summary>' + ic("wrongs") + '<span>Разбор ошибок — ' + wrongIdx.length + '</span>' + ic("down", "s turn") + '</summary>';
     wrongIdx.forEach(function(qi){
       var q = QS[qi], a = missOf(qi);
-      var given = a.none ? "— не успел ответить" : a.given.length ? a.given.map(function(oi){ return q.o[oi]; }).join("; ") : "— нет ответа";
+      var given = a.none ? "— не успел ответить" : a.typed ? "«" + a.typed + "»"
+        : a.given.length ? a.given.map(function(oi){ return q.o[oi]; }).join("; ") : "— нет ответа";
       var right = q.c.map(function(oi){ return q.o[oi]; }).join("; ");
       var d = document.createElement("div"); d.className = "wrongitem";
       d.innerHTML = '<div class="q">' + esc(secLabel(q.s) + " №" + qlab(q) + ". " + q.q) + '</div>' +
@@ -1765,8 +1918,7 @@ function okToDrop(){
 $("btn-start").onclick = function(){
   var list = startList();
   if(!list.length || !okToDrop()) return;
-  if(settings.mode === "exam") buildSession(examList(), "Экзамен", "exam");
-  else buildSession(list, "", settings.mode);
+  buildSession(list, "", settings.mode);
 };
 $("btn-wrong").onclick = function(){
   var ids = wrongIds();
@@ -1775,7 +1927,7 @@ $("btn-wrong").onclick = function(){
 };
 $("btn-marked").onclick = function(){
   var list = QS.filter(function(q){ return stats.marked.indexOf(q.id) >= 0; });
-  if(list.length && okToDrop()) buildSession(list, "Избранное", settings.mode === "exam" ? "test" : settings.mode);
+  if(list.length && okToDrop()) buildSession(list, "Избранное", settings.mode);
 };
 $("btn-resume").onclick = function(){
   var p = loadProgress();
@@ -2276,6 +2428,12 @@ $("n-copy").onclick = function(){
 setInterval(function(){ if(!$("screen-night").classList.contains("hidden")) renderNightPlan(); }, 30000);
 
 /* ================= КЛАВИАТУРА ================= */
+// в поле ответа цифры и пробел — обычный ввод (общий обработчик ниже поле пропускает), Enter — «Проверить»
+$("q-input").addEventListener("keydown", function(e){
+  if(e.key !== "Enter" || e.isComposing) return;
+  e.preventDefault();
+  if(!e.repeat) checkTyped();
+});
 document.addEventListener("keydown", function(e){
   if(e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
   // Ctrl/Alt/Cmd + клавиша — сочетания браузера (Ctrl+1 — вкладка), не ответ
@@ -2291,6 +2449,15 @@ document.addEventListener("keydown", function(e){
   if(tapLocked() && /^(Enter| |ArrowRight|[1-9])$/.test(e.key)){ e.preventDefault(); return; }
   // зажатая клавиша не пролистывает вопросы и не отвечает за пользователя
   if(e.repeat && e.key !== "Tab") { if(/^(Enter| |Arrow(Left|Right)|[1-9])$/.test(e.key)) e.preventDefault(); return; }
+  // «впишите» (фокус не в поле — там своя обработка): Enter — к полю, после «Не совпало» — «Дальше», после ответа — дальше
+  if(isTyped(q)){
+    if((e.key === "Enter" || e.key === " " || e.key === "ArrowRight") && e.target.tagName !== "BUTTON"){
+      if(curDone){ e.preventDefault(); next(); }
+      else if(e.key !== " "){ e.preventDefault(); if(typedMiss !== null) typedGrade(false); else $("q-input").focus(); }
+    }
+    if(e.key === "ArrowLeft" && lin(S.mode) && S.pos > 0){ e.preventDefault(); goBack(); }
+    return;
+  }
   // Enter на варианте: при нескольких ответах — «Ответить» (пробел — отметить вариант), после ответа — «Дальше»
   var onOpt = e.target.classList && e.target.classList.contains("opt");
   if(e.key === "Enter" && onOpt && !isCard(QS[curQi])){
