@@ -188,6 +188,13 @@ details[open] > summary .ico.turn{transform:rotate(180deg)}
 /* реклама бота: сине-красная рамка, чтобы отличалась от карточек тренажёра */
 .promo,.promo-line{border:2px solid transparent;
   background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(120deg,var(--promo-a),var(--promo-b)) border-box}
+.others{padding:14px;margin-top:14px}
+.others > b{display:block;font-size:16px;margin-bottom:8px}
+.others a{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);color:var(--ink);text-decoration:none}
+.others a:first-of-type{border-top:0}
+.others a span{flex:1;min-width:0}
+.others a small{display:block;color:var(--muted);font-size:13px}
+.others a .ico{color:var(--muted)}
 .promo{padding:16px;margin-top:14px;box-shadow:0 6px 18px -10px var(--promo-a)}
 .promo > b{display:block;font-size:16px}
 .promo p{margin:6px 0 12px;font-size:14.5px;color:var(--muted);line-height:1.5}
@@ -552,6 +559,11 @@ html:not(.ready) *{transition:none !important}
         сохранит видео из ВК, YouTube, TikTok, Instagram и RuTube: отправьте ему ссылку, он пришлёт файл.
       </p>
       <a class="btn wide promo-btn" href="https://t.me/welutsave_bot?start=test-jenya" target="_blank" rel="noopener"><svg class="ico s"><use href="#i-download"/></svg>Открыть бота: @welutsave_bot</a>
+    </div>
+    <div class="card others" id="others">
+      <b>Другие тренажёры</b>
+      <a href="https://yakimov-med.github.io/patfiziologiya/testy/"><span>Патофизиология — тесты и вопросы<small>тесты с проверенными ответами и открытые вопросы-карточки</small></span><svg class="ico s"><use href="#i-chev"/></svg></a>
+      <a href="https://yakimov-med.github.io/patfiziologiya/"><span>Патофизиология — конспекты к зачёту<small>разделы с объяснениями «на пальцах» и карточками</small></span><svg class="ico s"><use href="#i-chev"/></svg></a>
     </div>
     <p class="foot" id="menu-reset">
       Прогресс, ошибки и отметки хранятся в этом браузере (localStorage). Файл можно копировать и
